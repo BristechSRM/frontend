@@ -1,0 +1,15 @@
+@import "~susy/sass/susy";
+
+$shorthand: 12 1/4 fluid float inside;
+
+.speakers {
+    @include container;
+}
+
+.speakerList {
+    @include span(10 of 12);
+}
+
+.speakerFilter {
+    @include span(last 2 of 12);
+}
