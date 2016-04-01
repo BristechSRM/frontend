@@ -1,25 +1,8 @@
-import { combineReducers } from 'redux';
-import { handleActions } from 'redux-actions';
-import immutable from 'immutable';
-import { REQUEST_SPEAKERS, SPEAKER_FILTER_CHANGED } from '../actions'
+import { combineReducers } from 'redux-immutable';
+import sessions from './sessions';
+import routing from './routing';
 
-const initialState = immutable.Map({
-  speakers: immutable.List(),
-  speakerFilters: immutable.Map()
+export default combineReducers({
+  sessions,
+  routing
 });
-
-const rootReducer = handleActions({
-  REQUEST_SPEAKERS: (state, action) => {
-    return state.set('speakers', action.payload);
-  },
-
-  SPEAKER_FILTER_CHANGED: (state, action) => {
-    return state.withMutations(map => {
-      map.set('speakers', action.payload.speakers)
-         .set('speakerFilters', action.payload.filters);
-    });
-
-  }
-}, initialState);
-
-export default rootReducer;

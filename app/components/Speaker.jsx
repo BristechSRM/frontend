@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardHeader from 'material-ui/lib/card/card-header';
@@ -10,7 +11,7 @@ import StarRating from 'react-star-rating';
 
 class Speaker extends Component {
 
-  render() {    
+  render() {
     var style = {
       width: this.props.width,
       height: this.props.height
@@ -22,7 +23,7 @@ class Speaker extends Component {
           avatar={this.props.adminImageUri} />
         <CardText>
           <StarRating name="speaker-rating" totalStars={5} rating={this.props.rating} disabled={true} size={20} />
-          {this.props.title}
+          <Link to={`/session/5`}>{this.props.title}</Link>
         </CardText>
       </Card>
     )

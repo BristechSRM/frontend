@@ -13,7 +13,7 @@ class SpeakerFilter extends Component {
     this.props.onChange(newFilter);
   }
 
-  render() {
+  render() {    
     return (
       <div>
         <Checkbox

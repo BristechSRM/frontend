@@ -35,10 +35,10 @@ class Speakers extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state) {  
   return {
-    speakers: state.get('speakers'),
-    speakerFilters: state.get('speakerFilters')
+    speakers: state.get('sessions').get('speakers'),
+    speakerFilters: state.get('sessions').get('speakerFilters')
   }
 }
 
