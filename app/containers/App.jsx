@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Speakers from './Speakers.jsx';
+import Dashboard from './Dashboard.jsx';
 
 class App extends Component {
 

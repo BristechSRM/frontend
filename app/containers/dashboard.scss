@@ -2,14 +2,14 @@
 
 $shorthand: 12 1/4 fluid float inside;
 
-.speakers {
+.sessions {
     @include container;
 }
 
-.speakerList {
+.sessionList {
     @include span(10 of 12);
 }
 
-.speakerFilter {
+.sessionFilter {
     @include span(last 2 of 12);
 }

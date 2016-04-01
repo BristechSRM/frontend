@@ -3,19 +3,19 @@ import immutable from 'immutable';
 import { REQUEST_SPEAKERS, SPEAKER_FILTER_CHANGED } from '../actions'
 
 const initialState = immutable.Map({
-  speakers: immutable.List(),
-  speakerFilters: immutable.Map()
+  sessions: immutable.List(),
+  sessionFilters: immutable.Map()
 });
 
 const sessions = handleActions({
   REQUEST_SPEAKERS: (state, action) => {    
-    return state.set('speakers', action.payload);
+    return state.set('sessions', action.payload);
   },
 
   SPEAKER_FILTER_CHANGED: (state, action) => {
     return state.withMutations(map => {
-      map.set('speakers', action.payload.speakers)
-         .set('speakerFilters', action.payload.filters);
+      map.set('sessions', action.payload.sessions)
+         .set('sessionFilters', action.payload.filters);
     });
   }
 }, initialState);
