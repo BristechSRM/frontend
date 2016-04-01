@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
 import StarRating from 'react-star-rating';
 
-class Session extends Component {
+class SessionCard extends Component {
 
   render() {
     var style = {
@@ -30,4 +30,4 @@ class Session extends Component {
   }
 }
 
-export default Session;
+export default SessionCard;
