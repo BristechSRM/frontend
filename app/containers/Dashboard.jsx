@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import SpeakerList from '../components/SpeakerList.jsx';
-import SpeakerFilter from '../components/SpeakerFilter.jsx';
-import { requestSpeakers, speakerFilterChanged } from '../actions';
+import SessionList from '../components/SessionList.jsx';
+import SessionFilter from '../components/SessionFilter.jsx';
+import { requestSessions, sessionFilterChanged } from '../actions';
 import styles from './dashboard.scss';
 import { Map } from 'immutable';
 
@@ -14,21 +14,21 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(requestSpeakers());
+    this.props.dispatch(requestSessions());
   }
 
   handleFilterChange(e) {
-    this.props.dispatch(speakerFilterChanged(e));
+    this.props.dispatch(sessionFilterChanged(e));
   }
 
   render() {
     return (
         <div className={styles.sessions}>
           <div className={styles.sessionList}>
-            <SpeakerList speakers={this.props.speakers} />
+            <SessionList sessions={this.props.sessions} />
           </div>
           <div className={styles.sessionFilter}>
-            <SpeakerFilter options={this.props.speakerFilters} onChange={this.handleFilterChange.bind(this)} />
+            <SessionFilter options={this.props.sessionFilters} onChange={this.handleFilterChange.bind(this)} />
           </div>
         </div>
     )
@@ -37,8 +37,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    speakers: state.get('sessions').get('speakers'),
-    speakerFilters: state.get('sessions').get('speakerFilters')
+    sessions: state.get('sessions').get('sessions'),
+    sessionFilters: state.get('sessions').get('sessionFilters')
   }
 }
 

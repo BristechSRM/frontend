@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
 import StarRating from 'react-star-rating';
 
-class Speaker extends Component {
+class Session extends Component {
 
   render() {
     var style = {
@@ -22,7 +22,7 @@ class Speaker extends Component {
           title={this.props.name}
           avatar={this.props.adminImageUri} />
         <CardText>
-          <StarRating name="speaker-rating" totalStars={5} rating={this.props.rating} disabled={true} size={20} />
+          <StarRating name="session-rating" totalStars={5} rating={this.props.rating} disabled={true} size={20} />
           <Link to={`/session/5`}>{this.props.title}</Link>
         </CardText>
       </Card>
@@ -30,4 +30,4 @@ class Speaker extends Component {
   }
 }
 
-export default Speaker;
+export default Session;

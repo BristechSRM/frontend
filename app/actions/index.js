@@ -1,19 +1,19 @@
 import { createAction } from 'redux-actions';
 import Promise from 'bluebird';
 
-import SpeakersApi from '../services/SpeakersApi';
+import SessionsApi from '../services/SessionsApi';
 
 export const REQUEST_SPEAKERS = 'REQUEST_SPEAKERS';
 export const SPEAKER_FILTER_CHANGED = 'SPEAKER_FILTER_CHANGED';
 
-export const requestSpeakers = createAction(REQUEST_SPEAKERS, SpeakersApi.getSpeakers);
+export const requestSessions = createAction(REQUEST_SPEAKERS, SessionsApi.getSessions);
 
-export const speakerFilterChanged = createAction(SPEAKER_FILTER_CHANGED, filters => {
+export const sessionFilterChanged = createAction(SPEAKER_FILTER_CHANGED, filters => {
   return new Promise((resolve, reject) => {
-      SpeakersApi.getSpeakers(filters).then(speakers => {
+      SessionsApi.getSessions(filters).then(sessions => {
         resolve({
           filters: filters,
-          speakers: speakers
+          sessions: sessions
         });
       }).catch(error => reject(error));
   });

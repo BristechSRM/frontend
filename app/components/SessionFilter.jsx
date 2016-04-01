@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import immutable from 'immutable';
 import Checkbox from 'material-ui/lib/checkbox';
 
-class SpeakerFilter extends Component {
+class SessionFilter extends Component {
 
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class SpeakerFilter extends Component {
     this.props.onChange(newFilter);
   }
 
-  render() {    
+  render() {
     return (
       <div>
         <Checkbox
@@ -46,4 +46,4 @@ class SpeakerFilter extends Component {
   }
 }
 
-export default SpeakerFilter;
+export default SessionFilter;
