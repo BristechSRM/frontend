@@ -10,6 +10,6 @@ $shorthand: 12 1/4 fluid float inside;
     @include span(10 of 12);
 }
 
-.sessionFilter {
+.dashboardSidebar {
     @include span(last 2 of 12);
 }
