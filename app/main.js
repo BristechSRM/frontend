@@ -8,7 +8,7 @@ import immutable from 'immutable';
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import App from './containers/App.jsx';
-import Speakers from './containers/Speakers.jsx';
+import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 
 const store = configureStore(immutable.Map());
@@ -21,7 +21,7 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Speakers} />
+        <IndexRoute component={Dashboard} />
         <Route path="/session/:sessionId" component={Session} />
       </Route>
     </Router>

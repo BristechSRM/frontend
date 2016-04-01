@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import SpeakerList from '../components/SpeakerList.jsx';
 import SpeakerFilter from '../components/SpeakerFilter.jsx';
 import { requestSpeakers, speakerFilterChanged } from '../actions';
-import styles from './speakers.scss';
+import styles from './dashboard.scss';
 import { Map } from 'immutable';
 
-class Speakers extends Component {
+class Dashboard extends Component {
 
   constructor(props) {
     super(props);
@@ -23,11 +23,11 @@ class Speakers extends Component {
 
   render() {
     return (
-        <div className={styles.speakers}>
-          <div className={styles.speakerList}>
+        <div className={styles.sessions}>
+          <div className={styles.sessionList}>
             <SpeakerList speakers={this.props.speakers} />
           </div>
-          <div className={styles.speakerFilter}>
+          <div className={styles.sessionFilter}>
             <SpeakerFilter options={this.props.speakerFilters} onChange={this.handleFilterChange.bind(this)} />
           </div>
         </div>
@@ -35,11 +35,11 @@ class Speakers extends Component {
   }
 }
 
-function mapStateToProps(state) {  
+function mapStateToProps(state) {
   return {
     speakers: state.get('sessions').get('speakers'),
     speakerFilters: state.get('sessions').get('speakerFilters')
   }
 }
 
-export default connect(mapStateToProps)(Speakers)
+export default connect(mapStateToProps)(Dashboard)
