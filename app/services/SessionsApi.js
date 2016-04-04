@@ -3,9 +3,9 @@ import immutable from 'immutable';
 import Promise from 'bluebird';
 
 let SessionsApi = {
-   getSessions(filters) {
+   getSessions(filters, sortProperty, isSortOrderAscending) {
       return new Promise((resolve, reject) => {
-        let sessions = fetch('sessions.json')
+        let sessions = fetch('http://api.bris.tech/talkoutlines')
          .then(response => response.json())
          .then(allSessions => {
 
@@ -20,7 +20,7 @@ let SessionsApi = {
            }
 
            var filteredSessions =
-              allSessions.filter(s => filters.get(s.speakerStatus.toString()));
+              allSessions.filter(s => filters.get(s.status.toString()));
 
            return filteredSessions;
          })

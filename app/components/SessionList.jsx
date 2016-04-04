@@ -18,9 +18,9 @@ class SessionList extends Component {
               key={session.id}
               width={250}
               height={250}
-              name={session.name}
+              name={session.speakerName}
               title={session.title}
-              rating={session.rating}
+              rating={session.speakerRating}
               adminImageUri={session.adminImageUrl} />
         )}
       </div>

@@ -4,17 +4,18 @@ import Promise from 'bluebird';
 import SessionsApi from '../services/SessionsApi';
 
 export const REQUEST_SPEAKERS = 'REQUEST_SPEAKERS';
-export const SPEAKER_FILTER_CHANGED = 'SPEAKER_FILTER_CHANGED';
+export const SESSION_VIEW_SETTINGS_CHANGED = 'SESSION_VIEW_SETTINGS_CHANGED';
 
 export const requestSessions = createAction(REQUEST_SPEAKERS, SessionsApi.getSessions);
 
-export const sessionFilterChanged = createAction(SPEAKER_FILTER_CHANGED, filters => {
-  return new Promise((resolve, reject) => {
-      SessionsApi.getSessions(filters).then(sessions => {
-        resolve({
-          filters: filters,
-          sessions: sessions
-        });
-      }).catch(error => reject(error));
-  });
+export const sessionViewSettingsChanged = createAction(SESSION_VIEW_SETTINGS_CHANGED, viewSettings => {
+    return new Promise((resolve, reject) => {
+        SessionsApi.getSessions(viewSettings.get('filters'), viewSettings.get('sortProperty'), viewSettings.get('isSortOrderAscending'))
+        .then(sessions => {
+            resolve({
+                viewSettings: viewSettings,
+                sessions: sessions
+            });
+        }).catch(error => reject(error));
+    });
 });
