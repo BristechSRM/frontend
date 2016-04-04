@@ -1,31 +1,54 @@
 import React, { Component } from 'react';
 import SessionFilter from './SessionFilter.jsx';
-import SelectField from 'material-ui/lib/select-field';
+import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import Checkbox from 'material-ui/lib/checkbox';
+import immutable from 'immutable';
 
 class DashboardSidebar extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {value: 2};
-  }
+    handleFilterChange(filters) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+            filters: filters,
+            sortProperty: this.props.sortProperty,
+            isSortOrderAscending: this.props.isSortOrderAscending
+        }));
+    }
 
-  handleChange = (event, index, value) => this.setState({value});
+    handleSortPropertyChange(event, index, value) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+            filters: this.props.filters,
+            sortProperty: value,
+            isSortOrderAscending: this.props.isSortOrderAscending
+        }));
+    }
 
-  render() {
-    return (
-      <div>
-        <SessionFilter options={this.props.sessionFilters} onChange={this.props.onFilterChange} />
-        <SelectField value={this.state.value} onChange={this.handleChange} >
-          <MenuItem value={1} primaryText="Never"/>
-          <MenuItem value={2} primaryText="Every Night"/>
-          <MenuItem value={3} primaryText="Weeknights"/>
-          <MenuItem value={4} primaryText="Weekends"/>
-          <MenuItem value={5} primaryText="Weekly"/>
-        </SelectField>
-      </div>
-    );
-  }
+    handleSortOrderChange(event, value) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+            filters: this.props.filters,
+            sortProperty: this.props.sortProperty,
+            isSortOrderAscending: value
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <SessionFilter options={this.props.filters} onChange={(filters) => this.handleFilterChange(filters)} />
+
+                <DropDownMenu value={this.props.sortProperty} onChange={(e, i, v) => this.handleSortPropertyChange(e, i, v)}>
+                   <MenuItem value={"last-contacted"} primaryText="Last Contacted"/>
+                   <MenuItem value={"name"} primaryText="Name"/>
+                   <MenuItem value={"rating"} primaryText="Rating"/>
+                </DropDownMenu>
+
+                <Checkbox
+                    label='Ascending Order'
+                    checked={this.props.isSortOrderAscending}
+                    onCheck={(e, c) => this.handleSortOrderChange(e, c)} />
+            </div>
+        );
+    }
 }
 
 export default DashboardSidebar;

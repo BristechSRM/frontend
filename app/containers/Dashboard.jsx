@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SessionList from '../components/SessionList.jsx';
 import DashboardSidebar from '../components/dashboardSidebar.jsx';
-import { requestSessions, sessionFilterChanged } from '../actions';
+import { requestSessions, sessionViewSettingsChanged } from '../actions';
 import styles from './dashboard.scss';
 import { Map } from 'immutable';
 
@@ -17,12 +17,8 @@ class Dashboard extends Component {
     this.props.dispatch(requestSessions());
   }
 
-  handleFilterChange(e) {
-    this.props.dispatch(sessionFilterChanged(e));
-  }
-
-  handleOrderChange(e) {
-    console.log("Hi!");
+  handleSessionViewSettingsChange(e) {
+     this.props.dispatch(sessionViewSettingsChanged(e));
   }
 
   render() {
@@ -32,7 +28,7 @@ class Dashboard extends Component {
             <SessionList sessions={this.props.sessions} />
           </div>
           <div className={styles.dashboardSidebar}>
-            <DashboardSidebar sessionFilters={this.props.sessionFilters} onFilterChange={this.handleFilterChange.bind(this)} onOrderChange={this.handleOrderChange.bind(this)} />
+            <DashboardSidebar filters={this.props.filters} sortProperty={this.props.sortProperty} isSortOrderAscending={this.props.isSortOrderAscending} onSessionViewSettingsChange={e => this.handleSessionViewSettingsChange(e)} />
           </div>
         </div>
     )
@@ -42,7 +38,9 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     sessions: state.get('sessions').get('sessions'),
-    sessionFilters: state.get('sessions').get('sessionFilters')
+    filters: state.get('sessions').get('viewSettings').get('filters'),
+    sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
+    isSortOrderAscending: state.get('sessions').get('viewSettings').get('isSortOrderAscending')
   }
 }
 
