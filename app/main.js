@@ -11,6 +11,9 @@ import App from './containers/App.jsx';
 import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 
+import injectTouchTapEvent from 'react-tap-event-plugin';
+injectTouchTapEvent();
+
 const store = configureStore(immutable.Map());
 
 const history = syncHistoryWithStore(browserHistory, store, {
