@@ -1,33 +1,48 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import Card from 'material-ui/lib/card/card';
-import CardActions from 'material-ui/lib/card/card-actions';
-import CardHeader from 'material-ui/lib/card/card-header';
-import CardMedia from 'material-ui/lib/card/card-media';
-import CardTitle from 'material-ui/lib/card/card-title';
-import FlatButton from 'material-ui/lib/flat-button';
-import CardText from 'material-ui/lib/card/card-text';
 import StarRating from 'react-star-rating';
+
+import styles from './sessionCard.scss';
 
 class SessionCard extends Component {
 
-  render() {
-    var style = {
-      width: this.props.width,
-      height: this.props.height
+    render() {
+
+        var footerStyle = {
+            "backgroundColor": "#373736"
+        };
+
+        return (
+            <div className={styles.sessionCard}>
+                <div className={styles.body}>
+                    <div className={styles.header}>
+                        <div className={styles.adminImg}>
+                            <img src={this.props.adminImageUri} />
+                        </div>
+                        <div className={styles.adminName}>
+                            {this.props.adminName}
+                        </div>
+                        <div className={styles.notificationImg}>
+                            <img src="https://s3-eu-west-1.amazonaws.com/bristech-images/notification-icon-tm2.png"/>
+                        </div>
+                    </div>
+                    <div className={styles.rating}>
+                        <StarRating name="session-rating" totalStars={5} rating={this.props.rating} disabled={true} size={14} />
+                    </div>
+                    <div className={styles.title}>
+                        {this.props.title}
+                    </div>
+                </div>
+                <div className={styles.footer} style={footerStyle}>
+                    <div className={styles.speakerName}>
+                        {this.props.speakerName}
+                    </div>
+                    <div className={styles.lastContacted}>
+                        Last contacted - <span className={styles.date}>{this.props.speakerLastContacted || "Unknown"}</span>
+                    </div>
+                </div>
+            </div>
+        )
     }
-    return (
-      <Card style={style}>
-        <CardHeader
-          title={this.props.name}
-          avatar={this.props.adminImageUri} />
-        <CardText>
-          <StarRating name="session-rating" totalStars={5} rating={this.props.rating} disabled={true} size={20} />
-          <Link to={`/session/5`}>{this.props.title}</Link>
-        </CardText>
-      </Card>
-    )
-  }
 }
 
 export default SessionCard;
