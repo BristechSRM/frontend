@@ -1,0 +1,22 @@
+.sessionFilterCheckbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.square {
+    width: 15px;
+    height:17px;
+    margin-right: 10px;
+
+    svg, svg > rect {
+        width: 15px;
+        height:15px;
+    }
+}
+
+.label {
+    flex-grow: 1;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
