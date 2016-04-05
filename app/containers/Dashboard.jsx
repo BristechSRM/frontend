@@ -5,7 +5,8 @@ import SessionList from '../components/SessionList.jsx';
 import DashboardSidebar from '../components/dashboardSidebar.jsx';
 import { requestSessions, sessionViewSettingsChanged } from '../actions';
 import styles from './dashboard.scss';
-import { Map } from 'immutable';
+import immutable from 'immutable';
+import CircularProgress from 'material-ui/lib/circular-progress';
 
 class Dashboard extends Component {
 
@@ -14,18 +15,25 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(requestSessions());
+    this.props.dispatch(requestSessions(
+      this.props.filters,
+      this.props.sortProperty,
+      this.props.isSortOrderAscending));
   }
 
-  handleSessionViewSettingsChange(e) {
-     this.props.dispatch(sessionViewSettingsChanged(e));
+  handleSessionViewSettingsChange(viewSettings) {
+     this.props.dispatch(requestSessions(
+       viewSettings.get('filters'),
+       viewSettings.get('sortProperty'),
+       viewSettings.get('isSortOrderAscending')));
   }
 
   render() {
     return (
         <div className={styles.sessions}>
           <div className={styles.sessionList}>
-            <SessionList sessions={this.props.sessions} />
+            {this.props.isFetching ? "Loading..." :
+            <SessionList sessions={this.props.sessions} />}
           </div>
           <div className={styles.dashboardSidebar}>
             <DashboardSidebar filters={this.props.filters} sortProperty={this.props.sortProperty} isSortOrderAscending={this.props.isSortOrderAscending} onSessionViewSettingsChange={e => this.handleSessionViewSettingsChange(e)} />
@@ -36,7 +44,9 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
+    isFetching: state.get('sessions').get('isFetching'),
     sessions: state.get('sessions').get('sessions'),
     filters: state.get('sessions').get('viewSettings').get('filters'),
     sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),

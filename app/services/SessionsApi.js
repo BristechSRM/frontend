@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch';
 import immutable from 'immutable';
-import Promise from 'bluebird';
 
 let SessionsApi = {
    getSessions(filters, sortProperty, isSortOrderAscending) {
