@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SessionList from '../components/SessionList.jsx';
 import DashboardSidebar from '../components/dashboardSidebar.jsx';
-import { requestSessions, sessionViewSettingsChanged } from '../actions';
+import { getSessions } from '../actions';
 import styles from './dashboard.scss';
 import immutable from 'immutable';
 import CircularProgress from 'material-ui/lib/circular-progress';
@@ -15,14 +15,15 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(requestSessions(
+    this.props.dispatch(getSessions(
       this.props.filters,
       this.props.sortProperty,
-      this.props.isSortOrderAscending));
+      this.props.isSortOrderAscending,
+      true));
   }
 
   handleSessionViewSettingsChange(viewSettings) {
-     this.props.dispatch(requestSessions(
+     this.props.dispatch(getSessions(
        viewSettings.get('filters'),
        viewSettings.get('sortProperty'),
        viewSettings.get('isSortOrderAscending')));
@@ -44,7 +45,6 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     isFetching: state.get('sessions').get('isFetching'),
     sessions: state.get('sessions').get('sessions'),
