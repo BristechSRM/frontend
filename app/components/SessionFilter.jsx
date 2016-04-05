@@ -13,6 +13,11 @@ class SessionFilter extends Component {
         return (
             <div>
                 <SessionFilterCheckbox
+                    isChecked={this.props.options.get('0') || false}
+                    label='Unassigned'
+                    status='unassigned'
+                    onCheck={c => this.handleCheck('0', c)} />
+                <SessionFilterCheckbox
                     isChecked={this.props.options.get('1') || false}
                     label='Assigned'
                     status='assigned'
