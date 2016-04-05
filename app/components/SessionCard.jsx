@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StarRating from 'react-star-rating';
+import SessionStatusService from '../services/SessionStatusService';
 
 import styles from './sessionCard.scss';
 
@@ -8,7 +9,7 @@ class SessionCard extends Component {
     render() {
 
         var footerStyle = {
-            "backgroundColor": "#373736"
+            "backgroundColor": SessionStatusService.getStatusColor(this.props.status)
         };
 
         return (

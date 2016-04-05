@@ -17,6 +17,7 @@ class SessionList extends Component {
                                 key={session.id}
                                 speakerName={session.speakerName}
                                 title={session.title}
+                                status={session.status}
                                 rating={session.speakerRating}
                                 adminName={session.adminName}
                                 adminImageUri={session.adminImageUrl} />
