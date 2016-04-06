@@ -1,5 +1,13 @@
+$fullWidth: 1200px;
+
 body {
     background-color: #EDEDED;
-    margin:0;
+    margin: 0;
     overflow-y: scroll;
+}
+
+.content {
+  max-width: $fullWidth;
+  margin: 0 auto;  
+  padding-top: 20px;
 }

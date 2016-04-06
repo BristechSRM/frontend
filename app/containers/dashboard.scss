@@ -1,13 +1,9 @@
-$fullWidth: 1200px;
 $sidebarWidth: 185px;
 $sessionListMinWidth: 274px;
 
 .sessions {
     display: flex;
     min-width: $sessionListMinWidth + $sidebarWidth;
-    max-width: $fullWidth;
-    margin-left:auto;
-    margin-right:auto;
 }
 
 .sessionList {
