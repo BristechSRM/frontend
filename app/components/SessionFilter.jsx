@@ -4,17 +4,17 @@ import Checkbox from 'material-ui/lib/checkbox';
 
 class SessionFilter extends Component {
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  handleCheck(status, checked) {
-    var newFilter = this.props.options.set(status, checked);
-    this.props.onChange(newFilter);
-  }
+    handleCheck(status, checked) {
+        var newFilter = this.props.options.set(status, checked);
+        this.props.onChange(newFilter);
+    }
 
-  render() {
-    return (
+    render() {
+        return (
       <div>
         <Checkbox
             key={1}
@@ -43,7 +43,7 @@ class SessionFilter extends Component {
             onCheck={(e, c) => this.handleCheck('5', c)} />
       </div>
     )
-  }
+    }
 }
 
 export default SessionFilter;

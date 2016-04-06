@@ -7,32 +7,32 @@ import immutable from 'immutable';
 
 class DashboardSidebar extends Component {
 
-  handleFilterChange(filters) {
-    this.props.onSessionViewSettingsChange(immutable.Map({
-      filters: filters,
-      sortProperty: this.props.sortProperty,
-      isSortOrderAscending: this.props.isSortOrderAscending
-    }));
-  }
+    handleFilterChange(filters) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+          filters: filters,
+          sortProperty: this.props.sortProperty,
+          isSortOrderAscending: this.props.isSortOrderAscending
+      }));
+    }
 
-  handleSortPropertyChange(event, index, value) {
-    this.props.onSessionViewSettingsChange(immutable.Map({
-      filters: this.props.filters,
-      sortProperty: value,
-      isSortOrderAscending: this.props.isSortOrderAscending
-    }));
-  }
+    handleSortPropertyChange(event, index, value) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+          filters: this.props.filters,
+          sortProperty: value,
+          isSortOrderAscending: this.props.isSortOrderAscending
+      }));
+    }
 
-  handleSortOrderChange(event, value) {
-    this.props.onSessionViewSettingsChange(immutable.Map({
-      filters: this.props.filters,
-      sortProperty: this.props.sortProperty,
-      isSortOrderAscending: value
-    }));
-  }
+    handleSortOrderChange(event, value) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+          filters: this.props.filters,
+          sortProperty: this.props.sortProperty,
+          isSortOrderAscending: value
+      }));
+    }
 
-  render() {
-    return (
+    render() {
+        return (
             <div>
                 <SessionFilter options={this.props.filters} onChange={(filters) => this.handleFilterChange(filters)} />
 
@@ -48,7 +48,7 @@ class DashboardSidebar extends Component {
                     onCheck={(e, c) => this.handleSortOrderChange(e, c)} />
             </div>
         );
-  }
+    }
 }
 
 export default DashboardSidebar;

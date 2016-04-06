@@ -3,6 +3,6 @@ import sessions from './sessions';
 import routing from './routing';
 
 export default combineReducers({
-  sessions,
-  routing
+    sessions,
+    routing
 });
