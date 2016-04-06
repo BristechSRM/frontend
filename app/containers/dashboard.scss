@@ -1,15 +1,20 @@
-@import "~susy/sass/susy";
-
-$shorthand: 12 1/4 fluid float inside;
+$fullWidth: 1200px;
+$sidebarWidth: 185px;
+$sessionListMinWidth: 274px;
 
 .sessions {
-    @include container;
+    display: flex;
+    min-width: $sessionListMinWidth + $sidebarWidth;
+    max-width: $fullWidth;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .sessionList {
-    @include span(10 of 12);
+    flex: 1 1 $sessionListMinWidth;
 }
 
 .dashboardSidebar {
-    @include span(last 2 of 12);
+    flex: 0 0 $sidebarWidth;
+    margin-left:20px;
 }
