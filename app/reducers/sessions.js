@@ -3,33 +3,33 @@ import immutable from 'immutable';
 import { UPDATE_SESSIONS_START, UPDATE_SESSIONS_COMPLETE } from '../actions'
 
 const initialState = immutable.Map({
-  isFetching: false,
-  sessions: immutable.List(),
-  viewSettings: immutable.Map({
-    filters: immutable.Map(),
-    sortProperty: "last-contacted",
-    isSortOrderAscending: false
-  })
+    isFetching: false,
+    sessions: immutable.List(),
+    viewSettings: immutable.Map({
+        filters: immutable.Map(),
+        sortProperty: "last-contacted",
+        isSortOrderAscending: false
+    })
 });
 
 const sessions = handleActions({
-  UPDATE_SESSIONS_START: (state, action) => {
-    return state.set('isFetching', true);
-  },
+    UPDATE_SESSIONS_START: (state, action) => {
+        return state.set('isFetching', true);
+    },
 
-  UPDATE_SESSIONS_COMPLETE: (state, action) => {
-    return state.withMutations(map => {
-      map.set('isFetching', false)
+    UPDATE_SESSIONS_COMPLETE: (state, action) => {
+        return state.withMutations(map => {
+            map.set('isFetching', false)
          .set('sessions', action.payload.sessions)
          .setIn(['viewSettings', 'filters'], action.payload.filters)
          .setIn(['viewSettings', 'sortProperty'], action.payload.sortProperty)
          .setIn(['viewSettings', 'isSortOrderAscending'], action.payload.isSortOrderAscending)
 
-      if (action.payload.refreshCache) {
-        map.set('cachedSessions', action.payload.sessions);
-      }
-    });
-  }
+            if (action.payload.refreshCache) {
+                map.set('cachedSessions', action.payload.sessions);
+            }
+        });
+    }
 }, initialState);
 
 export default sessions;

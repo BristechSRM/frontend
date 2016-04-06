@@ -9,7 +9,7 @@ import immutable from 'immutable';
 
 export default function configureStore(initialState) {
 
-  const store = createStore(
+    const store = createStore(
     reducer,
     initialState,
     compose(
@@ -26,5 +26,5 @@ export default function configureStore(initialState) {
     //})
   //}
 
-  return store
+    return store
 }

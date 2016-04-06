@@ -6,13 +6,13 @@ import styles from './sessionCard.scss';
 
 class SessionCard extends Component {
 
-  render() {
+    render() {
 
-    var footerStyle = {
-      "backgroundColor": SessionStatusService.getStatusColor(this.props.status)
-    };
+        var footerStyle = {
+            "backgroundColor": SessionStatusService.getStatusColor(this.props.status)
+        };
 
-    return (
+        return (
             <div className={styles.sessionCard}>
                 <div className={styles.body}>
                     <div className={styles.header}>
@@ -43,7 +43,7 @@ class SessionCard extends Component {
                 </div>
             </div>
         )
-  }
+    }
 }
 
 export default SessionCard;

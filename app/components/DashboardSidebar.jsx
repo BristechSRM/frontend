@@ -5,8 +5,11 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import Checkbox from 'material-ui/lib/checkbox';
 import immutable from 'immutable';
 
+import styles from './dashboardSidebar.scss';
+
 class DashboardSidebar extends Component {
 
+<<<<<<< HEAD
   handleFilterChange(filters) {
     this.props.onSessionViewSettingsChange(
       immutable.Map({
@@ -49,6 +52,56 @@ class DashboardSidebar extends Component {
       </div>
     );
   }
+=======
+    handleFilterChange(filters) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+            filters: filters,
+            sortProperty: this.props.sortProperty,
+            isSortOrderAscending: this.props.isSortOrderAscending
+        }));
+    }
+
+    handleSortPropertyChange(event, index, value) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+            filters: this.props.filters,
+            sortProperty: value,
+            isSortOrderAscending: this.props.isSortOrderAscending
+        }));
+    }
+
+    handleSortOrderChange(event, value) {
+        this.props.onSessionViewSettingsChange(immutable.Map({
+            filters: this.props.filters,
+            sortProperty: this.props.sortProperty,
+            isSortOrderAscending: value
+        }));
+    }
+
+    render() {
+        return (
+            <div className={styles.dashboardSidebar}>
+                <div className={styles.section}>
+                    <h1>Apply Filter</h1>
+                    <SessionFilter options={this.props.filters} onChange={(filters) => this.handleFilterChange(filters)} />
+                </div>
+                <div className={styles.section}>
+                    <h1>Sort By</h1>
+                    <DropDownMenu className={styles.dropdown} value={this.props.sortProperty} onChange={(e, i, v) => this.handleSortPropertyChange(e, i, v)}>
+                       <MenuItem value={"last-contacted"} primaryText="Last Contacted"/>
+                       <MenuItem value={"name"} primaryText="Name"/>
+                       <MenuItem value={"rating"} primaryText="Rating"/>
+                    </DropDownMenu>
+
+                    <Checkbox
+                        className={styles.isAscCheckbox}
+                        label='Ascending Order'
+                        checked={this.props.isSortOrderAscending}
+                        onCheck={(e, c) => this.handleSortOrderChange(e, c)} />
+                </div>
+            </div>
+        );
+    }
+>>>>>>> 7070dc06905c0dfb5838ad574ba6830f5f25224a
 }
 
 export default DashboardSidebar;

@@ -7,8 +7,8 @@ import styles from './sessionList.scss';
 
 class SessionList extends Component {
 
-  render() {
-    return (
+    render() {
+        return (
             <div className={styles.sessionList}>
                 {this.props.sessions.valueSeq().map(session =>
                     <div className={styles.sessionCard}>
@@ -26,7 +26,7 @@ class SessionList extends Component {
                 )}
             </div>
         )
-  }
+    }
 }
 
 export default SessionList;

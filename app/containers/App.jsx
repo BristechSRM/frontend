@@ -6,6 +6,7 @@ import styles from './app.scss';
 
 class App extends Component {
 
+<<<<<<< HEAD
   render() {
     var navigation = immutable.List([
       { title: 'Dashboard', route: '' },
@@ -14,6 +15,10 @@ class App extends Component {
     ]);
 
     return (
+=======
+    render() {
+        return (
+>>>>>>> 7070dc06905c0dfb5838ad574ba6830f5f25224a
       <div>
         <AppHeader navigation={navigation} />
         <div className={styles.content}>
@@ -22,7 +27,7 @@ class App extends Component {
         <footer></footer>
       </div>
     );
-  }
+    }
 }
 
 export default App;

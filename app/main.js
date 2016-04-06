@@ -17,7 +17,7 @@ injectTouchTapEvent();
 const store = configureStore(immutable.Map());
 
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: state => state.get('routing') ? state.get('routing').toJS() : state
+    selectLocationState: state => state.get('routing') ? state.get('routing').toJS() : state
 });
 
 render(
