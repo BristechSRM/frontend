@@ -23,7 +23,7 @@ class Dashboard extends Component {
   }
 
   handleSessionViewSettingsChange(viewSettings) {
-     this.props.dispatch(getSessions(
+    this.props.dispatch(getSessions(
        viewSettings.get('filters'),
        viewSettings.get('sortProperty'),
        viewSettings.get('isSortOrderAscending')));
