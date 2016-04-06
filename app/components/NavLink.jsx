@@ -3,20 +3,20 @@ import RaisedButton from 'material-ui/lib/raised-button';
 
 class NavLink extends Component {
 
-  handleClick(e) {    
-  }
+    handleClick(e) {    
+    }
 
-  render() {
-    const defaultStyles = {
-      margin: 8
-    };
+    render() {
+        const defaultStyles = {
+            margin: 8
+        };
 
-    const styles = Object.assign({}, defaultStyles, this.props.styles);
+        const styles = Object.assign({}, defaultStyles, this.props.styles);
 
-    return (
+        return (
       <RaisedButton label={this.props.label} onClick={e => handleClick} style={styles} />
     )
-  }
+    }
 }
 
 export default NavLink;

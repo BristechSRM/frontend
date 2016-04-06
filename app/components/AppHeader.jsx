@@ -4,8 +4,8 @@ import styles from './appHeader.scss';
 
 class AppHeader extends Component {
 
-  render() {
-    return (
+    render() {
+        return (
       <div className={styles.appHeader}>
         <div>
           <div className={styles.logo}>
@@ -16,7 +16,7 @@ class AppHeader extends Component {
         </div>
       </div>
     )
-  }
+    }
 }
 
 export default AppHeader;

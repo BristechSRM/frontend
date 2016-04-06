@@ -7,13 +7,13 @@ import styles from './sessionFilterCheckbox.scss';
 
 class SessionFilterCheckbox extends Component {
 
-  render() {
+    render() {
 
-    var rectStyle = {
-      "fill": SessionStatusService.getStatusColor(this.props.status)
-    };
+        var rectStyle = {
+            "fill": SessionStatusService.getStatusColor(this.props.status)
+        };
 
-    return (
+        return (
             <div className={styles.sessionFilterCheckbox} onClick={() => this.props.onCheck(!this.props.isChecked)}>
                 <div className={styles.square}>
                     <svg><rect style={rectStyle} /></svg>
@@ -30,7 +30,7 @@ class SessionFilterCheckbox extends Component {
                 </div>
             </div>
         )
-  }
+    }
 }
 
 export default SessionFilterCheckbox;

@@ -4,13 +4,13 @@ import SessionFilterCheckbox from './SessionFilterCheckbox.jsx';
 
 class SessionFilter extends Component {
 
-  handleCheck(status, checked) {
-    var newFilter = this.props.options.set(status, checked);
-    this.props.onChange(newFilter);
-  }
+    handleCheck(status, checked) {
+        var newFilter = this.props.options.set(status, checked);
+        this.props.onChange(newFilter);
+    }
 
-  render() {
-    return (
+    render() {
+        return (
             <div>
                 <SessionFilterCheckbox
                     isChecked={this.props.options.get('0') || false}
@@ -44,7 +44,7 @@ class SessionFilter extends Component {
                     onCheck={c => this.handleCheck('5', c)} />
             </div>
         )
-  }
+    }
 }
 
 export default SessionFilter;
