@@ -9,26 +9,26 @@ class DashboardSidebar extends Component {
 
     handleFilterChange(filters) {
         this.props.onSessionViewSettingsChange(immutable.Map({
-          filters: filters,
-          sortProperty: this.props.sortProperty,
-          isSortOrderAscending: this.props.isSortOrderAscending
-      }));
+            filters: filters,
+            sortProperty: this.props.sortProperty,
+            isSortOrderAscending: this.props.isSortOrderAscending
+        }));
     }
 
     handleSortPropertyChange(event, index, value) {
         this.props.onSessionViewSettingsChange(immutable.Map({
-          filters: this.props.filters,
-          sortProperty: value,
-          isSortOrderAscending: this.props.isSortOrderAscending
-      }));
+            filters: this.props.filters,
+            sortProperty: value,
+            isSortOrderAscending: this.props.isSortOrderAscending
+        }));
     }
 
     handleSortOrderChange(event, value) {
         this.props.onSessionViewSettingsChange(immutable.Map({
-          filters: this.props.filters,
-          sortProperty: this.props.sortProperty,
-          isSortOrderAscending: value
-      }));
+            filters: this.props.filters,
+            sortProperty: this.props.sortProperty,
+            isSortOrderAscending: value
+        }));
     }
 
     render() {
