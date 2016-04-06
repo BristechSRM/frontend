@@ -13,4 +13,4 @@ export default function routing(state = initialState, action) {
     }
 
     return state;
-};
+}

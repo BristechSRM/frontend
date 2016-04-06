@@ -1,0 +1,28 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+
+  "env": {
+      "browser": true,
+      "node": true,
+      "commonjs": true
+  },
+
+  "rules": {
+    "indent": [2, 4, {"SwitchCase": 1}]
+  },
+
+  "plugins": [
+    "react"
+  ],
+
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
+}

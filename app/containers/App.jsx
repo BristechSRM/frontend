@@ -5,15 +5,15 @@ import styles from './app.scss';
 
 class App extends Component {
 
-  render() {
-    return (
+    render() {
+        return (
       <div>
         <header></header>
         {this.props.children}
         <footer></footer>
       </div>
     );
-  }
+    }
 }
 
 export default App;

@@ -10,27 +10,27 @@ import CircularProgress from 'material-ui/lib/circular-progress';
 
 class Dashboard extends Component {
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  componentDidMount() {
-    this.props.dispatch(getSessions(
+    componentDidMount() {
+        this.props.dispatch(getSessions(
       this.props.filters,
       this.props.sortProperty,
       this.props.isSortOrderAscending,
       true));
-  }
+    }
 
-  handleSessionViewSettingsChange(viewSettings) {
-     this.props.dispatch(getSessions(
+    handleSessionViewSettingsChange(viewSettings) {
+        this.props.dispatch(getSessions(
        viewSettings.get('filters'),
        viewSettings.get('sortProperty'),
        viewSettings.get('isSortOrderAscending')));
-  }
+    }
 
-  render() {
-    return (
+    render() {
+        return (
         <div className={styles.sessions}>
           <div className={styles.sessionList}>
             {this.props.isFetching ? "Loading..." :
@@ -41,17 +41,17 @@ class Dashboard extends Component {
           </div>
         </div>
     )
-  }
+    }
 }
 
 function mapStateToProps(state) {
-  return {
-    isFetching: state.get('sessions').get('isFetching'),
-    sessions: state.get('sessions').get('sessions'),
-    filters: state.get('sessions').get('viewSettings').get('filters'),
-    sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
-    isSortOrderAscending: state.get('sessions').get('viewSettings').get('isSortOrderAscending')
-  }
+    return {
+        isFetching: state.get('sessions').get('isFetching'),
+        sessions: state.get('sessions').get('sessions'),
+        filters: state.get('sessions').get('viewSettings').get('filters'),
+        sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
+        isSortOrderAscending: state.get('sessions').get('viewSettings').get('isSortOrderAscending')
+    }
 }
 
 export default connect(mapStateToProps)(Dashboard)
