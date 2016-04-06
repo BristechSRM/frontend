@@ -16,7 +16,6 @@ const mergeLastContacted = sessions => {
 
 const getSessionsFromServer = () => {
     return SessionsApi.getAllSessions()
-    return SessionsApi.getAllSessions()
     .then(sessions => mergeLastContacted(sessions))
     .then(sessions => immutable.List(sessions));
 }
