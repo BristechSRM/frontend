@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../services/SessionStatusService';
 import StarRating from 'react-star-rating';
 
@@ -74,5 +74,11 @@ class SessionSidebar extends Component {
         );
     }
 }
+
+SessionSidebar.propTypes = {
+    session: PropTypes.object,
+    speaker: PropTypes.object,
+    admin: PropTypes.object
+};
 
 export default SessionSidebar;
