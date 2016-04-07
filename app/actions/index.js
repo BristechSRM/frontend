@@ -11,7 +11,7 @@ export const UPDATE_SESSIONS_ERROR = 'UPDATE_SESSIONS_ERROR';
 const mergeLastContacted = sessions => {
   // TODO: merge lastContacted into sessions
     return CommsApi.getLastContacted()
-      .then(lastContacted => sessions);
+      .then(() => sessions);
 }
 
 const getSessionsFromServer = () => {

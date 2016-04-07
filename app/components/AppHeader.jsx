@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import NavLink from './NavLink.jsx';
+import React, { Component, PropTypes } from 'react';
 import immutable from 'immutable';
+import NavLink from './NavLink.jsx';
 import styles from './appHeader.scss';
 
 class AppHeader extends Component {
@@ -25,11 +25,15 @@ class AppHeader extends Component {
                     <div className={styles.logo}>
                         <img src="/img/srm-logo.png" alt="SRM" />
                     </div>
-                    {navigation.map(ni => <NavLink label={ni.title} route={ni.route}/>)}
+                    {navigation.map(ni => <NavLink key={ni.title} label={ni.title} route={ni.route}/>)}
                 </div>
             </div>
         )
     }
 }
+
+AppHeader.propTypes = {
+    navigation: PropTypes.instanceOf(immutable.List)
+};
 
 export default AppHeader;

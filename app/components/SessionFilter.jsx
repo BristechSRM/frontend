@@ -47,4 +47,9 @@ class SessionFilter extends Component {
     }
 }
 
+SessionFilter.propTypes = {
+    options: PropTypes.instanceOf(immutable.Map),
+    onChange: PropTypes.func
+};
+
 export default SessionFilter;

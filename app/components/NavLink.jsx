@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { Link } from 'react-router';
 
@@ -28,7 +28,13 @@ class NavLink extends Component {
 }
 
 NavLink.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
 }
+
+NavLink.propTypes = {
+    label: PropTypes.string,
+    route: PropTypes.string,
+    styles: PropTypes.object
+};
 
 export default NavLink;
