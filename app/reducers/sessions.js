@@ -13,11 +13,11 @@ const initialState = immutable.Map({
 });
 
 const sessions = handleActions({
-    UPDATE_SESSIONS_START: (state, action) => {
+    [UPDATE_SESSIONS_START]: (state) => {
         return state.set('isFetching', true);
     },
 
-    UPDATE_SESSIONS_COMPLETE: (state, action) => {
+    [UPDATE_SESSIONS_COMPLETE]: (state, action) => {
         return state.withMutations(map => {
             map.set('isFetching', false)
          .set('sessions', action.payload.sessions)
