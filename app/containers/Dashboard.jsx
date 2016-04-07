@@ -57,7 +57,7 @@ Dashboard.propTypes = {
     isSortOrderAscending: PropTypes.bool,
     sortProperty: PropTypes.string,
     filters: PropTypes.instanceOf(immutable.Map),
-    sessions: PropTypes.instanceOf(immutable.Map),
+    sessions: PropTypes.instanceOf(immutable.List),
     isFetching: PropTypes.bool,
     dispatch: PropTypes.func
 };

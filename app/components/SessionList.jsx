@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import SessionCard from './SessionCard.jsx';
+import immutable from 'immutable';
 import styles from './sessionList.scss';
 
 class SessionList extends Component {
@@ -28,7 +29,7 @@ class SessionList extends Component {
 }
 
 SessionList.propTypes = {
-    sessions: PropTypes.array
+    sessions: PropTypes.instanceOf(immutable.List)
 };
 
 export default SessionList;

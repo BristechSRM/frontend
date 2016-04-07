@@ -20,10 +20,10 @@ const sessions = handleActions({
     [UPDATE_SESSIONS_COMPLETE]: (state, action) => {
         return state.withMutations(map => {
             map.set('isFetching', false)
-         .set('sessions', action.payload.sessions)
-         .setIn(['viewSettings', 'filters'], action.payload.filters)
-         .setIn(['viewSettings', 'sortProperty'], action.payload.sortProperty)
-         .setIn(['viewSettings', 'isSortOrderAscending'], action.payload.isSortOrderAscending)
+            .set('sessions', action.payload.sessions)
+            .setIn(['viewSettings', 'filters'], action.payload.filters)
+            .setIn(['viewSettings', 'sortProperty'], action.payload.sortProperty)
+            .setIn(['viewSettings', 'isSortOrderAscending'], action.payload.isSortOrderAscending)
 
             if (action.payload.refreshCache) {
                 map.set('cachedSessions', action.payload.sessions);
