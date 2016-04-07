@@ -6,15 +6,15 @@ import styles from './sessionSidebar.scss';
 
 class SessionSidebar extends Component {
 
+    getHandle(type) {
+        var handle = this.props.speaker.handles.find(handle => handle.type === type);
+        return handle ? handle.id : "";
+    }
+
     render() {
         var h1Style = {
             "color": SessionStatusService.getStatusColor("deferred")
         };
-
-        var getHandle = function(profile, type) {
-            var handle = profile.handles.find(handle => handle.type === type);
-            return handle ? handle.id : "";
-        }
 
         return (
             <div className={styles.sessionSidebar}>
@@ -54,19 +54,19 @@ class SessionSidebar extends Component {
                     <table>
                         <tr>
                             <td>Email</td>
-                            <td>{getHandle(this.props.speaker, "email")}</td>
+                            <td>{this.getHandle("email")}</td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
-                            <td>{getHandle(this.props.speaker, "phone")}</td>
+                            <td>{this.getHandle("phone")}</td>
                         </tr>
                         <tr>
                             <td>Twitter</td>
-                            <td>@{getHandle(this.props.speaker, "twitter")}</td>
+                            <td>@{this.getHandle("twitter")}</td>
                         </tr>
                         <tr>
                             <td>Github</td>
-                            <td>{getHandle(this.props.speaker, "github")}</td>
+                            <td>{this.getHandle("github")}</td>
                         </tr>
                     </table>
                 </div>
