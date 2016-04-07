@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import SessionFilter from './SessionFilter.jsx';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
@@ -58,5 +58,12 @@ class DashboardSidebar extends Component {
         );
     }
 }
+
+DashboardSidebar.propTypes = {
+    onSessionViewSettingsChange: PropTypes.func,
+    isSortOrderAscending: PropTypes.bool,
+    sortProperty: PropTypes.string,
+    filters: PropTypes.instanceOf(immutable.Map)
+};
 
 export default DashboardSidebar;
