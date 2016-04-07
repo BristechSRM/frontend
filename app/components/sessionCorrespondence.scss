@@ -1,0 +1,12 @@
+.correspondence {
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 65px;
+    padding-bottom: 65px;
+    display:flex;
+    flex-direction: column;
+}
+
+.correspondenceItem:nth-child(even) {
+    background-color: #F6F6F6;
+}
