@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import immutable from 'immutable';
 import Checkbox from 'material-ui/lib/checkbox';
 import SessionStatusService from '../services/SessionStatusService';
 
@@ -31,6 +30,14 @@ class SessionFilterCheckbox extends Component {
             </div>
         )
     }
+}
+
+SessionFilterCheckbox.propTypes = {
+    status: PropTypes.string,
+    onCheck: PropTypes.func,
+    isChecked: PropTypes.bool,
+    label: PropTypes.string,
+    value: PropTypes.string
 }
 
 export default SessionFilterCheckbox;

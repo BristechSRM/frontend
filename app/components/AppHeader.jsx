@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
+import immutable from 'immutable';
 import NavLink from './NavLink.jsx';
 import styles from './appHeader.scss';
 
@@ -17,5 +18,9 @@ class AppHeader extends Component {
         )
     }
 }
+
+AppHeader.propTypes = {
+    navigation: PropTypes.instanceOf(immutable.List)
+};
 
 export default AppHeader;

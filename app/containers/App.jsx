@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import AppHeader from '../components/AppHeader.jsx';
 import immutable from 'immutable';
 
@@ -31,5 +31,9 @@ class App extends Component {
         );
     }
 }
+
+App.propTypes = {
+    children: PropTypes.object
+};
 
 export default App;
