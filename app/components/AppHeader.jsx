@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import NavLink from './NavLink.jsx';
 import styles from './appHeader.scss';
 
@@ -17,5 +17,9 @@ class AppHeader extends Component {
         )
     }
 }
+
+AppHeader.propTypes = {
+    navigation: PropTypes.array
+};
 
 export default AppHeader;
