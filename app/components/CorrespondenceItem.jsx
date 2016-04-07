@@ -4,7 +4,6 @@ import styles from './CorrespondenceItem.scss';
 
 class CorrespondenceItem extends Component {
 
-
     render() {
         var date = moment(this.props.date);
 
