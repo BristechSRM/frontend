@@ -5,7 +5,7 @@ var webpackConfig = {
     devtool: 'eval-source-map',
     entry: __dirname + '/app/main.js',
     output: {
-        path: __dirname + '/build',
+        path: __dirname + '/public',
         filename: 'main.js'
     },
     module: {
@@ -35,9 +35,6 @@ var webpackConfig = {
         fix: true
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: __dirname + '/app/index.tmpl.html'
-        }),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {

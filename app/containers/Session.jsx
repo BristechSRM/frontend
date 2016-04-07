@@ -4,8 +4,8 @@ class Session extends Component {
 
     render() {
         return (
-      <p>Session</p>
-    );
+            <p>Session</p>
+        );
     }
 }
 
