@@ -4,7 +4,9 @@
   "description": "bristechsrm\r =========",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/webpack-dev-server --progress",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "node_modules/.bin/webpack-dev-server --progress",
+    "start:prod": "webpack && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -34,8 +36,11 @@
   "dependencies": {
     "babel-polyfill": "^6.7.2",
     "classnames": "^2.2.3",
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
     "flexboxgrid": "^6.3.0",
     "history": "^2.0.1",
+    "if-env": "^1.0.0",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.8.2",
