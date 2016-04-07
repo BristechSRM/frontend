@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import SessionCard from './SessionCard.jsx';
-import _ from 'lodash';
 import styles from './sessionList.scss';
 
 class SessionList extends Component {
@@ -28,5 +26,9 @@ class SessionList extends Component {
         )
     }
 }
+
+SessionList.propTypes = {
+    sessions: PropTypes.array
+};
 
 export default SessionList;
