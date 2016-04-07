@@ -4,10 +4,8 @@ import CorrespondenceItem from './CorrespondenceItem.jsx';
 import styles from './sessionCorrespondence.scss';
 
 class SessionCorrespondence extends Component {
-
-
+    
     render() {
-
         return (
             <div className={styles.correspondence}>
                 {this.props.correspondence.map(correspondenceItem =>
