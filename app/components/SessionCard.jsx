@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import StarRating from 'react-star-rating';
 import SessionStatusService from '../services/SessionStatusService';
 
@@ -45,5 +45,15 @@ class SessionCard extends Component {
         )
     }
 }
+
+SessionCard.propTypes = {
+    speakerLastContacted: PropTypes.string,
+    speakerName: PropTypes.string,
+    title: PropTypes.string,
+    rating: PropTypes.number,
+    adminName: PropTypes.string,
+    adminImageUri: PropTypes.string,
+    status: PropTypes.string
+};
 
 export default SessionCard;
