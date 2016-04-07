@@ -1,0 +1,14 @@
+.session {
+    max-width:1200px;
+    margin-left:auto;
+    margin-right: auto;
+    display:flex;
+}
+
+.sidebar {
+    flex: 0 0 450px;
+}
+
+.correspondence {
+    flex: 1 0 450px;
+}
