@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 console.log('NODE_ENV = ' + process.env.NODE_ENV);
 
@@ -32,9 +33,9 @@ const settings =
 
 var webpackConfig = {
     devtool: settings.devtool,
-    entry: __dirname + '/app/main.js',
+    entry: path.join(__dirname, 'app/main.js'),
     output: {
-        path: __dirname + '/public',
+        path: path.join(__dirname + 'public'),
         filename: 'main.js'
     },
     module: {
