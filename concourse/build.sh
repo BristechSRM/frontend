@@ -1,12 +1,13 @@
 #! /bin/sh
 
 set -e
-export NODE_ENV=production
 
 cd code
-
 npm install
+
+export NODE_ENV=production
 npm run build
+
 cd ..
 cp -R code/public/* packed/
 cp code/server.js packed/
