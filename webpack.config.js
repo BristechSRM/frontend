@@ -1,8 +1,37 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+console.log('NODE_ENV = ' + process.env.NODE_ENV);
+
+var getProductionSettings = function () {
+    return {
+        devtool: 'cheap-module-source-map',
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('production')
+                }
+            }),
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurrenceOrderPlugin(),
+            new webpack.optimize.UglifyJsPlugin()
+        ]
+    }
+}
+
+var getDevelopmentSettings = function () {
+    return {
+        devtool: 'source-map',
+        plugins: [
+            new webpack.HotModuleReplacementPlugin()
+        ]
+    }
+}
+
+const settings =
+    process.env.NODE_ENV === 'production' ? getProductionSettings() : getDevelopmentSettings();
 
 var webpackConfig = {
-    devtool: 'eval-source-map',
+    devtool: settings.devtool,
     entry: __dirname + '/app/main.js',
     output: {
         path: __dirname + '/public',
@@ -34,9 +63,7 @@ var webpackConfig = {
         formatter: require('eslint-friendly-formatter'),
         fix: true
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ],
+    plugins: settings.plugins,
     devServer: {
         contentBase: './public',
         colors: true,
