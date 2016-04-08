@@ -6,8 +6,8 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "node_modules/.bin/webpack-dev-server --progress",
-    "start:prod": "webpack && node server.js",
-    "build": "webpack",
+    "start:prod": "node server.js",
+    "build": "node_modules/.bin/webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
