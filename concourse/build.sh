@@ -9,5 +9,5 @@ export NODE_ENV=production
 npm run build
 
 cd ..
-cp -R code/public/* packed/
+cp -R code/public/* packed/public
 cp code/server.js packed/
