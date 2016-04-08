@@ -8,7 +8,7 @@ class SessionCard extends Component {
 
     render() {
 
-        var footerStyle = {
+        const footerStyle = {
             "backgroundColor": SessionStatusService.getStatusColor(this.props.status)
         };
 

@@ -5,7 +5,7 @@ import SessionFilterCheckbox from './SessionFilterCheckbox.jsx';
 class SessionFilter extends Component {
 
     handleCheck(status, checked) {
-        var newFilter = this.props.options.set(status, checked);
+        const newFilter = this.props.options.set(status, checked);
         this.props.onChange(newFilter);
     }
 

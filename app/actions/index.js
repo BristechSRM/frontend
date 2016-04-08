@@ -1,4 +1,6 @@
-import { createAction } from 'redux-actions';
+import {
+    createAction
+} from 'redux-actions';
 import SessionsApi from '../services/SessionsApi';
 import CommsApi from '../services/CommsApi';
 import immutable from 'immutable';
@@ -9,15 +11,15 @@ export const UPDATE_SESSIONS_COMPLETE = 'UPDATE_SESSIONS_COMPLETE';
 export const UPDATE_SESSIONS_ERROR = 'UPDATE_SESSIONS_ERROR';
 
 const mergeLastContacted = sessions => {
-  // TODO: merge lastContacted into sessions
+    // TODO: merge lastContacted into sessions
     return CommsApi.getLastContacted()
-      .then(() => sessions);
+        .then(() => sessions);
 }
 
 const getSessionsFromServer = () => {
     return SessionsApi.getAllSessions()
-    .then(sessions => mergeLastContacted(sessions))
-    .then(sessions => immutable.List(sessions));
+        .then(sessions => mergeLastContacted(sessions))
+        .then(sessions => immutable.List(sessions));
 }
 
 const getSessionsFromState = state => {
@@ -35,7 +37,7 @@ const filterAndSort = (sessions, filters, sortProperty, isSortOrderAscending, re
         filteredSessions = filteredSessions.filter(s => filters.get(s.status.toString()));
     }
 
-    var propertyNames = {
+    const propertyNames = {
         'name': 'speakerName',
         'last-contacted': 'lastContacted',
         'rating': 'speakerRating'
@@ -43,9 +45,9 @@ const filterAndSort = (sessions, filters, sortProperty, isSortOrderAscending, re
 
     const sortOrder = isSortOrderAscending ? 'asc' : 'desc';
     const updatedSessions = _.orderBy(
-    filteredSessions.toJS(),
-    propertyNames[sortProperty],
-    sortOrder);
+        filteredSessions.toJS(),
+        propertyNames[sortProperty],
+        sortOrder);
 
     return createAction(UPDATE_SESSIONS_COMPLETE)({
         sessions: immutable.List(updatedSessions),
@@ -59,8 +61,11 @@ const filterAndSort = (sessions, filters, sortProperty, isSortOrderAscending, re
 export const getSessions = (filters, sortProperty, isSortOrderAscending, forceUpdate) => {
     return (dispatch, getState) => {
         dispatch(createAction(UPDATE_SESSIONS_START)());
+
         const getSessions = forceUpdate === true ? getSessionsFromServer() : getSessionsFromState(getState());
-        return getSessions.then(sessions => dispatch(
-      filterAndSort(sessions, filters, sortProperty, isSortOrderAscending, forceUpdate)));
+
+        return getSessions
+            .then(sessions => dispatch(filterAndSort(sessions, filters, sortProperty, isSortOrderAscending, forceUpdate)))
+            .catch(error => dispatch(createAction(UPDATE_SESSIONS_ERROR)(error)));
     }
 };
