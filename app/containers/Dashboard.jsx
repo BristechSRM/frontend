@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux'
+import { createSelector } from 'reselect';
+import SessionsApi from '../services/SessionsApi';
 
 import SessionList from '../components/SessionList.jsx';
 import DashboardSidebar from '../components/dashboardSidebar.jsx';
-import {getSessions} from '../actions';
+import { getAllSessions, changeViewSettings } from '../actions';
 import styles from './dashboard.scss';
 import immutable from 'immutable';
 
@@ -14,14 +16,14 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(getSessions(this.props.filters, this.props.sortProperty, this.props.isSortOrderAscending, true));
+        this.props.dispatch(getAllSessions());
     }
 
     handleSessionViewSettingsChange(viewSettings) {
-        this.props.dispatch(getSessions(viewSettings.get('filters'), viewSettings.get('sortProperty'), viewSettings.get('isSortOrderAscending')));
+        this.props.dispatch(changeViewSettings(viewSettings));
     }
 
-    render() {        
+    render() {
         const list = this.props.isFetching
             ? "Loading..."
             : this.props.error
@@ -41,17 +43,6 @@ class Dashboard extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        isFetching: state.get('sessions').get('isFetching'),
-        error: state.get('sessions').get('error'),
-        sessions: state.get('sessions').get('sessions'),
-        filters: state.get('sessions').get('viewSettings').get('filters'),
-        sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
-        isSortOrderAscending: state.get('sessions').get('viewSettings').get('isSortOrderAscending')
-    }
-}
-
 Dashboard.propTypes = {
     isSortOrderAscending: PropTypes.bool,
     sortProperty: PropTypes.string,
@@ -61,5 +52,30 @@ Dashboard.propTypes = {
     error: PropTypes.shape({message: PropTypes.string}),
     dispatch: PropTypes.func
 };
+
+const getViewSettings = (state) => state.get('sessions').get('viewSettings');
+const getSessions = (state) => state.get('sessions').get('sessions');
+
+const getFilteredAndSortedSessions = createSelector(
+  [ getSessions, getViewSettings ],
+  (sessions, viewSettings) => {
+      return SessionsApi.filterAndSort(
+        sessions,
+        viewSettings.get('filters'),
+        viewSettings.get('sortProperty'),
+        viewSettings.get('isSortOrderAscending'));
+  }
+)
+
+function mapStateToProps(state) {
+    return {
+        isFetching: state.get('sessions').get('isFetching'),
+        error: state.get('sessions').get('error'),
+        sessions: getFilteredAndSortedSessions(state),
+        filters: state.get('sessions').get('viewSettings').get('filters'),
+        sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
+        isSortOrderAscending: state.get('sessions').get('viewSettings').get('isSortOrderAscending')
+    }
+}
 
 export default connect(mapStateToProps)(Dashboard)
