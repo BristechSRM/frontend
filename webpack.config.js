@@ -35,7 +35,7 @@ var webpackConfig = {
     devtool: settings.devtool,
     entry: path.join(__dirname, 'app/main.js'),
     output: {
-        path: path.join(__dirname + 'public'),
+        path: path.join(__dirname, 'public'),
         filename: 'main.js'
     },
     module: {
