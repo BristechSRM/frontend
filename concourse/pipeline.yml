@@ -1,3 +1,9 @@
+resource_types:
+  - name: ecs
+    type: docker-image
+    source:
+      repository: bristechsrm/notify_ecs
+
 jobs:
 - name: build
   public: true
@@ -12,6 +18,8 @@ jobs:
   - put: image
     params:
       build: context
+  - put: cluster
+
 resources:
 - name: code
   type: git
@@ -26,3 +34,13 @@ resources:
     username: bristechsrm
     password: {{docker-hub-password}}
     repository: bristechsrm/frontend
+
+- name: cluster
+  type: ecs
+  source:
+    stackName: development
+    clusterName: apiCluster
+    taskName: sessionsTaskDefinition
+    serviceName: sessionsService
+    accessKeyId: {{awsAccessKeyId}}
+    secretAccessKey: {{awsSecretAccessKey}}
