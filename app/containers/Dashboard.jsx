@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
 import SessionList from '../components/SessionList.jsx';
-import DashboardSidebar from '../components/dashboardSidebar.jsx';
+import DashboardSidebar from '../components/DashboardSidebar.jsx';
 import { getSessions } from '../actions';
 import styles from './dashboard.scss';
 import immutable from 'immutable';
