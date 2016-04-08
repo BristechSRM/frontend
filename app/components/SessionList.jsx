@@ -11,7 +11,7 @@ class SessionList extends Component {
             <div className={styles.sessionList}>
                 {this.props.sessions.valueSeq().map(session =>
                     <div className={styles.sessionCard}>
-                        <Link to={'/session/' + session.id}>
+                        <Link to={'sessions/' + session.id}>
                             <SessionCard
                                 key={session.id}
                                 speakerName={session.speakerName}

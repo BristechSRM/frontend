@@ -25,7 +25,9 @@ render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Dashboard} />
-        <Route path="/session/:sessionId" component={Session} />        
+      </Route>
+      <Route path="sessions" component={App}>
+        <Route path=":sessionId" component={Session} />
       </Route>
       <Redirect from="*" to="/" />
     </Router>

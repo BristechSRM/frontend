@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
+import { Link } from 'react-router';
 
 class NavLink extends Component {
-
-    handleClick() {
-    }
 
     render() {
         const defaultStyles = {
@@ -13,14 +11,29 @@ class NavLink extends Component {
 
         const styles = Object.assign({}, defaultStyles, this.props.styles);
 
+        var activeStyle = {
+            backgroundColor: '#706f6f'
+        }
+
         return (
-          <RaisedButton label={this.props.label} onClick={() => this.handleClick} style={styles}/>
+          <RaisedButton
+            label={this.props.label}
+            labelStyle={{color: '#c6c6c6'}}
+            containerElement={<Link to={this.props.route} activeStyle={activeStyle} />}
+            linkButton={true}
+            style={styles}>
+          </RaisedButton>
         )
     }
 }
 
+NavLink.contextTypes = {
+    router: PropTypes.object
+}
+
 NavLink.propTypes = {
     label: PropTypes.string,
+    route: PropTypes.string,
     styles: PropTypes.object
 };
 
