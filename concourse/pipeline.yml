@@ -1,0 +1,15 @@
+jobs:
+- name: build
+  public: true
+  serial: true
+  plan:
+  - get: code
+    trigger: true
+  - task: build
+    file: code/concourse/build.yml  
+resources:
+- name: code
+  type: git
+  source:
+    uri: https://github.com/BristechSRM/frontend.git
+    branch: concourse
