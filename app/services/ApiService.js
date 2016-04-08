@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 const handleErrors = (response) => {
     return new Promise((resolve, reject) => {
         if (!response) {
-            reject("No response returned from fetch");
+            reject({ message: "No response returned from fetch"});
             return;
         }
 
