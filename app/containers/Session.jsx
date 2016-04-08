@@ -6,7 +6,7 @@ import styles from './session.scss';
 class Session extends Component {
 
     render() {
-        var session = {
+        const session = {
             id: 1,
             title: "Concourse: How I Met Myself",
             status: "deferred",
@@ -14,7 +14,7 @@ class Session extends Component {
             adminId: 1
         };
 
-        var speaker = {
+        const speaker = {
             id: 2,
             name: "David Wybourn",
             handles: [
@@ -34,12 +34,12 @@ class Session extends Component {
             rating: 4
         };
 
-        var admin = {
+        const admin = {
             id: 1,
             name: "Chris Smith"
         };
 
-        var correspondence = [
+        const correspondence = [
             {
                 fromProfileId: 1,
                 toProfileId: 2,

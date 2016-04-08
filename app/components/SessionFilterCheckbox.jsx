@@ -8,7 +8,7 @@ class SessionFilterCheckbox extends Component {
 
     render() {
 
-        var rectStyle = {
+        const rectStyle = {
             "fill": SessionStatusService.getStatusColor(this.props.status)
         };
 

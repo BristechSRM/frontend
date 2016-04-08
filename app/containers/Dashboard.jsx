@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux'
 
 import SessionList from '../components/SessionList.jsx';
 import DashboardSidebar from '../components/dashboardSidebar.jsx';
-import { getSessions } from '../actions';
+import {getSessions} from '../actions';
 import styles from './dashboard.scss';
 import immutable from 'immutable';
 
@@ -14,30 +14,28 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(getSessions(
-            this.props.filters,
-            this.props.sortProperty,
-            this.props.isSortOrderAscending,
-            true));
+        this.props.dispatch(getSessions(this.props.filters, this.props.sortProperty, this.props.isSortOrderAscending, true));
     }
 
     handleSessionViewSettingsChange(viewSettings) {
-        this.props.dispatch(getSessions(
-            viewSettings.get('filters'),
-            viewSettings.get('sortProperty'),
-            viewSettings.get('isSortOrderAscending')));
+        this.props.dispatch(getSessions(viewSettings.get('filters'), viewSettings.get('sortProperty'), viewSettings.get('isSortOrderAscending')));
     }
 
-    render() {
+    render() {        
+        const list = this.props.isFetching
+            ? "Loading..."
+            : this.props.error
+                ? <p>There was an error retrieving sessions - '{this.props.error.message}'</p>
+                : <SessionList sessions={this.props.sessions}/>;
+
         return (
             <div className={styles.sessions}>
-              <div className={styles.sessionList}>
-                {this.props.isFetching ? "Loading..." :
-                <SessionList sessions={this.props.sessions} />}
-              </div>
-              <div className={styles.dashboardSidebar}>
-                <DashboardSidebar filters={this.props.filters} sortProperty={this.props.sortProperty} isSortOrderAscending={this.props.isSortOrderAscending} onSessionViewSettingsChange={e => this.handleSessionViewSettingsChange(e)} />
-              </div>
+                <div className={styles.sessionList}>
+                    {list}
+                </div>
+                <div className={styles.dashboardSidebar}>
+                    <DashboardSidebar filters={this.props.filters} sortProperty={this.props.sortProperty} isSortOrderAscending={this.props.isSortOrderAscending} onSessionViewSettingsChange={e => this.handleSessionViewSettingsChange(e)}/>
+                </div>
             </div>
         )
     }
@@ -46,6 +44,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
     return {
         isFetching: state.get('sessions').get('isFetching'),
+        error: state.get('sessions').get('error'),
         sessions: state.get('sessions').get('sessions'),
         filters: state.get('sessions').get('viewSettings').get('filters'),
         sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
@@ -59,6 +58,7 @@ Dashboard.propTypes = {
     filters: PropTypes.instanceOf(immutable.Map),
     sessions: PropTypes.instanceOf(immutable.List),
     isFetching: PropTypes.bool,
+    error: PropTypes.shape({message: PropTypes.string}),
     dispatch: PropTypes.func
 };
 

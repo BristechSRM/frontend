@@ -7,12 +7,12 @@ import styles from './sessionSidebar.scss';
 class SessionSidebar extends Component {
 
     getHandle(type) {
-        var handle = this.props.speaker.handles.find(handle => handle.type === type);
+        const handle = this.props.speaker.handles.find(handle => handle.type === type);
         return handle ? handle.id : "";
     }
 
     render() {
-        var h1Style = {
+        const h1Style = {
             "color": SessionStatusService.getStatusColor("deferred")
         };
 

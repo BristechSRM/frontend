@@ -11,7 +11,7 @@ class NavLink extends Component {
 
         const styles = Object.assign({}, defaultStyles, this.props.styles);
 
-        var activeStyle = {
+        const activeStyle = {
             backgroundColor: '#706f6f'
         }
 

@@ -1,13 +1,8 @@
-import fetch from 'isomorphic-fetch';
+import api from './ApiService.js';
 
 class SessionsApi {
     getAllSessions() {
-        return new Promise((resolve, reject) => {
-            fetch('http://api.bris.tech/sessions')
-                .then(response => response.json())
-                .then(sessions => resolve(sessions))
-                .catch(error => reject(error));
-        });
+        return api.get('http://api.bris.tech/sessions');
     }
 }
 
