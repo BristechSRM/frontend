@@ -11,9 +11,9 @@ class DashboardSidebar extends Component {
 
     handleFilterChange(filters) {
         this.props.onSessionViewSettingsChange(immutable.Map({
-            filters: filters,
+            filters,
             sortProperty: this.props.sortProperty,
-            isSortOrderAscending: this.props.isSortOrderAscending
+            isSortOrderAscending: this.props.isSortOrderAscending,
         }));
     }
 
@@ -21,7 +21,7 @@ class DashboardSidebar extends Component {
         this.props.onSessionViewSettingsChange(immutable.Map({
             filters: this.props.filters,
             sortProperty: value,
-            isSortOrderAscending: this.props.isSortOrderAscending
+            isSortOrderAscending: this.props.isSortOrderAscending,
         }));
     }
 
@@ -29,7 +29,7 @@ class DashboardSidebar extends Component {
         this.props.onSessionViewSettingsChange(immutable.Map({
             filters: this.props.filters,
             sortProperty: this.props.sortProperty,
-            isSortOrderAscending: value
+            isSortOrderAscending: value,
         }));
     }
 
@@ -38,21 +38,29 @@ class DashboardSidebar extends Component {
             <div className={styles.dashboardSidebar}>
                 <div className={styles.section}>
                     <h1>Apply Filter</h1>
-                    <SessionFilter options={this.props.filters} onChange={(filters) => this.handleFilterChange(filters)} />
+                    <SessionFilter
+                      options={this.props.filters}
+                      onChange={(filters) => this.handleFilterChange(filters)}
+                    />
                 </div>
                 <div className={styles.section}>
                     <h1>Sort By</h1>
-                    <DropDownMenu className={styles.dropdown} value={this.props.sortProperty} onChange={(e, i, v) => this.handleSortPropertyChange(e, i, v)}>
-                       <MenuItem value={"last-contacted"} primaryText="Last Contacted"/>
-                       <MenuItem value={"name"} primaryText="Name"/>
-                       <MenuItem value={"rating"} primaryText="Rating"/>
+                    <DropDownMenu
+                      className={styles.dropdown}
+                      value={this.props.sortProperty}
+                      onChange={(e, i, v) => this.handleSortPropertyChange(e, i, v)}
+                    >
+                       <MenuItem value={"last-contacted"} primaryText="Last Contacted" />
+                       <MenuItem value={"name"} primaryText="Name" />
+                       <MenuItem value={"rating"} primaryText="Rating" />
                     </DropDownMenu>
 
                     <Checkbox
-                        className={styles.isAscCheckbox}
-                        label='Ascending Order'
-                        checked={this.props.isSortOrderAscending}
-                        onCheck={(e, c) => this.handleSortOrderChange(e, c)} />
+                      className={styles.isAscCheckbox}
+                      label="Ascending Order"
+                      checked={this.props.isSortOrderAscending}
+                      onCheck={(e, c) => this.handleSortOrderChange(e, c)}
+                    />
                 </div>
             </div>
         );
@@ -63,7 +71,7 @@ DashboardSidebar.propTypes = {
     onSessionViewSettingsChange: PropTypes.func,
     isSortOrderAscending: PropTypes.bool,
     sortProperty: PropTypes.string,
-    filters: PropTypes.instanceOf(immutable.Map)
+    filters: PropTypes.instanceOf(immutable.Map),
 };
 
 export default DashboardSidebar;

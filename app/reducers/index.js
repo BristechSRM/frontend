@@ -4,5 +4,5 @@ import routing from './routing';
 
 export default combineReducers({
     sessions,
-    routing
+    routing,
 });

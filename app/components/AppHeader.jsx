@@ -5,18 +5,22 @@ import styles from './appHeader.scss';
 
 class AppHeader extends Component {
 
+    renderNavLink(ni) {
+        return <NavLink key={ni.title} label={ni.title} route={ni.route} />;
+    }
+
     render() {
         const navigation = immutable.List([
             {
                 title: 'Dashboard',
-                route: '/'
+                route: '/',
             }, {
                 title: 'Sessions',
-                route: '/sessions'
+                route: '/sessions',
             }, {
                 title: 'Speakers',
-                route: '/speakers'
-            }
+                route: '/speakers',
+            },
         ]);
 
         return (
@@ -25,15 +29,15 @@ class AppHeader extends Component {
                     <div className={styles.logo}>
                         <img src="/img/srm-logo.png" alt="SRM" />
                     </div>
-                    {navigation.map(ni => <NavLink key={ni.title} label={ni.title} route={ni.route}/>)}
+                    {navigation.map(ni => this.renderNavLink(ni))}
                 </div>
             </div>
-        )
+        );
     }
 }
 
 AppHeader.propTypes = {
-    navigation: PropTypes.instanceOf(immutable.List)
+    navigation: PropTypes.instanceOf(immutable.List),
 };
 
 export default AppHeader;

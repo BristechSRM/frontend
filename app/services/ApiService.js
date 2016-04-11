@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
-const handleErrors = (response) => {
-    return new Promise((resolve, reject) => {
+const handleErrors = (response) =>
+    new Promise((resolve, reject) => {
         if (!response) {
-            reject({ message: "No response returned from fetch"});
+            reject({ message: 'No response returned from fetch' });
             return;
         }
 
@@ -12,13 +12,12 @@ const handleErrors = (response) => {
             return;
         }
 
-        return response.json()
+        response.json()
             .then(json => {
                 const error = json || { message: response.statusText };
                 reject(error);
             });
     });
-}
 
 class Api {
     get(uri) {
