@@ -18,6 +18,7 @@ jobs:
   - put: image
     params:
       build: context
+  - put: cluster
 
 resources:
 - name: code
