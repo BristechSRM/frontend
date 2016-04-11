@@ -7,13 +7,13 @@ import styles from './sessionSidebar.scss';
 class SessionSidebar extends Component {
 
     getHandle(type) {
-        var handle = this.props.speaker.handles.find(handle => handle.type === type);
-        return handle ? handle.id : "";
+        const handle = this.props.speaker.handles.find(h => h.type === type);
+        return handle ? handle.id : '';
     }
 
     render() {
-        var h1Style = {
-            "color": SessionStatusService.getStatusColor("deferred")
+        const h1Style = {
+            color: SessionStatusService.getStatusColor('deferred'),
         };
 
         return (
@@ -32,7 +32,15 @@ class SessionSidebar extends Component {
                         </tr>
                         <tr>
                             <td>Credibility</td>
-                            <td><StarRating name="session-rating" totalStars={5} rating={this.props.speaker.rating} disabled={true} size={16} /></td>
+                            <td>
+                              <StarRating
+                                name="session-rating"
+                                totalStars={5}
+                                rating={this.props.speaker.rating}
+                                disabled
+                                size={16}
+                              />
+                            </td>
                         </tr>
                         <tr>
                             <td>Signup Method</td>
@@ -54,19 +62,19 @@ class SessionSidebar extends Component {
                     <table>
                         <tr>
                             <td>Email</td>
-                            <td>{this.getHandle("email")}</td>
+                            <td>{this.getHandle('email')}</td>
                         </tr>
                         <tr>
                             <td>Phone Number</td>
-                            <td>{this.getHandle("phone")}</td>
+                            <td>{this.getHandle('phone')}</td>
                         </tr>
                         <tr>
                             <td>Twitter</td>
-                            <td>@{this.getHandle("twitter")}</td>
+                            <td>@{this.getHandle('twitter')}</td>
                         </tr>
                         <tr>
                             <td>Github</td>
-                            <td>{this.getHandle("github")}</td>
+                            <td>{this.getHandle('github')}</td>
                         </tr>
                     </table>
                 </div>
@@ -78,7 +86,7 @@ class SessionSidebar extends Component {
 SessionSidebar.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
-    admin: PropTypes.object
+    admin: PropTypes.object,
 };
 
 export default SessionSidebar;

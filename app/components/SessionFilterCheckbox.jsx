@@ -7,13 +7,15 @@ import styles from './sessionFilterCheckbox.scss';
 class SessionFilterCheckbox extends Component {
 
     render() {
-
-        var rectStyle = {
-            "fill": SessionStatusService.getStatusColor(this.props.status)
+        const rectStyle = {
+            fill: SessionStatusService.getStatusColor(this.props.status),
         };
 
         return (
-            <div className={styles.sessionFilterCheckbox} onClick={() => this.props.onCheck(!this.props.isChecked)}>
+            <div
+              className={styles.sessionFilterCheckbox}
+              onClick={() => this.props.onCheck(!this.props.isChecked)}
+            >
                 <div className={styles.square}>
                     <svg><rect style={rectStyle} /></svg>
                 </div>
@@ -22,13 +24,14 @@ class SessionFilterCheckbox extends Component {
                 </div>
                 <div>
                     <Checkbox
-                        key={this.props.value}
-                        checked={this.props.isChecked || false}
-                        labelPosition='left'
-                        disableTouchRipple />
+                      key={this.props.value}
+                      checked={this.props.isChecked || false}
+                      labelPosition="left"
+                      disableTouchRipple
+                    />
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -37,7 +40,7 @@ SessionFilterCheckbox.propTypes = {
     onCheck: PropTypes.func,
     isChecked: PropTypes.bool,
     label: PropTypes.string,
-    value: PropTypes.string
-}
+    value: PropTypes.string,
+};
 
 export default SessionFilterCheckbox;

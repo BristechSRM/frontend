@@ -5,17 +5,17 @@ import styles from './correspondenceItem.scss';
 class CorrespondenceItem extends Component {
 
     render() {
-        var date = moment(this.props.date);
+        const date = moment(this.props.date);
 
         return (
             <div className={styles.correspondenceItem}>
                 <div className={styles.content}>
-                    {this.props.message.split("\n").map(paragraph =>
+                    {this.props.message.split('\n').map(paragraph =>
                         <p>{paragraph}</p>
                     )}
                 </div>
                 <div className={styles.details}>
-                    {date.format("DD MMMM YYYY [at] h:mma")}
+                    {date.format('DD MMMM YYYY [at] h:mma')}
                 </div>
             </div>
         );
@@ -24,7 +24,7 @@ class CorrespondenceItem extends Component {
 
 CorrespondenceItem.propTypes = {
     date: PropTypes.string,
-    message: PropTypes.array
+    message: PropTypes.array,
 };
 
 export default CorrespondenceItem;

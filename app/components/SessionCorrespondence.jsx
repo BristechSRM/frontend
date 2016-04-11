@@ -6,13 +6,15 @@ import styles from './sessionCorrespondence.scss';
 class SessionCorrespondence extends Component {
 
     render() {
+        const sortedCorrespondence = this.props.correspondence.sort((a, b) => a.date < b.date);
         return (
             <div className={styles.correspondence}>
-                {this.props.correspondence.map(correspondenceItem =>
+                {sortedCorrespondence.map(correspondenceItem =>
                     <div className={styles.correspondenceItem}>
                         <CorrespondenceItem
-                            message={correspondenceItem.message}
-                            date={correspondenceItem.date} />
+                          message={correspondenceItem.message}
+                          date={correspondenceItem.date}
+                        />
                     </div>
                 )}
             </div>
@@ -21,7 +23,7 @@ class SessionCorrespondence extends Component {
 }
 
 SessionCorrespondence.propTypes = {
-    correspondence: PropTypes.array
+    correspondence: PropTypes.array,
 };
 
 export default SessionCorrespondence;

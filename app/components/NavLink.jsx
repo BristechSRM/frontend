@@ -6,35 +6,35 @@ class NavLink extends Component {
 
     render() {
         const defaultStyles = {
-            margin: 8
+            margin: 8,
         };
 
         const styles = Object.assign({}, defaultStyles, this.props.styles);
 
-        var activeStyle = {
-            backgroundColor: '#706f6f'
-        }
+        const activeStyle = {
+            backgroundColor: '#706f6f',
+        };
 
         return (
           <RaisedButton
             label={this.props.label}
-            labelStyle={{color: '#c6c6c6'}}
+            labelStyle={{ color: '#c6c6c6' }}
             containerElement={<Link to={this.props.route} activeStyle={activeStyle} />}
-            linkButton={true}
-            style={styles}>
-          </RaisedButton>
-        )
+            linkButton
+            style={styles}
+          />
+        );
     }
 }
 
 NavLink.contextTypes = {
-    router: PropTypes.object
-}
+    router: PropTypes.object,
+};
 
 NavLink.propTypes = {
     label: PropTypes.string,
     route: PropTypes.string,
-    styles: PropTypes.object
+    styles: PropTypes.object,
 };
 
 export default NavLink;

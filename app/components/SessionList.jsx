@@ -11,25 +11,26 @@ class SessionList extends Component {
             <div className={styles.sessionList}>
                 {this.props.sessions.valueSeq().map(session =>
                     <div className={styles.sessionCard}>
-                        <Link to={'sessions/' + session.id}>
+                        <Link to={`sessions/${session.id}`}>
                             <SessionCard
-                                key={session.id}
-                                speakerName={session.speakerName}
-                                title={session.title}
-                                status={session.status}
-                                rating={session.speakerRating}
-                                adminName={session.adminName}
-                                adminImageUri={session.adminImageUrl} />
+                              key={session.id}
+                              speakerName={session.speakerName}
+                              title={session.title}
+                              status={session.status}
+                              rating={session.speakerRating}
+                              adminName={session.adminName}
+                              adminImageUri={session.adminImageUrl}
+                            />
                         </Link>
                     </div>
                 )}
             </div>
-        )
+        );
     }
 }
 
 SessionList.propTypes = {
-    sessions: PropTypes.instanceOf(immutable.List)
+    sessions: PropTypes.instanceOf(immutable.List),
 };
 
 export default SessionList;
