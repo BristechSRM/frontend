@@ -1,8 +1,9 @@
 FROM node
 
+
 COPY packed/ frontend/
 ENV NODE_ENV production
-RUN npm install
+RUN cd frontend && npm install
 
 WORKDIR /frontend
 
