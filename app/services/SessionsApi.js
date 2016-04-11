@@ -11,7 +11,6 @@ class SessionsApi {
     }
 
     filterAndSort(sessions, filters, sortProperty, isSortOrderAscending) {
-
         let filteredSessions = sessions;
 
         const noFiltersEnabled = filters.every(f => !f);
@@ -21,10 +20,10 @@ class SessionsApi {
         }
 
         const propertyNames = {
-            'name': 'speakerName',
+            name: 'speakerName',
             'last-contacted': 'lastContacted',
-            'rating': 'speakerRating'
-        }
+            rating: 'speakerRating',
+        };
 
         const sortOrder = isSortOrderAscending ? 'asc' : 'desc';
         const updatedSessions = _.orderBy(
@@ -36,7 +35,7 @@ class SessionsApi {
     }
 
     getSession(sessionId) {
-        return api.get(sessionsUri + '/' + sessionId);
+        return api.get(`${sessionsUri}/${sessionId}`);
     }
 }
 

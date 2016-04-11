@@ -7,9 +7,8 @@ import styles from './sessionCard.scss';
 class SessionCard extends Component {
 
     render() {
-
         const footerStyle = {
-            "backgroundColor": SessionStatusService.getStatusColor(this.props.status)
+            backgroundColor: SessionStatusService.getStatusColor(this.props.status),
         };
 
         return (
@@ -23,11 +22,17 @@ class SessionCard extends Component {
                             {this.props.adminName}
                         </div>
                         <div className={styles.notificationImg}>
-                            <img src="https://s3-eu-west-1.amazonaws.com/bristech-images/notification-icon-tm2.png"/>
+                            <img src="https://s3-eu-west-1.amazonaws.com/bristech-images/notification-icon-tm2.png" />
                         </div>
                     </div>
                     <div className={styles.rating}>
-                        <StarRating name="session-rating" totalStars={5} rating={this.props.rating} disabled={true} size={14} />
+                        <StarRating
+                          name="session-rating"
+                          totalStars={5}
+                          rating={this.props.rating}
+                          disabled
+                          size={14}
+                        />
                     </div>
                     <div className={styles.title}>
                         {this.props.title}
@@ -38,11 +43,15 @@ class SessionCard extends Component {
                         {this.props.speakerName}
                     </div>
                     <div className={styles.lastContacted}>
-                        Last contacted - <span className={styles.date}>{this.props.speakerLastContacted || "Unknown"}</span>
+                        <p>Last contacted -
+                          <span className={styles.date}>
+                            {this.props.speakerLastContacted || 'Unknown'}
+                          </span>
+                        </p>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -53,7 +62,7 @@ SessionCard.propTypes = {
     rating: PropTypes.number,
     adminName: PropTypes.string,
     adminImageUri: PropTypes.string,
-    status: PropTypes.string
+    status: PropTypes.string,
 };
 
 export default SessionCard;
