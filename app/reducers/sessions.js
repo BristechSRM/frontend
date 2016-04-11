@@ -34,7 +34,7 @@ const sessions = handleActions({
     [UPDATE_SESSIONS_COMPLETE]: (state, action) => {
         return state.withMutations(map => {
             map.set('isFetching', false)
-                .set('sessions', action.payload.sessions)
+                .set('sessions', action.payload)
         });
     },
 
