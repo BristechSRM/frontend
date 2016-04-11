@@ -5,7 +5,8 @@ import immutable from 'immutable';
 import {
     UPDATE_SESSIONS_START,
     UPDATE_SESSIONS_COMPLETE,
-    UPDATE_SESSIONS_ERROR
+    UPDATE_SESSIONS_ERROR,
+    VIEW_SETTINGS_CHANGED
 } from '../actions'
 
 const initialState = immutable.Map({
@@ -34,14 +35,11 @@ const sessions = handleActions({
         return state.withMutations(map => {
             map.set('isFetching', false)
                 .set('sessions', action.payload.sessions)
-                .setIn(['viewSettings', 'filters'], action.payload.filters)
-                .setIn(['viewSettings', 'sortProperty'], action.payload.sortProperty)
-                .setIn(['viewSettings', 'isSortOrderAscending'], action.payload.isSortOrderAscending)
-
-            if (action.payload.refreshCache) {
-                map.set('cachedSessions', action.payload.sessions);
-            }
         });
+    },
+
+    [VIEW_SETTINGS_CHANGED]: (state, action) => {
+        return state.set('viewSettings', action.payload);
     }
 }, initialState);
 
