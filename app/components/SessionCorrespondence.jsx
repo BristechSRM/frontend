@@ -6,9 +6,10 @@ import styles from './sessionCorrespondence.scss';
 class SessionCorrespondence extends Component {
 
     render() {
+        const sortedCorrespondence = this.props.correspondence.sort((a, b) => a.date < b.date);
         return (
             <div className={styles.correspondence}>
-                {this.props.correspondence.map(correspondenceItem =>
+                {sortedCorrespondence.map(correspondenceItem =>
                     <div className={styles.correspondenceItem}>
                         <CorrespondenceItem
                             message={correspondenceItem.message}
