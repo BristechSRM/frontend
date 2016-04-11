@@ -1,23 +1,18 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux'
 import SessionSidebar from '../components/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/SessionCorrespondence.jsx';
+import { getSession } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
 
     componentDidMount() {
         const sessionId = this.props.params.sessionId;
+        this.props.dispatch(getSession(sessionId));
     }
-    
-    render() {
-        const session = {
-            id: 1,
-            title: "Concourse: How I Met Myself",
-            status: "deferred",
-            speakerId: 2,
-            adminId: 1
-        };
 
+    render() {
         const speaker = {
             id: 2,
             name: "David Wybourn",
@@ -75,7 +70,7 @@ class Session extends Component {
         return (
             <div className={styles.session}>
                 <div className={styles.sidebar}>
-                    <SessionSidebar session={session} speaker={speaker} admin={admin} />
+                    <SessionSidebar session={this.props.session} speaker={speaker} admin={admin} />
                 </div>
                 <div className={styles.correspondence}>
                     <SessionCorrespondence correspondence={correspondence} />
@@ -86,7 +81,19 @@ class Session extends Component {
 }
 
 Session.propTypes = {
-    params: PropTypes.object
+    params: PropTypes.object,
+    session: PropTypes.object,
+    isFetching: PropTypes.bool,
+    error: PropTypes.shape({message: PropTypes.string}),
+    dispatch: PropTypes.func
 }
 
-export default Session;
+function mapStateToProps(state) {
+    return {
+        isFetching: state.get('sessions').get('isFetching'),
+        session: state.get('session').get('session'),
+        error: state.get('session').get('error')
+    }
+}
+
+export default connect(mapStateToProps)(Session)
