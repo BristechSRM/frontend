@@ -1,10 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import SessionSidebar from '../components/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/SessionCorrespondence.jsx';
 import styles from './session.scss';
 
 class Session extends Component {
 
+    componentDidMount() {
+        const sessionId = this.props.params.sessionId;
+    }
+    
     render() {
         const session = {
             id: 1,
@@ -79,6 +83,10 @@ class Session extends Component {
             </div>
         );
     }
+}
+
+Session.propTypes = {
+    params: PropTypes.object
 }
 
 export default Session;
