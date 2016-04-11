@@ -18,7 +18,6 @@ jobs:
   - put: image
     params:
       build: context
-  - put: cluster
 
 resources:
 - name: code
@@ -39,8 +38,8 @@ resources:
   type: ecs
   source:
     stackName: development
-    clusterName: apiCluster
-    taskName: sessionsTaskDefinition
-    serviceName: sessionsService
+    clusterName: frontCluster
+    taskName: frontTaskDefinition
+    serviceName: frontService
     accessKeyId: {{awsAccessKeyId}}
     secretAccessKey: {{awsSecretAccessKey}}
