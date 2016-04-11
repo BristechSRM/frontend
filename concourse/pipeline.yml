@@ -24,7 +24,7 @@ resources:
   type: git
   source:
     uri: https://github.com/BristechSRM/frontend.git
-    branch: concourse
+    branch: concourse 
 
 - name: image
   type: docker-image
