@@ -12,8 +12,9 @@ class SessionCorrespondence extends Component {
                 {sortedCorrespondence.map(correspondenceItem =>
                     <div className={styles.correspondenceItem}>
                         <CorrespondenceItem
-                            message={correspondenceItem.message}
-                            date={correspondenceItem.date} />
+                          message={correspondenceItem.message}
+                          date={correspondenceItem.date}
+                        />
                     </div>
                 )}
             </div>
@@ -22,7 +23,7 @@ class SessionCorrespondence extends Component {
 }
 
 SessionCorrespondence.propTypes = {
-    correspondence: PropTypes.array
+    correspondence: PropTypes.array,
 };
 
 export default SessionCorrespondence;

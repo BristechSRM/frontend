@@ -1,67 +1,72 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
 
-console.log('NODE_ENV = ' + process.env.NODE_ENV);
+console.log(`NODE_ENV = ${process.env.NODE_ENV}`);
 
-var getProductionSettings = function () {
+function getProductionSettings() {
     return {
         devtool: 'cheap-module-source-map',
         plugins: [
             new webpack.DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify('production')
-                }
+                    NODE_ENV: JSON.stringify('production'),
+                },
             }),
             new webpack.optimize.DedupePlugin(),
             new webpack.optimize.OccurrenceOrderPlugin(),
-            new webpack.optimize.UglifyJsPlugin()
-        ]
-    }
+            new webpack.optimize.UglifyJsPlugin(),
+        ],
+    };
 }
 
-var getDevelopmentSettings = function () {
+function getDevelopmentSettings() {
     return {
         devtool: 'source-map',
         plugins: [
-            new webpack.HotModuleReplacementPlugin()
-        ]
-    }
+            new webpack.HotModuleReplacementPlugin(),
+        ],
+    };
 }
 
 const settings =
     process.env.NODE_ENV === 'production' ? getProductionSettings() : getDevelopmentSettings();
 
-var webpackConfig = {
+const webpackConfig = {
     devtool: settings.devtool,
-    entry: __dirname + '/app/main.js',
+    entry: path.join(__dirname, 'app/main.js'),
     output: {
-        path: __dirname + '/public',
-        filename: 'main.js'
+        path: path.join(__dirname, 'public'),
+        filename: 'main.js',
     },
     module: {
         preLoaders: [{
             test: /\.jsx?$/,
-            loader: "eslint-loader",
-            exclude: /node_modules/
+            loader: 'eslint-loader',
+            exclude: /node_modules/,
         }],
         loaders: [{
             test: /\.jsx?$/,
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel',
         }, {
             test: /(\.scss|\.css)$/,
-            loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass'
-        }]
+            loader: [
+                'style',
+                'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                'postcss',
+                'sass',
+            ].join('!'),
+        }],
     },
     resolve: {
-        extensions: ['', '.scss', '.js', '.json']
+        extensions: ['', '.scss', '.js', '.json'],
     },
     postcss: [
-        require('autoprefixer')
+        require('autoprefixer'),
     ],
     eslint: {
         configFile: '.eslintrc.json',
         formatter: require('eslint-friendly-formatter'),
-        fix: true
     },
     plugins: settings.plugins,
     devServer: {
@@ -69,8 +74,8 @@ var webpackConfig = {
         colors: true,
         historyApiFallback: true,
         inline: true,
-        hot: true
-    }
+        hot: true,
+    },
 };
 
 module.exports = webpackConfig;
