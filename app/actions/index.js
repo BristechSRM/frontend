@@ -25,7 +25,7 @@ export const getAllSessions = () =>
         return SessionsApi.getAllSessions()
             .then(sessions => dispatch(createAction(UPDATE_SESSIONS_COMPLETE)(immutable.fromJS(sessions))))
             .then(() => dispatch(createAction(UPDATE_LAST_CONTACT_START)()))
-            .then(CommsApi.getLastContacted)
+            .then(CommsApi.getLastContact)
             .then(lastContact => dispatch(createAction(UPDATE_LAST_CONTACT_COMPLETE)(
                 immutable.fromJS(CommsApi.mergeLastContact(lastContact, getState().get('sessions').get('sessions'))))),
                 error => dispatch(createAction(UPDATE_LAST_CONTACT_ERROR)(error)))
