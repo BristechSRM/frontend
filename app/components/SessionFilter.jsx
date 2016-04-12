@@ -4,50 +4,35 @@ import SessionFilterCheckbox from './SessionFilterCheckbox.jsx';
 
 class SessionFilter extends Component {
 
+    getCheckbox(label, status) {
+        return (
+          <SessionFilterCheckbox
+            isChecked={this.props.options.get(status) || false}
+            label={label}
+            status={status}
+            onCheck={c => this.handleCheck(status, c)}
+          />
+        );
+    }
+
     handleCheck(status, checked) {
         const newFilter = this.props.options.set(status, checked);
         this.props.onChange(newFilter);
     }
 
     render() {
+        const statuses = [
+            { status: 'unassigned', label: 'Unassigned' },
+            { status: 'assigned', label: 'Assigned' },
+            { status: 'in-progress', label: 'In progress' },
+            { status: 'deferred', label: 'Deferred' },
+            { status: 'topic-approved', label: 'Topic approved' },
+            { status: 'date-assigned', label: 'Date assigned' },
+        ];
+
         return (
             <div>
-                <SessionFilterCheckbox
-                  isChecked={this.props.options.get('0') || false}
-                  label="Unassigned"
-                  status="unassigned"
-                  onCheck={c => this.handleCheck('0', c)}
-                />
-                <SessionFilterCheckbox
-                  isChecked={this.props.options.get('1') || false}
-                  label="Assigned"
-                  status="assigned"
-                  onCheck={c => this.handleCheck('1', c)}
-                />
-                <SessionFilterCheckbox
-                  isChecked={this.props.options.get('2') || false}
-                  label="In progress"
-                  status="in-progress"
-                  onCheck={c => this.handleCheck('2', c)}
-                />
-                <SessionFilterCheckbox
-                  isChecked={this.props.options.get('3') || false}
-                  label="Deferred"
-                  status="deferred"
-                  onCheck={c => this.handleCheck('3', c)}
-                />
-                <SessionFilterCheckbox
-                  isChecked={this.props.options.get('4') || false}
-                  label="Topic approved"
-                  status="topic-approved"
-                  onCheck={c => this.handleCheck('4', c)}
-                />
-                <SessionFilterCheckbox
-                  isChecked={this.props.options.get('5') || false}
-                  label="Date assigned"
-                  status="date-assigned"
-                  onCheck={c => this.handleCheck('5', c)}
-                />
+                {statuses.map(s => this.getCheckbox(s.label, s.status))}
             </div>
         );
     }

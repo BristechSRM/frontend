@@ -20,7 +20,7 @@ class SessionsApi {
         const noFiltersEnabled = filters.every(f => !f);
 
         if (noFiltersEnabled === false) {
-            filteredSessions = filteredSessions.filter(s => filters.get(s.status.toString()));
+            filteredSessions = filteredSessions.filter(s => filters.get(s.get('status')));
         }
 
         const propertyNames = {
