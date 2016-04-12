@@ -9,8 +9,8 @@ class SessionCorrespondence extends Component {
         const sortedCorrespondence = this.props.correspondence.sort((a, b) => a.date < b.date);
         return (
             <div className={styles.correspondence}>
-                {sortedCorrespondence.map(correspondenceItem =>
-                    <div className={styles.correspondenceItem}>
+                {sortedCorrespondence.map((correspondenceItem, index) =>
+                    <div key={index} className={styles.correspondenceItem}>
                         <CorrespondenceItem
                           message={correspondenceItem.message}
                           date={correspondenceItem.date}
