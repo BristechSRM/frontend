@@ -13,31 +13,6 @@ class Session extends Component {
     }
 
     render() {
-        const speaker = {
-            id: 2,
-            name: 'David Wybourn',
-            handles: [
-                {
-                    type: 'email',
-                    id: 'test2@email.com',
-                },
-                {
-                    type: 'twitter',
-                    id: 'dwybourn',
-                },
-                {
-                    type: 'phone',
-                    id: '01234567890',
-                },
-            ],
-            rating: 4,
-        };
-
-        const admin = {
-            id: 1,
-            name: 'Chris Smith',
-        };
-
         const correspondence = [
             {
                 fromProfileId: 1,
@@ -70,7 +45,11 @@ class Session extends Component {
         return (
             <div className={styles.session}>
                 <div className={styles.sidebar}>
-                    <SessionSidebar session={this.props.session} speaker={speaker} admin={admin} />
+                    <SessionSidebar
+                      session={this.props.session}
+                      speaker={this.props.speaker}
+                      admin={this.props.admin}
+                    />
                 </div>
                 <div className={styles.correspondence}>
                     <SessionCorrespondence correspondence={correspondence} />
@@ -83,6 +62,8 @@ class Session extends Component {
 Session.propTypes = {
     params: PropTypes.object,
     session: PropTypes.object,
+    speaker: PropTypes.object,
+    admin: PropTypes.object,
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
@@ -90,8 +71,10 @@ Session.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        isFetching: state.get('sessions').get('isFetching'),
+        isFetching: state.get('session').get('isFetching'),
         session: state.get('session').get('session'),
+        speaker: state.get('session').get('speaker'),
+        admin: state.get('session').get('admin'),
         error: state.get('session').get('error'),
     };
 }
