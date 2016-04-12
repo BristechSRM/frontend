@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import StarRating from 'react-star-rating';
 import SessionStatusService from '../services/SessionStatusService';
+import moment from 'moment';
 
 import styles from './sessionCard.scss';
 
@@ -11,13 +12,18 @@ class SessionCard extends Component {
             backgroundColor: SessionStatusService.getStatusColor(this.props.status),
         };
 
+        const speakerLastContact = this.props.speakerLastContact;
         let lastContact = null;
-        if (this.props.speakerLastContact) {
+        if (speakerLastContact) {
+            const date = moment.isDate(speakerLastContact)
+                ? moment.date(speakerLastContact).format('DD MMMM YYYY [at] h:mma')
+                : speakerLastContact;
+
             lastContact =
             (<div className={styles.lastContact}>
                 <p>Last contact -
                     <span className={styles.date}>
-                        {this.props.speakerLastContact}
+                        {date}
                     </span>
                 </p>
             </div>);

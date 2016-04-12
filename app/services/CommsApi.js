@@ -6,8 +6,12 @@ class CommsApi {
     }
 
     mergeLastContact(lastContact, sessions) {
-        // TODO: merge lastContact into sessions based on threadId
-        return sessions;
+        const newSessions = [];
+        sessions.forEach(session => {
+            const lastContactRecord = lastContact.find(record => record.threadId === session.get('threadId'));
+            newSessions.push(session.set('speakerLastContact', lastContactRecord ? lastContactRecord.date : 'Never'));
+        });
+        return newSessions;
     }
 }
 
