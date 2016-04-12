@@ -7,6 +7,7 @@ class SessionFilter extends Component {
     getCheckbox(label, status) {
         return (
           <SessionFilterCheckbox
+            key={status}
             isChecked={this.props.options.get(status) || false}
             label={label}
             status={status}
