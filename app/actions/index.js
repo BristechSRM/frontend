@@ -19,9 +19,6 @@ export const GET_SESSION_ERROR = 'GET_SESSION_ERROR';
 
 export const VIEW_SETTINGS_CHANGED = 'VIEW_SETTINGS_CHANGED';
 
-const getSessionFromServer = (sessionId) =>
-    SessionsApi.getSession(sessionId);
-
 export const getAllSessions = () =>
     (dispatch, getState) => {
         dispatch(createAction(UPDATE_SESSIONS_START)());
@@ -38,7 +35,7 @@ export const getAllSessions = () =>
 export const getSession = (sessionId) =>
     (dispatch) => {
         dispatch(createAction(GET_SESSION_START)());
-        return getSessionFromServer(sessionId)
+        return SessionsApi.getSession(sessionId)
             .then(session => dispatch(createAction(GET_SESSION_COMPLETE)(session)))
             .catch(error => dispatch(createAction(GET_SESSION_ERROR)(error)));
     };

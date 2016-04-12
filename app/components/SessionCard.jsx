@@ -12,12 +12,12 @@ class SessionCard extends Component {
         };
 
         let lastContact = null;
-        if (this.props.speakerLastContacted) {
+        if (this.props.speakerLastContact) {
             lastContact =
-            (<div className={styles.lastContacted}>
-                <p>Last contacted -
+            (<div className={styles.lastContact}>
+                <p>Last contact -
                     <span className={styles.date}>
-                        {this.props.speakerLastContacted}
+                        {this.props.speakerLastContact}
                     </span>
                 </p>
             </div>);
@@ -62,7 +62,7 @@ class SessionCard extends Component {
 }
 
 SessionCard.propTypes = {
-    speakerLastContacted: PropTypes.string,
+    speakerLastContact: PropTypes.string,
     speakerName: PropTypes.string,
     title: PropTypes.string,
     rating: PropTypes.number,

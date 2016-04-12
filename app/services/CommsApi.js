@@ -1,7 +1,7 @@
 import api from './ApiService.js';
 
 class CommsApi {
-    getLastContacted() {
+    getLastContact() {
         return api.get('http://api.bris.tech:8080/last-contact');
     }
 

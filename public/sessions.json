@@ -1,7 +1,7 @@
 [
-  {"id": 1, "name":"Thomas Hull","title":"To know javascript is to love javascript","rating":1,"admin":"David Wybourn","adminImageUrl":"https://placebear.com/50/50","lastContacted":"1970-01-01T00:00:00","speakerStatus":1},
-  {"id": 2, "name":"Jason Ebbin","title":"F#: The sharpest tool in the shed","rating":5,"admin":"Jason Ebbin","adminImageUrl":"https://placebear.com/50/50","lastContacted":"1989-11-09T00:00:00","speakerStatus":3},
-  {"id": 3, "name":"David Wybourn","title":"Concourse: Where I met myself","rating":3,"admin":"Chris James Smith","adminImageUrl":"https://placebear.com/50/50","lastContacted":"2015-10-21T00:00:00","speakerStatus":4},
-  {"id": 4, "name":"Joe Bloggs","title":"This is a title","rating":2,"admin":"Thomas Hull","adminImageUrl":"https://placebear.com/50/50","lastContacted":"2016-02-19T00:00:00","speakerStatus":2},
-  {"id": 5, "name":"Chris Smith","title":"C# or F#: Which is sharper?","rating":5,"admin":"Thomas Hull","adminImageUrl":"https://placebear.com/50/50","lastContacted":"2016-01-10T00:00:00","speakerStatus":5}
+  {"id": 1, "name":"Thomas Hull","title":"To know javascript is to love javascript","rating":1,"admin":"David Wybourn","adminImageUrl":"https://placebear.com/50/50","lastContact":"1970-01-01T00:00:00","speakerStatus":1},
+  {"id": 2, "name":"Jason Ebbin","title":"F#: The sharpest tool in the shed","rating":5,"admin":"Jason Ebbin","adminImageUrl":"https://placebear.com/50/50","lastContact":"1989-11-09T00:00:00","speakerStatus":3},
+  {"id": 3, "name":"David Wybourn","title":"Concourse: Where I met myself","rating":3,"admin":"Chris James Smith","adminImageUrl":"https://placebear.com/50/50","lastContact":"2015-10-21T00:00:00","speakerStatus":4},
+  {"id": 4, "name":"Joe Bloggs","title":"This is a title","rating":2,"admin":"Thomas Hull","adminImageUrl":"https://placebear.com/50/50","lastContact":"2016-02-19T00:00:00","speakerStatus":2},
+  {"id": 5, "name":"Chris Smith","title":"C# or F#: Which is sharper?","rating":5,"admin":"Thomas Hull","adminImageUrl":"https://placebear.com/50/50","lastContact":"2016-01-10T00:00:00","speakerStatus":5}
 ]
