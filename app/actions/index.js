@@ -9,6 +9,10 @@ export const UPDATE_SESSIONS_ERROR = 'UPDATE_SESSIONS_ERROR';
 
 export const VIEW_SETTINGS_CHANGED = 'VIEW_SETTINGS_CHANGED';
 
+export const GET_SESSION_START = 'GET_SESSION_START';
+export const GET_SESSION_COMPLETE = 'GET_SESSION_COMPLETE';
+export const GET_SESSION_ERROR = 'GET_SESSION_ERROR';
+
 const mergeLastContacted = sessions =>
     // TODO: merge lastContacted into sessions
     CommsApi.getLastContacted()
@@ -19,6 +23,10 @@ const getSessionsFromServer = () =>
         // .then(sessions => mergeLastContacted(sessions))
         .then(sessions => immutable.List(sessions));
 
+const getSessionFromServer = (sessionId) =>
+    SessionsApi.getSession(sessionId);
+
+
 export const getAllSessions = () =>
     (dispatch) => {
         dispatch(createAction(UPDATE_SESSIONS_START)());
@@ -28,3 +36,11 @@ export const getAllSessions = () =>
     };
 
 export const changeViewSettings = createAction(VIEW_SETTINGS_CHANGED);
+
+export const getSession = (sessionId) =>
+    (dispatch) => {
+        dispatch(createAction(GET_SESSION_START)());
+        return getSessionFromServer(sessionId)
+            .then(session => dispatch(createAction(GET_SESSION_COMPLETE)(session)))
+            .catch(error => dispatch(createAction(GET_SESSION_ERROR)(error)));
+    };

@@ -24,7 +24,7 @@ class CorrespondenceItem extends Component {
 
 CorrespondenceItem.propTypes = {
     date: PropTypes.string,
-    message: PropTypes.array,
+    message: PropTypes.string,
 };
 
 export default CorrespondenceItem;
