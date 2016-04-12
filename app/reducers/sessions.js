@@ -14,7 +14,7 @@ const initialState = immutable.Map({
     sessions: immutable.List(),
     viewSettings: immutable.Map({
         filters: immutable.Map(),
-        sortProperty: 'last-contacted',
+        sortProperty: 'last-contact',
         isSortOrderAscending: false,
     }),
 });

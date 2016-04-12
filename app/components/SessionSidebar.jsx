@@ -51,7 +51,7 @@ class SessionSidebar extends Component {
                             <td>2 November 2015</td>
                         </tr>
                         <tr>
-                            <td>Last Contacted</td>
+                            <td>Last Contact</td>
                             <td>2 January 2016 at 3:24pm</td>
                         </tr>
                     </table>
