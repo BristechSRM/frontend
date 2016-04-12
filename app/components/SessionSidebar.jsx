@@ -7,11 +7,11 @@ import styles from './sessionSidebar.scss';
 class SessionSidebar extends Component {
 
     getName(profile) {
-        return profile ? `${profile.forename}  ${profile.surname}` : null;
+        return profile ? `${profile.forename || ''}  ${profile.surname || ''}` : null;
     }
 
     getHandle(type) {
-        const handle = this.props.speaker ? this.props.speaker.handles.find(h => h.type === type) : null;
+        const handle = this.props.speaker.handles ? this.props.speaker.handles.find(h => h.type === type) : null;
         return handle ? handle.id : '';
     }
 
@@ -40,7 +40,7 @@ class SessionSidebar extends Component {
                               <StarRating
                                 name="session-rating"
                                 totalStars={5}
-                                rating={this.props.speaker ? this.props.speaker.rating : 0}
+                                rating={this.props.speaker.rating}
                                 disabled
                                 size={16}
                               />
