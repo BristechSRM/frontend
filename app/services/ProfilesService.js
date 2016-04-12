@@ -31,6 +31,86 @@ const profiles = [
             },
         ],
     },
+    {
+        id: '09aac819-5f92-42eb-a06c-c01aef5181ae',
+        forename: 'Lauren',
+        surname: 'Clark',
+        rating: 1,
+        handles: [
+            {
+                type: 'email',
+                id: 'lclark@email.com',
+            },
+            {
+                type: 'twitter',
+                id: 'lozza',
+            },
+            {
+                type: 'phone',
+                id: '01234567890',
+            },
+        ],
+    },
+    {
+        id: '09aac819-5f92-42eb-a06c-c01aef5181af',
+        forename: 'Ian',
+        surname: 'Lovell',
+        rating: 4,
+        handles: [
+            {
+                type: 'email',
+                id: 'ilovell@email.com',
+            },
+            {
+                type: 'twitter',
+                id: 'ilovell',
+            },
+            {
+                type: 'phone',
+                id: '01234567890',
+            },
+        ],
+    },
+    {
+        id: '2b6f60c1-9025-4e2c-bbb2-3b40a87fde76',
+        forename: 'Thomas',
+        surname: 'Hull',
+        rating: 2,
+        handles: [
+            {
+                type: 'email',
+                id: 'thull@email.com',
+            },
+            {
+                type: 'twitter',
+                id: 'thom',
+            },
+            {
+                type: 'phone',
+                id: '01234567890',
+            },
+        ],
+    },
+    {
+        id: '2b6f60c1-9025-4e2c-bbb2-3b40a87fde86',
+        forename: 'Jason',
+        surname: 'Ebbin',
+        rating: 4,
+        handles: [
+            {
+                type: 'email',
+                id: 'jebbin@email.com',
+            },
+            {
+                type: 'twitter',
+                id: 'json',
+            },
+            {
+                type: 'phone',
+                id: '01234567890',
+            },
+        ],
+    },
 ];
 
 class ProfilesService {
