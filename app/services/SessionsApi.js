@@ -2,12 +2,12 @@ import api from './ApiService.js';
 import _ from 'lodash';
 import immutable from 'immutable';
 
-const sessionsUri = 'http://api.bris.tech/sessions';
+const sessionsUri = 'http://api.bris.tech';
 
 class SessionsApi {
 
     getAllSessions() {
-        return api.get(sessionsUri);
+        return api.get(`${sessionsUri}/sessionsummaries`);
     }
 
     filterAndSort(sessions, filters, sortProperty, isSortOrderAscending) {
@@ -39,7 +39,7 @@ class SessionsApi {
     }
 
     getSession(sessionId) {
-        return api.get(`${sessionsUri}/${sessionId}`);
+        return api.get(`${sessionsUri}/sessions/${sessionId}`);
     }
 }
 
