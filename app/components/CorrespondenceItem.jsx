@@ -10,8 +10,8 @@ class CorrespondenceItem extends Component {
         return (
             <div className={styles.correspondenceItem}>
                 <div className={styles.content}>
-                    {this.props.message.split('\n').map(paragraph =>
-                        <p>{paragraph}</p>
+                    {this.props.message.split('\n').map((paragraph, index) =>
+                        <p key={index}>{paragraph}</p>
                     )}
                 </div>
                 <div className={styles.details}>
