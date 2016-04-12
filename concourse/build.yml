@@ -1,0 +1,12 @@
+platform: linux
+
+image: docker:///node
+
+inputs:
+- name: code
+
+outputs:
+- name: packed
+
+run:
+  path: code/concourse/build.sh

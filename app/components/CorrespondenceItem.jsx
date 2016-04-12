@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import styles from './CorrespondenceItem.scss';
+import styles from './correspondenceItem.scss';
 
 class CorrespondenceItem extends Component {
 
