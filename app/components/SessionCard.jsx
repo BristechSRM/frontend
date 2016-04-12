@@ -42,10 +42,10 @@ class SessionCard extends Component {
                     <div className={styles.speakerName}>
                         {this.props.speakerName}
                     </div>
-                    <div className={styles.lastContacted}>
-                        <p>Last contacted -
+                    <div className={styles.lastContact}>
+                        <p>Last contact -
                           <span className={styles.date}>
-                            {this.props.speakerLastContacted || 'Unknown'}
+                            {this.props.speakerLastContact || 'Unknown'}
                           </span>
                         </p>
                     </div>
@@ -56,7 +56,7 @@ class SessionCard extends Component {
 }
 
 SessionCard.propTypes = {
-    speakerLastContacted: PropTypes.string,
+    speakerLastContact: PropTypes.string,
     speakerName: PropTypes.string,
     title: PropTypes.string,
     rating: PropTypes.number,

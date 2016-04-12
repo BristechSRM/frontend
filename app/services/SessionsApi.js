@@ -21,7 +21,7 @@ class SessionsApi {
 
         const propertyNames = {
             name: 'speakerName',
-            'last-contacted': 'lastContacted',
+            'last-contact': 'lastContact',
             rating: 'speakerRating',
         };
 

@@ -13,14 +13,14 @@ export const GET_SESSION_START = 'GET_SESSION_START';
 export const GET_SESSION_COMPLETE = 'GET_SESSION_COMPLETE';
 export const GET_SESSION_ERROR = 'GET_SESSION_ERROR';
 
-const mergeLastContacted = sessions =>
-    // TODO: merge lastContacted into sessions
-    CommsApi.getLastContacted()
+const mergeLastContact = sessions =>
+    // TODO: merge lastContact into sessions
+    CommsApi.getLastContact()
         .then(() => sessions);
 
 const getSessionsFromServer = () =>
     SessionsApi.getAllSessions()
-        // .then(sessions => mergeLastContacted(sessions))
+        // .then(sessions => mergeLastContact(sessions))
         .then(sessions => immutable.List(sessions));
 
 const getSessionFromServer = (sessionId) =>
