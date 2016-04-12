@@ -2,7 +2,7 @@ import api from './ApiService.js';
 import _ from 'lodash';
 import immutable from 'immutable';
 
-const sessionsUri = 'http://api.bris.tech/sessions';
+const sessionsUri = 'http://api.bris.tech';
 
 class SessionsApi {
 
@@ -13,7 +13,7 @@ class SessionsApi {
     // TODO: /sessions endpoint should return threadId for each sessions
     // currently assigning a fixed value
     getAllSessions() {
-        return api.get(sessionsUri)
+        return api.get(`${sessionsUri}/sessionsummaries`)
             .then(sessions => sessions.map(s => {
                 const updated = s;
                 updated.threadId = this.getRandom(1, 2).toString();
@@ -50,7 +50,7 @@ class SessionsApi {
     }
 
     getSession(sessionId) {
-        return api.get(`${sessionsUri}/${sessionId}`);
+        return api.get(`${sessionsUri}/sessions/${sessionId}`);
     }
 }
 
