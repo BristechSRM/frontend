@@ -8,7 +8,7 @@ class CommsApi {
     mergeLastContact(lastContact, sessions) {
         const newSessions = [];
         sessions.forEach(session => {
-            const lastContactRecord = lastContact.find(record => record.threadId === session.threadId);
+            const lastContactRecord = lastContact.find(record => record.threadId === session.get('threadId'));
             newSessions.push(session.set('speakerLastContact', lastContactRecord ? lastContactRecord.date : 'Never'));
         });
         return newSessions;
