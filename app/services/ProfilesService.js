@@ -1,6 +1,6 @@
 const profiles = [
     {
-        id: '4e843d4b-b425-4780-9b0a-84cab5faf140',
+        id: '09aac819-5f92-42eb-a06c-c01aef5181ad',
         forename: 'Chris',
         surname: 'Smith',
         rating: 5,
@@ -12,7 +12,7 @@ const profiles = [
         ],
     },
     {
-        id: '7627b8f9-d002-423a-8242-bf5c64388661',
+        id: '2b6f60c1-9025-4e2c-bbb2-3b40a87fde75',
         forename: 'David',
         surname: 'Wybourn',
         rating: 3,
