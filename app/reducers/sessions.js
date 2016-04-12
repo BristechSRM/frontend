@@ -6,6 +6,9 @@ import {
     UPDATE_SESSIONS_START,
     UPDATE_SESSIONS_COMPLETE,
     UPDATE_SESSIONS_ERROR,
+    UPDATE_LAST_CONTACT_START,
+    UPDATE_LAST_CONTACT_COMPLETE,
+    UPDATE_LAST_CONTACT_ERROR,
     VIEW_SETTINGS_CHANGED,
 } from '../actions';
 
@@ -33,6 +36,15 @@ const sessions = handleActions({
             map.set('isFetching', false)
                 .set('sessions', action.payload);
         }),
+
+    [UPDATE_LAST_CONTACT_START]: (state) =>
+        state.update('sessions', sess => sess.map(s => s.set('speakerLastContact', null))),
+
+    [UPDATE_LAST_CONTACT_COMPLETE]: (state, action) =>
+        state.set('sessions', action.payload),
+
+    [UPDATE_LAST_CONTACT_ERROR]: (state) =>
+        state.update('sessions', sess => sess.map(s => s.set('speakerLastContact', 'Unknown'))),
 
     [VIEW_SETTINGS_CHANGED]: (state, action) =>
         state.set('viewSettings', action.payload),
