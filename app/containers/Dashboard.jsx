@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import SessionsApi from '../services/SessionsApi';
 
 import SessionList from '../components/SessionList.jsx';
-import DashboardSidebar from '../components/dashboardSidebar.jsx';
+import DashboardSidebar from '../components/DashboardSidebar.jsx';
 import { getAllSessions, changeViewSettings } from '../actions';
 import styles from './dashboard.scss';
 import immutable from 'immutable';
