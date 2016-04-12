@@ -13,7 +13,7 @@ class SessionSidebar extends Component {
 
     render() {
         const h1Style = {
-            color: SessionStatusService.getStatusColor('deferred'),
+            color: SessionStatusService.getStatusColor(this.props.session.status),
         };
 
         return (

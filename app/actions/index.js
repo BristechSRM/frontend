@@ -13,15 +13,14 @@ export const UPDATE_LAST_CONTACT_START = 'UPDATE_LAST_CONTACT_START';
 export const UPDATE_LAST_CONTACT_COMPLETE = 'UPDATE_LAST_CONTACT_COMPLETE';
 export const UPDATE_LAST_CONTACT_ERROR = 'UPDATE_LAST_CONTACT_ERROR';
 
+export const GET_SESSION_START = 'GET_SESSION_START';
+export const GET_SESSION_COMPLETE = 'GET_SESSION_COMPLETE';
+export const GET_SESSION_ERROR = 'GET_SESSION_ERROR';
+
 export const VIEW_SETTINGS_CHANGED = 'VIEW_SETTINGS_CHANGED';
 
-const getLastContacted = () =>
-    (dispatch) => {
-        dispatch(createAction(UPDATE_LAST_CONTACT_START)());
-        return CommsApi.getLastContacted()
-            .then(lastContact => dispatch(createAction(UPDATE_LAST_CONTACT_COMPLETE)(lastContact)))
-            .catch(error => dispatch(createAction(UPDATE_LAST_CONTACT_ERROR)(error)));
-    };
+const getSessionFromServer = (sessionId) =>
+    SessionsApi.getSession(sessionId);
 
 export const getAllSessions = () =>
     (dispatch, getState) => {
@@ -34,6 +33,14 @@ export const getAllSessions = () =>
                 immutable.fromJS(CommsApi.mergeLastContact(lastContact, getState().get('sessions').get('sessions'))))),
                 error => dispatch(createAction(UPDATE_LAST_CONTACT_ERROR)(error)))
             .catch(error => dispatch(createAction(UPDATE_SESSIONS_ERROR)(error)));
+    };
+
+export const getSession = (sessionId) =>
+    (dispatch) => {
+        dispatch(createAction(GET_SESSION_START)());
+        return getSessionFromServer(sessionId)
+            .then(session => dispatch(createAction(GET_SESSION_COMPLETE)(session)))
+            .catch(error => dispatch(createAction(GET_SESSION_ERROR)(error)));
     };
 
 export const changeViewSettings = createAction(VIEW_SETTINGS_CHANGED);

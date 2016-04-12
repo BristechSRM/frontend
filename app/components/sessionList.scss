@@ -1,12 +1,30 @@
+$margin: 7px;
+$minwidth: 260px;
+$sidebar: 205px;
+
+@mixin setMaxWidthForNColumns($n) {
+    $doubleMargin: $margin * 2;
+    $cardWidth: $minwidth + $doubleMargin;
+    $percentageWidth: 100% / $n;
+
+    @media (min-width: $cardWidth * $n + $sidebar) {
+        max-width: calc(#{$percentageWidth} - #{$doubleMargin});
+    }
+}
+
 .sessionList {
     display: flex;
     flex-wrap: wrap;
 }
 
 .sessionCard {
-    margin:7px;
+    margin: $margin;
     height: 260px;
-    flex: 1 0 260px;
+    flex: 1 0 $minwidth;
+
+    @include setMaxWidthForNColumns(2);
+
+    @include setMaxWidthForNColumns(3);
 
     > a {
         text-decoration: none;

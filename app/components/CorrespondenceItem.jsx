@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import styles from './CorrespondenceItem.scss';
+import styles from './correspondenceItem.scss';
 
 class CorrespondenceItem extends Component {
 
@@ -24,7 +24,7 @@ class CorrespondenceItem extends Component {
 
 CorrespondenceItem.propTypes = {
     date: PropTypes.string,
-    message: PropTypes.array,
+    message: PropTypes.string,
 };
 
 export default CorrespondenceItem;
