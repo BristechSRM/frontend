@@ -10,6 +10,10 @@ class SessionsApi {
     filterAndSort(sessions, filters, sortProperty, isSortOrderAscending) {
         let filteredSessions = sessions;
 
+        if (!sessions) {
+            return immutable.List();
+        }
+
         const noFiltersEnabled = filters.every(f => !f);
 
         if (noFiltersEnabled === false) {

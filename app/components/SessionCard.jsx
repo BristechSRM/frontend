@@ -11,6 +11,18 @@ class SessionCard extends Component {
             backgroundColor: SessionStatusService.getStatusColor(this.props.status),
         };
 
+        let lastContact = null;
+        if (this.props.speakerLastContacted) {
+            lastContact =
+            (<div className={styles.lastContacted}>
+                <p>Last contacted -
+                    <span className={styles.date}>
+                        {this.props.speakerLastContacted}
+                    </span>
+                </p>
+            </div>);
+        }
+
         return (
             <div className={styles.sessionCard}>
                 <div className={styles.body}>
@@ -42,13 +54,7 @@ class SessionCard extends Component {
                     <div className={styles.speakerName}>
                         {this.props.speakerName}
                     </div>
-                    <div className={styles.lastContacted}>
-                        <p>Last contacted -
-                          <span className={styles.date}>
-                            {this.props.speakerLastContacted || 'Unknown'}
-                          </span>
-                        </p>
-                    </div>
+                    {lastContact}
                 </div>
             </div>
         );
