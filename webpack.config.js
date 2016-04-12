@@ -20,10 +20,16 @@ function getProductionSettings() {
 }
 
 function getDevelopmentSettings() {
+    const styleLintPlugin = require('stylelint-webpack-plugin');
+
     return {
         devtool: 'source-map',
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
+            new styleLintPlugin({
+                configFile: '.stylelintrc',
+                failOnError: false,
+            }),
         ],
     };
 }
