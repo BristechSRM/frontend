@@ -6,12 +6,13 @@
 
 .square {
     width: 15px;
-    height:17px;
+    height: 17px;
     margin-right: 10px;
 
-    svg, svg > rect {
+    svg,
+    svg > rect {
         width: 15px;
-        height:15px;
+        height: 15px;
     }
 }
 

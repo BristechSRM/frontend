@@ -2,19 +2,19 @@
     background-color: #fff;
 
     > div {
-      display: flex;
-      align-items: center;
+        display: flex;
+        align-items: center;
 
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 10px 0;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 0;
 
-      .logo {
-        margin-right: auto;
-      }
+        .logo {
+            margin-right: auto;
+        }
 
-      .navItem {
-        flex: 0 1 0;
-      }
+        .navItem {
+            flex: 0 1 0;
+        }
     }
 }

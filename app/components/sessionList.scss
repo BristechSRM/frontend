@@ -7,7 +7,9 @@ $sidebar: 205px;
     $cardWidth: $minwidth + $doubleMargin;
     $percentageWidth: 100% / $n;
 
-    @media (min-width: $cardWidth * $n + $sidebar) {
+    $minWidth: $cardWidth * $n + $sidebar;
+
+    @media (min-width: $minWidth) {
         max-width: calc(#{$percentageWidth} - #{$doubleMargin});
     }
 }
@@ -23,11 +25,10 @@ $sidebar: 205px;
     flex: 1 0 $minwidth;
 
     @include setMaxWidthForNColumns(2);
-
     @include setMaxWidthForNColumns(3);
 
     > a {
         text-decoration: none;
-        color:inherit;
+        color: inherit;
     }
 }
