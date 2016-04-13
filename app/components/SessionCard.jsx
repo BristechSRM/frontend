@@ -15,15 +15,16 @@ class SessionCard extends Component {
         const speakerLastContact = this.props.speakerLastContact;
         let lastContact = null;
         if (speakerLastContact) {
-            const date = moment.isDate(speakerLastContact)
-                ? moment.date(speakerLastContact).format('DD MMMM YYYY [at] h:mma')
+            const momentDate = moment(speakerLastContact);
+            const date = momentDate.isValid()
+                ? momentDate.format('DD MMMM YYYY')
                 : speakerLastContact;
 
             lastContact =
             (<div className={styles.lastContact}>
                 <p>Last contact -
                     <span className={styles.date}>
-                        {date}
+                        {` ${date}`}
                     </span>
                 </p>
             </div>);
