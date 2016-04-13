@@ -24,7 +24,7 @@ class SessionCard extends Component {
             (<div className={styles.lastContact}>
                 <p>Last contact -
                     <span className={styles.date}>
-                        {date}
+                        {` ${date}`}
                     </span>
                 </p>
             </div>);
