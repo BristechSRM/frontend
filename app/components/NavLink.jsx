@@ -1,28 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import RaisedButton from 'material-ui/lib/raised-button';
+import styles from './navLink.scss';
 import { Link } from 'react-router';
 
 class NavLink extends Component {
 
     render() {
-        const defaultStyles = {
-            margin: 8,
-        };
-
-        const styles = Object.assign({}, defaultStyles, this.props.styles);
-
         const activeStyle = {
-            backgroundColor: '#706f6f',
+            backgroundColor: '#6f6f6f',
+            color: '#ffffff',
+            border: '2px solid #6f6f6f',
         };
 
         return (
-          <RaisedButton
-            label={this.props.label}
-            labelStyle={{ color: '#c6c6c6' }}
-            containerElement={<Link to={this.props.route} activeStyle={activeStyle} />}
-            linkButton
-            style={styles}
-          />
+            <div className={styles.navLink}>
+                <Link to={this.props.route} activeStyle={activeStyle}>
+                    {this.props.label}
+                </Link>
+            </div>
         );
     }
 }
@@ -34,7 +28,6 @@ NavLink.contextTypes = {
 NavLink.propTypes = {
     label: PropTypes.string,
     route: PropTypes.string,
-    styles: PropTypes.object,
 };
 
 export default NavLink;
