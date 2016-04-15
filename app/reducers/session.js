@@ -5,17 +5,13 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = immutable.Map({
     isFetching: false,
     session: {},
-    speaker: {},
-    admin: {},
 });
 
 const session = handleActions({
     [actionTypes.GET_SESSION_START]: (state) =>
         state.withMutations(map => {
             map.set('isFetching', true)
-                .set('session', {})
-                .set('speaker', {})
-                .set('admin', {});
+                .set('session', {});
         }),
 
     [actionTypes.GET_SESSION_ERROR]: (state, action) =>
@@ -29,23 +25,29 @@ const session = handleActions({
             map.set('isFetching', false)
                 .set('session', action.payload);
         }),
-
-    [actionTypes.GET_PROFILES_START]: (state) =>
+    [actionTypes.GET_SPEAKER_START]: (state) =>
         state.withMutations(map => {
-            map.set('speaker', {})
-                .set('admin', {});
+            map.set('speaker', {});
         }),
-
-    [actionTypes.GET_PROFILES_COMPLETE]: (state, action) =>
+    [actionTypes.GET_SPEAKER_COMPLETE]: (state, action) =>
         state.withMutations(map => {
-            map.set('speaker', action.payload.speaker)
-                .set('admin', action.payload.admin);
+            map.set('speaker', action.payload);
         }),
-
-    [actionTypes.GET_PROFILES_ERROR]: (state) =>
+    [actionTypes.GET_SPEAKER_ERROR]: (state) =>
         state.withMutations(map => {
-            map.set('speaker', {})
-                .set('admin', {});
+            map.set('speaker', {});
+        }),
+    [actionTypes.GET_ADMIN_START]: (state) =>
+        state.withMutations(map => {
+            map.set('admin', {});
+        }),
+    [actionTypes.GET_ADMIN_COMPLETE]: (state, action) =>
+        state.withMutations(map => {
+            map.set('admin', action.payload);
+        }),
+    [actionTypes.GET_ADMIN_ERROR]: (state) =>
+        state.withMutations(map => {
+            map.set('admin', {});
         }),
 }, initialState);
 
