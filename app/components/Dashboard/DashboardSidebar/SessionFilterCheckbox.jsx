@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Checkbox from 'material-ui/lib/checkbox';
-import SessionStatusService from '../services/SessionStatusService';
+import SessionStatusService from '../../../services/SessionStatusService';
 
 import styles from './sessionFilterCheckbox.scss';
 
