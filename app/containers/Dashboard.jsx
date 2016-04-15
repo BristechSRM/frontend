@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import SessionsApi from '../services/SessionsApi';
 
-import SessionList from '../components/SessionList.jsx';
-import DashboardSidebar from '../components/DashboardSidebar.jsx';
+import SessionList from '../components/Dashboard/SessionList/SessionList.jsx';
+import DashboardSidebar from '../components/Dashboard/DashboardSidebar/DashboardSidebar.jsx';
 import { getAllSessions, changeViewSettings } from '../actions';
 import styles from './dashboard.scss';
 import immutable from 'immutable';

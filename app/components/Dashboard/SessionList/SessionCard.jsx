@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import StarRating from 'react-star-rating';
-import SessionStatusService from '../services/SessionStatusService';
+import SessionStatusService from '../../../services/SessionStatusService';
 import moment from 'moment';
 
 import styles from './sessionCard.scss';

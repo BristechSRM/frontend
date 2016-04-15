@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import SessionSidebar from '../components/SessionSidebar.jsx';
-import SessionCorrespondence from '../components/SessionCorrespondence.jsx';
+import SessionSidebar from '../components/Session/SessionSidebar.jsx';
+import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
 import { getSession } from '../actions';
 import styles from './session.scss';
 
