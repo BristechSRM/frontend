@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import SessionStatusService from '../services/SessionStatusService';
+import SessionStatusService from '../../services/SessionStatusService';
 import StarRating from 'react-star-rating';
 
 import styles from './sessionSidebar.scss';
