@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import SessionSidebar from '../components/Session/SessionSidebar.jsx';
+import SessionSidebarContainer from './SessionSidebarContainer.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
 import { getSession } from '../actions';
 import styles from './session.scss';
@@ -45,8 +45,7 @@ class Session extends Component {
         return (
             <div className={styles.session}>
                 <div className={styles.sidebar}>
-                    <SessionSidebar
-                      session={this.props.session}
+                    <SessionSidebarContainer
                       speaker={this.props.speaker}
                       admin={this.props.admin}
                     />
