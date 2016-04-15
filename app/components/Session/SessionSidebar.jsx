@@ -11,8 +11,16 @@ class SessionSidebar extends Component {
     }
 
     getHandle(type) {
+        if (!this.props.speaker) {
+            return '';
+        }
+
         const handle = this.props.speaker.handles ? this.props.speaker.handles.find(h => h.type === type) : null;
         return handle ? handle.id : '';
+    }
+
+    getRating(profile) {
+        return profile ? profile.rating : 0;
     }
 
     render() {
@@ -41,7 +49,7 @@ class SessionSidebar extends Component {
                                   <StarRating
                                     name="session-rating"
                                     totalStars={5}
-                                    rating={this.props.speaker.rating}
+                                    rating={this.getRating(this.props.speaker)}
                                     disabled
                                     size={16}
                                   />

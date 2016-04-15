@@ -34,7 +34,7 @@ export const getSpeaker = (profileId) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_SPEAKER_START)());
         return ProfilesService.getProfile(profileId)
-            .then(profile => dispatch(createAction(actionTypes.GET_SPEAKER_START)(profile)))
+            .then(profile => dispatch(createAction(actionTypes.GET_SPEAKER_COMPLETE)(profile)))
             .catch(error => dispatch(createAction(actionTypes.GET_SPEAKER_ERROR)(error)));
     };
 
@@ -42,6 +42,6 @@ export const getAdmin = (profileId) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_ADMIN_START)());
         return ProfilesService.getProfile(profileId)
-            .then(profile => dispatch(createAction(actionTypes.GET_ADMIN_START)(profile)))
+            .then(profile => dispatch(createAction(actionTypes.GET_ADMIN_COMPLETE)(profile)))
             .catch(error => dispatch(createAction(actionTypes.GET_ADMIN_ERROR)(error)));
     };
