@@ -5,6 +5,7 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = immutable.Map({
     isFetching: false,
     session: {},
+    correspondence: [],
 });
 
 const session = handleActions({
@@ -49,6 +50,12 @@ const session = handleActions({
         state.withMutations(map => {
             map.set('admin', {});
         }),
+    [actionTypes.GET_CORRESPONDENCE_START]: (state) =>
+        state.set('correspondence', []),
+    [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>
+        state.set('correspondence', action.payload),
+    [actionTypes.GET_CORRESPONDENCE_ERROR]: (state) =>
+        state.set('correspondence', []),
 }, initialState);
 
 export default session;

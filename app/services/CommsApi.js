@@ -1,8 +1,10 @@
 import api from './ApiService.js';
 
+const commsUri = 'http://api.bris.tech:8080';
+
 class CommsApi {
     getLastContact() {
-        return api.get('http://api.bris.tech:8080/last-contact');
+        return api.get(`${commsUri}/last-contact`);
     }
 
     mergeLastContact(lastContact, sessions) {
@@ -12,6 +14,10 @@ class CommsApi {
             newSessions.push(session.set('speakerLastContact', lastContactRecord ? lastContactRecord.date : 'Never'));
         });
         return newSessions;
+    }
+
+    getThread(threadId) {
+        return api.get(`${commsUri}/threads/${threadId}`);
     }
 }
 
