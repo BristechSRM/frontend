@@ -1,6 +1,6 @@
 import api from './ApiService.js';
 
-const commsUri = 'http://api.bris.tech:8080';
+const commsUri = 'http://localhost:9001';
 
 class CommsApi {
     getLastContact() {

@@ -6,6 +6,7 @@ const initialState = immutable.Map({
     isFetching: false,
     session: {},
     correspondence: [],
+    lastContact: 'Unknown',
 });
 
 const session = handleActions({
@@ -51,11 +52,22 @@ const session = handleActions({
             map.set('admin', {});
         }),
     [actionTypes.GET_CORRESPONDENCE_START]: (state) =>
-        state.set('correspondence', []),
+        state.withMutations(map => {
+            map.set('correspondence', [])
+                .set('lastContact', '');
+        }),
     [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>
-        state.set('correspondence', action.payload),
+        state.withMutations(map => {
+            map.set('correspondence', action.payload)
+                .set('lastContact', action.payload.reduce(
+                    (prev, cur) => (cur.date > prev ? cur.date : prev), '') || 'Never'
+                );
+        }),
     [actionTypes.GET_CORRESPONDENCE_ERROR]: (state) =>
-        state.set('correspondence', []),
+        state.withMutations(map => {
+            map.set('correspondence', [])
+                .set('lastContact', 'Unknown');
+        }),
 }, initialState);
 
 export default session;

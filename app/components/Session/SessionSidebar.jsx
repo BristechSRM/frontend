@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
 import StarRating from 'react-star-rating';
+import moment from 'moment';
 
 import styles from './sessionSidebar.scss';
 
@@ -27,6 +28,11 @@ class SessionSidebar extends Component {
         const h1Style = {
             color: SessionStatusService.getStatusColor(this.props.session.status),
         };
+
+        const momentDate = moment(this.props.lastContact);
+        const lastContactDate = momentDate.isValid()
+            ? momentDate.format('D MMMM YYYY [at] h:mma')
+            : this.props.lastContact;
 
         return (
             <div className={styles.sessionSidebar}>
@@ -65,7 +71,7 @@ class SessionSidebar extends Component {
                             </tr>
                             <tr>
                                 <td>Last Contact</td>
-                                <td>2 January 2016 at 3:24pm</td>
+                                <td>{lastContactDate}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -103,6 +109,7 @@ SessionSidebar.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
+    lastContact: PropTypes.string,
 };
 
 export default SessionSidebar;
