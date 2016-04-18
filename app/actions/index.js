@@ -22,24 +22,26 @@ export const getAllSessions = () =>
 
 export const getSession = (sessionId) =>
     (dispatch) => {
-        const profileIds = [];
         dispatch(createAction(actionTypes.GET_SESSION_START)());
         return SessionsApi.getSession(sessionId)
-            .then(session => {
-                profileIds.push(session.speakerId);
-                profileIds.push(session.adminId);
-                dispatch(createAction(actionTypes.GET_SESSION_COMPLETE)(session));
-            })
-            .then(() => dispatch(createAction(actionTypes.GET_PROFILES_START)()))
-            .then(() => profileIds.map(id => (id ? ProfilesService.getProfile(id) : null)))
-            .then(promises => Promise.all(promises))
-            .then(profiles => dispatch(createAction(actionTypes.GET_PROFILES_COMPLETE)(
-                {
-                    speaker: profiles[0],
-                    admin: profiles[1],
-                })),
-                error => dispatch(createAction(actionTypes.GET_PROFILES_ERROR)(error)))
+            .then(session => dispatch(createAction(actionTypes.GET_SESSION_COMPLETE)(session)))
             .catch(error => dispatch(createAction(actionTypes.GET_SESSION_ERROR)(error)));
     };
 
 export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED);
+
+export const getSpeaker = (profileId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.GET_SPEAKER_START)());
+        return ProfilesService.getProfile(profileId)
+            .then(profile => dispatch(createAction(actionTypes.GET_SPEAKER_COMPLETE)(profile)))
+            .catch(error => dispatch(createAction(actionTypes.GET_SPEAKER_ERROR)(error)));
+    };
+
+export const getAdmin = (profileId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.GET_ADMIN_START)());
+        return ProfilesService.getProfile(profileId)
+            .then(profile => dispatch(createAction(actionTypes.GET_ADMIN_COMPLETE)(profile)))
+            .catch(error => dispatch(createAction(actionTypes.GET_ADMIN_ERROR)(error)));
+    };
