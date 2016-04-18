@@ -51,17 +51,11 @@ const session = handleActions({
             map.set('admin', {});
         }),
     [actionTypes.GET_CORRESPONDENCE_START]: (state) =>
-        state.withMutations(map => {
-            map.set('correspondence', []);
-        }),
+        state.set('correspondence', []),
     [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>
-        state.withMutations(map => {
-            map.set('correspondence', action.payload);
-        }),
+        state.set('correspondence', action.payload),
     [actionTypes.GET_CORRESPONDENCE_ERROR]: (state) =>
-        state.withMutations(map => {
-            map.set('correspondence', []);
-        }),
+        state.set('correspondence', []),
 }, initialState);
 
 export default session;
