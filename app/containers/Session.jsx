@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getSpeaker, getAdmin } from '../actions';
+import { getSession, getSpeaker, getAdmin, getCorrespondence } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -19,38 +19,12 @@ class Session extends Component {
         if (this.props.session.adminId !== nextProps.session.adminId) {
             this.props.dispatch(getAdmin(nextProps.session.adminId));
         }
+        if (this.props.session.threadId !== nextProps.session.threadId) {
+            this.props.dispatch(getCorrespondence(nextProps.session.threadId));
+        }
     }
 
     render() {
-        const correspondence = [
-            {
-                fromProfileId: 1,
-                toProfileId: 2,
-                type: 'email',
-                fromHandleId: 'test1@email.com',
-                toHandleId: 'test2@email.com',
-                date: '2016-02-06T15:16:54Z',
-                message: 'Hi David\n\nWould you like to do one on docker and concourse?\nThanks\nChris',
-            },
-            {
-                fromProfileId: 1,
-                toProfileId: 2,
-                type: 'email',
-                fromHandleId: 'test1@email.com',
-                toHandleId: 'test2@email.com',
-                date: '2016-02-08T14:30:00Z',
-                message: "That shouldn't be an issue. I hear that you can master both topics in a matter of hours.",
-            },
-            {
-                fromProfileId: 2,
-                toProfileId: 1,
-                type: 'email',
-                fromHandleId: 'test2@email.com',
-                toHandleId: 'test1@email.com',
-                date: '2016-02-07T09:45:21Z',
-                message: "Hi Chris\n\nI've never used docker or concourse though, won't that be an issue?\n\nDavid",
-            },
-        ];
         return (
             <div className={styles.session}>
                 <div className={styles.sidebar}>
@@ -61,7 +35,7 @@ class Session extends Component {
                     />
                 </div>
                 <div className={styles.correspondence}>
-                    <SessionCorrespondence correspondence={correspondence} />
+                    <SessionCorrespondence correspondence={this.props.correspondence} />
                 </div>
             </div>
         );
@@ -73,6 +47,7 @@ Session.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
+    correspondence: PropTypes.array,
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
@@ -81,6 +56,7 @@ Session.propTypes = {
 function mapStateToProps(state) {
     return {
         isFetching: state.get('session').get('isFetching'),
+        correspondence: state.get('session').get('correspondence'),
         session: state.get('session').get('session'),
         speaker: state.get('session').get('speaker'),
         admin: state.get('session').get('admin'),

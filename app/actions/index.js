@@ -45,3 +45,11 @@ export const getAdmin = (profileId) =>
             .then(profile => dispatch(createAction(actionTypes.GET_ADMIN_COMPLETE)(profile)))
             .catch(error => dispatch(createAction(actionTypes.GET_ADMIN_ERROR)(error)));
     };
+
+export const getCorrespondence = (threadId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.GET_CORRESPONDENCE_START)());
+        return CommsApi.getThread(threadId)
+            .then(thread => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(thread.items)))
+            .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
+    };
