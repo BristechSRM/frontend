@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import SessionSidebarContainer from './SessionSidebarContainer.jsx';
+import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession } from '../actions';
+import { getSession, getSpeaker, getAdmin } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -10,6 +10,15 @@ class Session extends Component {
     componentDidMount() {
         const sessionId = this.props.params.sessionId;
         this.props.dispatch(getSession(sessionId));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.session.speakerId !== nextProps.session.speakerId) {
+            this.props.dispatch(getSpeaker(nextProps.session.speakerId));
+        }
+        if (this.props.session.adminId !== nextProps.session.adminId) {
+            this.props.dispatch(getAdmin(nextProps.session.adminId));
+        }
     }
 
     render() {
@@ -45,7 +54,8 @@ class Session extends Component {
         return (
             <div className={styles.session}>
                 <div className={styles.sidebar}>
-                    <SessionSidebarContainer
+                    <SessionSidebar
+                      session={this.props.session}
                       speaker={this.props.speaker}
                       admin={this.props.admin}
                     />
