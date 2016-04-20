@@ -10,6 +10,7 @@ import App from './containers/App.jsx';
 import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 import Calendar from './containers/Calendar.jsx';
+import LoginRequired from './containers/LoginRequired.jsx';
 
 import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
@@ -23,12 +24,14 @@ const history = syncHistoryWithStore(browserHistory, store, {
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="dashboard" component={App}>
-        <IndexRoute path="/" component={Dashboard} />
-        <Route path="/sessions/:sessionId" component={Session} />
-        <Route path="/calendar" component={Calendar} />
+      <Route component={LoginRequired}>
+        <Route component={App}>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/sessions/:sessionId" component={Session} />
+          <Route path="/calendar" component={Calendar} />
+        </Route>
       </Route>
-      <Redirect from="*" to="dashboard" />
+      <Redirect from="*" to="/dashboard" />
     </Router>
   </Provider>,
   document.getElementById('root')

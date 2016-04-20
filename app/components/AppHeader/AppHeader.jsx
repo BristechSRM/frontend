@@ -13,7 +13,7 @@ class AppHeader extends Component {
         const navigation = immutable.List([
             {
                 title: 'Dashboard',
-                route: '/',
+                route: '/dashboard',
             },
             {
                 title: 'Calendar',
