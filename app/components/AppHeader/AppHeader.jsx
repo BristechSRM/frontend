@@ -14,13 +14,8 @@ class AppHeader extends Component {
             {
                 title: 'Dashboard',
                 route: '/',
-            }, {
-                title: 'Sessions',
-                route: '/sessions',
-            }, {
-                title: 'Speakers',
-                route: '/speakers',
-            }, {
+            },
+            {
                 title: 'Calendar',
                 route: '/calendar',
             },

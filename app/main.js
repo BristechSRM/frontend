@@ -23,16 +23,12 @@ const history = syncHistoryWithStore(browserHistory, store, {
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Dashboard} />
+      <Route path="dashboard" component={App}>
+        <IndexRoute path="/" component={Dashboard} />
+        <Route path="/sessions/:sessionId" component={Session} />
+        <Route path="/calendar" component={Calendar} />
       </Route>
-      <Route path="sessions" component={App}>
-        <Route path=":sessionId" component={Session} />
-      </Route>
-      <Route path="calendar" component={App}>
-        <IndexRoute component={Calendar} />
-      </Route>
-      <Redirect from="*" to="/" />
+      <Redirect from="*" to="dashboard" />
     </Router>
   </Provider>,
   document.getElementById('root')
