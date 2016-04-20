@@ -32,6 +32,7 @@ class Session extends Component {
                       session={this.props.session}
                       speaker={this.props.speaker}
                       admin={this.props.admin}
+                      lastContact={this.props.lastContact}
                     />
                 </div>
                 <div className={styles.correspondence}>
@@ -47,6 +48,7 @@ Session.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
+    lastContact: PropTypes.string,
     correspondence: PropTypes.array,
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
@@ -60,6 +62,7 @@ function mapStateToProps(state) {
         session: state.get('session').get('session'),
         speaker: state.get('session').get('speaker'),
         admin: state.get('session').get('admin'),
+        lastContact: state.get('session').get('lastContact'),
         error: state.get('session').get('error'),
     };
 }
