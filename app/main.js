@@ -9,6 +9,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import App from './containers/App.jsx';
 import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
+import Calendar from './containers/Calendar.jsx';
 
 import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
@@ -27,6 +28,9 @@ render(
       </Route>
       <Route path="sessions" component={App}>
         <Route path=":sessionId" component={Session} />
+      </Route>
+      <Route path="calendar" component={App}>
+        <IndexRoute component={Calendar} />
       </Route>
       <Redirect from="*" to="/" />
     </Router>

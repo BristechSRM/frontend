@@ -20,6 +20,9 @@ class AppHeader extends Component {
             }, {
                 title: 'Speakers',
                 route: '/speakers',
+            }, {
+                title: 'Calendar',
+                route: '/calendar',
             },
         ]);
 
