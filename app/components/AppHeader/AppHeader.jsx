@@ -13,14 +13,9 @@ class AppHeader extends Component {
         const navigation = immutable.List([
             {
                 title: 'Dashboard',
-                route: '/',
-            }, {
-                title: 'Sessions',
-                route: '/sessions',
-            }, {
-                title: 'Speakers',
-                route: '/speakers',
-            }, {
+                route: '/dashboard',
+            },
+            {
                 title: 'Calendar',
                 route: '/calendar',
             },
