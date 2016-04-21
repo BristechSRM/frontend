@@ -59,6 +59,7 @@
     "react-tap-event-plugin": "^0.2.2",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
+    "redux-auth-wrapper": "^0.3.0",
     "redux-immutable": "^3.0.6",
     "redux-logger": "^2.6.1",
     "redux-promise": "^0.5.3",
