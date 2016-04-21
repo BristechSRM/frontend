@@ -25,7 +25,9 @@ class AppHeader extends Component {
             <div className={styles.appHeader}>
                 <div>
                     <div className={styles.logo}>
-                        <img src="/img/srm-logo.png" alt="SRM" />
+                        <a href="/">
+                          <img src="/img/srm-logo.png" alt="SRM" />
+                        </a>
                     </div>
                     {navigation.map(ni => this.renderNavLink(ni))}
                 </div>
