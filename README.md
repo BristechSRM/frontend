@@ -16,7 +16,7 @@ We recommend using [Atom](https://atom.io/) for making code changes, although an
 
 Webpack is configured to use [ESLint](http://eslint.org/) via the [Webpack ESLint loader](https://github.com/MoOx/eslint-loader). The configuration of ESLint is within the `.eslintrc.json` file in the project root.
 
-By default, auto-fixing of ESLint issues is enabled. For issues that cannot be auto-fixed, Webpack will display them in the cli using the [eslint-friendly-formatter](https://github.com/royriojas/eslint-friendly-formatter).
+By default, auto-fixing of ESLint issues is disabled. Webpack will display linting issues in the cli using the [eslint-friendly-formatter](https://github.com/royriojas/eslint-friendly-formatter).
 
 To see ESLint issues directly in Atom, you can install the `linter-eslint` atom package via your cli:
 
@@ -31,3 +31,11 @@ apm install atom-beautify
 ```
 
 With this package installed, you can press `ctrl-alt-b` within a file, or `Packages > Beautify` to format the file to our ESLint standards. The atom beautify settings are configured in the `.jsbeautifyrc` file within the project root.
+
+For SASS linting we use stylelint using the stylelint-config-standard settings. The settings for stylelint can be configured with the `.stylelintrc` file in the root of the project.
+
+To display SASS linting issues in Atom, you can install the linter-stylelint package:
+
+```
+apm install linter-stylelint
+```
