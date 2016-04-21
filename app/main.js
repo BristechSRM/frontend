@@ -32,7 +32,7 @@ const userIsAuthenticated = UserAuthWrapper({
     wrapperDisplayName: 'UserIsAuthenticated',
     allowRedirectBack: false,
     redirectAction: () => {
-        window.location = 'http://www.bing.com';
+        window.location = 'http://api.bris.tech:9003';
     },
 });
 
