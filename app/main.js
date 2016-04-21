@@ -8,9 +8,13 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 import App from './containers/App.jsx';
+import AuthCallback from './containers/AuthCallback.jsx';
 import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 import Calendar from './containers/Calendar.jsx';
+import AuthService from './services/AuthService.js';
+
+AuthService.isAuthenticated();
 
 import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
@@ -23,7 +27,6 @@ const history = syncHistoryWithStore(browserHistory, store, {
         : state),
 });
 
-// Redirects to /login by default
 const userIsAuthenticated = UserAuthWrapper({
     authSelector: () => ({ authenticated: true }),
     wrapperDisplayName: 'UserIsAuthenticated',
@@ -36,6 +39,7 @@ const userIsAuthenticated = UserAuthWrapper({
 render(
     <Provider store={store}>
     <Router history={history}>
+        <Route component={AuthCallback} />
         <Route component={App}>
             <Route path="/dashboard" component={userIsAuthenticated(Dashboard)} />
             <Route path="/sessions/:sessionId" component={Session} />
