@@ -31,6 +31,10 @@ class AuthService {
     signOut() {
         this.tokenManager.redirectForLogout();
     }
+
+    processTokenAsync() {
+        return this.tokenManager.processTokenCallbackAsync();
+    }
 }
 
 export default new AuthService();

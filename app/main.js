@@ -12,9 +12,6 @@ import AuthCallback from './containers/AuthCallback.jsx';
 import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 import Calendar from './containers/Calendar.jsx';
-import AuthService from './services/AuthService.js';
-
-AuthService.isAuthenticated();
 
 import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
@@ -22,9 +19,10 @@ injectTouchTapEvent();
 const store = configureStore();
 
 const history = syncHistoryWithStore(browserHistory, store, {
-    selectLocationState: state => (state.get('routing')
-        ? state.get('routing').toJS()
-        : state),
+    selectLocationState: state => {
+        const routing = state.get('routing');
+        return routing ? routing.toJS() : state;
+    },
 });
 
 const userIsAuthenticated = UserAuthWrapper({
@@ -39,7 +37,7 @@ const userIsAuthenticated = UserAuthWrapper({
 render(
     <Provider store={store}>
     <Router history={history}>
-        <Route component={AuthCallback} />
+        <Route path="/signed-in" component={AuthCallback} />
         <Route component={App}>
             <Route path="/dashboard" component={userIsAuthenticated(Dashboard)} />
             <Route path="/sessions/:sessionId" component={Session} />
