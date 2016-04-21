@@ -7,6 +7,10 @@ import styles from './sessionCard.scss';
 
 class SessionCard extends Component {
 
+    isValidDate(date) {
+        return ((new Date(date) !== 'Invalid Date' && !isNaN(new Date(date))));
+    }
+
     render() {
         const footerStyle = {
             backgroundColor: SessionStatusService.getStatusColor(this.props.status),
@@ -15,9 +19,8 @@ class SessionCard extends Component {
         const speakerLastContact = this.props.speakerLastContact;
         let lastContact = null;
         if (speakerLastContact) {
-            const momentDate = moment(speakerLastContact);
-            const date = momentDate.isValid()
-                ? momentDate.format('DD MMMM YYYY')
+            const date = this.isValidDate(speakerLastContact)
+                ? moment(speakerLastContact).format('DD MMMM YYYY')
                 : speakerLastContact;
 
             lastContact =
