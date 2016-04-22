@@ -2,7 +2,7 @@ import api from './ApiService.js';
 
 const commsUri = 'http://api.bris.tech:8080';
 
-class CommsApi {
+class CommsService {
     getLastContact() {
         return api.get(`${commsUri}/last-contact`);
     }
@@ -21,4 +21,4 @@ class CommsApi {
     }
 }
 
-export default new CommsApi();
+export default new CommsService();

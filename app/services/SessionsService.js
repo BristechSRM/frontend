@@ -4,7 +4,7 @@ import immutable from 'immutable';
 
 const sessionsUri = 'http://api.bris.tech';
 
-class SessionsApi {
+class SessionsService {
 
     getRandom(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -54,4 +54,4 @@ class SessionsApi {
     }
 }
 
-export default new SessionsApi();
+export default new SessionsService();

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import SessionsApi from '../services/SessionsApi';
+import SessionsService from '../services/SessionsService';
 
 import SessionList from '../components/Dashboard/SessionList/SessionList.jsx';
 import DashboardSidebar from '../components/Dashboard/DashboardSidebar/DashboardSidebar.jsx';
@@ -60,7 +60,7 @@ const getSessions = (state) => state.get('sessions').get('sessions');
 const getFilteredAndSortedSessions = createSelector(
   [getSessions, getViewSettings],
   (sessions, viewSettings) =>
-      SessionsApi.filterAndSort(
+      SessionsService.filterAndSort(
         sessions,
         viewSettings.get('filters'),
         viewSettings.get('sortProperty'),
