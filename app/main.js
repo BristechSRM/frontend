@@ -1,17 +1,15 @@
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Redirect, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
+import { Router, Route, Redirect, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { UserAuthWrapper } from 'redux-auth-wrapper';
 
-import App from './containers/App.jsx';
-import AuthCallback from './containers/AuthCallback.jsx';
-import Dashboard from './containers/Dashboard.jsx';
-import Session from './containers/Session.jsx';
-import Calendar from './containers/Calendar.jsx';
+// Route components
+import SignIn from './containers/SignIn.jsx';
+import SignedIn from './containers/SignedIn.jsx';
+import appRoutes from './appRoutes.js';
 
 import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
@@ -25,24 +23,13 @@ const history = syncHistoryWithStore(browserHistory, store, {
     },
 });
 
-const userIsAuthenticated = UserAuthWrapper({
-    authSelector: () => ({ authenticated: true }),
-    wrapperDisplayName: 'UserIsAuthenticated',
-    allowRedirectBack: false,
-    redirectAction: () => {
-        window.location = 'http://api.bris.tech:9003';
-    },
-});
-
 render(
     <Provider store={store}>
-    <Router history={history}>
-        <Route path="/signed-in" component={AuthCallback} />
-        <Route component={App}>
-            <Route path="/dashboard" component={userIsAuthenticated(Dashboard)} />
-            <Route path="/sessions/:sessionId" component={Session} />
-            <Route path="/calendar" component={Calendar} />
-        </Route>
+      <Router history={history}>
+        <Route path="/sign-in" component={SignIn} />
+        <Route path="/signed-in" component={SignedIn} />
+        {appRoutes}
         <Redirect from="*" to="/dashboard" />
-    </Router>
-</Provider>, document.getElementById('root'));
+      </Router>
+    </Provider>,
+document.getElementById('root'));

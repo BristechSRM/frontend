@@ -3,7 +3,7 @@
 class AuthService {
     constructor() {
         const settings = {
-            authority: 'http://api.bris.tech:9003',
+            authority: 'http://api.bris.tech:8083',
             client_id: 'bristechsrm',
             redirect_uri: 'http://srm.bris.tech/signed-in',
             post_logout_redirect_uri: 'http://srm.bris.tech',
@@ -15,9 +15,7 @@ class AuthService {
     }
 
     isAuthenticated() {
-        // TODO: return this.tokenManager.expired
-        console.log(!this.tokenManager.expired);
-        return true;
+        return !this.tokenManager.expired;
     }
 
     signIn() {
