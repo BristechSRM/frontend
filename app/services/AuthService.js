@@ -15,9 +15,7 @@ class AuthService {
     }
 
     isAuthenticated() {
-        // TODO: return this.tokenManager.expired
-        console.log(!this.tokenManager.expired);
-        return true;
+        return !this.tokenManager.expired;
     }
 
     signIn() {
