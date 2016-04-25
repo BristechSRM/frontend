@@ -3,10 +3,10 @@
 class AuthService {
     constructor() {
         const settings = {
-            authority: 'http://localhost:9003',
+            authority: 'http://api.bris.tech:8083',
             client_id: 'bristechsrm',
-            redirect_uri: 'http://localhost:8080/signed-in',
-            post_logout_redirect_uri: 'http://localhost:8080',
+            redirect_uri: 'http://srm.bris.tech/signed-in',
+            post_logout_redirect_uri: 'http://srm.bris.tech',
             response_type: 'id_token token',
             scope: 'openid profile api',
         };
