@@ -14,11 +14,13 @@ class SessionList extends Component {
                         <Link to={`sessions/${session.id}`}>
                             <SessionCard
                               key={session.id}
-                              speakerName={session.speakerName}
+                              speakerForename={session.speakerForename}
+                              speakerSurname={session.speakerSurname}
                               title={session.title}
                               status={session.status}
                               rating={session.speakerRating}
-                              adminName={session.adminName}
+                              adminForename={session.adminForename}
+                              adminSurname={session.adminSurname}
                               adminImageUri={session.adminImageUrl}
                               speakerLastContact={session.speakerLastContact}
                             />

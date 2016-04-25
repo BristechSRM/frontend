@@ -11,6 +11,12 @@ class SessionCard extends Component {
         return ((new Date(date) !== 'Invalid Date' && !isNaN(new Date(date))));
     }
 
+    joinName(forename, surname) {
+        const fn = forename ? `${forename} ` : '';
+        const ln = surname || '';
+        return `${fn} ${ln}`;
+    }
+
     render() {
         const footerStyle = {
             backgroundColor: SessionStatusService.getStatusColor(this.props.status),
@@ -33,6 +39,9 @@ class SessionCard extends Component {
             </div>);
         }
 
+        const speakerName = this.joinName(this.props.speakerForename, this.props.speakerSurname);
+        const adminName = this.joinName(this.props.adminForename, this.props.adminSurname);
+
         return (
             <div className={styles.sessionCard}>
                 <div className={styles.body}>
@@ -41,7 +50,7 @@ class SessionCard extends Component {
                             <img src={this.props.adminImageUri} />
                         </div>
                         <div className={styles.adminName}>
-                            {this.props.adminName}
+                            {adminName}
                         </div>
                         <div className={styles.notificationImg}>
                             <img src="https://s3-eu-west-1.amazonaws.com/bristech-images/notification-icon-tm2.png" />
@@ -62,7 +71,7 @@ class SessionCard extends Component {
                 </div>
                 <div className={styles.footer} style={footerStyle}>
                     <div className={styles.speakerName}>
-                        {this.props.speakerName}
+                        {speakerName}
                     </div>
                     {lastContact}
                 </div>
@@ -73,10 +82,12 @@ class SessionCard extends Component {
 
 SessionCard.propTypes = {
     speakerLastContact: PropTypes.string,
-    speakerName: PropTypes.string,
+    speakerForename: PropTypes.string,
+    speakerSurname: PropTypes.string,
     title: PropTypes.string,
     rating: PropTypes.number,
-    adminName: PropTypes.string,
+    adminForename: PropTypes.string,
+    adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,
     status: PropTypes.string,
 };
