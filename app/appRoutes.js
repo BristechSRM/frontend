@@ -10,7 +10,7 @@ import Session from './containers/Session.jsx';
 import Calendar from './containers/Calendar.jsx';
 
 const userIsAuthenticated = UserAuthWrapper({
-    authSelector: () => (AuthService.isAuthenticated() ? true : null),
+    authSelector: () => (AuthService.isAuthenticated() ? { isAuthenticated: true } : null),
     wrapperDisplayName: 'UserIsAuthenticated',
     allowRedirectBack: false,
     failureRedirectPath: '/sign-in',
