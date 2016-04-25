@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import EventList from '../components/Event/EventList.jsx';
+import EventList from '../components/Calendar/EventList.jsx';
 import immutable from 'immutable';
 
 const events = [{
