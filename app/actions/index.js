@@ -7,18 +7,10 @@ import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
 export const getAllSessions = () =>
-    (dispatch, getState) => {
+    (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SESSIONS_START)());
         return SessionsService.getAllSessions()
             .then(sessions => dispatch(createAction(actionTypes.UPDATE_SESSIONS_COMPLETE)(immutable.fromJS(sessions))))
-            .then(() => dispatch(createAction(actionTypes.UPDATE_LAST_CONTACT_START)()))
-            .then(CommsService.getLastContact)
-            .then(lastContact => {
-                const existingSessions = getState().get('sessions').get('sessions');
-                const sessionsWithLastContact = CommsService.mergeLastContact(lastContact, existingSessions);
-                const immutableSessions = immutable.fromJS(sessionsWithLastContact);
-                dispatch(createAction(actionTypes.UPDATE_LAST_CONTACT_COMPLETE)(immutableSessions));
-            })
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSIONS_ERROR)(error)));
     };
 

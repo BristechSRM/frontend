@@ -21,8 +21,8 @@ class SessionList extends Component {
                               rating={session.speakerRating}
                               adminForename={session.adminForename}
                               adminSurname={session.adminSurname}
-                              adminImageUri={session.adminImageUrl}
-                              speakerLastContact={session.speakerLastContact}
+                              adminImageUri={session.adminImageUri}
+                              lastContact={session.lastContact}
                             />
                         </Link>
                     </div>
