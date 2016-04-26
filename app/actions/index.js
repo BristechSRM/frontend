@@ -60,6 +60,6 @@ export const getEvent = (eventId) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_EVENT_START)());
         return EventsService.getEvent(eventId)
-            .then(event => dispatch(createAction(actionTypes.GET_EVENT_COMPLETE)(event)))
+            .then(event => dispatch(createAction(actionTypes.GET_EVENT_COMPLETE)(immutable.List(event.sessions))))
             .catch(error => dispatch(createAction(actionTypes.GET_EVENT_ERROR)(error)));
     };

@@ -19,7 +19,7 @@ const event = handleActions({
 
     [actionTypes.GET_EVENT_COMPLETE]: (state, action) =>
         state.withMutations(map => {
-            map.set('isFetching', false).set('sessions', action.payload.sessions);
+            map.set('isFetching', false).set('sessions', action.payload);
         }),
 }, initialState);
 
