@@ -2,7 +2,7 @@ import api from './ApiService.js';
 import _ from 'lodash';
 import immutable from 'immutable';
 
-const sessionsUri = 'http://api.bris.tech';
+const sessionsUri = 'http://api.bris.tech:8082/sessions';
 
 class SessionsService {
 
@@ -10,15 +10,8 @@ class SessionsService {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // TODO: /sessions endpoint should return threadId for each sessions
-    // currently assigning a fixed value
     getAllSessions() {
-        return api.get(`${sessionsUri}/sessionsummaries`)
-            .then(sessions => sessions.map(s => {
-                const updated = s;
-                updated.threadId = this.getRandom(1, 2).toString();
-                return s;
-            }));
+        return api.get(sessionsUri);
     }
 
     filterAndSort(sessions, filters, sortProperty, isSortOrderAscending) {
@@ -50,7 +43,7 @@ class SessionsService {
     }
 
     getSession(sessionId) {
-        return api.get(`${sessionsUri}/sessions/${sessionId}`);
+        return api.get(`${sessionsUri}/${sessionId}`);
     }
 }
 

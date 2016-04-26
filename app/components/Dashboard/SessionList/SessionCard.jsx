@@ -21,15 +21,12 @@ class SessionCard extends Component {
         const footerStyle = {
             backgroundColor: SessionStatusService.getStatusColor(this.props.status),
         };
+        const lastContactDate = this.props.lastContact ? this.props.lastContact.date : 'Never';
 
-        const speakerLastContact = this.props.speakerLastContact;
-        let lastContact = null;
-        if (speakerLastContact) {
-            const date = this.isValidDate(speakerLastContact)
-                ? moment(speakerLastContact).format('DD MMMM YYYY')
-                : speakerLastContact;
-
-            lastContact =
+        const date = this.isValidDate(lastContactDate)
+            ? moment(lastContactDate).format('DD MMMM YYYY')
+            : lastContactDate;
+        let lastContact =
             (<div className={styles.lastContact}>
                 <p>Last contact -
                     <span className={styles.date}>
@@ -37,7 +34,6 @@ class SessionCard extends Component {
                     </span>
                 </p>
             </div>);
-        }
 
         const speakerName = this.joinName(this.props.speakerForename, this.props.speakerSurname);
         const adminName = this.joinName(this.props.adminForename, this.props.adminSurname);
@@ -81,7 +77,7 @@ class SessionCard extends Component {
 }
 
 SessionCard.propTypes = {
-    speakerLastContact: PropTypes.string,
+    lastContact: PropTypes.object,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     title: PropTypes.string,
