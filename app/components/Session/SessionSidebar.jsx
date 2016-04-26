@@ -7,10 +7,6 @@ import styles from './sessionSidebar.scss';
 
 class SessionSidebar extends Component {
 
-    getName(profile) {
-        return profile ? `${profile.forename || ''}  ${profile.surname || ''}` : null;
-    }
-
     getHandle(type) {
         if (!this.props.speaker) {
             return '';
@@ -26,6 +22,12 @@ class SessionSidebar extends Component {
         return profile ? profile.rating : 0;
     }
 
+    joinName(forename, surname) {
+        const fn = forename ? `${forename} ` : '';
+        const ln = surname || '';
+        return `${fn} ${ln}`;
+    }
+
     render() {
         const h1Style = {
             color: SessionStatusService.getStatusColor(this.props.session.status),
@@ -39,7 +41,9 @@ class SessionSidebar extends Component {
         return (
             <div className={styles.sessionSidebar}>
                 <div className={styles.header}>
-                    <h1 style={h1Style}>{this.getName(this.props.speaker)}</h1>
+                    <h1 style={h1Style}>
+                        {this.joinName(this.props.session.speakerForename, this.props.session.speakerSurname)}
+                    </h1>
                     {this.props.session.title}
                 </div>
 
@@ -49,7 +53,9 @@ class SessionSidebar extends Component {
                         <tbody>
                             <tr>
                                 <td>Assigned Admin</td>
-                                <td>{this.getName(this.props.admin)}</td>
+                                <td>
+                                    {this.joinName(this.props.session.adminForename, this.props.session.adminSurname)}
+                                </td>
                             </tr>
                             <tr>
                                 <td>Credibility</td>
@@ -69,7 +75,7 @@ class SessionSidebar extends Component {
                             </tr>
                             <tr>
                                 <td>Date Added</td>
-                                <td>2 November 2015</td>
+                                <td>{this.props.session.dateAdded}</td>
                             </tr>
                             <tr>
                                 <td>Last Contact</td>
