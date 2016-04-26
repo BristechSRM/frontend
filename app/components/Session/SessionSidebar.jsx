@@ -16,8 +16,10 @@ class SessionSidebar extends Component {
             return '';
         }
 
-        const handle = this.props.speaker.handles ? this.props.speaker.handles.find(h => h.type === type) : null;
-        return handle ? handle.id : '';
+        const handle = this.props.speaker.handles
+            ? this.props.speaker.handles.find(h => h.type.toLowerCase() === type.toLowerCase())
+            : null;
+        return handle ? handle.identifier : '';
     }
 
     getRating(profile) {
