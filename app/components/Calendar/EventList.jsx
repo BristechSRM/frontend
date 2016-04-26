@@ -5,14 +5,11 @@ import EventCard from './EventCard.jsx';
 
 const styles = {
     base: {
-        ul: {
-            li: {
-                background: 'blue',
-                border: 0,
-                borderRadius: 4,
-                padding: '1.5em',
-            },
-        },
+        backgroundColor: '#ccc',
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'nowrap',
+        alignItems: 'stretch',
     },
 };
 
