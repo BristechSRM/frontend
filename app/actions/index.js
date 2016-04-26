@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 import SessionsService from '../services/SessionsService';
 import CommsService from '../services/CommsService';
 import ProfilesService from '../services/ProfilesService';
+import EventsService from '../services/EventsService';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
@@ -53,4 +54,12 @@ export const getCorrespondence = (threadId) =>
         return CommsService.getThread(threadId)
             .then(thread => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(thread.items)))
             .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
+    };
+
+export const getAllEvents = () =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.GET_EVENTS_START)());
+        return EventsService.getAllEvents()
+            .then(events => dispatch(createAction(actionTypes.GET_EVENTS_COMPLETE)(events)))
+            .catch(error => dispatch(createAction(actionTypes.GET_EVENTS_ERROR)(error)));
     };
