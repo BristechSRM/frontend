@@ -19,11 +19,11 @@ const eventSessions = [{
         id: '903c6dd2-dfd8-44d3-8a36-e7ae6ce28d95',
         title: 'test',
         description: 'description',
-        speakerForename: 'forename',
-        speakerSurname: 'surname',
+        speakerForename: 'Ben',
+        speakerSurname: 'Byford',
         speakerBio: 'bio',
         speakerRating: 4,
-        speakerImageUri: '',
+        speakerImageUri: '/img/ben.png',
     }],
 }, {
     id: '21793e09-58e4-48fd-bb41-4cff140974b7',
@@ -36,7 +36,7 @@ const eventSessions = [{
         speakerSurname: 'Byford',
         speakerBio: 'bio',
         speakerRating: 4,
-        speakerImageUri: '',
+        speakerImageUri: '/img/ben.png',
     }, {
         id: 'd8cc8f72-2d97-4269-92d3-6d044a6d2af5',
         date: Date.now(),
@@ -46,7 +46,7 @@ const eventSessions = [{
         speakerSurname: 'Abeel',
         speakerBio: 'bio',
         speakerRating: 4,
-        speakerImageUri: '',
+        speakerImageUri: '/img/melissa.png',
     }],
 }];
 

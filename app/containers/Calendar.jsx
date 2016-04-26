@@ -19,7 +19,14 @@ class Calendar extends Component {
     renderEventSession(session) {
         return (
           <div>
-            <EventSession key={session.id} title={session.title} />
+            <EventSession
+              key={session.id}
+              date={session.date}
+              title={session.title}
+              speakerForename={session.speakerForename}
+              speakerSurname={session.speakerSurname}
+              speakerImageUri={session.speakerImageUri}
+            />
           </div>
         );
     }
