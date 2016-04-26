@@ -28,8 +28,8 @@ class SessionsService {
         }
 
         const propertyNames = {
-            name: 'speakerName',
-            'last-contact': 'lastContact',
+            name: 'speakerSurname',
+            'last-contact': 'lastContact.date',
             rating: 'speakerRating',
         };
 
