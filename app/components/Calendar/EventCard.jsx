@@ -7,11 +7,12 @@ const styles = {
     base: {
         card: {
             backgroundColor: '#fff',
-            padding: '0.5rem',
+            padding: '1rem',
             marginBottom: '0.5rem',
         },
         date: {
-            margin: '0.5rem 0',
+            margin: '0',
+            fontSize: '1.3rem',
             day: {
                 color: '#c6c6c6',
             },
@@ -21,6 +22,7 @@ const styles = {
         },
         sessions: {
             margin: '0',
+            fontSize: '0.8rem',
         },
     },
 };
@@ -38,6 +40,8 @@ class EventCard extends Component {
         const month = date.format('MMMM');
         const year = date.year();
 
+        const sessionLabel = this.props.sessions.length === 1 ? 'session' : 'sessions';
+
         return (
             <div style={[styles.base.card, cardBorderStyles]} onClick={() => this.props.onSelected(this.props.id)}>
                <p style={styles.base.date}>
@@ -45,7 +49,7 @@ class EventCard extends Component {
                  <span>{month}</span>&nbsp;
                  <span style={styles.base.date.year}>{year}</span>
                </p>
-               <p style={styles.base.sessions}>{`${this.props.sessions.length} sessions`}</p>
+               <p style={styles.base.sessions}>{`${this.props.sessions.length} ${sessionLabel}`}</p>
             </div>
         );
     }
