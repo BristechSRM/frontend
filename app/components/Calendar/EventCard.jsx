@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import immutable from 'immutable';
 import Radium from 'radium';
 import moment from 'moment';
 
@@ -43,7 +42,10 @@ class EventCard extends Component {
         const sessionLabel = this.props.sessions.length === 1 ? 'session' : 'sessions';
 
         return (
-            <div style={[styles.base.card, cardBorderStyles]} onClick={() => this.props.onSelected(this.props.id)}>
+            <div
+              style={[styles.base.card, cardBorderStyles]}
+              onClick={() => this.props.onSelected({ id: this.props.id })}
+            >
                <p style={styles.base.date}>
                  <span style={styles.base.date.day}>{day}</span>&nbsp;
                  <span>{month}</span>&nbsp;
@@ -57,7 +59,7 @@ class EventCard extends Component {
 
 EventCard.propTypes = {
     id: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.number,
     sessions: PropTypes.array,
     onSelected: PropTypes.func,
 };

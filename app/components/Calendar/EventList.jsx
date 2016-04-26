@@ -5,7 +5,6 @@ import EventCard from './EventCard.jsx';
 
 const styles = {
     base: {
-        backgroundColor: '#ccc',
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'nowrap',
