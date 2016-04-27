@@ -8,7 +8,7 @@
     "start:dev": "node_modules/.bin/webpack-dev-server --progress",
     "start:prod": "node server.js",
     "build": "node_modules/.bin/webpack",
-    "storybook": "start-storybook -p 9001",
+    "storybook": "start-storybook -p 9001 -s ./public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
