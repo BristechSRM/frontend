@@ -3,16 +3,10 @@ const path = require('path');
 
 console.log(`NODE_ENV = ${process.env.NODE_ENV}`);
 
-function getCommonPlugins() {
-    return [
-    ];
-}
-
 function getProductionSettings() {
     return {
         devtool: 'cheap-module-source-map',
         plugins: [
-            ...getCommonPlugins(),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: JSON.stringify('production'),
@@ -31,7 +25,6 @@ function getDevelopmentSettings() {
     return {
         devtool: 'source-map',
         plugins: [
-            ...getCommonPlugins(),
             new webpack.HotModuleReplacementPlugin(),
             new styleLintPlugin({
                 configFile: '.stylelintrc',

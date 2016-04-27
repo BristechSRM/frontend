@@ -5,23 +5,26 @@ import EventCard from './EventCard.jsx';
 
 const styles = {
     base: {
-        ul: {
-            li: {
-                background: 'blue',
-                border: 0,
-                borderRadius: 4,
-                padding: '1.5em',
-            },
-        },
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'nowrap',
+        alignItems: 'stretch',
     },
 };
 
 class EventList extends Component {
 
+    constructor() {
+        // TODO: temporary until event ids are unique
+        super();
+        this.key = 0;
+    }
+
     renderEvent(event) {
+        this.key++;
         return (
            <EventCard
-             key={event.id}
+             key={this.key}
              id={event.id}
              date={event.date}
              sessions={event.sessions}
@@ -33,7 +36,7 @@ class EventList extends Component {
     render() {
         return (
             <div styles={styles.base}>
-                { this.props.events.map(e => this.renderEvent(e)) }
+                { this.props.events.valueSeq().map(e => this.renderEvent(e)) }
             </div>
         );
     }

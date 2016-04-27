@@ -52,6 +52,14 @@ export const getAllEvents = () =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_EVENTS_START)());
         return EventsService.getAllEvents()
-            .then(events => dispatch(createAction(actionTypes.GET_EVENTS_COMPLETE)(events)))
+            .then(events => dispatch(createAction(actionTypes.GET_EVENTS_COMPLETE)(immutable.List(events))))
             .catch(error => dispatch(createAction(actionTypes.GET_EVENTS_ERROR)(error)));
+    };
+
+export const getEvent = (eventId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.GET_EVENT_START)());
+        return EventsService.getEvent(eventId)
+            .then(event => dispatch(createAction(actionTypes.GET_EVENT_COMPLETE)(immutable.List(event.sessions))))
+            .catch(error => dispatch(createAction(actionTypes.GET_EVENT_ERROR)(error)));
     };
