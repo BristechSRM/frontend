@@ -32,6 +32,7 @@ class Calendar extends Component {
     }
 
     render() {
+        console.log(this.props.events);
         return (
             <div className={styles.calendar}>
                <div className={styles.eventList}>

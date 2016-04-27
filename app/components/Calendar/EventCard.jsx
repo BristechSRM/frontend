@@ -8,6 +8,9 @@ const styles = {
             backgroundColor: '#fff',
             padding: '1rem',
             marginBottom: '0.5rem',
+            ':hover': {
+                cursor: 'pointer',
+            },
         },
         date: {
             margin: '0',
