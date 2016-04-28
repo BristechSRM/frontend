@@ -42,7 +42,7 @@ const webpackConfig = {
     entry: path.join(__dirname, 'app/main.js'),
     output: {
         path: path.join(__dirname, 'public'),
-        filename: 'main.js',
+        filename: 'js/main.js',
     },
     module: {
         preLoaders: [{

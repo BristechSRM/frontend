@@ -20,7 +20,7 @@ const appRoutes = (
   <Route component={App}>
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/sessions/:sessionId" component={Session} />
-      <Route path="/calendar" component={Calendar} />
+      <Route path="/calendar" component={userIsAuthenticated(Calendar)} />
   </Route>
 );
 
