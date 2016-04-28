@@ -8,6 +8,7 @@ import AuthService from './services/AuthService.js';
 import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 import Calendar from './containers/Calendar.jsx';
+import EventSessions from './containers/EventSessions.jsx';
 
 const userIsAuthenticated = UserAuthWrapper({
     authSelector: () => (AuthService.isAuthenticated() ? { isAuthenticated: true } : null),
@@ -20,7 +21,9 @@ const appRoutes = (
   <Route component={App}>
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/sessions/:sessionId" component={Session} />
-      <Route path="/calendar" component={userIsAuthenticated(Calendar)} />
+      <Route path="/calendar" component={Calendar}>
+        <Route path=":eventId" component={EventSessions} />
+      </Route>
   </Route>
 );
 

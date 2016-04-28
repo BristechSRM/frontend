@@ -62,7 +62,7 @@ class EventCard extends Component {
 
 EventCard.propTypes = {
     id: PropTypes.string,
-    date: PropTypes.number,
+    date: PropTypes.object,
     sessions: PropTypes.array,
     onSelected: PropTypes.func,
 };

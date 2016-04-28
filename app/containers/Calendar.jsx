@@ -3,7 +3,7 @@ import EventList from '../components/Calendar/EventList.jsx';
 import EventSession from '../components/Calendar/EventSession.jsx';
 import immutable from 'immutable';
 import { connect } from 'react-redux';
-import { getAllEvents, getEvent } from '../actions';
+import { getAllEvents } from '../actions';
 import styles from './calendar.scss';
 
 class Calendar extends Component {
@@ -12,15 +12,22 @@ class Calendar extends Component {
         this.props.dispatch(getAllEvents());
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.list !== nextProps.list) {
+            if (nextProps.list.count() > 0) {
+                this.context.router.push(`/calendar/${nextProps.list.get(0).id}`);
+            }
+        }
+    }
+
     handleEventSelected(event) {
-        this.props.dispatch(getEvent(event.id));
+        this.context.router.push(`/calendar/${event.id}`);
     }
 
     renderEventSession(session) {
         return (
-          <div>
+          <div key={session.id}>
             <EventSession
-              key={session.id}
               date={session.date}
               title={session.title}
               speakerForename={session.speakerForename}
@@ -35,42 +42,35 @@ class Calendar extends Component {
         return (
             <div className={styles.calendar}>
                <div className={styles.eventList}>
-                  <EventList events={this.props.events.list} onEventSelected={e => this.handleEventSelected(e)} />
+                  {this.props.isFetching ? <p>Loading...</p> :
+                  <EventList
+                    events={this.props.list}
+                    onEventSelected={e => this.handleEventSelected(e)}
+                  />}
                </div>
-               <div className={styles.eventSessions}>
-                  {this.props.event.sessions.map(s => this.renderEventSession(s))}
-               </div>
+               {this.props.children}
             </div>
         );
     }
 }
 
 Calendar.propTypes = {
-    events: PropTypes.shape({
-        isFetching: PropTypes.bool,
-        error: PropTypes.object,
-        list: PropTypes.instanceOf(immutable.List),
-    }),
-    event: PropTypes.shape({
-        isFetching: PropTypes.bool,
-        error: PropTypes.object,
-        sessions: PropTypes.instanceOf(immutable.List),
-    }),
+    isFetching: PropTypes.bool,
+    error: PropTypes.object,
+    list: PropTypes.instanceOf(immutable.List),
+    children: PropTypes.object,
     dispatch: PropTypes.func,
+};
+
+Calendar.contextTypes = {
+    router: PropTypes.object,
 };
 
 function mapStateToProps(state) {
     return {
-        events: {
-            isFetching: state.get('events').get('isFetching'),
-            error: state.get('events').get('error'),
-            list: state.get('events').get('events'),
-        },
-        event: {
-            isFetching: state.get('event').get('isFetching'),
-            error: state.get('event').get('error'),
-            sessions: state.get('event').get('sessions'),
-        },
+        isFetching: state.get('events').get('isFetching'),
+        error: state.get('events').get('error'),
+        list: state.get('events').get('events'),
     };
 }
 
