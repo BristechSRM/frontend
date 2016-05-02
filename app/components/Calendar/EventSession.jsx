@@ -77,7 +77,7 @@ class EventSession extends Component {
                   </div>
                   <div style={styles.base.moment}>
                      <p style={styles.base.date}>{startDate.format('dddd, DD MMMM')}</p>
-                     <p style={styles.base.time}>{startDate.format('HH:mm Z')} - {endDate.format('HH:mm Z')}</p>
+                     <p style={styles.base.time}>{startDate.format('HH:mm')} - {endDate.format('HH:mm')}</p>
                   </div>
                 </div>
                 <h2 style={styles.base.title}>{this.props.title}</h2>
