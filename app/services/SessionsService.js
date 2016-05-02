@@ -31,6 +31,7 @@ class SessionsService {
             name: 'speakerSurname',
             'last-contact': 'lastContact.date',
             rating: 'speakerRating',
+            'event-date': 'date',
         };
 
         const sortOrder = isSortOrderAscending ? 'asc' : 'desc';

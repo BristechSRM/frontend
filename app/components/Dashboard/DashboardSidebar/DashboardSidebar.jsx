@@ -53,6 +53,7 @@ class DashboardSidebar extends Component {
                        <MenuItem value={"last-contact"} primaryText="Last Contact" />
                        <MenuItem value={"name"} primaryText="Name" />
                        <MenuItem value={"rating"} primaryText="Rating" />
+                       <MenuItem value={"event-date"} primaryText="Event Date" />
                     </DropDownMenu>
 
                     <Checkbox
