@@ -1,8 +1,16 @@
 import api from './ApiService.js';
-import _ from 'lodash';
 import immutable from 'immutable';
 
 const sessionsUri = 'http://api.bris.tech:8082/sessions';
+
+const getProperty = (property, session) => {
+    const propertyNames = {
+        name: s => s.speakerSurname,
+        'last-contact': s => (s.lastContact ? s.lastContact.date : ''),
+        rating: s => s.speakerRating,
+    };
+    return propertyNames[property](session);
+};
 
 class SessionsService {
 
@@ -27,17 +35,19 @@ class SessionsService {
             filteredSessions = filteredSessions.filter(s => filters.get(s.get('status')));
         }
 
-        const propertyNames = {
-            name: 'speakerSurname',
-            'last-contact': 'lastContact.date',
-            rating: 'speakerRating',
-        };
+        const updatedSessions = filteredSessions.toJS().sort((a, b) => {
+            const aProp = getProperty(sortProperty, a);
+            const bProp = getProperty(sortProperty, b);
 
-        const sortOrder = isSortOrderAscending ? 'asc' : 'desc';
-        const updatedSessions = _.orderBy(
-            filteredSessions.toJS(),
-            propertyNames[sortProperty],
-            sortOrder);
+            let val = 0;
+            if (aProp < bProp) {
+                val = -1;
+            } else if (aProp > bProp) {
+                val = 1;
+            }
+
+            return isSortOrderAscending ? val : -1 * val;
+        });
 
         return immutable.List(updatedSessions);
     }
