@@ -33,7 +33,6 @@ class EventList extends Component {
     }
 
     render() {
-        console.log(this.props.events);
         return (
             <div styles={styles.base}>
                 { this.props.events.map(e => this.renderEvent(e)) }

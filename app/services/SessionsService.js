@@ -3,6 +3,29 @@ import _ from 'lodash';
 
 const sessionsUri = 'http://api.bris.tech:8082/sessions';
 
+const sortProperties = {
+    name: {
+        nullSelector: 'speakerSurname',
+        sortSelector: 'speakerSurname',
+        nullIsLow: true,
+    },
+    'last-contact': {
+        nullSelector: 'lastContact',
+        sortSelector: 'lastContact.date',
+        nullIsLow: true,
+    },
+    rating: {
+        nullSelector: 'speakerRating',
+        sortSelector: 'speakerRating',
+        nullIsLow: true,
+    },
+    'event-date': {
+        nullSelector: 'date',
+        sortSelector: 'date',
+        nullIsLow: false,
+    },
+};
+
 class SessionsService {
 
     getRandom(min, max) {
@@ -26,19 +49,22 @@ class SessionsService {
             filteredSessions = filteredSessions.filter(s => filters[s.status]);
         }
 
-        const propertyNames = {
-            name: 'speaker.surname',
-            'last-contact': 'lastContact.date',
-            rating: 'speaker.rating',
-            'event-date': 'date',
-        };
-
-        const sortOrder = isSortOrderAscending ? 'asc' : 'desc';
-        const updatedSessions = _.orderBy(
+        const nullSelector = sortProperties[sortProperty].nullSelector;
+        const [withNull, withoutNull] = _.partition(
             filteredSessions.toJS(),
-            propertyNames[sortProperty],
-            sortOrder);
+            [nullSelector, null]
+        );
 
+        const propertyName = sortProperties[sortProperty].sortSelector;
+        const sortOrder = isSortOrderAscending ? 'asc' : 'desc';
+        let updatedSessions = _.orderBy(
+            withoutNull,
+            propertyName,
+            sortOrder
+        );
+
+        const nullsBefore = isSortOrderAscending === sortProperties[sortProperty].nullIsLow;
+        updatedSessions = nullsBefore ? withNull.concat(updatedSessions) : updatedSessions.concat(withNull);
         return updatedSessions;
     }
 

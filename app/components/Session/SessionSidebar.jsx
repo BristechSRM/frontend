@@ -117,7 +117,7 @@ SessionSidebar.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
-    lastContact: PropTypes.string,
+    lastContact: PropTypes.object,
 };
 
 export default SessionSidebar;
