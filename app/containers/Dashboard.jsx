@@ -7,7 +7,6 @@ import SessionList from '../components/Dashboard/SessionList/SessionList.jsx';
 import DashboardSidebar from '../components/Dashboard/DashboardSidebar/DashboardSidebar.jsx';
 import { getAllSessions, changeViewSettings } from '../actions';
 import styles from './dashboard.scss';
-import immutable from 'immutable';
 
 class Dashboard extends Component {
 
@@ -47,34 +46,34 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
     isSortOrderAscending: PropTypes.bool,
     sortProperty: PropTypes.string,
-    filters: PropTypes.instanceOf(immutable.Map),
-    sessions: PropTypes.instanceOf(immutable.List),
+    filters: PropTypes.object,
+    sessions: PropTypes.array,
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
 };
 
-const getViewSettings = (state) => state.get('sessions').get('viewSettings');
-const getSessions = (state) => state.get('sessions').get('sessions');
+const getViewSettings = (state) => state.sessions.viewSettings;
+const getSessions = (state) => state.sessions.sessions;
 
 const getFilteredAndSortedSessions = createSelector(
   [getSessions, getViewSettings],
   (sessions, viewSettings) =>
       SessionsService.filterAndSort(
         sessions,
-        viewSettings.get('filters'),
-        viewSettings.get('sortProperty'),
-        viewSettings.get('isSortOrderAscending'))
+        viewSettings.filters,
+        viewSettings.sortProperty,
+        viewSettings.isSortOrderAscending)
 );
 
 function mapStateToProps(state) {
     return {
-        isFetching: state.get('sessions').get('isFetching'),
-        error: state.get('sessions').get('error'),
+        isFetching: state.sessions.isFetching,
+        error: state.sessions.error,
         sessions: getFilteredAndSortedSessions(state),
-        filters: state.get('sessions').get('viewSettings').get('filters'),
-        sortProperty: state.get('sessions').get('viewSettings').get('sortProperty'),
-        isSortOrderAscending: state.get('sessions').get('viewSettings').get('isSortOrderAscending'),
+        filters: state.sessions.viewSettings.filters,
+        sortProperty: state.sessions.viewSettings.sortProperty,
+        isSortOrderAscending: state.sessions.viewSettings.isSortOrderAscending,
     };
 }
 

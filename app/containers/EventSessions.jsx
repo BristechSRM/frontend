@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import EventSession from '../components/Calendar/EventSession.jsx';
-import immutable from 'immutable';
 import { connect } from 'react-redux';
 import { getEvent } from '../actions';
 import styles from './calendar.scss';
@@ -46,16 +45,16 @@ class EventSessions extends Component {
 EventSessions.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.object,
-    sessions: PropTypes.instanceOf(immutable.List),
+    sessions: PropTypes.array,
     dispatch: PropTypes.func,
     params: PropTypes.object,
 };
 
 function mapStateToProps(state) {
     return {
-        isFetching: state.get('event').get('isFetching'),
-        error: state.get('event').get('error'),
-        sessions: state.get('event').get('sessions'),
+        isFetching: state.event.isFetching,
+        error: state.event.error,
+        sessions: state.event.sessions,
     };
 }
 

@@ -16,12 +16,7 @@ injectTouchTapEvent();
 
 const store = configureStore();
 
-const history = syncHistoryWithStore(browserHistory, store, {
-    selectLocationState: state => {
-        const routing = state.get('routing');
-        return routing ? routing.toJS() : state;
-    },
-});
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
     <Provider store={store}>

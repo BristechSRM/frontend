@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import immutable from 'immutable';
 import Radium from 'radium';
 import EventCard from './EventCard.jsx';
 
@@ -34,16 +33,17 @@ class EventList extends Component {
     }
 
     render() {
+        console.log(this.props.events);
         return (
             <div styles={styles.base}>
-                { this.props.events.valueSeq().sort((a, b) => a.date > b.date).map(e => this.renderEvent(e)) }
+                { this.props.events.map(e => this.renderEvent(e)) }
             </div>
         );
     }
 }
 
 EventList.propTypes = {
-    events: PropTypes.instanceOf(immutable.List),
+    events: PropTypes.array,
     onEventSelected: PropTypes.func,
 };
 
