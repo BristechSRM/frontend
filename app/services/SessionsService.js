@@ -1,15 +1,30 @@
 import api from './ApiService.js';
+import _ from 'lodash';
 import immutable from 'immutable';
 
 const sessionsUri = 'http://api.bris.tech:8082/sessions';
 
-const getProperty = (property, session) => {
-    const propertyNames = {
-        name: s => s.speakerSurname,
-        'last-contact': s => (s.lastContact ? s.lastContact.date : ''),
-        rating: s => s.speakerRating,
-    };
-    return propertyNames[property](session);
+const sortProperties = {
+    name: {
+        nullSelector: 'speakerSurname',
+        sortSelector: 'speakerSurname',
+        nullIsLow: true,
+    },
+    'last-contact': {
+        nullSelector: 'lastContact',
+        sortSelector: 'lastContact.date',
+        nullIsLow: true,
+    },
+    rating: {
+        nullSelector: 'speakerRating',
+        sortSelector: 'speakerRating',
+        nullIsLow: true,
+    },
+    'event-date': {
+        nullSelector: 'date',
+        sortSelector: 'date',
+        nullIsLow: false,
+    },
 };
 
 class SessionsService {
@@ -35,20 +50,22 @@ class SessionsService {
             filteredSessions = filteredSessions.filter(s => filters.get(s.get('status')));
         }
 
-        const updatedSessions = filteredSessions.toJS().sort((a, b) => {
-            const aProp = getProperty(sortProperty, a);
-            const bProp = getProperty(sortProperty, b);
+        const nullSelector = sortProperties[sortProperty].nullSelector;
+        const [withNull, withoutNull] = _.partition(
+            filteredSessions.toJS(),
+            [nullSelector, null]
+        );
 
-            let val = 0;
-            if (aProp < bProp) {
-                val = -1;
-            } else if (aProp > bProp) {
-                val = 1;
-            }
+        const propertyName = sortProperties[sortProperty].sortSelector;
+        const sortOrder = isSortOrderAscending ? 'asc' : 'desc';
+        let updatedSessions = _.orderBy(
+            withoutNull,
+            propertyName,
+            sortOrder
+        );
 
-            return isSortOrderAscending ? val : -1 * val;
-        });
-
+        const nullsBefore = isSortOrderAscending === sortProperties[sortProperty].nullIsLow;
+        updatedSessions = nullsBefore ? withNull.concat(updatedSessions) : updatedSessions.concat(withNull);
         return immutable.List(updatedSessions);
     }
 

@@ -1,17 +1,14 @@
-import { getStubEvents, getStubEventSessions } from '../stub/events.js';
+import api from './ApiService.js';
+
+const eventsUri = 'http://localhost:9004/events';
 
 class EventsService {
     getAllEvents() {
-        return new Promise((resolve) => {
-            resolve(getStubEvents(8));
-        });
+        return api.get(eventsUri);
     }
 
     getEvent(eventId) {
-        return new Promise((resolve) => {
-            const event = getStubEventSessions().find(e => e.id === eventId);
-            resolve(event);
-        });
+        return api.get(`${eventsUri}/${eventId}`);
     }
 }
 

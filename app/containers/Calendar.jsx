@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import EventList from '../components/Calendar/EventList.jsx';
-import EventSession from '../components/Calendar/EventSession.jsx';
 import immutable from 'immutable';
 import { connect } from 'react-redux';
 import { getAllEvents } from '../actions';
@@ -22,20 +21,6 @@ class Calendar extends Component {
 
     handleEventSelected(event) {
         this.context.router.push(`/calendar/${event.id}`);
-    }
-
-    renderEventSession(session) {
-        return (
-          <div key={session.id}>
-            <EventSession
-              date={session.date}
-              title={session.title}
-              speakerForename={session.speakerForename}
-              speakerSurname={session.speakerSurname}
-              speakerImageUri={session.speakerImageUri}
-            />
-          </div>
-        );
     }
 
     render() {

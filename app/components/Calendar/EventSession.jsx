@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 import moment from 'moment';
-import LoremIpsum from 'lorem-ipsum';
 
 const styles = {
     base: {
@@ -54,10 +53,15 @@ const styles = {
 
 class EventSession extends Component {
 
+    convertToHtml(plaintext) {
+        return !plaintext ? '' : plaintext.split('\n').map(para => `<p>${para}</p>`).join('');
+    }
+
     render() {
-        const date = moment(this.props.date);
-        const bio = LoremIpsum({ count: 3, units: 'paragraphs', format: 'html' });
-        const description = LoremIpsum({ count: 5, units: 'paragraphs', format: 'html' });
+        const startDate = moment(this.props.startDate);
+        const endDate = moment(this.props.endDate);
+        const bio = this.convertToHtml(this.props.speakerBio);
+        const description = this.convertToHtml(this.props.description);
 
         return (
             <div style={styles.base.card}>
@@ -72,8 +76,8 @@ class EventSession extends Component {
                      <p>{`${this.props.speakerForename} ${this.props.speakerSurname}`}</p>
                   </div>
                   <div style={styles.base.moment}>
-                     <p style={styles.base.date}>{date.format('dddd, DD MMMM')}</p>
-                     <p style={styles.base.time}>11:00 - 12:00</p>
+                     <p style={styles.base.date}>{startDate.format('dddd, DD MMMM')}</p>
+                     <p style={styles.base.time}>{startDate.format('HH:mm')} - {endDate.format('HH:mm')}</p>
                   </div>
                 </div>
                 <h2 style={styles.base.title}>{this.props.title}</h2>
@@ -86,11 +90,14 @@ class EventSession extends Component {
 }
 
 EventSession.propTypes = {
-    date: PropTypes.number,
+    startDate: PropTypes.string,
+    endDate: PropTypes.string,
     title: PropTypes.string,
+    description: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     speakerImageUri: PropTypes.string,
+    speakerBio: PropTypes.string,
 };
 
 export default Radium(EventSession);
