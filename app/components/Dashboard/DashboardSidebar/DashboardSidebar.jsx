@@ -3,34 +3,33 @@ import SessionFilter from './SessionFilter.jsx';
 import DropDownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import Checkbox from 'material-ui/lib/checkbox';
-import immutable from 'immutable';
 
 import styles from './dashboardSidebar.scss';
 
 class DashboardSidebar extends Component {
 
     handleFilterChange(filters) {
-        this.props.onSessionViewSettingsChange(immutable.Map({
+        this.props.onSessionViewSettingsChange({
             filters,
             sortProperty: this.props.sortProperty,
             isSortOrderAscending: this.props.isSortOrderAscending,
-        }));
+        });
     }
 
     handleSortPropertyChange(event, index, value) {
-        this.props.onSessionViewSettingsChange(immutable.Map({
+        this.props.onSessionViewSettingsChange({
             filters: this.props.filters,
             sortProperty: value,
             isSortOrderAscending: this.props.isSortOrderAscending,
-        }));
+        });
     }
 
     handleSortOrderChange(event, value) {
-        this.props.onSessionViewSettingsChange(immutable.Map({
+        this.props.onSessionViewSettingsChange({
             filters: this.props.filters,
             sortProperty: this.props.sortProperty,
             isSortOrderAscending: value,
-        }));
+        });
     }
 
     render() {
@@ -72,7 +71,7 @@ DashboardSidebar.propTypes = {
     onSessionViewSettingsChange: PropTypes.func,
     isSortOrderAscending: PropTypes.bool,
     sortProperty: PropTypes.string,
-    filters: PropTypes.instanceOf(immutable.Map),
+    filters: PropTypes.object,
 };
 
 export default DashboardSidebar;

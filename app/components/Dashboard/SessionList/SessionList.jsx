@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import SessionCard from './SessionCard.jsx';
-import immutable from 'immutable';
 import styles from './sessionList.scss';
 
 class SessionList extends Component {
@@ -9,7 +8,7 @@ class SessionList extends Component {
     render() {
         return (
             <div className={styles.sessionList}>
-                {this.props.sessions.valueSeq().map(session =>
+                {this.props.sessions.map(session =>
                     <div key={session.id} className={styles.sessionCard}>
                         <Link to={`sessions/${session.id}`}>
                             <SessionCard
@@ -33,7 +32,7 @@ class SessionList extends Component {
 }
 
 SessionList.propTypes = {
-    sessions: PropTypes.instanceOf(immutable.List),
+    sessions: PropTypes.array,
 };
 
 export default SessionList;

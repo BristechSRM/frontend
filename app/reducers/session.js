@@ -2,12 +2,14 @@ import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = immutable.Map({
+const initialState = new immutable.Record({
     isFetching: false,
-    session: {},
-    correspondence: [],
+    session: new immutable.Record({})(),
+    admin: new immutable.Record({})(),
+    speaker: new immutable.Record({})(),
+    correspondence: immutable.List(),
     lastContact: 'Unknown',
-});
+})();
 
 const session = handleActions({
     [actionTypes.GET_SESSION_START]: (state) =>
@@ -27,35 +29,24 @@ const session = handleActions({
             map.set('isFetching', false)
                 .set('session', action.payload);
         }),
-    [actionTypes.GET_SPEAKER_START]: (state) =>
-        state.withMutations(map => {
-            map.set('speaker', {});
-        }),
-    [actionTypes.GET_SPEAKER_COMPLETE]: (state, action) =>
-        state.withMutations(map => {
-            map.set('speaker', action.payload);
-        }),
-    [actionTypes.GET_SPEAKER_ERROR]: (state) =>
-        state.withMutations(map => {
-            map.set('speaker', {});
-        }),
-    [actionTypes.GET_ADMIN_START]: (state) =>
-        state.withMutations(map => {
-            map.set('admin', {});
-        }),
-    [actionTypes.GET_ADMIN_COMPLETE]: (state, action) =>
-        state.withMutations(map => {
-            map.set('admin', action.payload);
-        }),
-    [actionTypes.GET_ADMIN_ERROR]: (state) =>
-        state.withMutations(map => {
-            map.set('admin', {});
-        }),
+    [actionTypes.GET_SPEAKER_START]: (state) => state.set('speaker', new immutable.Record({})()),
+
+    [actionTypes.GET_SPEAKER_COMPLETE]: (state, action) => state.set('speaker', action.payload),
+
+    [actionTypes.GET_SPEAKER_ERROR]: (state) => state.set('speaker', new immutable.Record({})()),
+
+    [actionTypes.GET_ADMIN_START]: (state) => state.set('admin', new immutable.Record({})()),
+
+    [actionTypes.GET_ADMIN_COMPLETE]: (state, action) => state.set('admin', action.payload),
+
+    [actionTypes.GET_ADMIN_ERROR]: (state) => state.set('admin', new immutable.Record({})()),
+
     [actionTypes.GET_CORRESPONDENCE_START]: (state) =>
         state.withMutations(map => {
-            map.set('correspondence', [])
-                .set('lastContact', '');
+            map.set('correspondence', immutable.List())
+                .set('lastContact', new immutable.Record({})());
         }),
+
     [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>
         state.withMutations(map => {
             map.set('correspondence', action.payload)
@@ -63,9 +54,10 @@ const session = handleActions({
                     (prev, cur) => (cur.date > prev ? cur.date : prev), '') || 'Never'
                 );
         }),
+
     [actionTypes.GET_CORRESPONDENCE_ERROR]: (state) =>
         state.withMutations(map => {
-            map.set('correspondence', [])
+            map.set('correspondence', new immutable.Record({})())
                 .set('lastContact', 'Unknown');
         }),
 }, initialState);

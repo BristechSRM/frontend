@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import immutable from 'immutable';
 import SessionFilterCheckbox from './SessionFilterCheckbox.jsx';
 
 class SessionFilter extends Component {
@@ -40,7 +39,7 @@ class SessionFilter extends Component {
 }
 
 SessionFilter.propTypes = {
-    options: PropTypes.instanceOf(immutable.Map),
+    options: PropTypes.object,
     onChange: PropTypes.func,
 };
 

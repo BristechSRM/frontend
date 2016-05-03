@@ -48,7 +48,7 @@ Session.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
-    lastContact: PropTypes.string,
+    lastContact: PropTypes.object,
     correspondence: PropTypes.array,
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
@@ -57,13 +57,13 @@ Session.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        isFetching: state.get('session').get('isFetching'),
-        correspondence: state.get('session').get('correspondence'),
-        session: state.get('session').get('session'),
-        speaker: state.get('session').get('speaker'),
-        admin: state.get('session').get('admin'),
-        lastContact: state.get('session').get('lastContact'),
-        error: state.get('session').get('error'),
+        isFetching: state.session.isFetching,
+        correspondence: state.session.correspondence,
+        session: state.session.session,
+        speaker: state.session.speaker,
+        admin: state.session.admin,
+        lastContact: state.session.lastContact,
+        error: state.session.error,
     };
 }
 

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import immutable from 'immutable';
 import NavLink from './NavLink.jsx';
 import styles from './appHeader.scss';
 
@@ -10,7 +9,7 @@ class AppHeader extends Component {
     }
 
     render() {
-        const navigation = immutable.List([
+        const navigation = [
             {
                 title: 'Dashboard',
                 route: '/dashboard',
@@ -19,7 +18,7 @@ class AppHeader extends Component {
                 title: 'Calendar',
                 route: '/calendar',
             },
-        ]);
+        ];
 
         return (
             <div className={styles.appHeader}>
@@ -37,7 +36,7 @@ class AppHeader extends Component {
 }
 
 AppHeader.propTypes = {
-    navigation: PropTypes.instanceOf(immutable.List),
+    navigation: PropTypes.array,
 };
 
 export default AppHeader;

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import EventList from '../components/Calendar/EventList.jsx';
-import immutable from 'immutable';
 import { connect } from 'react-redux';
 import { getAllEvents } from '../actions';
 import styles from './calendar.scss';
@@ -24,14 +23,17 @@ class Calendar extends Component {
     }
 
     render() {
+        const result = this.props.error
+             ? this.props.error.message
+             : <EventList
+               events={this.props.list}
+               onEventSelected={e => this.handleEventSelected(e)}
+             />;
+
         return (
             <div className={styles.calendar}>
                <div className={styles.eventList}>
-                  {this.props.isFetching ? <p>Loading...</p> :
-                  <EventList
-                    events={this.props.list}
-                    onEventSelected={e => this.handleEventSelected(e)}
-                  />}
+                  {this.props.isFetching ? <p>Loading...</p> : result}
                </div>
                {this.props.children}
             </div>
@@ -42,7 +44,7 @@ class Calendar extends Component {
 Calendar.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.object,
-    list: PropTypes.instanceOf(immutable.List),
+    list: PropTypes.array,
     children: PropTypes.object,
     dispatch: PropTypes.func,
 };
@@ -53,9 +55,9 @@ Calendar.contextTypes = {
 
 function mapStateToProps(state) {
     return {
-        isFetching: state.get('events').get('isFetching'),
-        error: state.get('events').get('error'),
-        list: state.get('events').get('events'),
+        isFetching: state.events.isFetching,
+        error: state.events.error,
+        list: state.events.events,
     };
 }
 

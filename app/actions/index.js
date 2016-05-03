@@ -10,7 +10,7 @@ export const getAllSessions = () =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SESSIONS_START)());
         return SessionsService.getAllSessions()
-            .then(sessions => dispatch(createAction(actionTypes.UPDATE_SESSIONS_COMPLETE)(immutable.fromJS(sessions))))
+            .then(sessions => dispatch(createAction(actionTypes.UPDATE_SESSIONS_COMPLETE)(immutable.List(sessions))))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSIONS_ERROR)(error)));
     };
 
@@ -22,7 +22,8 @@ export const getSession = (sessionId) =>
             .catch(error => dispatch(createAction(actionTypes.GET_SESSION_ERROR)(error)));
     };
 
-export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED);
+export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED,
+     settings => new immutable.Record(settings)());
 
 export const getSpeaker = (profileId) =>
     (dispatch) => {

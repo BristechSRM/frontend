@@ -4,10 +4,10 @@ import {
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = immutable.Map({
+const initialState = new immutable.Record({
     isFetching: false,
     sessions: immutable.List(),
-});
+})();
 
 const event = handleActions({
     [actionTypes.GET_EVENT_START]: (state) => state.set('isFetching', true),
