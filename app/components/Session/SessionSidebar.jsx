@@ -8,18 +8,21 @@ import styles from './sessionSidebar.scss';
 class SessionSidebar extends Component {
 
     getHandle(type) {
-        if (!this.props.speaker) {
-            return '';
-        }
-
-        const handle = this.props.speaker.handles
-            ? this.props.speaker.handles.find(h => h.type.toLowerCase() === type.toLowerCase())
+        const handle = this.props.speakerHandles
+            ? this.props.speakerHandles.find(h => h.type.toLowerCase() === type.toLowerCase())
             : null;
         return handle ? handle.identifier : '';
     }
 
-    getRating(profile) {
-        return profile ? profile.rating : 0;
+    getLastContactDate(lastContact) {
+        if (!lastContact) {
+            return 'Never';
+        }
+
+        const momentDate = moment(this.props.lastContact.date);
+        return momentDate.isValid()
+            ? momentDate.format('D MMMM YYYY [at] h:mma')
+            : this.props.lastContact.date;
     }
 
     joinName(forename, surname) {
@@ -30,21 +33,18 @@ class SessionSidebar extends Component {
 
     render() {
         const h1Style = {
-            color: SessionStatusService.getStatusColor(this.props.session.status),
+            color: SessionStatusService.getStatusColor(this.props.status),
         };
 
-        const momentDate = moment(this.props.lastContact);
-        const lastContactDate = momentDate.isValid()
-            ? momentDate.format('D MMMM YYYY [at] h:mma')
-            : this.props.lastContact;
+        const lastContactDate = this.getLastContactDate(this.props.lastContact);
 
         return (
             <div className={styles.sessionSidebar}>
                 <div className={styles.header}>
                     <h1 style={h1Style}>
-                        {this.joinName(this.props.session.speaker.forename, this.props.session.speaker.surname)}
+                        {this.joinName(this.props.speakerForename, this.props.speakerSurname)}
                     </h1>
-                    {this.props.session.title}
+                    {this.props.title}
                 </div>
 
                 <div className={styles.section}>
@@ -54,7 +54,7 @@ class SessionSidebar extends Component {
                             <tr>
                                 <td>Assigned Admin</td>
                                 <td>
-                                    {this.joinName(this.props.session.admin.forename, this.props.session.admin.surname)}
+                                    {this.joinName(this.props.adminForename, this.props.adminSurname)}
                                 </td>
                             </tr>
                             <tr>
@@ -63,7 +63,7 @@ class SessionSidebar extends Component {
                                   <StarRating
                                     name="session-rating"
                                     totalStars={5}
-                                    rating={this.getRating(this.props.speaker)}
+                                    rating={this.props.speakerRating}
                                     disabled
                                     size={16}
                                   />
@@ -75,7 +75,7 @@ class SessionSidebar extends Component {
                             </tr>
                             <tr>
                                 <td>Date Added</td>
-                                <td>{this.props.session.dateAdded}</td>
+                                <td>???</td>
                             </tr>
                             <tr>
                                 <td>Last Contact</td>
@@ -114,9 +114,14 @@ class SessionSidebar extends Component {
 }
 
 SessionSidebar.propTypes = {
-    session: PropTypes.object,
-    speaker: PropTypes.object,
-    admin: PropTypes.object,
+    title: PropTypes.string,
+    status: PropTypes.string,
+    speakerForename: PropTypes.string,
+    speakerSurname: PropTypes.string,
+    speakerRating: PropTypes.number,
+    speakerHandles: PropTypes.array,
+    adminForename: PropTypes.string,
+    adminSurname: PropTypes.string,
     lastContact: PropTypes.object,
 };
 
