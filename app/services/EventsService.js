@@ -1,6 +1,6 @@
 import api from './ApiService.js';
 
-const eventsUri = 'http://localhost:9004/events';
+const eventsUri = 'http://api.bris.tech:8082/events';
 
 class EventsService {
     getAllEvents() {
