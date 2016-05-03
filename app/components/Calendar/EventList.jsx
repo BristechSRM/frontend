@@ -36,7 +36,7 @@ class EventList extends Component {
     render() {
         return (
             <div styles={styles.base}>
-                { this.props.events.valueSeq().map(e => this.renderEvent(e)) }
+                { this.props.events.valueSeq().sort((a, b) => a.date > b.date).map(e => this.renderEvent(e)) }
             </div>
         );
     }
