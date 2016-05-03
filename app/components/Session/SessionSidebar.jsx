@@ -42,7 +42,7 @@ class SessionSidebar extends Component {
             <div className={styles.sessionSidebar}>
                 <div className={styles.header}>
                     <h1 style={h1Style}>
-                        {this.joinName(this.props.session.speakerForename, this.props.session.speakerSurname)}
+                        {this.joinName(this.props.session.speaker.forename, this.props.session.speaker.surname)}
                     </h1>
                     {this.props.session.title}
                 </div>
@@ -54,7 +54,7 @@ class SessionSidebar extends Component {
                             <tr>
                                 <td>Assigned Admin</td>
                                 <td>
-                                    {this.joinName(this.props.session.adminForename, this.props.session.adminSurname)}
+                                    {this.joinName(this.props.session.admin.forename, this.props.session.admin.surname)}
                                 </td>
                             </tr>
                             <tr>
