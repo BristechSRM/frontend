@@ -21,7 +21,7 @@ $sidebar: 205px;
 
 .sessionCard {
     margin: $margin;
-    height: 260px;
+    height: 280px;
     flex: 1 0 $minwidth;
 
     @include setMaxWidthForNColumns(2);
