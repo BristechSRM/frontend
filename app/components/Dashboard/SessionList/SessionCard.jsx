@@ -56,7 +56,7 @@ class SessionCard extends Component {
                         <StarRating
                           name="session-rating"
                           totalStars={5}
-                          rating={this.props.rating}
+                          rating={this.props.speakerRating}
                           disabled
                           size={14}
                         />
@@ -77,15 +77,15 @@ class SessionCard extends Component {
 }
 
 SessionCard.propTypes = {
-    lastContact: PropTypes.object,
+    title: PropTypes.string,
+    status: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
-    title: PropTypes.string,
-    rating: PropTypes.number,
+    speakerRating: PropTypes.number,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,
-    status: PropTypes.string,
+    lastContact: PropTypes.object,
 };
 
 export default SessionCard;

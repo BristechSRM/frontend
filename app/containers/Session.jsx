@@ -29,9 +29,14 @@ class Session extends Component {
             <div className={styles.session}>
                 <div className={styles.sidebar}>
                     <SessionSidebar
-                      session={this.props.session}
-                      speaker={this.props.speaker}
-                      admin={this.props.admin}
+                      title={this.props.session.title}
+                      status={this.props.session.status}
+                      speakerForename={this.props.speaker ? this.props.speaker.forename : null}
+                      speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
+                      speakerRating={this.props.speaker ? this.props.speaker.rating : null}
+                      speakerHandles={[]}
+                      adminForename={this.props.admin ? this.props.admin.forename : null}
+                      adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
                     />
                 </div>
@@ -49,7 +54,7 @@ Session.propTypes = {
     speaker: PropTypes.object,
     admin: PropTypes.object,
     lastContact: PropTypes.object,
-    correspondence: PropTypes.array,
+    correspondence: PropTypes.object,
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
@@ -60,9 +65,9 @@ function mapStateToProps(state) {
         isFetching: state.session.isFetching,
         correspondence: state.session.correspondence,
         session: state.session.session,
-        speaker: state.session.speaker,
-        admin: state.session.admin,
-        lastContact: state.session.lastContact,
+        speaker: state.session.session.speaker,
+        admin: state.session.session.admin,
+        lastContact: state.session.session.lastContact,
         error: state.session.error,
     };
 }
