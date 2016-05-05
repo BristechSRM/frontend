@@ -1,7 +1,7 @@
 import api from './ApiService.js';
 import _ from 'lodash';
 
-const sessionsUri = 'http://api.bris.tech:8082/sessions';
+const sessionsUri = 'http://api.bris.tech:8080/sessions';
 
 const sortProperties = {
     name: {

@@ -3,7 +3,7 @@
 class AuthService {
     constructor() {
         const settings = {
-            authority: 'http://api.bris.tech:8083',
+            authority: 'http://auth.bris.tech:8080',
             client_id: 'bristechsrm',
             redirect_uri: 'http://srm.bris.tech/signed-in',
             post_logout_redirect_uri: 'http://srm.bris.tech',
