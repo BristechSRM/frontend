@@ -19,6 +19,7 @@ const initialState = new immutable.Record({
         sortProperty: 'last-contact',
         isSortOrderAscending: false,
     })(),
+    error: null,
 })();
 
 const sessions = handleActions({
