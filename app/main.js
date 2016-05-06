@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
+import { registerServices } from './services/Registration';
 import { Router, Route, Redirect, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -15,8 +16,9 @@ import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
 
 const store = configureStore();
-
 const history = syncHistoryWithStore(browserHistory, store);
+
+registerServices('production');
 
 render(
     <Provider store={store}>
