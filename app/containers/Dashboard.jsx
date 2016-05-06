@@ -18,10 +18,13 @@ class Dashboard extends Component {
         this.props.dispatch(changeViewSettings(viewSettings));
     }
 
+    handleSessionSelected(session) {
+    }
+
     render() {
         const output = this.props.error
             ? <p>There was an error retrieving sessions - '{this.props.error.message}'</p>
-            : <SessionList sessions={this.props.sessions} />;
+          : <SessionList sessions={this.props.sessions} onSessionSelected={s => this.handleSessionSelected(s)} />;
 
         const list = this.props.isFetching ? 'Loading...' : output;
 

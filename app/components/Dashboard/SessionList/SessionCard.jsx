@@ -1,9 +1,85 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'radium';
+import * as Colors from 'material-ui/lib/styles/colors';
 import FontIcon from 'material-ui/lib/font-icon';
 import SessionStatusService from '../../../services/SessionStatusService';
 import moment from 'moment';
 
-import styles from './sessionCard.scss';
+const styles = {
+    base: {
+        card: {
+            display: 'flex',
+            flexDirection: 'column',
+            ':hover': {
+                cursor: 'pointer',
+            },
+        },
+        speaker: {
+            flex: '0 1 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            alignItems: 'center',
+            padding: '1rem',
+            name: {
+                flex: '0 1 auto',
+                color: '#fff',
+                fontSize: '1.6rem',
+                textAlign: 'center',
+            },
+            rating: {
+                flex: '0 1 auto',
+                color: '#fff',
+                fontSize: '1.2rem',
+            },
+        },
+        session: {
+            flex: '1 1 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '1.4rem',
+            backgroundColor: '#fff',
+            details: {
+                flex: '1 1 auto',
+                title: {
+                    fontSize: '1.1rem',
+                    fontWeight: '300',
+                    marginBottom: '0.7rem',
+                },
+                date: {
+                    fontSize: '0.8rem',
+                    fontWeight: '500',
+                },
+            },
+        },
+        footer: {
+            flex: '0 0 50px',
+            marginTop: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: '#fbfbfb',
+            admin: {
+                image: {
+                    flex: '0 0 50px',
+                    height: '50px',
+                },
+                details: {
+                    flex: '1 1 auto',
+                    marginLeft: '0.6rem',
+                },
+                name: {
+                    margin: 0,
+                },
+                lastContact: {
+                    fontSize: '0.8rem',
+                    fontWeight: '300',
+                    color: '#555',
+                    margin: 0,
+                },
+            },
+        },
+    },
+};
 
 class SessionCard extends Component {
 
@@ -18,104 +94,103 @@ class SessionCard extends Component {
     }
 
     render() {
-        const footerStyle = {
-            backgroundColor: SessionStatusService.getStatusColor(this.props.status),
-        };
-        const lastContactDate = this.props.lastContact ? this.props.lastContact.date : 'Never';
+        const sessionTitle = this.props.title
+           ? this.props.title
+           : '(title to be confirmed)';
 
-        const date = this.isValidDate(lastContactDate)
-            ? moment(lastContactDate).format('DD MMMM YYYY')
-            : lastContactDate;
+        const sessionDate = this.props.date
+           ? moment(this.props.date).format('DD MMMM YYYY')
+           : null;
+
+        const statusColor = SessionStatusService.getStatusColor(this.props.status);
+
+        const sessionDateStyle = {
+            color: statusColor,
+        };
+
+        const speakerStyle = {
+            backgroundColor: statusColor,
+        };
 
         const speakerName = this.joinName(this.props.speakerForename, this.props.speakerSurname);
         const adminName = this.joinName(this.props.adminForename, this.props.adminSurname);
 
+        const adminImage = this.props.adminImageUri
+            ? <img src={this.props.adminImageUri} width="50px" height="50px" />
+            : null;
+
+        const lastContactDate = this.props.lastContactDate ? this.props.lastContactDate : 'Never';
+        const lastContact = this.isValidDate(lastContactDate)
+            ? moment(lastContactDate).fromNow()
+            : lastContactDate;
+
+        const lastContactIcon = this.props.lastContactDirection === 'in'
+            ? 'arrow_downward'
+            : 'arrow_upward';
+
+        const directionIcon = this.props.lastContactDate
+            ? <FontIcon className="material-icons" color={Colors.grey400}>{lastContactIcon}</FontIcon>
+            : null;
+
         return (
-            <div className={styles.sessionCard}>
-                <div className={styles.speakerImage}>
-                    <img src="https://placebear.com/g/50/50" />
-                </div>
-                <div className={styles.speakerDetails} style={footerStyle}>
-                    <div className={styles.speakerName}>
+            <div
+              style={[styles.base.card, { height: this.props.height, width: this.props.width }]}
+              onClick={() => this.props.onSelect({ id: this.props.id })}
+            >
+                <div style={[styles.base.speaker, speakerStyle]}>
+                    <div style={styles.base.speaker.name}>
                         {speakerName}
                     </div>
-                    <div className={styles.speakerRating}>
+                    <div style={styles.base.speaker.rating}>
                         {'★'.repeat(this.props.speakerRating)}
                         {'☆'.repeat(5 - this.props.speakerRating)}
                     </div>
                 </div>
-                <div className={styles.sessionDetails}>
-                    <div className={styles.sessionTitle}>
-                        <div className={styles.eventDate}>
-                             <FontIcon className={`material-icons ${styles.clock}`}>schedule</FontIcon>
-                             3rd February 2016
+                <div style={styles.base.session}>
+                    <div style={styles.base.session.details}>
+                        <div style={styles.base.session.details.title}>
+                            {sessionTitle}
                         </div>
-                        {this.props.title}
+                        <div style={[styles.base.session.details.date, sessionDateStyle]}>
+                            {sessionDate}
+                        </div>
                     </div>
-                    <div className={styles.footer}>
-                        <div className={styles.admin}>
-                            <div className={styles.adminImage}>
-                                <img src={this.props.adminImageUri} />
-                            </div>
+                    <div style={styles.base.footer}>
+                        <div style={styles.base.footer.admin.image}>
+                            {adminImage}
+                        </div>
+                        <div style={styles.base.footer.admin.details}>
                             <div>
-                                <span className={styles.lighter}>Assigned to</span><br />
-                                {adminName}
+                              <p style={styles.base.footer.admin.name}>{adminName}</p>
+                              <p style={styles.base.footer.admin.lastContact}>Last contact - {lastContact}</p>
                             </div>
                         </div>
-                        <div className={styles.lastContact}>
-                            <span className={styles.lighter}>Last contacted</span><br />
-                            {date}
+                        <div style={styles.base.footer.lastContact}>
+                            {directionIcon}
                         </div>
                     </div>
                 </div>
             </div>
-            // <div className={styles.sessionCard}>
-            //     <div className={styles.body}>
-            //         <div className={styles.header}>
-            //             <div className={styles.adminImg}>
-            //                 <img src={this.props.adminImageUri} />
-            //             </div>
-            //             <div className={styles.adminName}>
-            //                 {adminName}
-            //             </div>
-            //             <div className={styles.notificationImg}>
-            //                 <img src="https://s3-eu-west-1.amazonaws.com/bristech-images/notification-icon-tm2.png" />
-            //             </div>
-            //         </div>
-            //         <div className={styles.rating}>
-            //             <StarRating
-            //               name="session-rating"
-            //               totalStars={5}
-            //               rating={this.props.speakerRating}
-            //               disabled
-            //               size={14}
-            //             />
-            //         </div>
-            //         <div className={styles.title}>
-            //             {this.props.title}
-            //         </div>
-            //     </div>
-            //     <div className={styles.footer} style={footerStyle}>
-            //         <div className={styles.speakerName}>
-            //             {speakerName}
-            //         </div>
-            //         {lastContact}
-            //     </div>
-            // </div>
         );
     }
 }
 
 SessionCard.propTypes = {
+    id: PropTypes.string,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    onSelect: PropTypes.func,
     title: PropTypes.string,
     status: PropTypes.string,
+    date: PropTypes.object,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     speakerRating: PropTypes.number,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,
-    lastContact: PropTypes.object,
+    lastContactDate: PropTypes.object,
+    lastContactDirection: PropTypes.string,
 };
 
-export default SessionCard;
+export default Radium(SessionCard);
