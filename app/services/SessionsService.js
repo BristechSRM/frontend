@@ -1,7 +1,8 @@
+import DiscoveryService from './DiscoveryService.js';
 import api from './ApiService.js';
 import _ from 'lodash';
 
-const sessionsUri = 'http://api.bris.tech:8080/sessions';
+const sessionsUri = DiscoveryService.getUri('api-gateway', '/sessions');
 
 const sortProperties = {
     name: {

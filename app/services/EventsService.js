@@ -1,6 +1,7 @@
+import DiscoveryService from './DiscoveryService.js';
 import api from './ApiService.js';
 
-const eventsUri = 'http://api.bris.tech:8080/events';
+const eventsUri = DiscoveryService.getUri('api-gateway', '/events');
 
 class EventsService {
     getAllEvents() {

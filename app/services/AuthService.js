@@ -1,12 +1,13 @@
 /* global OidcTokenManager */
+import DiscoveryService from './DiscoveryService.js';
 
 class AuthService {
     constructor() {
         const settings = {
-            authority: 'http://auth.bris.tech:8080',
+            authority: DiscoveryService.getUri('auth'),
             client_id: 'bristechsrm',
-            redirect_uri: 'http://srm.bris.tech/signed-in',
-            post_logout_redirect_uri: 'http://srm.bris.tech',
+            redirect_uri: DiscoveryService.getUri('bristech-srm', '/signed-in'),
+            post_logout_redirect_uri: DiscoveryService.getUri('bristech-srm'),
             response_type: 'id_token token',
             scope: 'openid profile api',
         };
