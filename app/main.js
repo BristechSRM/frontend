@@ -15,7 +15,6 @@ import injectTouchTapEvent from 'react-tap-event-plugin';
 injectTouchTapEvent();
 
 const store = configureStore();
-
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(
