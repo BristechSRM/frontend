@@ -1,11 +1,11 @@
 import DiscoveryService from './DiscoveryService.js';
 import api from './ApiService.js';
 
-const corespondanceUri = DiscoveryService.getUri('api-gateway', '/correspondence');
+const correspondenceUri = DiscoveryService.getUri('api-gateway', '/correspondence');
 
 class CorrespondenceService {
     getCorrespondence(senderId, receiverId) {
-        return api.get(`${corespondanceUri}/?senderId=${senderId}&receiverId=${receiverId}`);
+        return api.get(`${correspondenceUri}?senderId=${senderId}&receiverId=${receiverId}`);
     }
 }
 
