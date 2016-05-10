@@ -42,13 +42,16 @@ const session = handleActions({
     [actionTypes.GET_CORRESPONDENCE_START]: (state) => state.set('isFetching', true),
 
     [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>
-        state.withMutations(map => {
+        state.withMutations(map =>
             map.set('isFetching', false)
                .set('correspondence', immutable.List(action.payload))
-               .set('lastContact', action.payload.reduce(
-                    (prev, cur) => (cur.date > prev ? cur.date : prev), '') || null
-                );
-        }),
+               .set('lastContact',
+                   action.payload.reduce(
+                       (prev, cur) => (cur.date > prev ? cur.date : prev),
+                       ''
+                   ) || null
+                )
+        ),
 
     [actionTypes.GET_CORRESPONDENCE_ERROR]: (state, action) =>
         state.withMutations(map => {
