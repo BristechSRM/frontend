@@ -19,6 +19,7 @@ class Dashboard extends Component {
     }
 
     handleSessionSelected(session) {
+        this.context.router.push(`/sessions/${session.id}`);
     }
 
     render() {
@@ -54,6 +55,10 @@ Dashboard.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
+};
+
+Dashboard.contextTypes = {
+    router: PropTypes.object,
 };
 
 const getViewSettings = (state) => state.sessions.viewSettings;

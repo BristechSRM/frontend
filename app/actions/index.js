@@ -1,8 +1,8 @@
 import { createAction } from 'redux-actions';
 import SessionsService from '../services/SessionsService';
-import CommsService from '../services/CommsService';
 import ProfilesService from '../services/ProfilesService';
 import EventsService from '../services/EventsService';
+import CorrespondenceService from '../services/CorrespondenceService';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
@@ -41,11 +41,11 @@ export const getAdmin = (profileId) =>
             .catch(error => dispatch(createAction(actionTypes.GET_ADMIN_ERROR)(error)));
     };
 
-export const getCorrespondence = (threadId) =>
+export const getCorrespondence = (session) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_CORRESPONDENCE_START)());
-        return CommsService.getThread(threadId)
-            .then(thread => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(thread.items)))
+        return CorrespondenceService.getCorrespondence(session.admin.id, session.speaker.id)
+            .then(correspondence => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(correspondence)))
             .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
     };
 

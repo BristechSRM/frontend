@@ -19,10 +19,10 @@ class SessionSidebar extends Component {
             return 'Never';
         }
 
-        const momentDate = moment(this.props.lastContact.date);
+        const momentDate = moment(this.props.lastContact);
         return momentDate.isValid()
             ? momentDate.format('D MMMM YYYY [at] h:mma')
-            : this.props.lastContact.date;
+            : this.props.lastContact;
     }
 
     joinName(forename, surname) {
