@@ -8,7 +8,7 @@ module.exports = function karmaConfig(config) {
         files: [
             '**/*.spec.js',
         ],
-        frameworks: ['mocha', 'chai'],
+        frameworks: ['mocha', 'chai', 'sinon'],
         reporters: ['mocha'],
         preprocessors: {
             '**/*.spec.js': ['webpack'],
