@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+import AuthService from './AuthService';
+
 const handleErrors = (response) =>
     new Promise((resolve, reject) => {
         if (!response) {
@@ -21,8 +23,11 @@ const handleErrors = (response) =>
 
 class Api {
     get(uri) {
+        const headers = new Headers();
+        headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
+
         return new Promise((resolve, reject) => {
-            fetch(uri)
+            fetch(uri, { headers })
                 .then(handleErrors)
                 .then(response => response.json())
                 .then(response => resolve(response))
