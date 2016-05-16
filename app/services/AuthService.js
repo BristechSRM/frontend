@@ -34,6 +34,10 @@ class AuthService {
     processTokenAsync() {
         return this.tokenManager.processTokenCallbackAsync();
     }
+
+    getAccessToken() {
+        return this.tokenManager.access_token;
+    }
 }
 
 export default new AuthService();

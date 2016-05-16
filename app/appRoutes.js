@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
+import { UserAuthWrapper } from 'redux-auth-wrapper';
 
 // Route components
 import App from './containers/App.jsx';
@@ -7,19 +8,18 @@ import Dashboard from './containers/Dashboard.jsx';
 import Session from './containers/Session.jsx';
 import Calendar from './containers/Calendar.jsx';
 import EventSessions from './containers/EventSessions.jsx';
+import AuthService from './services/AuthService.js';
 
-// TODO: Required for authentication
-// import { UserAuthWrapper } from 'redux-auth-wrapper';
-// import AuthService from './services/AuthService.js';
-// const userIsAuthenticated = UserAuthWrapper({
-//     authSelector: () => (AuthService.isAuthenticated() ? { isAuthenticated: true } : null),
-//     wrapperDisplayName: 'UserIsAuthenticated',
-//     allowRedirectBack: false,
-//     failureRedirectPath: '/sign-in',
-// });
+const UserIsAuthenticated = UserAuthWrapper({
+    authSelector: () => ({ isAuthenticated: AuthService.isAuthenticated() }),
+    wrapperDisplayName: 'UserIsAuthenticated',
+    allowRedirectBack: false,
+    failureRedirectPath: '/sign-in',
+    predicate: state => state.isAuthenticated,
+});
 
 const appRoutes = (
-  <Route component={App}>
+  <Route component={UserIsAuthenticated(App)}>
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/sessions/:sessionId" component={Session} />
       <Route path="/calendar" component={Calendar}>
