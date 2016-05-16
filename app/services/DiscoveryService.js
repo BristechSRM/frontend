@@ -11,7 +11,7 @@ const services = {
     },
     ['auth']: {
         development: 'http://auth:8080',
-        production: 'http://auth.bris.tech',
+        production: 'http://auth.bris.tech:8080',
     },
 };
 
