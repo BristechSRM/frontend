@@ -14,6 +14,11 @@ const handleErrors = (response) =>
             return;
         }
 
+        if (response.status === 401 || response.status === 403) {
+            AuthService.reauthenticate();
+            return;
+        }
+
         response.json()
             .then(json => {
                 const error = json || { message: response.statusText };

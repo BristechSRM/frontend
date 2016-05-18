@@ -38,6 +38,11 @@ class AuthService {
     getAccessToken() {
         return this.tokenManager.access_token;
     }
+
+    reauthenticate() {
+        this.tokenManager.removeToken();
+        this.tokenManager.redirectForToken();
+    }
 }
 
 export default new AuthService();
