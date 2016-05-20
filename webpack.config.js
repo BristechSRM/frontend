@@ -1,38 +1,8 @@
 const webpack = require('webpack');
+const copyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 console.log(`NODE_ENV = ${process.env.NODE_ENV}`);
-
-function getProductionSettings() {
-    return {
-        devtool: 'cheap-module-source-map',
-        plugins: [
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production'),
-                },
-            }),
-            new webpack.optimize.DedupePlugin(),
-            new webpack.optimize.OccurrenceOrderPlugin(),
-            new webpack.optimize.UglifyJsPlugin(),
-        ],
-    };
-}
-
-function getDevelopmentSettings() {
-    const styleLintPlugin = require('stylelint-webpack-plugin');
-
-    return {
-        devtool: 'source-map',
-        plugins: [
-            new webpack.HotModuleReplacementPlugin(),
-            new styleLintPlugin({
-                configFile: '.stylelintrc',
-                failOnError: false,
-            }),
-        ],
-    };
-}
 
 const settings =
     process.env.NODE_ENV === 'production' ? getProductionSettings() : getDevelopmentSettings();
@@ -85,3 +55,44 @@ const webpackConfig = {
 };
 
 module.exports = webpackConfig;
+
+function getProductionSettings() {
+    return {
+        devtool: 'cheap-module-source-map',
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: JSON.stringify('production'),
+                },
+            }),
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurrenceOrderPlugin(),
+            new webpack.optimize.UglifyJsPlugin(),
+            new copyPlugin([{
+                from: 'app/config/prod.config.json',
+                to: 'js/config.json',
+                force: true,
+            }]),
+        ],
+    };
+}
+
+function getDevelopmentSettings() {
+    const styleLintPlugin = require('stylelint-webpack-plugin');
+
+    return {
+        devtool: 'source-map',
+        plugins: [
+            new webpack.HotModuleReplacementPlugin(),
+            new styleLintPlugin({
+                configFile: '.stylelintrc',
+                failOnError: false,
+            }),
+            new copyPlugin([{
+                from: 'app/config/dev.config.json',
+                to: 'js/config.json',
+                force: true,
+            }]),
+        ],
+    };
+}
