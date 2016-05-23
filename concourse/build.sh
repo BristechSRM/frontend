@@ -5,8 +5,7 @@ set -e
 cd code
 npm install
 
-export NODE_ENV=production
-npm run build
+npm run build:prod
 
 cd ..
 cp -R code/public packed/

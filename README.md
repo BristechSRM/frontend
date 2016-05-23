@@ -5,11 +5,11 @@ git clone https://github.com/BristechSRM/frontend.git
 cd frontend
 ```
 
-Add app/dev.config.json
+Add app/config/config.dev.json
 
 ```
 npm install
-npm start
+npm run start:dev
 ```
 
 Navigate to http://localhost:8080 to view the frontend.
