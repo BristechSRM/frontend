@@ -8,8 +8,8 @@ class AuthService {
             client_id: 'bristechsrm',
             redirect_uri: DiscoveryService.getUri('bristech-srm', '/signed-in'),
             post_logout_redirect_uri: DiscoveryService.getUri('bristech-srm'),
-            response_type: 'id_token token',
-            scope: 'openid profile api',
+            response_type: 'token',
+            scope: 'api',
         };
 
         this.tokenManager = new OidcTokenManager(settings);
