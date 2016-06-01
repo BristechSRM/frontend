@@ -1,5 +1,7 @@
 /* global sinon */
 
+import '../utils/mockDependencies';
+
 import Q from 'q';
 import immutable from 'immutable';
 
