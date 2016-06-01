@@ -4,7 +4,7 @@ const webpackConfig = require('./webpack.config.dev');
 module.exports = function karmaConfig(config) {
     config.set({
         basePath: path.join(__dirname, 'app'),
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
         files: [
             '**/*.spec.js',
         ],
