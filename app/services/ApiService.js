@@ -39,6 +39,22 @@ class Api {
                 .catch(error => reject(error));
         });
     }
+
+    put(uri, data) {
+        const headers = new Headers();
+        headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+        const requestData = { method: 'PUT', headers, body: JSON.stringify(data) };
+
+        return new Promise((resolve, reject) => {
+            fetch(uri, requestData)
+                .then(handleErrors)
+                .then(response => response.json())
+                .then(response => resolve(response))
+                .catch(error => reject(error));
+        });
+    }
 }
 
 export default new Api();
