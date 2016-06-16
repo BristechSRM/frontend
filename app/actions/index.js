@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import SessionsService from '../services/SessionsService';
-import ProfilesService from '../services/ProfilesService';
+import SpeakersService from '../services/SpeakersService';
+import AdminsService from '../services/AdminsService';
 import EventsService from '../services/EventsService';
 import CorrespondenceService from '../services/CorrespondenceService';
 import immutable from 'immutable';
@@ -25,19 +26,27 @@ export const getSession = (sessionId) =>
 export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED,
      settings => new immutable.Record(settings)());
 
-export const getSpeaker = (profileId) =>
+export const getSpeaker = (speakerId) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_SPEAKER_START)());
-        return ProfilesService.getProfile(profileId)
-            .then(profile => dispatch(createAction(actionTypes.GET_SPEAKER_COMPLETE)(profile)))
+        return SpeakersService.getSpeaker(speakerId)
+            .then(speaker => dispatch(createAction(actionTypes.GET_SPEAKER_COMPLETE)(speaker)))
             .catch(error => dispatch(createAction(actionTypes.GET_SPEAKER_ERROR)(error)));
     };
 
-export const getAdmin = (profileId) =>
+export const updateSpeakerRating = (speakerId, newRating) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.PUT_SPEAKER_START)());
+        return SpeakersService.updateRating(speakerId, newRating)
+            .then(speaker => dispatch(createAction(actionTypes.PUT_SPEAKER_COMPLETE)(speaker)))
+            .catch(error => dispatch(createAction(actionTypes.PUT_SPEAKER_ERROR)(error)));
+    };
+
+export const getAdmin = (adminId) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.GET_ADMIN_START)());
-        return ProfilesService.getProfile(profileId)
-            .then(profile => dispatch(createAction(actionTypes.GET_ADMIN_COMPLETE)(profile)))
+        return AdminsService.getAdmin(adminId)
+            .then(admin => dispatch(createAction(actionTypes.GET_ADMIN_COMPLETE)(admin)))
             .catch(error => dispatch(createAction(actionTypes.GET_ADMIN_ERROR)(error)));
     };
 
