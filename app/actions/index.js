@@ -36,10 +36,10 @@ export const getSpeaker = (speakerId) =>
 
 export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
-        dispatch(createAction(actionTypes.PUT_SPEAKER_START)());
+        dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
         return SpeakersService.updateRating(speakerId, newRating)
-            .then(speaker => dispatch(createAction(actionTypes.PUT_SPEAKER_COMPLETE)(speaker)))
-            .catch(error => dispatch(createAction(actionTypes.PUT_SPEAKER_ERROR)(error)));
+            .then(speaker => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_COMPLETE)(speaker)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_ERROR)(error)));
     };
 
 export const getAdmin = (adminId) =>
