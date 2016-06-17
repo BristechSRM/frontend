@@ -16,8 +16,7 @@ class SpeakersService {
     updateRating(speakerId, newRating) {
         return this.getSpeaker(speakerId)
             .then(speaker => {
-                const s = speaker;
-                s.rating = newRating;
+                const s = Object.assign({}, speaker, { rating: newRating });
                 return this.putSpeaker(speakerId, s);
             });
     }
