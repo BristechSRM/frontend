@@ -18,7 +18,7 @@ class SpeakersService {
             .then(speaker => {
                 const s = speaker;
                 s.rating = newRating;
-                return this.putSpeaker(speakerId, speaker);
+                return this.putSpeaker(speakerId, s);
             });
     }
 }
