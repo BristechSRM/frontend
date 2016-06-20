@@ -27,17 +27,32 @@ const handleErrors = (response) =>
     });
 
 class Api {
-    get(uri) {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
-
+    performRequest(uri, requestData) {
         return new Promise((resolve, reject) => {
-            fetch(uri, { headers })
+            fetch(uri, requestData)
                 .then(handleErrors)
                 .then(response => response.json())
                 .then(response => resolve(response))
                 .catch(error => reject(error));
         });
+    }
+
+    get(uri) {
+        const headers = new Headers();
+        headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
+        const requestData = { headers };
+
+        return this.performRequest(uri, requestData);
+    }
+
+    put(uri, data) {
+        const headers = new Headers();
+        headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+        const requestData = { method: 'PUT', headers, body: JSON.stringify(data) };
+
+        return this.performRequest(uri, requestData);
     }
 }
 

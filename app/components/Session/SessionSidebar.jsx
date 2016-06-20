@@ -64,8 +64,12 @@ class SessionSidebar extends Component {
                                     name="session-rating"
                                     totalStars={5}
                                     rating={this.props.speakerRating}
-                                    disabled
+                                    disabled={false}
+                                    editing
                                     size={16}
+                                    onRatingClick={(e, data) =>
+                                        this.props.onRatingClick(this.props.speakerId, data.rating)
+                                    }
                                   />
                                 </td>
                             </tr>
@@ -116,6 +120,7 @@ class SessionSidebar extends Component {
 SessionSidebar.propTypes = {
     title: PropTypes.string,
     status: PropTypes.string,
+    speakerId: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     speakerRating: PropTypes.number,
@@ -123,6 +128,7 @@ SessionSidebar.propTypes = {
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     lastContact: PropTypes.object,
+    onRatingClick: PropTypes.func,
 };
 
 export default SessionSidebar;

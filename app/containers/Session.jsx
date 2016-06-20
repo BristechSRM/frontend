@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence } from '../actions';
+import { getSession, getCorrespondence, updateSpeakerRating } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -18,6 +18,10 @@ class Session extends Component {
         }
     }
 
+    onRatingClick(speakerId, rating) {
+        this.props.dispatch(updateSpeakerRating(speakerId, rating));
+    }
+
     render() {
         if (this.props.isFetching) {
             return (
@@ -31,6 +35,7 @@ class Session extends Component {
                     <SessionSidebar
                       title={this.props.session.title}
                       status={this.props.session.status}
+                      speakerId={this.props.speaker ? this.props.speaker.id : null}
                       speakerForename={this.props.speaker ? this.props.speaker.forename : null}
                       speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
                       speakerRating={this.props.speaker ? this.props.speaker.rating : null}
@@ -38,6 +43,7 @@ class Session extends Component {
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
+                      onRatingClick={(speakerId, newRating) => this.onRatingClick(speakerId, newRating)}
                     />
                 </div>
                 <div className={styles.correspondence}>
