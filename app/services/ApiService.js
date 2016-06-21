@@ -37,31 +37,33 @@ class Api {
         });
     }
 
-    getAuthedHeaders() {
+    getAuthorizationHeaders() {
         const headers = new Headers();
         headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
         return headers;
     }
 
-    getAuthedJsonHeaders() {
-        const headers = this.getAuthedHeaders();
+    getAuthorizationAndJsonHeaders() {
+        const headers = this.getAuthorizationHeaders();
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
         return headers;
     }
 
     get(uri) {
-        const requestData = { headers: this.getAuthedHeaders() };
+        const requestData = { headers: this.getAuthorizationHeaders() };
         return this.performRequest(uri, requestData);
     }
 
     put(uri, data) {
-        const requestData = { method: 'PUT', headers: this.getAuthedJsonHeaders(), body: JSON.stringify(data) };
+        const headers = this.getAuthorizationAndJsonHeaders();
+        const requestData = { method: 'PUT', headers, body: JSON.stringify(data) };
         return this.performRequest(uri, requestData);
     }
 
     patch(uri, operations) {
-        const requestData = { method: 'PATCH', headers: this.getAuthedJsonHeaders(), body: JSON.stringify(operations) };
+        const headers = this.getAuthorizationAndJsonHeaders();
+        const requestData = { method: 'PATCH', headers, body: JSON.stringify(operations) };
         return this.performRequest(uri, requestData);
     }
 }
