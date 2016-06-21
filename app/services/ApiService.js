@@ -37,21 +37,31 @@ class Api {
         });
     }
 
-    get(uri) {
+    getAuthedHeaders() {
         const headers = new Headers();
         headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
-        const requestData = { headers };
+        return headers;
+    }
 
+    getAuthedJsonHeaders() {
+        const headers = this.getAuthedHeaders();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+        return headers;
+    }
+
+    get(uri) {
+        const requestData = { headers: this.getAuthedHeaders() };
         return this.performRequest(uri, requestData);
     }
 
     put(uri, data) {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${AuthService.getAccessToken()}`);
-        headers.append('Accept', 'application/json');
-        headers.append('Content-Type', 'application/json');
-        const requestData = { method: 'PUT', headers, body: JSON.stringify(data) };
+        const requestData = { method: 'PUT', headers: this.getAuthedJsonHeaders(), body: JSON.stringify(data) };
+        return this.performRequest(uri, requestData);
+    }
 
+    patch(uri, operations) {
+        const requestData = { method: 'PATCH', headers: this.getAuthedJsonHeaders(), body: JSON.stringify(operations) };
         return this.performRequest(uri, requestData);
     }
 }
