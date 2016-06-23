@@ -9,10 +9,6 @@ class SpeakersService {
         return api.get(`${speakersUri}/${speakerId}`);
     }
 
-    putSpeaker(speakerId, data) {
-        return api.put(`${speakersUri}/${speakerId}`, data);
-    }
-
     patchSpeaker(speakerId, operations) {
         return api.patch(`${speakersUri}/${speakerId}`, operations);
     }

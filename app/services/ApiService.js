@@ -55,12 +55,6 @@ class Api {
         return this.performRequest(uri, requestData);
     }
 
-    put(uri, data) {
-        const headers = this.getAuthorizationAndJsonHeaders();
-        const requestData = { method: 'PUT', headers, body: JSON.stringify(data) };
-        return this.performRequest(uri, requestData);
-    }
-
     patch(uri, operations) {
         const headers = this.getAuthorizationAndJsonHeaders();
         const requestData = { method: 'PATCH', headers, body: JSON.stringify(operations) };
