@@ -9,16 +9,13 @@ class SpeakersService {
         return api.get(`${speakersUri}/${speakerId}`);
     }
 
-    putSpeaker(speakerId, data) {
-        return api.put(`${speakersUri}/${speakerId}`, data);
+    patchSpeaker(speakerId, operations) {
+        return api.patch(`${speakersUri}/${speakerId}`, operations);
     }
 
     updateRating(speakerId, newRating) {
-        return this.getSpeaker(speakerId)
-            .then(speaker => {
-                const s = Object.assign({}, speaker, { rating: newRating });
-                return this.putSpeaker(speakerId, s);
-            });
+        const operations = [{ op: 'replace', path: '/rating', value: newRating }];
+        return this.patchSpeaker(speakerId, operations);
     }
 }
 
