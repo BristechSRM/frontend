@@ -7,6 +7,11 @@ import styles from './session.scss';
 
 class Session extends Component {
 
+    constructor(props) {
+        super(props);
+        this.onRatingClick = this.onRatingClick.bind(this);
+    }
+
     componentDidMount() {
         const sessionId = this.props.params.sessionId;
         this.props.dispatch(getSession(sessionId));
@@ -18,8 +23,8 @@ class Session extends Component {
         }
     }
 
-    onRatingClick(speakerId, rating) {
-        this.props.dispatch(updateSpeakerRating(speakerId, rating));
+    onRatingClick(rating) {
+        this.props.dispatch(updateSpeakerRating(this.props.speaker.id, rating));
     }
 
     render() {
@@ -43,7 +48,7 @@ class Session extends Component {
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
-                      onRatingClick={(speakerId, newRating) => this.onRatingClick(speakerId, newRating)}
+                      onRatingClick={this.onRatingClick}
                     />
                 </div>
                 <div className={styles.correspondence}>
