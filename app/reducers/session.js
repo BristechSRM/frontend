@@ -5,8 +5,6 @@ import * as actionTypes from '../constants/actionTypes';
 const initialState = new immutable.Record({
     isFetching: false,
     session: new immutable.Record({})(),
-    admin: new immutable.Record({})(),
-    speaker: new immutable.Record({})(),
     correspondence: immutable.List(),
     lastContact: null,
     error: null,
@@ -27,17 +25,6 @@ const session = handleActions({
                 .set('session', action.payload);
         }),
 
-    [actionTypes.GET_SPEAKER_START]: (state) => state.set('speaker', new immutable.Record({})()),
-
-    [actionTypes.GET_SPEAKER_COMPLETE]: (state, action) => state.set('speaker', new immutable.Record(action.payload)()),
-
-    [actionTypes.GET_SPEAKER_ERROR]: (state) => state.set('speaker', new immutable.Record({})()),
-
-    [actionTypes.GET_ADMIN_START]: (state) => state.set('admin', new immutable.Record({})()),
-
-    [actionTypes.GET_ADMIN_COMPLETE]: (state, action) => state.set('admin', new immutable.Record(action.payload)()),
-
-    [actionTypes.GET_ADMIN_ERROR]: (state) => state.set('admin', new immutable.Record({})()),
 
     [actionTypes.GET_CORRESPONDENCE_START]: (state) => state.set('isFetching', true),
 
