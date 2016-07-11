@@ -22,9 +22,13 @@ const session = handleActions({
     [actionTypes.GET_SESSION_COMPLETE]: (state, action) =>
         state.withMutations(map => {
             map.set('isFetching', false)
-                .set('session', action.payload);
+                .set('session', new immutable.Record(action.payload)());
         }),
 
+    [actionTypes.UPDATE_SPEAKER_RATING_COMPLETE]: (state, action) => {
+        const newSpeaker = Object.assign({}, state.session.speaker, { rating: action.payload });
+        return state.setIn(['session', 'speaker'], newSpeaker);
+    },
 
     [actionTypes.GET_CORRESPONDENCE_START]: (state) => state.set('isFetching', true),
 
