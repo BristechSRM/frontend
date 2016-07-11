@@ -24,6 +24,7 @@ class EditSaveControl extends Component {
                                     <button
                                       className="btn btn-default"
                                       type="button"
+                                      onClick={() => this.props.onSaveClick()}
                                     >
                                       Save
                                     </button>
@@ -52,6 +53,7 @@ class EditSaveControl extends Component {
 EditSaveControl.propTypes = {
     children: PropTypes.element.isRequired,
     changeEditMode: PropTypes.func,
+    onSaveClick: PropTypes.func,
     inEditMode: PropTypes.bool,
 };
 

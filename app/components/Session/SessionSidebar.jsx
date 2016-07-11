@@ -80,6 +80,7 @@ class SessionSidebar extends Component {
                                 <td>
                                     <EditSaveControl
                                       changeEditMode={this.props.changeSpeakerRatingEditMode}
+                                      onSaveClick={this.props.saveSpeakerRating}
                                       inEditMode={this.props.editStash.speakerRating.inEditMode}
                                     >
                                         <RatingControl
@@ -150,6 +151,7 @@ SessionSidebar.propTypes = {
     editStash: PropTypes.object,
     changeSpeakerRatingStash: PropTypes.func,
     changeSpeakerRatingEditMode: PropTypes.func,
+    saveSpeakerRating: PropTypes.func,
 };
 
 export default SessionSidebar;

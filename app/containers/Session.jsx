@@ -12,6 +12,7 @@ class Session extends Component {
         super(props);
         this.changeSpeakerRatingStash = this.changeSpeakerRatingStash.bind(this);
         this.changeSpeakerRatingEditMode = this.changeSpeakerRatingEditMode.bind(this);
+        this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
     }
 
     componentDidMount() {
@@ -29,11 +30,22 @@ class Session extends Component {
         if (this.props.editStash.speakerRating.inEditMode) {
             this.props.dispatch(changeSpeakerRatingStash(rating));
         }
-        // this.props.dispatch(updateSpeakerRating(this.props.speaker.id, rating));
     }
 
     changeSpeakerRatingEditMode(inEditMode) {
         this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
+    }
+
+    saveSpeakerRating() {
+        const newValue = this.props.editStash.speakerRating.value;
+        if (newValue !== null
+            && newValue >= 0
+            && newValue < 6) {
+            this.props.dispatch(
+                updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
+        } else {
+            this.changeSpeakerRatingEditMode(false);
+        }
     }
 
     render() {
@@ -62,6 +74,7 @@ class Session extends Component {
                       editStash={this.props.editStash}
                       changeSpeakerRatingStash={this.changeSpeakerRatingStash}
                       changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
+                      saveSpeakerRating={this.saveSpeakerRating}
                     />
                 </div>
                 <div className={styles.correspondence}>
