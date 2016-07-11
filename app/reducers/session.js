@@ -2,13 +2,13 @@ import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
-const initialEditState = new immutable.Record({
+const initialEditStash = new immutable.Record({
     speakerRating: new immutable.Record({ inEditMode: false, newValue: null })(),
 })();
 
 const initialState = new immutable.Record({
     isFetching: false,
-    editState: initialEditState,
+    editStash: initialEditStash,
     session: new immutable.Record({})(),
     correspondence: immutable.List(),
     lastContact: null,
@@ -56,7 +56,7 @@ const session = handleActions({
         }),
 
     [actionTypes.SPEAKER_RATING_EDITMODE_CHANGED]: (state, action) =>
-        state.setIn(['editState', 'speakerRating', 'inEditMode'], action.payload),
+        state.setIn(['editStash', 'speakerRating', 'inEditMode'], action.payload),
 }, initialState);
 
 export default session;

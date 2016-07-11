@@ -56,7 +56,7 @@ class Session extends Component {
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
                       onRatingClick={this.onRatingClick}
-                      editState={this.props.editState}
+                      editStash={this.props.editStash}
                       changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
                     />
                 </div>
@@ -76,7 +76,7 @@ Session.propTypes = {
     lastContact: PropTypes.object,
     correspondence: PropTypes.object,
     isFetching: PropTypes.bool,
-    editState: PropTypes.object,
+    editStash: PropTypes.object,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
 };
@@ -84,7 +84,7 @@ Session.propTypes = {
 function mapStateToProps(state) {
     return {
         isFetching: state.session.isFetching,
-        editState: state.session.editState,
+        editStash: state.session.editStash,
         correspondence: state.session.correspondence,
         session: state.session.session,
         speaker: state.session.session.speaker,
