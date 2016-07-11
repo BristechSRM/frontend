@@ -12,7 +12,7 @@ class EditSaveControl extends Component {
                                     <button
                                       className="btn btn-default"
                                       type="button"
-                                      onClick={() => this.props.changeSpeakerRatingEditMode(true)}
+                                      onClick={() => this.props.changeEditMode(true)}
                                     >
                                       Edit
                                     </button>
@@ -35,7 +35,7 @@ class EditSaveControl extends Component {
                                     <button
                                       className="btn btn-default"
                                       type="button"
-                                      onClick={() => this.props.changeSpeakerRatingEditMode(false)}
+                                      onClick={() => this.props.changeEditMode(false)}
                                     >
                                       Cancel
                                     </button>
@@ -51,7 +51,7 @@ class EditSaveControl extends Component {
 
 EditSaveControl.propTypes = {
     children: PropTypes.element.isRequired,
-    changeSpeakerRatingEditMode: PropTypes.func,
+    changeEditMode: PropTypes.func,
     inEditMode: PropTypes.bool,
 };
 
