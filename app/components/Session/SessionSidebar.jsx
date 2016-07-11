@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
+import EditSaveControl from './EditSaveControl.jsx';
 import RatingControl from './RatingControl.jsx';
 import moment from 'moment';
 
@@ -77,11 +78,13 @@ class SessionSidebar extends Component {
                             <tr>
                                 <td>Credibility</td>
                                 <td>
-                                    <RatingControl
-                                      rating={this.props.speakerRating}
-                                      onRatingClick={this.props.onRatingClick}
-                                      isEditable
-                                    />
+                                    <EditSaveControl>
+                                        <RatingControl
+                                          rating={this.props.speakerRating}
+                                          onRatingClick={this.props.onRatingClick}
+                                          inEditMode
+                                        />
+                                    </EditSaveControl>
                                 </td>
                             </tr>
                             <tr>
