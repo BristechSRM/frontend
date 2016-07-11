@@ -8,28 +8,37 @@ class EditSaveControl extends Component {
                     <tr>
                         <td>{this.props.children}</td>
                             <td>
-                                <button
-                                  className="btn btn-default"
-                                  type="button"
-                                >
-                                  Edit
-                                </button>
+                                { !this.props.inEditMode ?
+                                    <button
+                                      className="btn btn-default"
+                                      type="button"
+                                    >
+                                      Edit
+                                    </button>
+                                    : null
+                                }
                             </td>
                             <td>
-                                <button
-                                  className="btn btn-default"
-                                  type="button"
-                                >
-                                  Save
-                                </button>
+                                { this.props.inEditMode ?
+                                    <button
+                                      className="btn btn-default"
+                                      type="button"
+                                    >
+                                      Save
+                                    </button>
+                                    : null
+                                }
                             </td>
                             <td>
-                                <button
-                                  className="btn btn-default"
-                                  type="button"
-                                >
-                                  Cancel
-                                </button>
+                                { this.props.inEditMode ?
+                                    <button
+                                      className="btn btn-default"
+                                      type="button"
+                                    >
+                                      Cancel
+                                    </button>
+                                    : null
+                                }
                             </td>
                     </tr>
                 </tbody>
@@ -40,6 +49,7 @@ class EditSaveControl extends Component {
 
 EditSaveControl.propTypes = {
     children: PropTypes.element.isRequired,
+    inEditMode: PropTypes.bool,
 };
 
 export default EditSaveControl;

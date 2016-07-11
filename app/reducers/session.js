@@ -2,8 +2,13 @@ import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
+const initialEditState = new immutable.Record({
+    speakerRating: new immutable.Record({ inEditMode: true, newValue: null })(),
+})();
+
 const initialState = new immutable.Record({
     isFetching: false,
+    editState: initialEditState,
     session: new immutable.Record({})(),
     correspondence: immutable.List(),
     lastContact: null,
