@@ -48,6 +48,23 @@ class SessionSidebar extends Component {
                 </div>
 
                 <div className={styles.section}>
+                    <div className={styles.section}>
+                        <h1>Abstract</h1>
+                        <table>
+                            <tbody>
+                                <tr>{this.props.description}</tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className={styles.section}>
+                        <h1>Biography</h1>
+                        <table>
+                            <tbody>
+                                <tr>{this.props.speakerBio}</tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <h1>Status</h1>
                     <table>
                         <tbody>
@@ -113,11 +130,13 @@ class SessionSidebar extends Component {
 SessionSidebar.propTypes = {
     title: PropTypes.string,
     status: PropTypes.string,
+    description: PropTypes.string,
     speakerId: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     speakerRating: PropTypes.number,
     speakerHandles: PropTypes.array,
+    speakerBio: PropTypes.string,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     lastContact: PropTypes.object,

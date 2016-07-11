@@ -40,10 +40,12 @@ class Session extends Component {
                     <SessionSidebar
                       title={this.props.session.title}
                       status={this.props.session.status}
+                      description={this.props.session.description}
                       speakerId={this.props.speaker ? this.props.speaker.id : null}
                       speakerForename={this.props.speaker ? this.props.speaker.forename : null}
                       speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
                       speakerRating={this.props.speaker ? this.props.speaker.rating : null}
+                      speakerBio={this.props.speaker ? this.props.speaker.bio : null}
                       speakerHandles={[]}
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
