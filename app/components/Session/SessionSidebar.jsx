@@ -80,6 +80,7 @@ class SessionSidebar extends Component {
                                     <RatingControl
                                       rating={this.props.speakerRating}
                                       onRatingClick={this.props.onRatingClick}
+                                      isEditable
                                     />
                                 </td>
                             </tr>
