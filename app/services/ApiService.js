@@ -26,12 +26,20 @@ const handleErrors = (response) =>
             });
     });
 
+const getResponseBody = (response) => {
+    const bodyIsEmpty = response.status === 204;
+    if (bodyIsEmpty) {
+        return Promise.resolve();
+    }
+    return response.json();
+};
+
 class Api {
     performRequest(uri, requestData) {
         return new Promise((resolve, reject) => {
             fetch(uri, requestData)
                 .then(handleErrors)
-                .then(response => response.json())
+                .then(getResponseBody)
                 .then(response => resolve(response))
                 .catch(error => reject(error));
         });
@@ -55,9 +63,9 @@ class Api {
         return this.performRequest(uri, requestData);
     }
 
-    patch(uri, operations) {
+    patch(uri, op) {
         const headers = this.getAuthorizationAndJsonHeaders();
-        const requestData = { method: 'PATCH', headers, body: JSON.stringify(operations) };
+        const requestData = { method: 'PATCH', headers, body: JSON.stringify(op) };
         return this.performRequest(uri, requestData);
     }
 }
