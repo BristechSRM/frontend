@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
-import StarRating from 'react-star-rating';
+import RatingControl from './RatingControl.jsx';
 import moment from 'moment';
 
 import styles from './sessionSidebar.scss';
@@ -60,17 +60,10 @@ class SessionSidebar extends Component {
                             <tr>
                                 <td>Credibility</td>
                                 <td>
-                                  <StarRating
-                                    name="session-rating"
-                                    totalStars={5}
-                                    rating={this.props.speakerRating}
-                                    disabled={false}
-                                    editing
-                                    size={16}
-                                    onRatingClick={(e, data) =>
-                                        this.props.onRatingClick(this.props.speakerId, data.rating)
-                                    }
-                                  />
+                                    <RatingControl
+                                      rating={this.props.speakerRating}
+                                      onRatingClick={this.props.onRatingClick}
+                                    />
                                 </td>
                             </tr>
                             <tr>
