@@ -3,7 +3,7 @@ import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
 const initialEditState = new immutable.Record({
-    speakerRating: new immutable.Record({ inEditMode: true, newValue: null })(),
+    speakerRating: new immutable.Record({ inEditMode: false, newValue: null })(),
 })();
 
 const initialState = new immutable.Record({
@@ -54,6 +54,9 @@ const session = handleActions({
             map.set('isFetching', false)
                .set('error', action.payload);
         }),
+
+    [actionTypes.SPEAKER_RATING_EDITMODE_CHANGED]: (state, action) =>
+        state.setIn(['editState', 'speakerRating', 'inEditMode'], action.payload),
 }, initialState);
 
 export default session;

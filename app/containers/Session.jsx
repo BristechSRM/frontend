@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence, updateSpeakerRating } from '../actions';
+import { getSession, getCorrespondence, updateSpeakerRating, changeSpeakerRatingEditMode } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -10,6 +10,7 @@ class Session extends Component {
     constructor(props) {
         super(props);
         this.onRatingClick = this.onRatingClick.bind(this);
+        this.changeSpeakerRatingEditMode = this.changeSpeakerRatingEditMode.bind(this);
     }
 
     componentDidMount() {
@@ -25,6 +26,10 @@ class Session extends Component {
 
     onRatingClick(rating) {
         this.props.dispatch(updateSpeakerRating(this.props.speaker.id, rating));
+    }
+
+    changeSpeakerRatingEditMode(inEditMode) {
+        this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
     }
 
     render() {
@@ -52,6 +57,7 @@ class Session extends Component {
                       lastContact={this.props.lastContact}
                       onRatingClick={this.onRatingClick}
                       editState={this.props.editState}
+                      changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
                     />
                 </div>
                 <div className={styles.correspondence}>

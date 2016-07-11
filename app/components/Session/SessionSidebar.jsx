@@ -79,6 +79,7 @@ class SessionSidebar extends Component {
                                 <td>Credibility</td>
                                 <td>
                                     <EditSaveControl
+                                      changeSpeakerRatingEditMode={this.props.changeSpeakerRatingEditMode}
                                       inEditMode={this.props.editState.speakerRating.inEditMode}
                                     >
                                         <RatingControl
@@ -148,6 +149,7 @@ SessionSidebar.propTypes = {
     lastContact: PropTypes.object,
     onRatingClick: PropTypes.func,
     editState: PropTypes.object,
+    changeSpeakerRatingEditMode: PropTypes.func,
 };
 
 export default SessionSidebar;

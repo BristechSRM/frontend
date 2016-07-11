@@ -56,3 +56,6 @@ export const getEvent = (eventId) =>
             .then(event => dispatch(createAction(actionTypes.GET_EVENT_COMPLETE)(immutable.List(event.sessions))))
             .catch(error => dispatch(createAction(actionTypes.GET_EVENT_ERROR)(error)));
     };
+
+export const changeSpeakerRatingEditMode = createAction(actionTypes.SPEAKER_RATING_EDITMODE_CHANGED,
+    inEditMode => inEditMode);
