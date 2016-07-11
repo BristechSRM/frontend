@@ -29,7 +29,7 @@ export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
         return SpeakersService.updateRating(speakerId, newRating)
-            .then(speaker => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_COMPLETE)(speaker)))
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_COMPLETE)(newRating)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_ERROR)(error)));
     };
 
