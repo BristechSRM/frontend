@@ -84,8 +84,8 @@ class SessionSidebar extends Component {
                                     >
                                         <RatingControl
                                           rating={this.props.speakerRating}
-                                          onRatingClick={this.props.onRatingClick}
-                                          inEditMode={this.props.editStash.speakerRating.inEditMode}
+                                          onRatingClick={this.props.changeSpeakerRatingStash}
+                                          inEditMode
                                         />
                                     </EditSaveControl>
                                 </td>
@@ -147,8 +147,8 @@ SessionSidebar.propTypes = {
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     lastContact: PropTypes.object,
-    onRatingClick: PropTypes.func,
     editStash: PropTypes.object,
+    changeSpeakerRatingStash: PropTypes.func,
     changeSpeakerRatingEditMode: PropTypes.func,
 };
 
