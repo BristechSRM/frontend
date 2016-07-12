@@ -5,7 +5,7 @@ import SessionCorrespondence from '../components/Session/SessionCorrespondence.j
 import { getSession, getCorrespondence,
     updateSpeakerRating,
     changeSpeakerRatingEditMode, changeSpeakerBioEditMode,
-    changeSpeakerRatingStash } from '../actions';
+    changeSpeakerRatingStash, changeSpeakerBioStash } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -16,6 +16,7 @@ class Session extends Component {
         this.changeSpeakerRatingEditMode = this.changeSpeakerRatingEditMode.bind(this);
         this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
         this.changeSpeakerBioEditMode = this.changeSpeakerBioEditMode.bind(this);
+        this.changeSpeakerBioStash = this.changeSpeakerBioStash.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +41,12 @@ class Session extends Component {
     changeSpeakerRatingStash(rating) {
         if (this.props.editStash.speakerRating.inEditMode) {
             this.props.dispatch(changeSpeakerRatingStash(rating));
+        }
+    }
+
+    changeSpeakerBioStash(bio) {
+        if (this.props.editStash.speakerBio.inEditMode) {
+            this.props.dispatch(changeSpeakerBioStash(bio));
         }
     }
 
@@ -82,6 +89,7 @@ class Session extends Component {
                       changeSpeakerRatingStash={this.changeSpeakerRatingStash}
                       changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
                       saveSpeakerRating={this.saveSpeakerRating}
+                      changeSpeakerBioStash={this.changeSpeakerBioStash}
                       changeSpeakerBioEditMode={this.changeSpeakerBioEditMode}
                     />
                 </div>

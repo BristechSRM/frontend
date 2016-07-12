@@ -58,6 +58,9 @@ export const changeSpeakerBioEditMode = createAction(actionTypes.SPEAKER_BIO_EDI
 export const changeSpeakerRatingStash = createAction(actionTypes.SPEAKER_RATING_STASH_CHANGED,
     newValue => newValue);
 
+export const changeSpeakerBioStash = createAction(actionTypes.SPEAKER_BIO_STASH_CHANGED,
+    newValue => newValue);
+
 export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
