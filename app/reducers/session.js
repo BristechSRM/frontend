@@ -5,6 +5,7 @@ import * as actionTypes from '../constants/actionTypes';
 const initialEditStash = new immutable.Record({
     speakerRating: new immutable.Record({ inEditMode: false, value: null })(),
     speakerBio: new immutable.Record({ inEditMode: false, value: null })(),
+    sessionDescription: new immutable.Record({ inEditMode: false, value: null })(),
 })();
 
 const initialState = new immutable.Record({

@@ -53,7 +53,17 @@ class SessionSidebar extends Component {
                         <h1>Abstract</h1>
                         <table>
                             <tbody>
-                                <tr>{this.props.description}</tr>
+                                <tr>
+                                    <EditSaveControl
+                                      inEditMode={this.props.editStash.sessionDescription.inEditMode}
+                                    >
+                                        {
+                                            this.props.editStash.sessionDescription.inEditMode ?
+                                                <textarea>{this.props.description}</textarea>
+                                            :
+                                                <div>{this.props.description}</div>
+                                        }
+                                    </EditSaveControl></tr>
                             </tbody>
                         </table>
                     </div>
