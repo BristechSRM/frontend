@@ -51,10 +51,10 @@ class EditSaveControl extends Component {
 }
 
 EditSaveControl.propTypes = {
-    children: PropTypes.element.isRequired,
-    changeEditMode: PropTypes.func,
-    onSaveClick: PropTypes.func,
-    inEditMode: PropTypes.bool,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+    changeEditMode: PropTypes.func.isRequired,
+    onSaveClick: PropTypes.func.isRequired,
+    inEditMode: PropTypes.bool.isRequired,
 };
 
 export default EditSaveControl;

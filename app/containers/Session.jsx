@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence, updateSpeakerRating,
-    changeSpeakerRatingEditMode, changeSpeakerRatingStash } from '../actions';
+import { getSession, getCorrespondence,
+    updateSpeakerRating, updateSpeakerBio,
+    changeSpeakerRatingEditMode, changeSpeakerBioEditMode,
+    changeSpeakerRatingStash, changeSpeakerBioStash } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -13,6 +15,9 @@ class Session extends Component {
         this.changeSpeakerRatingStash = this.changeSpeakerRatingStash.bind(this);
         this.changeSpeakerRatingEditMode = this.changeSpeakerRatingEditMode.bind(this);
         this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
+        this.changeSpeakerBioEditMode = this.changeSpeakerBioEditMode.bind(this);
+        this.changeSpeakerBioStash = this.changeSpeakerBioStash.bind(this);
+        this.saveSpeakerBio = this.saveSpeakerBio.bind(this);
     }
 
     componentDidMount() {
@@ -26,14 +31,24 @@ class Session extends Component {
         }
     }
 
+    changeSpeakerRatingEditMode(inEditMode) {
+        this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
+    }
+
+    changeSpeakerBioEditMode(inEditMode) {
+        this.props.dispatch(changeSpeakerBioEditMode(inEditMode));
+    }
+
     changeSpeakerRatingStash(rating) {
         if (this.props.editStash.speakerRating.inEditMode) {
             this.props.dispatch(changeSpeakerRatingStash(rating));
         }
     }
 
-    changeSpeakerRatingEditMode(inEditMode) {
-        this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
+    changeSpeakerBioStash(bio) {
+        if (this.props.editStash.speakerBio.inEditMode) {
+            this.props.dispatch(changeSpeakerBioStash(bio));
+        }
     }
 
     saveSpeakerRating() {
@@ -46,6 +61,10 @@ class Session extends Component {
         } else {
             this.changeSpeakerRatingEditMode(false);
         }
+    }
+
+    saveSpeakerBio() {
+        this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
     }
 
     render() {
@@ -75,6 +94,9 @@ class Session extends Component {
                       changeSpeakerRatingStash={this.changeSpeakerRatingStash}
                       changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
                       saveSpeakerRating={this.saveSpeakerRating}
+                      changeSpeakerBioStash={this.changeSpeakerBioStash}
+                      changeSpeakerBioEditMode={this.changeSpeakerBioEditMode}
+                      saveSpeakerBio={this.saveSpeakerBio}
                     />
                 </div>
                 <div className={styles.correspondence}>

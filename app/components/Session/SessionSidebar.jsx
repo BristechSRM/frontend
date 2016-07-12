@@ -62,7 +62,27 @@ class SessionSidebar extends Component {
                         <h1>Biography</h1>
                         <table>
                             <tbody>
-                                <tr>{this.props.speakerBio}</tr>
+                                <tr>
+                                    <td>
+                                        <EditSaveControl
+                                          changeEditMode={this.props.changeSpeakerBioEditMode}
+                                          onSaveClick={this.props.saveSpeakerBio}
+                                          inEditMode={this.props.editStash.speakerBio.inEditMode}
+                                        >
+                                            {
+                                                this.props.editStash.speakerBio.inEditMode ?
+                                                    <textarea
+                                                      onChange={(event) =>
+                                                          this.props.changeSpeakerBioStash(event.target.value)}
+                                                    >
+                                                      {this.props.speakerBio}
+                                                    </textarea>
+                                                :
+                                                    <div>{this.props.speakerBio}</div>
+                                            }
+                                        </EditSaveControl>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -152,6 +172,9 @@ SessionSidebar.propTypes = {
     changeSpeakerRatingStash: PropTypes.func,
     changeSpeakerRatingEditMode: PropTypes.func,
     saveSpeakerRating: PropTypes.func,
+    changeSpeakerBioStash: PropTypes.func,
+    changeSpeakerBioEditMode: PropTypes.func,
+    saveSpeakerBio: PropTypes.func,
 };
 
 export default SessionSidebar;
