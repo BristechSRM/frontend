@@ -94,6 +94,9 @@ const session = handleActions({
 
     [actionTypes.SPEAKER_BIO_STASH_CHANGED]: (state, action) =>
         state.setIn(['editStash', 'speakerBio', 'value'], action.payload),
+
+    [actionTypes.SESSION_DESCRIPTION_STASH_CHANGED]: (state, action) =>
+        state.setIn(['editStash', 'sessionDescription', 'value'], action.payload),
 }, initialState);
 
 export default session;

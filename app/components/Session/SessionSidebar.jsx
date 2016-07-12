@@ -61,7 +61,12 @@ class SessionSidebar extends Component {
                                         >
                                             {
                                                 this.props.editStash.sessionDescription.inEditMode ?
-                                                    <textarea>{this.props.description}</textarea>
+                                                    <textarea
+                                                      onChange={(event) =>
+                                                          this.props.changeSessionDescriptionStash(event.target.value)}
+                                                    >
+                                                        {this.props.description}
+                                                    </textarea>
                                                 :
                                                     <div>{this.props.description}</div>
                                             }
@@ -189,6 +194,7 @@ SessionSidebar.propTypes = {
     changeSpeakerBioStash: PropTypes.func,
     changeSpeakerBioEditMode: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
+    changeSessionDescriptionStash: PropTypes.func,
     changeSessionDescriptionEditMode: PropTypes.func,
 };
 

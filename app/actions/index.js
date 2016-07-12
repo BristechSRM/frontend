@@ -64,6 +64,9 @@ export const changeSpeakerRatingStash = createAction(actionTypes.SPEAKER_RATING_
 export const changeSpeakerBioStash = createAction(actionTypes.SPEAKER_BIO_STASH_CHANGED,
     newValue => newValue);
 
+export const changeSessionDescriptionStash = createAction(actionTypes.SESSION_DESCRIPTION_STASH_CHANGED,
+    newValue => newValue);
+
 export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
