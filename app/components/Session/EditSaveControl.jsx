@@ -51,7 +51,7 @@ class EditSaveControl extends Component {
 }
 
 EditSaveControl.propTypes = {
-    children: React.PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
     changeEditMode: PropTypes.func.isRequired,
     onSaveClick: PropTypes.func.isRequired,
     inEditMode: PropTypes.bool.isRequired,
