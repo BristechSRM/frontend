@@ -65,9 +65,8 @@ class SessionSidebar extends Component {
                                                     <textarea
                                                       onChange={(event) =>
                                                           this.props.changeSessionDescriptionStash(event.target.value)}
-                                                    >
-                                                        {this.props.description}
-                                                    </textarea>
+                                                      defaultValue={this.props.description}
+                                                    />
                                                 :
                                                     <div>{this.props.description}</div>
                                             }
@@ -94,9 +93,8 @@ class SessionSidebar extends Component {
                                                     <textarea
                                                       onChange={(event) =>
                                                           this.props.changeSpeakerBioStash(event.target.value)}
-                                                    >
-                                                      {this.props.speakerBio}
-                                                    </textarea>
+                                                      defaultValue={this.props.speakerBio}
+                                                    />
                                                 :
                                                     <div>{this.props.speakerBio}</div>
                                             }
