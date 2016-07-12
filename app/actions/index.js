@@ -84,3 +84,12 @@ export const updateSpeakerBio = (speakerId, newBio) =>
             .then(() => dispatch(changeSpeakerBioEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_ERROR)(error)));
     };
+
+export const updateSessionDescription = (sessionId, newDescription) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_START)());
+        return SessionsService.updateDescription(sessionId, newDescription)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE)(newDescription)))
+            .then(() => dispatch(changeSessionDescriptionEditMode(false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_ERROR)(error)));
+    };

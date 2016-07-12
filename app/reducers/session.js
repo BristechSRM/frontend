@@ -32,6 +32,9 @@ const session = handleActions({
                 .set('session', new immutable.Record(action.payload)());
         }),
 
+    [actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE]: (state, action) =>
+        state.setIn(['session', 'description'], action.payload),
+
     [actionTypes.UPDATE_SPEAKER_RATING_COMPLETE]: (state, action) => {
         const newSpeaker = Object.assign({}, state.session.speaker, { rating: action.payload });
         return state.setIn(['session', 'speaker'], newSpeaker);

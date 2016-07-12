@@ -57,6 +57,7 @@ class SessionSidebar extends Component {
                                     <td>
                                         <EditSaveControl
                                           changeEditMode={this.props.changeSessionDescriptionEditMode}
+                                          onSaveClick={this.props.saveSessionDescription}
                                           inEditMode={this.props.editStash.sessionDescription.inEditMode}
                                         >
                                             {
@@ -196,6 +197,7 @@ SessionSidebar.propTypes = {
     saveSpeakerBio: PropTypes.func,
     changeSessionDescriptionStash: PropTypes.func,
     changeSessionDescriptionEditMode: PropTypes.func,
+    saveSessionDescription: PropTypes.func,
 };
 
 export default SessionSidebar;

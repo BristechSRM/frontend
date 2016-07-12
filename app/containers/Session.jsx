@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
 import { getSession, getCorrespondence,
-    updateSpeakerRating, updateSpeakerBio,
+    updateSpeakerRating, updateSpeakerBio, updateSessionDescription,
     changeSpeakerRatingEditMode, changeSpeakerBioEditMode, changeSessionDescriptionEditMode,
     changeSpeakerRatingStash, changeSpeakerBioStash, changeSessionDescriptionStash } from '../actions';
 import styles from './session.scss';
@@ -20,6 +20,7 @@ class Session extends Component {
         this.saveSpeakerBio = this.saveSpeakerBio.bind(this);
         this.changeSessionDescriptionEditMode = this.changeSessionDescriptionEditMode.bind(this);
         this.changeSessionDescriptionStash = this.changeSessionDescriptionStash.bind(this);
+        this.saveSessionDescription = this.saveSessionDescription.bind(this);
     }
 
     componentDidMount() {
@@ -79,6 +80,11 @@ class Session extends Component {
         this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
     }
 
+    saveSessionDescription() {
+        this.props.dispatch(
+            updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
+    }
+
     render() {
         if (this.props.isFetching) {
             return (
@@ -111,6 +117,7 @@ class Session extends Component {
                       saveSpeakerBio={this.saveSpeakerBio}
                       changeSessionDescriptionStash={this.changeSessionDescriptionStash}
                       changeSessionDescriptionEditMode={this.changeSessionDescriptionEditMode}
+                      saveSessionDescription={this.saveSessionDescription}
                     />
                 </div>
                 <div className={styles.correspondence}>
