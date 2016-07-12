@@ -36,6 +36,11 @@ const session = handleActions({
         return state.setIn(['session', 'speaker'], newSpeaker);
     },
 
+    [actionTypes.UPDATE_SPEAKER_BIO_COMPLETE]: (state, action) => {
+        const newSpeaker = Object.assign({}, state.session.speaker, { bio: action.payload });
+        return state.setIn(['session', 'speaker'], newSpeaker);
+    },
+
     [actionTypes.GET_CORRESPONDENCE_START]: (state) => state.set('isFetching', true),
 
     [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>

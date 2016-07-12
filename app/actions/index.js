@@ -69,3 +69,12 @@ export const updateSpeakerRating = (speakerId, newRating) =>
             .then(() => dispatch(changeSpeakerRatingEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_ERROR)(error)));
     };
+
+export const updateSpeakerBio = (speakerId, newBio) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_START)());
+        return SpeakersService.updateBio(speakerId, newBio)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_COMPLETE)(newBio)))
+            .then(() => dispatch(changeSpeakerBioEditMode(false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_ERROR)(error)));
+    };

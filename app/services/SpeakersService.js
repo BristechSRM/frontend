@@ -17,6 +17,11 @@ class SpeakersService {
         const op = { path: 'rating', value: newRating };
         return this.patchSpeaker(speakerId, op);
     }
+
+    updateBio(speakerId, newBio) {
+        const op = { path: 'bio', value: newBio };
+        return this.patchSpeaker(speakerId, op);
+    }
 }
 
 export default new SpeakersService();

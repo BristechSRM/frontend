@@ -66,12 +66,14 @@ class SessionSidebar extends Component {
                                     <td>
                                         <EditSaveControl
                                           changeEditMode={this.props.changeSpeakerBioEditMode}
+                                          onSaveClick={this.props.saveSpeakerBio}
                                           inEditMode={this.props.editStash.speakerBio.inEditMode}
                                         >
                                             {
                                                 this.props.editStash.speakerBio.inEditMode ?
                                                     <textarea
-                                                      onChange={(event) => this.props.changeSpeakerBioStash(event.target.value)}
+                                                      onChange={(event) =>
+                                                          this.props.changeSpeakerBioStash(event.target.value)}
                                                     >
                                                       {this.props.speakerBio}
                                                     </textarea>
@@ -172,6 +174,7 @@ SessionSidebar.propTypes = {
     saveSpeakerRating: PropTypes.func,
     changeSpeakerBioStash: PropTypes.func,
     changeSpeakerBioEditMode: PropTypes.func,
+    saveSpeakerBio: PropTypes.func,
 };
 
 export default SessionSidebar;
