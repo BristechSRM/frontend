@@ -55,6 +55,9 @@ export const changeSpeakerRatingEditMode = createAction(actionTypes.SPEAKER_RATI
 export const changeSpeakerBioEditMode = createAction(actionTypes.SPEAKER_BIO_EDITMODE_CHANGED,
     inEditMode => inEditMode);
 
+export const changeSessionDescriptionEditMode = createAction(actionTypes.SESSION_DESCRIPTION_EDITMODE_CHANGED,
+    inEditMode => inEditMode);
+
 export const changeSpeakerRatingStash = createAction(actionTypes.SPEAKER_RATING_STASH_CHANGED,
     newValue => newValue);
 

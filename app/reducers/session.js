@@ -80,6 +80,15 @@ const session = handleActions({
         return newState;
     },
 
+    [actionTypes.SESSION_DESCRIPTION_EDITMODE_CHANGED]: (state, action) => {
+        const newState = state.setIn(['editStash', 'sessionDescription', 'inEditMode'], action.payload);
+
+        if (!action.payload) {
+            return newState.setIn(['editStash', 'sessionDescription', 'value'], null);
+        }
+        return newState;
+    },
+
     [actionTypes.SPEAKER_RATING_STASH_CHANGED]: (state, action) =>
         state.setIn(['editStash', 'speakerRating', 'value'], action.payload),
 

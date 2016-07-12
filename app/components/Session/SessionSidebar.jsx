@@ -54,16 +54,20 @@ class SessionSidebar extends Component {
                         <table>
                             <tbody>
                                 <tr>
-                                    <EditSaveControl
-                                      inEditMode={this.props.editStash.sessionDescription.inEditMode}
-                                    >
-                                        {
-                                            this.props.editStash.sessionDescription.inEditMode ?
-                                                <textarea>{this.props.description}</textarea>
-                                            :
-                                                <div>{this.props.description}</div>
-                                        }
-                                    </EditSaveControl></tr>
+                                    <td>
+                                        <EditSaveControl
+                                          changeEditMode={this.props.changeSessionDescriptionEditMode}
+                                          inEditMode={this.props.editStash.sessionDescription.inEditMode}
+                                        >
+                                            {
+                                                this.props.editStash.sessionDescription.inEditMode ?
+                                                    <textarea>{this.props.description}</textarea>
+                                                :
+                                                    <div>{this.props.description}</div>
+                                            }
+                                        </EditSaveControl>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -185,6 +189,7 @@ SessionSidebar.propTypes = {
     changeSpeakerBioStash: PropTypes.func,
     changeSpeakerBioEditMode: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
+    changeSessionDescriptionEditMode: PropTypes.func,
 };
 
 export default SessionSidebar;
