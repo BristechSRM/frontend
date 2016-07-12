@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
+import EditSaveControl from './EditSaveControl.jsx';
 import RatingControl from './RatingControl.jsx';
 import moment from 'moment';
 
@@ -77,10 +78,17 @@ class SessionSidebar extends Component {
                             <tr>
                                 <td>Credibility</td>
                                 <td>
-                                    <RatingControl
-                                      rating={this.props.speakerRating}
-                                      onRatingClick={this.props.onRatingClick}
-                                    />
+                                    <EditSaveControl
+                                      changeEditMode={this.props.changeSpeakerRatingEditMode}
+                                      onSaveClick={this.props.saveSpeakerRating}
+                                      inEditMode={this.props.editStash.speakerRating.inEditMode}
+                                    >
+                                        <RatingControl
+                                          rating={this.props.speakerRating}
+                                          onRatingClick={this.props.changeSpeakerRatingStash}
+                                          inEditMode
+                                        />
+                                    </EditSaveControl>
                                 </td>
                             </tr>
                             <tr>
@@ -140,7 +148,10 @@ SessionSidebar.propTypes = {
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     lastContact: PropTypes.object,
-    onRatingClick: PropTypes.func,
+    editStash: PropTypes.object,
+    changeSpeakerRatingStash: PropTypes.func,
+    changeSpeakerRatingEditMode: PropTypes.func,
+    saveSpeakerRating: PropTypes.func,
 };
 
 export default SessionSidebar;

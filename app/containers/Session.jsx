@@ -2,14 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence, updateSpeakerRating } from '../actions';
+import { getSession, getCorrespondence, updateSpeakerRating,
+    changeSpeakerRatingEditMode, changeSpeakerRatingStash } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
 
     constructor(props) {
         super(props);
-        this.onRatingClick = this.onRatingClick.bind(this);
+        this.changeSpeakerRatingStash = this.changeSpeakerRatingStash.bind(this);
+        this.changeSpeakerRatingEditMode = this.changeSpeakerRatingEditMode.bind(this);
+        this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
     }
 
     componentDidMount() {
@@ -23,8 +26,26 @@ class Session extends Component {
         }
     }
 
-    onRatingClick(rating) {
-        this.props.dispatch(updateSpeakerRating(this.props.speaker.id, rating));
+    changeSpeakerRatingStash(rating) {
+        if (this.props.editStash.speakerRating.inEditMode) {
+            this.props.dispatch(changeSpeakerRatingStash(rating));
+        }
+    }
+
+    changeSpeakerRatingEditMode(inEditMode) {
+        this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
+    }
+
+    saveSpeakerRating() {
+        const newValue = this.props.editStash.speakerRating.value;
+        if (newValue !== null
+            && newValue >= 0
+            && newValue < 6) {
+            this.props.dispatch(
+                updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
+        } else {
+            this.changeSpeakerRatingEditMode(false);
+        }
     }
 
     render() {
@@ -50,7 +71,10 @@ class Session extends Component {
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
-                      onRatingClick={this.onRatingClick}
+                      editStash={this.props.editStash}
+                      changeSpeakerRatingStash={this.changeSpeakerRatingStash}
+                      changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
+                      saveSpeakerRating={this.saveSpeakerRating}
                     />
                 </div>
                 <div className={styles.correspondence}>
@@ -69,6 +93,7 @@ Session.propTypes = {
     lastContact: PropTypes.object,
     correspondence: PropTypes.object,
     isFetching: PropTypes.bool,
+    editStash: PropTypes.object,
     error: PropTypes.shape({ message: PropTypes.string }),
     dispatch: PropTypes.func,
 };
@@ -76,6 +101,7 @@ Session.propTypes = {
 function mapStateToProps(state) {
     return {
         isFetching: state.session.isFetching,
+        editStash: state.session.editStash,
         correspondence: state.session.correspondence,
         session: state.session.session,
         speaker: state.session.session.speaker,

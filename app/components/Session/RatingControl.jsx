@@ -9,7 +9,7 @@ class RatingControl extends Component {
               totalStars={5}
               rating={this.props.rating}
               disabled={false}
-              editing
+              editing={this.props.inEditMode}
               size={16}
               onRatingClick={(e, data) => this.props.onRatingClick(data.rating) }
             />
@@ -20,6 +20,7 @@ class RatingControl extends Component {
 RatingControl.propTypes = {
     rating: PropTypes.number,
     onRatingClick: PropTypes.func,
+    inEditMode: PropTypes.bool,
 };
 
 export default RatingControl;
