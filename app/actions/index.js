@@ -52,6 +52,9 @@ export const getEvent = (eventId) =>
 export const changeSpeakerRatingEditMode = createAction(actionTypes.SPEAKER_RATING_EDITMODE_CHANGED,
     inEditMode => inEditMode);
 
+export const changeSpeakerBioEditMode = createAction(actionTypes.SPEAKER_BIO_EDITMODE_CHANGED,
+    inEditMode => inEditMode);
+
 export const changeSpeakerRatingStash = createAction(actionTypes.SPEAKER_RATING_STASH_CHANGED,
     newValue => newValue);
 

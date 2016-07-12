@@ -4,6 +4,7 @@ import * as actionTypes from '../constants/actionTypes';
 
 const initialEditStash = new immutable.Record({
     speakerRating: new immutable.Record({ inEditMode: false, value: null })(),
+    speakerBio: new immutable.Record({ inEditMode: false, value: null })(),
 })();
 
 const initialState = new immutable.Record({
@@ -60,6 +61,15 @@ const session = handleActions({
 
         if (!action.payload) {
             return newState.setIn(['editStash', 'speakerRating', 'value'], null);
+        }
+        return newState;
+    },
+
+    [actionTypes.SPEAKER_BIO_EDITMODE_CHANGED]: (state, action) => {
+        const newState = state.setIn(['editStash', 'speakerBio', 'inEditMode'], action.payload);
+
+        if (!action.payload) {
+            return newState.setIn(['editStash', 'speakerBio', 'value'], null);
         }
         return newState;
     },

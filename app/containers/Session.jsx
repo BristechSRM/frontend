@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence, updateSpeakerRating,
-    changeSpeakerRatingEditMode, changeSpeakerRatingStash } from '../actions';
+import { getSession, getCorrespondence,
+    updateSpeakerRating,
+    changeSpeakerRatingEditMode, changeSpeakerBioEditMode,
+    changeSpeakerRatingStash } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -13,6 +15,7 @@ class Session extends Component {
         this.changeSpeakerRatingStash = this.changeSpeakerRatingStash.bind(this);
         this.changeSpeakerRatingEditMode = this.changeSpeakerRatingEditMode.bind(this);
         this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
+        this.changeSpeakerBioEditMode = this.changeSpeakerBioEditMode.bind(this);
     }
 
     componentDidMount() {
@@ -26,14 +29,18 @@ class Session extends Component {
         }
     }
 
+    changeSpeakerRatingEditMode(inEditMode) {
+        this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
+    }
+
+    changeSpeakerBioEditMode(inEditMode) {
+        this.props.dispatch(changeSpeakerBioEditMode(inEditMode));
+    }
+
     changeSpeakerRatingStash(rating) {
         if (this.props.editStash.speakerRating.inEditMode) {
             this.props.dispatch(changeSpeakerRatingStash(rating));
         }
-    }
-
-    changeSpeakerRatingEditMode(inEditMode) {
-        this.props.dispatch(changeSpeakerRatingEditMode(inEditMode));
     }
 
     saveSpeakerRating() {
@@ -75,6 +82,7 @@ class Session extends Component {
                       changeSpeakerRatingStash={this.changeSpeakerRatingStash}
                       changeSpeakerRatingEditMode={this.changeSpeakerRatingEditMode}
                       saveSpeakerRating={this.saveSpeakerRating}
+                      changeSpeakerBioEditMode={this.changeSpeakerBioEditMode}
                     />
                 </div>
                 <div className={styles.correspondence}>
