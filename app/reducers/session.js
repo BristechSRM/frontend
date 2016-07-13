@@ -74,14 +74,8 @@ const session = handleActions({
         return newState;
     },
 
-    [actionTypes.SPEAKER_RATING_STASH_CHANGED]: (state, action) =>
-        state.setIn(['editStash', 'speakerRating', 'value'], action.payload),
-
-    [actionTypes.SPEAKER_BIO_STASH_CHANGED]: (state, action) =>
-        state.setIn(['editStash', 'speakerBio', 'value'], action.payload),
-
-    [actionTypes.SESSION_DESCRIPTION_STASH_CHANGED]: (state, action) =>
-        state.setIn(['editStash', 'sessionDescription', 'value'], action.payload),
+    [actionTypes.SESSION_VIEW_EDITSTASH_CHANGED]: (state, action) =>
+        state.setIn(['editStash', action.payload.field, 'value'], action.payload.value),
 }, initialState);
 
 export default session;

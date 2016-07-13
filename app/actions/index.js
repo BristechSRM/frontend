@@ -52,14 +52,8 @@ export const getEvent = (eventId) =>
 export const changeSessionViewEditMode = createAction(actionTypes.SESSION_VIEW_EDITMODE_CHANGED,
     modeData => modeData);
 
-export const changeSpeakerRatingStash = createAction(actionTypes.SPEAKER_RATING_STASH_CHANGED,
-    newValue => newValue);
-
-export const changeSpeakerBioStash = createAction(actionTypes.SPEAKER_BIO_STASH_CHANGED,
-    newValue => newValue);
-
-export const changeSessionDescriptionStash = createAction(actionTypes.SESSION_DESCRIPTION_STASH_CHANGED,
-    newValue => newValue);
+export const changeSessionViewEditStash = createAction(actionTypes.SESSION_VIEW_EDITSTASH_CHANGED,
+    stashData => stashData);
 
 export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
