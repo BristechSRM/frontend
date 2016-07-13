@@ -70,7 +70,7 @@ export const changeSessionDescriptionStash = createAction(actionTypes.SESSION_DE
 export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
-        return SpeakersService.updateRating(speakerId, newRating)
+        return SpeakersService.patchSpeaker(speakerId, 'rating', newRating)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_COMPLETE)(newRating)))
             .then(() => dispatch(changeSpeakerRatingEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_ERROR)(error)));
@@ -79,7 +79,7 @@ export const updateSpeakerRating = (speakerId, newRating) =>
 export const updateSpeakerBio = (speakerId, newBio) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_START)());
-        return SpeakersService.updateBio(speakerId, newBio)
+        return SpeakersService.patchSpeaker(speakerId, 'bio', newBio)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_COMPLETE)(newBio)))
             .then(() => dispatch(changeSpeakerBioEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_ERROR)(error)));
@@ -88,7 +88,7 @@ export const updateSpeakerBio = (speakerId, newBio) =>
 export const updateSessionDescription = (sessionId, newDescription) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_START)());
-        return SessionsService.updateDescription(sessionId, newDescription)
+        return SessionsService.patchSession(sessionId, 'description', newDescription)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE)(newDescription)))
             .then(() => dispatch(changeSessionDescriptionEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_ERROR)(error)));

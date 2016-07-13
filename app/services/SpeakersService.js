@@ -9,18 +9,9 @@ class SpeakersService {
         return api.get(`${speakersUri}/${speakerId}`);
     }
 
-    patchSpeaker(speakerId, op) {
+    patchSpeaker(speakerId, path, value) {
+        const op = { path, value };
         return api.patch(`${speakersUri}/${speakerId}`, op);
-    }
-
-    updateRating(speakerId, newRating) {
-        const op = { path: 'rating', value: newRating };
-        return this.patchSpeaker(speakerId, op);
-    }
-
-    updateBio(speakerId, newBio) {
-        const op = { path: 'bio', value: newBio };
-        return this.patchSpeaker(speakerId, op);
     }
 }
 

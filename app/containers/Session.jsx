@@ -77,12 +77,22 @@ class Session extends Component {
     }
 
     saveSpeakerBio() {
-        this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
+        const newValue = this.props.editStash.speakerBio.value;
+        if (newValue !== null) {
+            this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
+        } else {
+            this.changeSpeakerBioEditMode(false);
+        }
     }
 
     saveSessionDescription() {
-        this.props.dispatch(
-            updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
+        const newValue = this.props.editStash.sessionDescription.value;
+        if (newValue !== null) {
+            this.props.dispatch(
+                updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
+        } else {
+            this.changeSessionDescriptionEditMode(false);
+        }
     }
 
     render() {

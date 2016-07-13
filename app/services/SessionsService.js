@@ -73,13 +73,9 @@ class SessionsService {
         return api.get(`${sessionsUri}/${sessionId}`);
     }
 
-    patchSession(sessionId, op) {
+    patchSession(sessionId, path, value) {
+        const op = { path, value };
         return api.patch(`${sessionsUri}/${sessionId}`, op);
-    }
-
-    updateDescription(sessionId, newDescription) {
-        const op = { path: 'description', value: newDescription };
-        return this.patchSession(sessionId, op);
     }
 }
 
