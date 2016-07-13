@@ -14,9 +14,10 @@ class Session extends Component {
         super(props);
         this.changeEditMode = this.changeEditMode.bind(this);
         this.changeEditStash = this.changeEditStash.bind(this);
-        this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
-        this.saveSpeakerBio = this.saveSpeakerBio.bind(this);
-        this.saveSessionDescription = this.saveSessionDescription.bind(this);
+        this.saveStashedChanges = this.saveStashedChanges.bind(this);
+        this.saveSpeakerRating = () => this.saveStashedChanges('speaker', 'rating', updateSpeakerRating);
+        this.saveSpeakerBio = () => this.saveStashedChanges('speaker', 'bio', updateSpeakerBio);
+        this.saveSessionDescription = () => this.saveStashedChanges('session', 'description', updateSessionDescription);
     }
 
     componentDidMount() {
@@ -40,30 +41,11 @@ class Session extends Component {
         }
     }
 
-    saveSpeakerRating() {
-        if (this.props.editStash.speaker.rating.valueChanged) {
-            this.props.dispatch(
-                updateSpeakerRating(this.props.speaker.id, this.props.editStash.speaker.rating.value));
+    saveStashedChanges(record, field, updateFunc) {
+        if (this.props.editStash[record][field].valueChanged) {
+            this.props.dispatch(updateFunc(this.props[record].id, this.props.editStash[record][field].value));
         } else {
-            this.changeEditMode('speaker', 'rating', false);
-        }
-    }
-
-    saveSpeakerBio() {
-        if (this.props.editStash.speaker.bio.valueChanged) {
-            this.props.dispatch(
-                updateSpeakerBio(this.props.speaker.id, this.props.editStash.speaker.bio.value));
-        } else {
-            this.changeEditMode('speaker', 'bio', false);
-        }
-    }
-
-    saveSessionDescription() {
-        if (this.props.editStash.session.description.valueChanged) {
-            this.props.dispatch(
-                updateSessionDescription(this.props.session.id, this.props.editStash.session.description.value));
-        } else {
-            this.changeEditMode('session', 'description', false);
+            this.changeEditMode(record, field, false);
         }
     }
 
