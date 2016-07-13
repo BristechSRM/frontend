@@ -31,12 +31,12 @@ class Session extends Component {
     }
 
     changeEditMode(field, inEditMode) {
-        this.props.dispatch(changeSessionViewEditMode({ field, inEditMode }));
+        this.props.dispatch(changeSessionViewEditMode(field, inEditMode));
     }
 
     changeEditStash(field, value) {
         if (this.props.editStash[field].inEditMode) {
-            this.props.dispatch(changeSessionViewEditStash({ field, value }));
+            this.props.dispatch(changeSessionViewEditStash(field, value));
         }
     }
 
