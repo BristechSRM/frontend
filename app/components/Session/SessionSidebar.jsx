@@ -15,7 +15,7 @@ class SessionSidebar extends Component {
         return handle ? handle.identifier : '';
     }
 
-    getDate(date, missingDateMessage) {
+    formatDate(date, missingDateMessage) {
         if (!date) {
             return missingDateMessage;
         }
@@ -37,9 +37,9 @@ class SessionSidebar extends Component {
             color: SessionStatusService.getStatusColor(this.props.status),
         };
 
-        const lastContactDate = this.getDate(this.props.lastContact, 'Never');
-        const assignedDate = this.getDate(this.props.date, 'Not assigned');
-        const dateAdded = this.getDate(this.props.dateAdded, '');
+        const lastContactDate = this.formatDate(this.props.lastContact, 'Never');
+        const assignedDate = this.formatDate(this.props.date, 'Not assigned');
+        const dateAdded = this.formatDate(this.props.dateAdded, '');
 
         return (
             <div className={styles.sessionSidebar}>
