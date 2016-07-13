@@ -88,7 +88,7 @@ export const updateSpeakerBio = (speakerId, newBio) =>
 export const updateSessionDescription = (sessionId, newDescription) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_START)());
-        return SessionsService.updateDescription(sessionId, newDescription)
+        return SessionsService.patchSession(sessionId, 'description', newDescription)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE)(newDescription)))
             .then(() => dispatch(changeSessionDescriptionEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_ERROR)(error)));
