@@ -42,6 +42,9 @@ const session = handleActions({
     [actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE]: (state, action) =>
         state.setIn(['session', 'description'], action.payload),
 
+    [actionTypes.UPDATE_SESSION_TITLE_COMPLETE]: (state, action) =>
+        state.setIn(['session', 'title'], action.payload),
+
     [actionTypes.UPDATE_SPEAKER_RATING_COMPLETE]: (state, action) => {
         const newSpeaker = Object.assign({}, state.session.speaker, { rating: action.payload });
         return state.setIn(['session', 'speaker'], newSpeaker);

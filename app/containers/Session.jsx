@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
 import { getSession, getCorrespondence,
-    updateSpeakerRating, updateSpeakerBio, updateSessionDescription,
+    updateSpeakerRating, updateSpeakerBio,
+    updateSessionDescription, updateSessionTitle,
     changeSessionViewEditMode,
     changeSessionViewEditStash } from '../actions';
 import styles from './session.scss';
@@ -18,6 +19,7 @@ class Session extends Component {
         this.saveSpeakerRating = () => this.saveStashedChanges('speaker', 'rating', updateSpeakerRating);
         this.saveSpeakerBio = () => this.saveStashedChanges('speaker', 'bio', updateSpeakerBio);
         this.saveSessionDescription = () => this.saveStashedChanges('session', 'description', updateSessionDescription);
+        this.saveSessionTitle = () => this.saveStashedChanges('session', 'title', updateSessionTitle);
     }
 
     componentDidMount() {
@@ -80,6 +82,7 @@ class Session extends Component {
                       saveSpeakerRating={this.saveSpeakerRating}
                       saveSpeakerBio={this.saveSpeakerBio}
                       saveSessionDescription={this.saveSessionDescription}
+                      saveSessionTitle={this.saveSessionTitle}
                     />
                 </div>
                 <div className={styles.correspondence}>
