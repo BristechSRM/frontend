@@ -63,6 +63,7 @@ class Session extends Component {
                       title={this.props.session.title}
                       status={this.props.session.status}
                       description={this.props.session.description}
+                      date={this.props.session.date}
                       speakerId={this.props.speaker ? this.props.speaker.id : null}
                       speakerForename={this.props.speaker ? this.props.speaker.forename : null}
                       speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
@@ -73,11 +74,11 @@ class Session extends Component {
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
                       editStash={this.props.editStash}
+                      changeEditMode={this.changeEditMode}
+                      changeEditStash={this.changeEditStash}
                       saveSpeakerRating={this.saveSpeakerRating}
                       saveSpeakerBio={this.saveSpeakerBio}
                       saveSessionDescription={this.saveSessionDescription}
-                      changeEditMode={this.changeEditMode}
-                      changeEditStash={this.changeEditStash}
                     />
                 </div>
                 <div className={styles.correspondence}>
