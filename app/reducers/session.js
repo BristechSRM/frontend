@@ -2,10 +2,12 @@ import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 
+const intialEditRecord = new immutable.Record({ inEditMode: false, valueChanged: false, value: null })();
+
 const initialEditStash = new immutable.Record({
-    speakerRating: new immutable.Record({ inEditMode: false, value: null })(),
-    speakerBio: new immutable.Record({ inEditMode: false, value: null })(),
-    sessionDescription: new immutable.Record({ inEditMode: false, value: null })(),
+    speakerRating: intialEditRecord,
+    speakerBio: intialEditRecord,
+    sessionDescription: intialEditRecord,
 })();
 
 const initialState = new immutable.Record({
@@ -65,17 +67,24 @@ const session = handleActions({
                .set('error', action.payload);
         }),
 
-    [actionTypes.SESSION_VIEW_EDITMODE_CHANGED]: (state, action) => {
-        const newState = state.setIn(['editStash', action.payload.field, 'inEditMode'], action.payload.inEditMode);
-
-        if (!action.payload.inEditMode) {
-            return newState.setIn(['editStash', action.payload.field, 'value'], null);
-        }
-        return newState;
-    },
+    [actionTypes.SESSION_VIEW_EDITMODE_CHANGED]: (state, action) =>
+        state.withMutations(map => {
+            const newMap = map.setIn(['editStash', action.payload.field, 'inEditMode'], action.payload.inEditMode);
+            if (!action.payload.inEditMode) {
+                return newMap.setIn(['editStash', action.payload.field, 'value'], null)
+                    .setIn(['editStash', action.payload.field, 'valueChanged'], false);
+            }
+            return newMap;
+        }),
 
     [actionTypes.SESSION_VIEW_EDITSTASH_CHANGED]: (state, action) =>
-        state.setIn(['editStash', action.payload.field, 'value'], action.payload.value),
+        state.withMutations(map => {
+            const newMap = map.setIn(['editStash', action.payload.field, 'value'], action.payload.value);
+            if (!map.getIn(['editStash', action.payload.field, 'valueChanged'])) {
+                return newMap.setIn(['editStash', action.payload.field, 'valueChanged'], true);
+            }
+            return newMap;
+        }),
 }, initialState);
 
 export default session;

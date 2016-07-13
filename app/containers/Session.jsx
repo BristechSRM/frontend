@@ -31,43 +31,39 @@ class Session extends Component {
     }
 
     changeEditMode(field, inEditMode) {
-        this.props.dispatch(changeSessionViewEditMode({ field, inEditMode }));
+        this.props.dispatch(changeSessionViewEditMode(field, inEditMode));
     }
 
     changeEditStash(field, value) {
         if (this.props.editStash[field].inEditMode) {
-            this.props.dispatch(changeSessionViewEditStash({ field, value }));
+            this.props.dispatch(changeSessionViewEditStash(field, value));
         }
     }
 
     saveSpeakerRating() {
-        const newValue = this.props.editStash.speakerRating.value;
-        if (newValue !== null
-            && newValue >= 0
-            && newValue < 6) {
+        if (this.props.editStash.speakerRating.valueChanged) {
             this.props.dispatch(
                 updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
         } else {
-            this.changeSpeakerRatingEditMode(false);
+            this.changeEditMode('speakerRating', false);
         }
     }
 
     saveSpeakerBio() {
-        const newValue = this.props.editStash.speakerBio.value;
-        if (newValue !== null) {
-            this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
+        if (this.props.editStash.speakerBio.valueChanged) {
+            this.props.dispatch(
+                updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
         } else {
-            this.changeSpeakerBioEditMode(false);
+            this.changeEditMode('speakerBio', false);
         }
     }
 
     saveSessionDescription() {
-        const newValue = this.props.editStash.sessionDescription.value;
-        if (newValue !== null) {
+        if (this.props.editStash.sessionDescription.valueChanged) {
             this.props.dispatch(
                 updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
         } else {
-            this.changeSessionDescriptionEditMode(false);
+            this.changeEditMode('sessionDescription', false);
         }
     }
 
