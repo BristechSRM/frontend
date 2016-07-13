@@ -53,7 +53,26 @@ class SessionSidebar extends Component {
                         <h1>Abstract</h1>
                         <table>
                             <tbody>
-                                <tr>{this.props.description}</tr>
+                                <tr>
+                                    <td>
+                                        <EditSaveControl
+                                          changeEditMode={this.props.changeSessionDescriptionEditMode}
+                                          onSaveClick={this.props.saveSessionDescription}
+                                          inEditMode={this.props.editStash.sessionDescription.inEditMode}
+                                        >
+                                            {
+                                                this.props.editStash.sessionDescription.inEditMode ?
+                                                    <textarea
+                                                      onChange={(event) =>
+                                                          this.props.changeSessionDescriptionStash(event.target.value)}
+                                                      defaultValue={this.props.description}
+                                                    />
+                                                :
+                                                    <div>{this.props.description}</div>
+                                            }
+                                        </EditSaveControl>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -74,9 +93,8 @@ class SessionSidebar extends Component {
                                                     <textarea
                                                       onChange={(event) =>
                                                           this.props.changeSpeakerBioStash(event.target.value)}
-                                                    >
-                                                      {this.props.speakerBio}
-                                                    </textarea>
+                                                      defaultValue={this.props.speakerBio}
+                                                    />
                                                 :
                                                     <div>{this.props.speakerBio}</div>
                                             }
@@ -175,6 +193,9 @@ SessionSidebar.propTypes = {
     changeSpeakerBioStash: PropTypes.func,
     changeSpeakerBioEditMode: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
+    changeSessionDescriptionStash: PropTypes.func,
+    changeSessionDescriptionEditMode: PropTypes.func,
+    saveSessionDescription: PropTypes.func,
 };
 
 export default SessionSidebar;

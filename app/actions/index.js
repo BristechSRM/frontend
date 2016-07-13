@@ -55,10 +55,16 @@ export const changeSpeakerRatingEditMode = createAction(actionTypes.SPEAKER_RATI
 export const changeSpeakerBioEditMode = createAction(actionTypes.SPEAKER_BIO_EDITMODE_CHANGED,
     inEditMode => inEditMode);
 
+export const changeSessionDescriptionEditMode = createAction(actionTypes.SESSION_DESCRIPTION_EDITMODE_CHANGED,
+    inEditMode => inEditMode);
+
 export const changeSpeakerRatingStash = createAction(actionTypes.SPEAKER_RATING_STASH_CHANGED,
     newValue => newValue);
 
 export const changeSpeakerBioStash = createAction(actionTypes.SPEAKER_BIO_STASH_CHANGED,
+    newValue => newValue);
+
+export const changeSessionDescriptionStash = createAction(actionTypes.SESSION_DESCRIPTION_STASH_CHANGED,
     newValue => newValue);
 
 export const updateSpeakerRating = (speakerId, newRating) =>
@@ -77,4 +83,13 @@ export const updateSpeakerBio = (speakerId, newBio) =>
             .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_COMPLETE)(newBio)))
             .then(() => dispatch(changeSpeakerBioEditMode(false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_ERROR)(error)));
+    };
+
+export const updateSessionDescription = (sessionId, newDescription) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_START)());
+        return SessionsService.updateDescription(sessionId, newDescription)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE)(newDescription)))
+            .then(() => dispatch(changeSessionDescriptionEditMode(false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_ERROR)(error)));
     };

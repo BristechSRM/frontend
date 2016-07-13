@@ -5,6 +5,7 @@ import * as actionTypes from '../constants/actionTypes';
 const initialEditStash = new immutable.Record({
     speakerRating: new immutable.Record({ inEditMode: false, value: null })(),
     speakerBio: new immutable.Record({ inEditMode: false, value: null })(),
+    sessionDescription: new immutable.Record({ inEditMode: false, value: null })(),
 })();
 
 const initialState = new immutable.Record({
@@ -30,6 +31,9 @@ const session = handleActions({
             map.set('isFetching', false)
                 .set('session', new immutable.Record(action.payload)());
         }),
+
+    [actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE]: (state, action) =>
+        state.setIn(['session', 'description'], action.payload),
 
     [actionTypes.UPDATE_SPEAKER_RATING_COMPLETE]: (state, action) => {
         const newSpeaker = Object.assign({}, state.session.speaker, { rating: action.payload });
@@ -79,11 +83,23 @@ const session = handleActions({
         return newState;
     },
 
+    [actionTypes.SESSION_DESCRIPTION_EDITMODE_CHANGED]: (state, action) => {
+        const newState = state.setIn(['editStash', 'sessionDescription', 'inEditMode'], action.payload);
+
+        if (!action.payload) {
+            return newState.setIn(['editStash', 'sessionDescription', 'value'], null);
+        }
+        return newState;
+    },
+
     [actionTypes.SPEAKER_RATING_STASH_CHANGED]: (state, action) =>
         state.setIn(['editStash', 'speakerRating', 'value'], action.payload),
 
     [actionTypes.SPEAKER_BIO_STASH_CHANGED]: (state, action) =>
         state.setIn(['editStash', 'speakerBio', 'value'], action.payload),
+
+    [actionTypes.SESSION_DESCRIPTION_STASH_CHANGED]: (state, action) =>
+        state.setIn(['editStash', 'sessionDescription', 'value'], action.payload),
 }, initialState);
 
 export default session;
