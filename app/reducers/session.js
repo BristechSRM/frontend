@@ -10,6 +10,7 @@ const initialEditStash = new immutable.Record({
         bio: initialEditRecord,
     })(),
     session: new immutable.Record({
+        title: initialEditRecord,
         description: initialEditRecord,
     })(),
 })();

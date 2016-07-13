@@ -47,7 +47,21 @@ class SessionSidebar extends Component {
                     <h1 style={h1Style}>
                         {this.joinName(this.props.speakerForename, this.props.speakerSurname)}
                     </h1>
-                    {this.props.title}
+                    <EditSaveControl
+                      changeEditMode={(inEditMode) => this.props.changeEditMode('session', 'title', inEditMode)}
+                      inEditMode={this.props.editStash.session.title.inEditMode}
+                    >
+                        {
+                            this.props.editStash.session.title.inEditMode ?
+                                <textarea
+                                  onChange={(event) => this.props.changeEditStash(
+                                      'session', 'title', event.target.value)}
+                                  defaultValue={this.props.title}
+                                />
+                            :
+                                <div>{this.props.title}</div>
+                        }
+                    </EditSaveControl>
                 </div>
 
                 <div className={styles.section}>
