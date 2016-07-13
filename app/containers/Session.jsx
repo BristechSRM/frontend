@@ -42,9 +42,7 @@ class Session extends Component {
 
     saveSpeakerRating() {
         const newValue = this.props.editStash.speakerRating.value;
-        if (newValue !== null
-            && newValue >= 0
-            && newValue < 6) {
+        if (newValue !== null) {
             this.props.dispatch(
                 updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
         } else {
