@@ -5,7 +5,7 @@ import SessionCorrespondence from '../components/Session/SessionCorrespondence.j
 import { getSession, getCorrespondence,
     updateSpeakerRating, updateSpeakerBio, updateSessionDescription,
     changeSessionViewEditMode,
-    changeSpeakerRatingStash, changeSpeakerBioStash, changeSessionDescriptionStash } from '../actions';
+    changeSessionViewEditStash } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
@@ -13,11 +13,9 @@ class Session extends Component {
     constructor(props) {
         super(props);
         this.changeEditMode = this.changeEditMode.bind(this);
-        this.changeSpeakerRatingStash = this.changeSpeakerRatingStash.bind(this);
+        this.changeEditStash = this.changeEditStash.bind(this);
         this.saveSpeakerRating = this.saveSpeakerRating.bind(this);
-        this.changeSpeakerBioStash = this.changeSpeakerBioStash.bind(this);
         this.saveSpeakerBio = this.saveSpeakerBio.bind(this);
-        this.changeSessionDescriptionStash = this.changeSessionDescriptionStash.bind(this);
         this.saveSessionDescription = this.saveSessionDescription.bind(this);
     }
 
@@ -36,21 +34,9 @@ class Session extends Component {
         this.props.dispatch(changeSessionViewEditMode({ field, inEditMode }));
     }
 
-    changeSpeakerRatingStash(rating) {
-        if (this.props.editStash.speakerRating.inEditMode) {
-            this.props.dispatch(changeSpeakerRatingStash(rating));
-        }
-    }
-
-    changeSpeakerBioStash(bio) {
-        if (this.props.editStash.speakerBio.inEditMode) {
-            this.props.dispatch(changeSpeakerBioStash(bio));
-        }
-    }
-
-    changeSessionDescriptionStash(description) {
-        if (this.props.editStash.sessionDescription.inEditMode) {
-            this.props.dispatch(changeSessionDescriptionStash(description));
+    changeEditStash(field, value) {
+        if (this.props.editStash[field].inEditMode) {
+            this.props.dispatch(changeSessionViewEditStash({ field, value }));
         }
     }
 
@@ -109,13 +95,11 @@ class Session extends Component {
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.lastContact}
                       editStash={this.props.editStash}
-                      changeSpeakerRatingStash={this.changeSpeakerRatingStash}
                       saveSpeakerRating={this.saveSpeakerRating}
-                      changeSpeakerBioStash={this.changeSpeakerBioStash}
                       saveSpeakerBio={this.saveSpeakerBio}
-                      changeSessionDescriptionStash={this.changeSessionDescriptionStash}
                       saveSessionDescription={this.saveSessionDescription}
                       changeEditMode={this.changeEditMode}
+                      changeEditStash={this.changeEditStash}
                     />
                 </div>
                 <div className={styles.correspondence}>
