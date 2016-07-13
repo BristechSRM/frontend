@@ -41,8 +41,7 @@ class Session extends Component {
     }
 
     saveSpeakerRating() {
-        const newValue = this.props.editStash.speakerRating.value;
-        if (newValue !== null) {
+        if (this.props.editStash.speakerRating.valueChanged) {
             this.props.dispatch(
                 updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
         } else {
@@ -51,8 +50,7 @@ class Session extends Component {
     }
 
     saveSpeakerBio() {
-        const newValue = this.props.editStash.speakerBio.value;
-        if (newValue !== null) {
+        if (this.props.editStash.speakerBio.valueChanged) {
             this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
         } else {
             this.changeSpeakerBioEditMode(false);
@@ -60,8 +58,7 @@ class Session extends Component {
     }
 
     saveSessionDescription() {
-        const newValue = this.props.editStash.sessionDescription.value;
-        if (newValue !== null) {
+        if (this.props.editStash.sessionDescription.valueChanged) {
             this.props.dispatch(
                 updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
         } else {
