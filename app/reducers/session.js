@@ -65,29 +65,11 @@ const session = handleActions({
                .set('error', action.payload);
         }),
 
-    [actionTypes.SPEAKER_RATING_EDITMODE_CHANGED]: (state, action) => {
-        const newState = state.setIn(['editStash', 'speakerRating', 'inEditMode'], action.payload);
+    [actionTypes.SESSION_VIEW_EDITMODE_CHANGED]: (state, action) => {
+        const newState = state.setIn(['editStash', action.payload.field, 'inEditMode'], action.payload.inEditMode);
 
-        if (!action.payload) {
-            return newState.setIn(['editStash', 'speakerRating', 'value'], null);
-        }
-        return newState;
-    },
-
-    [actionTypes.SPEAKER_BIO_EDITMODE_CHANGED]: (state, action) => {
-        const newState = state.setIn(['editStash', 'speakerBio', 'inEditMode'], action.payload);
-
-        if (!action.payload) {
-            return newState.setIn(['editStash', 'speakerBio', 'value'], null);
-        }
-        return newState;
-    },
-
-    [actionTypes.SESSION_DESCRIPTION_EDITMODE_CHANGED]: (state, action) => {
-        const newState = state.setIn(['editStash', 'sessionDescription', 'inEditMode'], action.payload);
-
-        if (!action.payload) {
-            return newState.setIn(['editStash', 'sessionDescription', 'value'], null);
+        if (!action.payload.inEditMode) {
+            return newState.setIn(['editStash', action.payload.field, 'value'], null);
         }
         return newState;
     },

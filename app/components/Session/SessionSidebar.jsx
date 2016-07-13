@@ -56,7 +56,8 @@ class SessionSidebar extends Component {
                                 <tr>
                                     <td>
                                         <EditSaveControl
-                                          changeEditMode={this.props.changeSessionDescriptionEditMode}
+                                          changeEditMode={(inEditMode) =>
+                                              this.props.changeEditMode('sessionDescription', inEditMode)}
                                           onSaveClick={this.props.saveSessionDescription}
                                           inEditMode={this.props.editStash.sessionDescription.inEditMode}
                                         >
@@ -84,7 +85,8 @@ class SessionSidebar extends Component {
                                 <tr>
                                     <td>
                                         <EditSaveControl
-                                          changeEditMode={this.props.changeSpeakerBioEditMode}
+                                          changeEditMode={(inEditMode) =>
+                                              this.props.changeEditMode('speakerBio', inEditMode)}
                                           onSaveClick={this.props.saveSpeakerBio}
                                           inEditMode={this.props.editStash.speakerBio.inEditMode}
                                         >
@@ -117,7 +119,8 @@ class SessionSidebar extends Component {
                                 <td>Credibility</td>
                                 <td>
                                     <EditSaveControl
-                                      changeEditMode={this.props.changeSpeakerRatingEditMode}
+                                      changeEditMode={(inEditMode) =>
+                                          this.props.changeEditMode('speakerRating', inEditMode)}
                                       onSaveClick={this.props.saveSpeakerRating}
                                       inEditMode={this.props.editStash.speakerRating.inEditMode}
                                     >
@@ -188,14 +191,12 @@ SessionSidebar.propTypes = {
     lastContact: PropTypes.object,
     editStash: PropTypes.object,
     changeSpeakerRatingStash: PropTypes.func,
-    changeSpeakerRatingEditMode: PropTypes.func,
     saveSpeakerRating: PropTypes.func,
     changeSpeakerBioStash: PropTypes.func,
-    changeSpeakerBioEditMode: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
     changeSessionDescriptionStash: PropTypes.func,
-    changeSessionDescriptionEditMode: PropTypes.func,
     saveSessionDescription: PropTypes.func,
+    changeEditMode: PropTypes.func,
 };
 
 export default SessionSidebar;
