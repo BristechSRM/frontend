@@ -15,20 +15,9 @@ class SessionSidebar extends Component {
         return handle ? handle.identifier : '';
     }
 
-    getLastContactDate(lastContact) {
-        if (!lastContact) {
-            return 'Never';
-        }
-
-        const momentDate = moment(this.props.lastContact);
-        return momentDate.isValid()
-            ? momentDate.format('D MMMM YYYY [at] h:mma')
-            : this.props.lastContact;
-    }
-
-    getAssignedDate(date) {
+    getDate(date, missingDateMessage) {
         if (!date) {
-            return 'Not assigned';
+            return missingDateMessage;
         }
 
         const momentDate = moment(date);
@@ -48,8 +37,9 @@ class SessionSidebar extends Component {
             color: SessionStatusService.getStatusColor(this.props.status),
         };
 
-        const lastContactDate = this.getLastContactDate(this.props.lastContact);
-        const assignedDate = this.getAssignedDate(this.props.date);
+        const lastContactDate = this.getDate(this.props.lastContact, 'Never');
+        const assignedDate = this.getDate(this.props.date, 'Not assigned');
+        const dateAdded = this.getDate(this.props.dateAdded, '');
 
         return (
             <div className={styles.sessionSidebar}>
@@ -107,7 +97,8 @@ class SessionSidebar extends Component {
                                                 this.props.editStash.speaker.bio.inEditMode ?
                                                     <textarea
                                                       onChange={(event) =>
-                                                          this.props.changeEditStash('speaker', 'bio', event.target.value)}
+                                                        this.props.changeEditStash(
+                                                            'speaker', 'bio', event.target.value)}
                                                       defaultValue={this.props.speakerBio}
                                                     />
                                                 :
@@ -156,7 +147,7 @@ class SessionSidebar extends Component {
                             </tr>
                             <tr>
                                 <td>Date Added</td>
-                                <td>???</td>
+                                <td>{dateAdded}</td>
                             </tr>
                             <tr>
                                 <td>Last Contact</td>
@@ -199,6 +190,7 @@ SessionSidebar.propTypes = {
     status: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,
+    dateAdded: PropTypes.string,
     speakerId: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
