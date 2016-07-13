@@ -30,40 +30,40 @@ class Session extends Component {
         }
     }
 
-    changeEditMode(field, inEditMode) {
-        this.props.dispatch(changeSessionViewEditMode(field, inEditMode));
+    changeEditMode(record, field, inEditMode) {
+        this.props.dispatch(changeSessionViewEditMode(record, field, inEditMode));
     }
 
-    changeEditStash(field, value) {
-        if (this.props.editStash[field].inEditMode) {
-            this.props.dispatch(changeSessionViewEditStash(field, value));
+    changeEditStash(record, field, value) {
+        if (this.props.editStash[record][field].inEditMode) {
+            this.props.dispatch(changeSessionViewEditStash(record, field, value));
         }
     }
 
     saveSpeakerRating() {
-        if (this.props.editStash.speakerRating.valueChanged) {
+        if (this.props.editStash.speaker.rating.valueChanged) {
             this.props.dispatch(
-                updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
+                updateSpeakerRating(this.props.speaker.id, this.props.editStash.speaker.rating.value));
         } else {
-            this.changeEditMode('speakerRating', false);
+            this.changeEditMode('speaker', 'rating', false);
         }
     }
 
     saveSpeakerBio() {
-        if (this.props.editStash.speakerBio.valueChanged) {
+        if (this.props.editStash.speaker.bio.valueChanged) {
             this.props.dispatch(
-                updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
+                updateSpeakerBio(this.props.speaker.id, this.props.editStash.speaker.bio.value));
         } else {
-            this.changeEditMode('speakerBio', false);
+            this.changeEditMode('speaker', 'bio', false);
         }
     }
 
     saveSessionDescription() {
-        if (this.props.editStash.sessionDescription.valueChanged) {
+        if (this.props.editStash.session.description.valueChanged) {
             this.props.dispatch(
-                updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
+                updateSessionDescription(this.props.session.id, this.props.editStash.session.description.value));
         } else {
-            this.changeEditMode('sessionDescription', false);
+            this.changeEditMode('session', 'description', false);
         }
     }
 

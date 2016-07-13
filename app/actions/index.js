@@ -49,18 +49,18 @@ export const getEvent = (eventId) =>
             .catch(error => dispatch(createAction(actionTypes.GET_EVENT_ERROR)(error)));
     };
 
-export const changeSessionViewEditMode = (field, inEditMode) =>
-    createAction(actionTypes.SESSION_VIEW_EDITMODE_CHANGED)({ field, inEditMode });
+export const changeSessionViewEditMode = (record, field, inEditMode) =>
+    createAction(actionTypes.SESSION_VIEW_EDITMODE_CHANGED)({ record, field, inEditMode });
 
-export const changeSessionViewEditStash = (field, value) =>
-    createAction(actionTypes.SESSION_VIEW_EDITSTASH_CHANGED)({ field, value });
+export const changeSessionViewEditStash = (record, field, value) =>
+    createAction(actionTypes.SESSION_VIEW_EDITSTASH_CHANGED)({ record, field, value });
 
 export const updateSpeakerRating = (speakerId, newRating) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
         return SpeakersService.patchSpeaker(speakerId, 'rating', newRating)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_COMPLETE)(newRating)))
-            .then(() => dispatch(changeSessionViewEditMode('speakerRating', false)))
+            .then(() => dispatch(changeSessionViewEditMode('speaker', 'rating', false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_ERROR)(error)));
     };
 
@@ -69,7 +69,7 @@ export const updateSpeakerBio = (speakerId, newBio) =>
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_START)());
         return SpeakersService.patchSpeaker(speakerId, 'bio', newBio)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_COMPLETE)(newBio)))
-            .then(() => dispatch(changeSessionViewEditMode('speakerBio', false)))
+            .then(() => dispatch(changeSessionViewEditMode('speaker', 'bio', false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_ERROR)(error)));
     };
 
@@ -78,6 +78,6 @@ export const updateSessionDescription = (sessionId, newDescription) =>
         dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_START)());
         return SessionsService.patchSession(sessionId, 'description', newDescription)
             .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_COMPLETE)(newDescription)))
-            .then(() => dispatch(changeSessionViewEditMode('sessionDescription', false)))
+            .then(() => dispatch(changeSessionViewEditMode('session', 'description', false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_ERROR)(error)));
     };
