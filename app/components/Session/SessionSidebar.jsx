@@ -26,6 +26,17 @@ class SessionSidebar extends Component {
             : this.props.lastContact;
     }
 
+    getAssignedDate(date) {
+        if (!date) {
+            return 'Not assigned';
+        }
+
+        const momentDate = moment(date);
+        return momentDate.isValid()
+            ? momentDate.format('D MMMM YYYY [at] h:mma')
+            : date;
+    }
+
     joinName(forename, surname) {
         const fn = forename ? `${forename} ` : '';
         const ln = surname || '';
@@ -38,6 +49,7 @@ class SessionSidebar extends Component {
         };
 
         const lastContactDate = this.getLastContactDate(this.props.lastContact);
+        const assignedDate = this.getAssignedDate(this.props.date);
 
         return (
             <div className={styles.sessionSidebar}>
@@ -117,6 +129,10 @@ class SessionSidebar extends Component {
                                 </td>
                             </tr>
                             <tr>
+                                <td>Assigned Event Date</td>
+                                <td>{assignedDate}</td>
+                            </tr>
+                            <tr>
                                 <td>Credibility</td>
                                 <td>
                                     <EditSaveControl
@@ -182,6 +198,7 @@ SessionSidebar.propTypes = {
     title: PropTypes.string,
     status: PropTypes.string,
     description: PropTypes.string,
+    date: PropTypes.string,
     speakerId: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
@@ -192,11 +209,11 @@ SessionSidebar.propTypes = {
     adminSurname: PropTypes.string,
     lastContact: PropTypes.object,
     editStash: PropTypes.object,
+    changeEditMode: PropTypes.func,
+    changeEditStash: PropTypes.func,
     saveSpeakerRating: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
     saveSessionDescription: PropTypes.func,
-    changeEditMode: PropTypes.func,
-    changeEditStash: PropTypes.func,
 };
 
 export default SessionSidebar;
