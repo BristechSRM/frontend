@@ -45,15 +45,16 @@ class Session extends Component {
             this.props.dispatch(
                 updateSpeakerRating(this.props.speaker.id, this.props.editStash.speakerRating.value));
         } else {
-            this.changeSpeakerRatingEditMode(false);
+            this.changeEditMode('speakerRating', false);
         }
     }
 
     saveSpeakerBio() {
         if (this.props.editStash.speakerBio.valueChanged) {
-            this.props.dispatch(updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
+            this.props.dispatch(
+                updateSpeakerBio(this.props.speaker.id, this.props.editStash.speakerBio.value));
         } else {
-            this.changeSpeakerBioEditMode(false);
+            this.changeEditMode('speakerBio', false);
         }
     }
 
@@ -62,7 +63,7 @@ class Session extends Component {
             this.props.dispatch(
                 updateSessionDescription(this.props.session.id, this.props.editStash.sessionDescription.value));
         } else {
-            this.changeSessionDescriptionEditMode(false);
+            this.changeEditMode('sessionDescription', false);
         }
     }
 
