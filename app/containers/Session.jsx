@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
 import { getSession, getCorrespondence,
-    updateSpeakerRating, updateSpeakerBio,
+    updateSpeakerRating, updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
     updateSessionDescription, updateSessionTitle,
     changeSessionViewEditMode,
     changeSessionViewEditStash } from '../actions';
@@ -20,6 +20,10 @@ class Session extends Component {
         this.saveSpeakerBio = () => this.saveStashedChanges('speaker', 'bio', updateSpeakerBio);
         this.saveSessionDescription = () => this.saveStashedChanges('session', 'description', updateSessionDescription);
         this.saveSessionTitle = () => this.saveStashedChanges('session', 'title', updateSessionTitle);
+        this.saveSpeakerNames = () => {
+            this.saveStashedChanges('speaker', 'forename', updateSpeakerForename);
+            this.saveStashedChanges('speaker', 'surname', updateSpeakerSurname);
+        };
     }
 
     componentDidMount() {
@@ -38,9 +42,11 @@ class Session extends Component {
     }
 
     changeEditStash(record, field, value) {
-        if (this.props.editStash[record][field].inEditMode) {
-            this.props.dispatch(changeSessionViewEditStash(record, field, value));
+        if (!this.props.editStash[record][field].inEditMode) {
+            // TODO: decide if this should be set here, or in reducer as a part of changing stash
+            this.changeEditMode(record, field, true);
         }
+        this.props.dispatch(changeSessionViewEditStash(record, field, value));
     }
 
     saveStashedChanges(record, field, updateFunc) {
@@ -83,6 +89,7 @@ class Session extends Component {
                       saveSpeakerBio={this.saveSpeakerBio}
                       saveSessionDescription={this.saveSessionDescription}
                       saveSessionTitle={this.saveSessionTitle}
+                      saveSpeakerNames={this.saveSpeakerNames}
                     />
                 </div>
                 <div className={styles.correspondence}>

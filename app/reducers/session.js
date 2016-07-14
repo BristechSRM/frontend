@@ -6,6 +6,8 @@ const initialEditRecord = new immutable.Record({ inEditMode: false, valueChanged
 
 const initialEditStash = new immutable.Record({
     speaker: new immutable.Record({
+        forename: initialEditRecord,
+        surname: initialEditRecord,
         rating: initialEditRecord,
         bio: initialEditRecord,
     })(),
@@ -52,6 +54,16 @@ const session = handleActions({
 
     [actionTypes.UPDATE_SPEAKER_BIO_COMPLETE]: (state, action) => {
         const newSpeaker = Object.assign({}, state.session.speaker, { bio: action.payload });
+        return state.setIn(['session', 'speaker'], newSpeaker);
+    },
+
+    [actionTypes.UPDATE_SPEAKER_FORENAME_COMPLETE]: (state, action) => {
+        const newSpeaker = Object.assign({}, state.session.speaker, { forename: action.payload });
+        return state.setIn(['session', 'speaker'], newSpeaker);
+    },
+
+    [actionTypes.UPDATE_SPEAKER_SURNAME_COMPLETE]: (state, action) => {
+        const newSpeaker = Object.assign({}, state.session.speaker, { surname: action.payload });
         return state.setIn(['session', 'speaker'], newSpeaker);
     },
 

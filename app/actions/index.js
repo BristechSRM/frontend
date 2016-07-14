@@ -73,6 +73,24 @@ export const updateSpeakerBio = (speakerId, newBio) =>
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_ERROR)(error)));
     };
 
+export const updateSpeakerForename = (speakerId, newForename) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SPEAKER_FORENAME_START)());
+        return SpeakersService.patchSpeaker(speakerId, 'forename', newForename)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_FORENAME_COMPLETE)(newForename)))
+            .then(() => dispatch(changeSessionViewEditMode('speaker', 'forename', false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_FORENAME_ERROR)(error)));
+    };
+
+export const updateSpeakerSurname = (speakerId, newSurname) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SPEAKER_SURNAME_START)());
+        return SpeakersService.patchSpeaker(speakerId, 'surname', newSurname)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_SURNAME_COMPLETE)(newSurname)))
+            .then(() => dispatch(changeSessionViewEditMode('speaker', 'surname', false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_SURNAME_ERROR)(error)));
+    };
+
 export const updateSessionDescription = (sessionId, newDescription) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_START)());
