@@ -81,3 +81,12 @@ export const updateSessionDescription = (sessionId, newDescription) =>
             .then(() => dispatch(changeSessionViewEditMode('session', 'description', false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_DESCRIPTION_ERROR)(error)));
     };
+
+export const updateSessionTitle = (sessionId, newTitle) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SESSION_TITLE_START)());
+        return SessionsService.patchSession(sessionId, 'title', newTitle)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_TITLE_COMPLETE)(newTitle)))
+            .then(() => dispatch(changeSessionViewEditMode('session', 'title', false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_TITLE_ERROR)(error)));
+    };
