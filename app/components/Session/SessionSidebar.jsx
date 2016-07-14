@@ -45,7 +45,33 @@ class SessionSidebar extends Component {
             <div className={styles.sessionSidebar}>
                 <div className={styles.header}>
                     <h1 style={h1Style}>
-                        {this.joinName(this.props.speakerForename, this.props.speakerSurname)}
+                        <EditSaveControl
+                          changeEditMode={(inEditMode) => this.props.changeEditMode('speaker', 'forename', inEditMode)}
+                          inEditMode={this.props.editStash.speaker.forename.inEditMode}
+                        >
+                            {
+                                // Note: speaker.forename edit mode is being used as flag for surname edit mode as well, since it makes sense to edit them together.
+                                this.props.editStash.speaker.forename.inEditMode ?
+                                    <div>
+                                        <input
+                                          type="text"
+                                          className={styles.editInputBox}
+                                          onChange={(event) => this.props.changeEditStash(
+                                              'speaker', 'forename', event.target.value)}
+                                          defaultValue={this.props.speakerForename}
+                                        />
+                                        <input
+                                          type="text"
+                                          className={styles.editInputBox}
+                                          onChange={(event) => this.props.changeEditStash(
+                                              'speaker', 'surname', event.target.value)}
+                                          defaultValue={this.props.speakerSurname}
+                                        />
+                                    </div>
+                                :
+                                    <div>{this.joinName(this.props.speakerForename, this.props.speakerSurname)}</div>
+                            }
+                        </EditSaveControl>
                     </h1>
                     <EditSaveControl
                       changeEditMode={(inEditMode) => this.props.changeEditMode('session', 'title', inEditMode)}

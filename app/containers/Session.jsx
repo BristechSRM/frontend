@@ -38,9 +38,11 @@ class Session extends Component {
     }
 
     changeEditStash(record, field, value) {
-        if (this.props.editStash[record][field].inEditMode) {
-            this.props.dispatch(changeSessionViewEditStash(record, field, value));
+        if (!this.props.editStash[record][field].inEditMode) {
+            // TODO: decide if this should be set here, or in reducer as a part of changing stash
+            this.changeEditMode(record, field, true);
         }
+        this.props.dispatch(changeSessionViewEditStash(record, field, value));
     }
 
     saveStashedChanges(record, field, updateFunc) {

@@ -6,6 +6,8 @@ const initialEditRecord = new immutable.Record({ inEditMode: false, valueChanged
 
 const initialEditStash = new immutable.Record({
     speaker: new immutable.Record({
+        forename: initialEditRecord,
+        surname: initialEditRecord,
         rating: initialEditRecord,
         bio: initialEditRecord,
     })(),
