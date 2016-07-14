@@ -78,7 +78,7 @@ class Session extends Component {
                       speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
                       speakerRating={this.props.speaker ? this.props.speaker.rating : null}
                       speakerBio={this.props.speaker ? this.props.speaker.bio : null}
-                      speakerHandles={[]}
+                      speakerHandles={this.props.speaker ? this.props.speaker.handles : null}
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       lastContact={this.props.session.lastContact}

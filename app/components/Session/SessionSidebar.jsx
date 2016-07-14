@@ -9,10 +9,10 @@ import styles from './sessionSidebar.scss';
 class SessionSidebar extends Component {
 
     getHandle(type) {
-        const handle = this.props.speakerHandles
+        const firstHandle = this.props.speakerHandles
             ? this.props.speakerHandles.find(h => h.type.toLowerCase() === type.toLowerCase())
             : null;
-        return handle ? handle.identifier : '';
+        return firstHandle ? firstHandle.identifier : '';
     }
 
     formatDate(date, missingDateMessage) {
