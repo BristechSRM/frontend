@@ -81,7 +81,7 @@ class Session extends Component {
                       speakerHandles={[]}
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
-                      lastContact={this.props.lastContact}
+                      lastContact={this.props.session.lastContact}
                       editStash={this.props.editStash}
                       changeEditMode={this.changeEditMode}
                       changeEditStash={this.changeEditStash}
@@ -105,7 +105,6 @@ Session.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
-    lastContact: PropTypes.object,
     correspondence: PropTypes.object,
     isFetching: PropTypes.bool,
     editStash: PropTypes.object,
@@ -121,7 +120,6 @@ function mapStateToProps(state) {
         session: state.session.session,
         speaker: state.session.session.speaker,
         admin: state.session.session.admin,
-        lastContact: state.session.lastContact,
         error: state.session.error,
     };
 }

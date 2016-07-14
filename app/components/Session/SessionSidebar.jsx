@@ -37,7 +37,7 @@ class SessionSidebar extends Component {
             color: SessionStatusService.getStatusColor(this.props.status),
         };
 
-        const lastContactDate = this.formatDate(this.props.lastContact, 'Never');
+        const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
         const assignedDate = this.formatDate(this.props.date, 'Not assigned');
         const dateAdded = this.formatDate(this.props.dateAdded, '');
 
