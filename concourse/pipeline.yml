@@ -1,8 +1,8 @@
 resource_types:
-  - name: ecs
+  - name: docker-swarm-deploy
     type: docker-image
     source:
-      repository: bristechsrm/notify_ecs
+      repository: bristechsrm/docker-swarm-deploy
 
 jobs:
 - name: build
@@ -18,14 +18,14 @@ jobs:
   - put: image
     params:
       build: context
-  - put: cluster
+  - put: swarm
 
 resources:
 - name: code
   type: git
   source:
     uri: https://github.com/BristechSRM/frontend.git
-    branch: master 
+    branch: master
 
 - name: image
   type: docker-image
@@ -35,12 +35,13 @@ resources:
     password: {{docker-hub-password}}
     repository: bristechsrm/frontend
 
-- name: cluster
-  type: ecs
+- name: swarm
+  type: docker-swarm-deploy
   source:
-    stackName: development
-    clusterName: frontCluster
-    taskName: frontTaskDefinition
-    serviceName: frontService
-    accessKeyId: {{awsAccessKeyId}}
-    secretAccessKey: {{awsSecretAccessKey}}
+    serviceName: frontend
+    executableName: frontend
+    nodeName: {{frontendNode}}
+    portNumber: 80
+    repository: bristechsrm/frontend
+    swarmMasterIp: {{swarmMasterIp}}
+    network: bridge
