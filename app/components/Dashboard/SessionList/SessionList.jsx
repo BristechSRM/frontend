@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SessionCard from './SessionCard.jsx';
+import NewSessionCard from './NewSessionCard.jsx';
 
 const styles = {
     base: {
@@ -39,9 +40,32 @@ class SessionList extends Component {
          </div>);
     }
 
+    /* Render a dummy card that the user can click to create a new session */
+    renderNewSession() {
+        return (<div key={"NewSessionCard"} style={styles.base.card}>
+           <NewSessionCard
+             id={"NewSession"}
+             height="280px"
+             onSelect={s => this.props.onNewSessionSelected(s)}
+             title={"New Session"}
+             status={"0"}  /* 0 will render similar to an 'unassigned' session. */
+             date={ null }
+             speakerForename={"Add New"}
+             speakerSurname={"Session"}
+             speakerRating={0}
+             adminForename={"New"}
+             adminSurname={"Admin"}
+             adminImageUri={null}
+             lastContactDate={null}
+             lastContactDirection="in"
+           />
+         </div>);
+    }
+
     render() {
         return (
             <div style={styles.base.list}>
+                {this.renderNewSession()}
                 {this.props.sessions.map(s => this.renderSession(s))}
             </div>
         );
@@ -51,6 +75,7 @@ class SessionList extends Component {
 SessionList.propTypes = {
     sessions: PropTypes.array,
     onSessionSelected: PropTypes.func,
+    onNewSessionSelected: PropTypes.func,
 };
 
 export default SessionList;

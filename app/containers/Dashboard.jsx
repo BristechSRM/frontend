@@ -22,10 +22,17 @@ class Dashboard extends Component {
         this.context.router.push(`/sessions/${session.id}`);
     }
 
+    handleNewSessionSelected() {
+        this.context.router.push('/sessions/new');
+    }
+
     render() {
         const output = this.props.error
             ? <p>There was an error retrieving sessions - '{this.props.error.message}'</p>
-          : <SessionList sessions={this.props.sessions} onSessionSelected={s => this.handleSessionSelected(s)} />;
+          : <SessionList sessions={this.props.sessions}
+            onSessionSelected={s => this.handleSessionSelected(s)}
+            onNewSessionSelected={() => this.handleNewSessionSelected()}
+          />;
 
         const list = this.props.isFetching ? 'Loading...' : output;
 
