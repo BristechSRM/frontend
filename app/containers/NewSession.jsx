@@ -11,10 +11,10 @@ import {
     getAllAdmins,
     submitNewSession,
 } from '../actions';
-// TBD import styles from './session.scss';
 
 
-// Container component for creating a new session.
+// React container component for creating a new session.
+// Acts as a container for the display-only NewSessionForm component.
 class NewSession extends Component {
 
     constructor(props) {
@@ -57,7 +57,6 @@ class NewSession extends Component {
         this.props.dispatch(submitNewSession(this.context.router));
     }
 
-    // http://stackoverflow.com/questions/591539/can-form-styling-be-done-without-tables
     render() {
         return (
           <NewSessionForm

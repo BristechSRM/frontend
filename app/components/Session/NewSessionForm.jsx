@@ -4,12 +4,6 @@ import React, { Component, PropTypes } from 'react';
 // A form into which the user can enter details of a new session
 class NewSessionForm extends Component {
 
-    joinName(forename, surname) {
-        const fn = forename ? `${forename} ` : '';
-        const ln = surname || '';
-        return `${fn} ${ln}`;
-    }
-
     sendValue(handler) {
         return (ev) => {
             handler(ev.target.value);
@@ -80,23 +74,9 @@ class NewSessionForm extends Component {
     }
 
     render() {
-        // const h1Style = {
-        //     color: SessionStatusService.getStatusColor(this.props.status),
-        // };
-
-        // const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
-        // const assignedDate = this.formatDate(this.props.date, 'Not assigned');
-        // const dateAdded = this.formatDate(this.props.dateAdded, '');
-
         return (
             <div>
               <h1>Create New Session</h1>
-              <p>This form does not yet:</p>
-              <ul>
-                <li>validate inputs</li>
-                <li>have proper layout (it is just a table for now)</li>
-                <li>have a date picker</li>
-              </ul>
               <form
                 onSubmit={(event) => { event.preventDefault(); this.props.submit(); return false; } }
               >
@@ -175,7 +155,7 @@ class NewSessionForm extends Component {
 
 
 NewSessionForm.propTypes = {
-    // Data captured by the forrm
+    // Data captured by the form
     title: PropTypes.string,
     titleValidation: PropTypes.string,
 

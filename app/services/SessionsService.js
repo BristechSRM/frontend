@@ -75,10 +75,6 @@ class SessionsService {
         return api.get(`${sessionsUri}/${sessionId}`);
     }
 
-    getSession(sessionId) {
-        return api.get(`${sessionsUri}/${sessionId}`);
-    }
-
     patchSession(sessionId, path, value) {
         const op = { path, value };
         return api.patch(`${sessionsUri}/${sessionId}`, op);
@@ -87,7 +83,6 @@ class SessionsService {
     postSession(session) {
         return api.post(sessionsUri, session);
     }
-
 
     getAllSpeakers() {
         return api.get(speakersUri);

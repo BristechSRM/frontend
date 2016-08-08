@@ -28,6 +28,8 @@ export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED
 
 export const getCorrespondence = (session) =>
     (dispatch) => {
+        // CorrespondenceService will error if there's no admin id available
+        // (eg on a new session that has no admin assigned yet)
         if (session.admin) {
             dispatch(createAction(actionTypes.GET_CORRESPONDENCE_START)());
             return CorrespondenceService.getCorrespondence(session.admin.id, session.speaker.id)
@@ -35,8 +37,8 @@ export const getCorrespondence = (session) =>
                 .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
         }
 
-        // Nothing to do if there's no admin (there can be no correspondence.
-        // Returning an empty promise in case the caller piggybacks on it with Promise.then() etc
+        // Nothing to do if there's no admin (there can be no correspondence).
+        // Returning an empty promise to maintain the interface, as all actions seem to return a Promise.
         return new Promise((resolve /* ,reject */) => {
             resolve(null);
         });
@@ -133,10 +135,9 @@ export const newSessionSpeakerSelected = (newSpeakerId) =>
 export const newSessionAdminSelected = (newAdminId) =>
     createAction(actionTypes.NEW_SESSION_ADD_ADMIN_ID)(newAdminId);
 
-// PENDING: Consider a better solution than passing 'history' to this action
-// History should be passed in from this.props.history by the caller
-// (tried dispatching push(url) (push from react-router-redux), but it only updates history,
-// does not navigate)
+// This action requires the react-route history object (from this.props.history) to be passed in,
+// because the action re-routes the user to the 'edit session' page.
+// Simply dispatching push(url) doesn't work - it updates history only.
 export const submitNewSession = (history) =>
     (dispatch, getState) => {
         dispatch(createAction(actionTypes.NEW_SESSION_SUBMIT_START)());

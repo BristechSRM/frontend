@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 
-// TODO: Much is duplicated between NewSessionCard and SessionCard
-// Styles could be factored out into a separate source
-// Layout of the component itself could be factored out a little.
+// React component to provide a dummy 'card' that can be clicked to create a new session.
+
+// TODO: The styles and layout here are copied from SessionCard.
+// It may be possible to factor out the common style and layout somewhat.
 
 const styles = {
     base: {
