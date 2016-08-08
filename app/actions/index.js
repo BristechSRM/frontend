@@ -5,6 +5,7 @@ import EventsService from '../services/EventsService';
 import CorrespondenceService from '../services/CorrespondenceService';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
+import moment from 'moment';
 
 export const getAllSessions = () =>
     (dispatch) => {
@@ -27,10 +28,18 @@ export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED
 
 export const getCorrespondence = (session) =>
     (dispatch) => {
-        dispatch(createAction(actionTypes.GET_CORRESPONDENCE_START)());
-        return CorrespondenceService.getCorrespondence(session.admin.id, session.speaker.id)
-            .then(correspondence => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(correspondence)))
-            .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
+        if (session.admin) {
+            dispatch(createAction(actionTypes.GET_CORRESPONDENCE_START)());
+            return CorrespondenceService.getCorrespondence(session.admin.id, session.speaker.id)
+                .then(correspondence => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(correspondence)))
+                .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
+        }
+
+        // Nothing to do if there's no admin (there can be no correspondence.
+        // Returning an empty promise in case the caller piggybacks on it with Promise.then() etc
+        return new Promise((resolve /* ,reject */) => {
+            resolve(null);
+        });
     };
 
 export const getAllEvents = () =>
@@ -108,3 +117,67 @@ export const updateSessionTitle = (sessionId, newTitle) =>
             .then(() => dispatch(changeSessionViewEditMode('session', 'title', false)))
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_TITLE_ERROR)(error)));
     };
+
+export const newSessionTitleEntered = (newTitle) =>
+    createAction(actionTypes.NEW_SESSION_ADD_TITLE)(newTitle);
+
+export const newSessionDescriptionEntered = (newDescription) =>
+    createAction(actionTypes.NEW_SESSION_ADD_DESCRIPTION)(newDescription);
+
+export const newSessionDateEntered = (newDate) =>
+    createAction(actionTypes.NEW_SESSION_ADD_DATE)(newDate);
+
+export const newSessionSpeakerSelected = (newSpeakerId) =>
+    createAction(actionTypes.NEW_SESSION_ADD_SPEAKER_ID)(newSpeakerId);
+
+export const newSessionAdminSelected = (newAdminId) =>
+    createAction(actionTypes.NEW_SESSION_ADD_ADMIN_ID)(newAdminId);
+
+// PENDING: Consider a better solution than passing 'history' to this action
+// History should be passed in from this.props.history by the caller
+// (tried dispatching push(url) (push from react-router-redux), but it only updates history,
+// does not navigate)
+export const submitNewSession = (history) =>
+    (dispatch, getState) => {
+        dispatch(createAction(actionTypes.NEW_SESSION_SUBMIT_START)());
+        const sessionInRedux = window.debug_session = getState().newsession;
+
+        const newSessionPostData = {
+            title: sessionInRedux.title,
+            description: sessionInRedux.description,
+            date: moment(sessionInRedux.date, 'D/M/YYYY').format(),
+            speaker: { id: sessionInRedux.speakerId },
+        };
+
+        if (sessionInRedux.adminId) {
+            newSessionPostData.admin = { id: sessionInRedux.adminId };
+        }
+
+        return SessionsService.postSession(newSessionPostData)
+            .then(
+                (newSessionId) => {
+                    setTimeout(() => {
+                        dispatch(createAction(actionTypes.NEW_SESSION_SUBMIT_COMPLETE)());
+                        history.push(`/sessions/${newSessionId}`);
+                    }, 5000);
+                }
+            )
+            .catch(error => dispatch(createAction(actionTypes.NEW_SESSION_SUBMIT_ERROR)(error)));
+    };
+
+export const getAllSpeakers = (sessionId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.NEW_SESSION_GET_SPEAKERS_START)());
+        return SessionsService.getAllSpeakers(sessionId)
+            .then(speakers => dispatch(createAction(actionTypes.NEW_SESSION_GET_SPEAKERS_COMPLETE)(speakers)))
+            .catch(error => dispatch(createAction(actionTypes.NEW_SESSION_GET_SPEAKERS_ERROR)(error)));
+    };
+
+export const getAllAdmins = (sessionId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.NEW_SESSION_GET_ADMINS_START)());
+        return SessionsService.getAllAdmins(sessionId)
+            .then(admins => dispatch(createAction(actionTypes.NEW_SESSION_GET_ADMINS_COMPLETE)(admins)))
+            .catch(error => dispatch(createAction(actionTypes.NEW_SESSION_GET_ADMINS_ERROR)(error)));
+    };
+

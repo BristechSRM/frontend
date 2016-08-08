@@ -1,0 +1,214 @@
+import React, { Component, PropTypes } from 'react';
+
+
+// A form into which the user can enter details of a new session
+class NewSessionForm extends Component {
+
+    joinName(forename, surname) {
+        const fn = forename ? `${forename} ` : '';
+        const ln = surname || '';
+        return `${fn} ${ln}`;
+    }
+
+    sendValue(handler) {
+        return (ev) => {
+            handler(ev.target.value);
+        };
+    }
+
+    adminsDroplist() {
+        if (this.props.isFetchingAdmins) {
+            return <select><option>Loading admins...</option></select>;
+        }
+
+        return (
+            <select
+              id="admin"
+              name="admin"
+              value={this.props.adminId}
+              onChange={this.sendValue(this.props.adminSelected)}
+            >
+              <option value=""></option>
+              {
+                  this.props.admins.map(s =>
+                    <option key={`adm-${s.id}`} value={s.id}>{`${s.forename} ${s.surname}`}</option>
+                  )
+              }
+            </select>
+        );
+    }
+
+    speakersDroplist() {
+        if (this.props.isFetchingSpeakers) {
+            return <select><option>Loading speakers...</option></select>;
+        }
+
+        return (
+            <select
+              id="speaker"
+              name="speaker"
+              value={this.props.speakerId}
+              onChange={this.sendValue(this.props.speakerSelected)}
+            >
+              <option value=""></option>
+              {
+                  this.props.speakers.map(s =>
+                    <option key={`spk-${s.id}`} value={s.id}>{`${s.forename} ${s.surname}`}</option>
+                  )
+              }
+            </select>
+        );
+    }
+
+    submitButton() {
+        const buttonAttributes = {};
+
+        const validationMsg =
+            this.props.titleValidation ||
+            this.props.descriptionValidation ||
+            this.props.dateValidation ||
+            this.props.adminIdValidation ||
+            this.props.speakerIdValidation;
+
+        if (validationMsg) {
+            buttonAttributes.disabled = 'disabled';
+        }
+
+        return (
+            <input type="submit" value="Submit" {...buttonAttributes} />
+        );
+    }
+
+    render() {
+        // const h1Style = {
+        //     color: SessionStatusService.getStatusColor(this.props.status),
+        // };
+
+        // const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
+        // const assignedDate = this.formatDate(this.props.date, 'Not assigned');
+        // const dateAdded = this.formatDate(this.props.dateAdded, '');
+
+        return (
+            <div>
+              <h1>Create New Session</h1>
+              <p>This form does not yet:</p>
+              <ul>
+                <li>validate inputs</li>
+                <li>have proper layout (it is just a table for now)</li>
+                <li>have a date picker</li>
+              </ul>
+              <form
+                onSubmit={(event) => { event.preventDefault(); this.props.submit(); return false; } }
+              >
+                  <fieldset>
+                  <legend>New session details</legend>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><label htmlFor="title">Title <span className="error">*</span></label></td>
+                          <td>
+                            <input
+                              type="text"
+                              id="title"
+                              name="title"
+                              size="40"
+                              value={this.props.title}
+                              onChange={this.sendValue(this.props.titleEntered)}
+                            />
+                          </td>
+                          <td>{this.props.titleValidation}</td>
+                        </tr>
+                        <tr>
+                          <td><label htmlFor="description">Description <span className="error">*</span></label></td>
+                          <td>
+                            <input
+                              type="text"
+                              id="description"
+                              name="description"
+                              size="40"
+                              value={this.props.description}
+                              onChange={this.sendValue(this.props.descriptionEntered)}
+                            />
+                          </td>
+                          <td>{this.props.descriptionValidation}</td>
+                        </tr>
+                        <tr>
+                          <td><label htmlFor="date">Session date <span className="error">*</span></label></td>
+                          <td>
+                            <input
+                              type="text"
+                              id="date"
+                              name="dob"
+                              size="10"
+                              value={this.props.date}
+                              onChange={this.sendValue(this.props.dateEntered)}
+                            />
+                            <span className="note">DD/MM/YYYY</span>
+                          </td>
+                          <td>{this.props.dateValidation}</td>
+                        </tr>
+                        <tr>
+                          <td><label htmlFor="speaker">Speaker <span className="error">*</span></label></td>
+                          <td>{this.speakersDroplist()}</td>
+                          <td>{this.props.speakerIdValidation}</td>
+                        </tr>
+                        <tr>
+                          <td><label htmlFor="admin">Admin <span className="error">*</span></label></td>
+                          <td>{this.adminsDroplist()}</td>
+                          <td>{this.props.adminIdValidation}</td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td>
+                          {this.submitButton()}
+                          {this.props.submitMessage}
+                        </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </fieldset>
+              </form>
+            </div>
+        );
+    }
+}
+
+
+NewSessionForm.propTypes = {
+    // Data captured by the forrm
+    title: PropTypes.string,
+    titleValidation: PropTypes.string,
+
+    description: PropTypes.string,
+    descriptionValidation: PropTypes.string,
+
+    date: PropTypes.string,
+    dateValidation: PropTypes.string,
+
+    speakerId: PropTypes.string,
+    speakerIdValidation: PropTypes.string,
+
+    adminId: PropTypes.string,
+    adminIdValidation: PropTypes.string,
+
+    error: PropTypes.string,
+
+    // Droplists async population
+    admins: PropTypes.array,
+    speakers: PropTypes.array,
+    isFetchingAdmins: PropTypes.bool,
+    isFetchingSpeakers: PropTypes.bool,
+
+    // Saving
+    submitMessage: PropTypes.string,
+
+    // Handlers for user actions
+    submit: PropTypes.func,
+    titleEntered: PropTypes.func,
+    descriptionEntered: PropTypes.func,
+    dateEntered: PropTypes.func,
+    speakerSelected: PropTypes.func,
+    adminSelected: PropTypes.func,
+};
+
+export default NewSessionForm;
