@@ -34,9 +34,9 @@ class NewEvent extends Component {
         return (
           <NewEventForm
             name={this.props.name}
-            nameValidation={this.props.nameValidation}
+            nameValidationMessage={this.props.nameValidationMessage}
             date={this.props.date}
-            dateValidation={this.props.dateValidation}
+            dateValidationMessage={this.props.dateValidationMessage}
             error={this.props.error}
             submitMessage={this.props.submitMessage}
 
@@ -52,9 +52,9 @@ function mapStateToProps(state) {
     return {
         submitMessage: 'TBD',
         name: 'TBD',
-        nameValidation: 'TBD',
+        nameValidationMessage: 'TBD',
         date: 'TBD',
-        dateValidation: 'TBD',
+        dateValidationMessage: 'TBD',
         error: 'TBD',
     };
 }
@@ -66,9 +66,9 @@ NewEvent.contextTypes = {
 
 NewEvent.propTypes = {
     name: PropTypes.string,
-    nameValidation: PropTypes.string,
+    nameValidationMessage: PropTypes.string,
     date: PropTypes.string,
-    dateValidation: PropTypes.string,
+    dateValidationMessage: PropTypes.string,
     error: PropTypes.string,
     submitMessage: PropTypes.string,
     submit: PropTypes.func,

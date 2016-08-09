@@ -13,8 +13,8 @@ class NewEventForm extends Component {
         const buttonAttributes = {};
 
         const validationMsg =
-            this.props.nameValidation ||
-            this.props.dateValidation;
+            this.props.nameValidationMessage ||
+            this.props.dateValidationMessage;
 
         if (validationMsg) {
             buttonAttributes.disabled = 'disabled';
@@ -48,7 +48,7 @@ class NewEventForm extends Component {
                               onChange={this.sendValue(this.props.nameEntered)}
                             />
                           </td>
-                          <td>{this.props.nameValidation}</td>
+                          <td>{this.props.nameValidationMessage}</td>
                         </tr>
                         <tr>
                           <td><label htmlFor="date">Event date <span className="error">*</span></label></td>
@@ -63,7 +63,7 @@ class NewEventForm extends Component {
                             />
                             <span className="note">DD/MM/YYYY</span>
                           </td>
-                          <td>{this.props.dateValidation}</td>
+                          <td>{this.props.dateValidationMessage}</td>
                         </tr>
                         <tr>
                           <td></td>
@@ -85,10 +85,10 @@ class NewEventForm extends Component {
 NewEventForm.propTypes = {
     // Data captured by the form
     name: PropTypes.string,
-    nameValidation: PropTypes.string,
+    nameValidationMessage: PropTypes.string,
 
     date: PropTypes.string,
-    dateValidation: PropTypes.string,
+    dateValidationMessage: PropTypes.string,
 
     error: PropTypes.string,
 
