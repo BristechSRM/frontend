@@ -56,7 +56,7 @@ class NewEventForm extends Component {
                             <input
                               type="text"
                               id="date"
-                              name="dob"
+                              name="date"
                               size="10"
                               value={this.props.date}
                               onChange={this.sendValue(this.props.dateEntered)}
