@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 import EventCard from './EventCard.jsx';
+import NewEventCard from './NewEventCard.jsx';
 
 const styles = {
     base: {
@@ -32,9 +33,20 @@ class EventList extends Component {
         );
     }
 
+    renderNewEventLink(event) {
+        this.key++;
+        return (
+           <NewEventCard
+             key="AddNewEvent"
+             onSelected={e => this.props.onNewEventSelected(e)}
+           />
+        );
+    }
+
     render() {
         return (
             <div styles={styles.base}>
+                { this.renderNewEventLink() }
                 { this.props.events.map(e => this.renderEvent(e)) }
             </div>
         );
@@ -44,6 +56,7 @@ class EventList extends Component {
 EventList.propTypes = {
     events: PropTypes.array,
     onEventSelected: PropTypes.func,
+    onNewEventSelected: PropTypes.func,
 };
 
 export default Radium(EventList);

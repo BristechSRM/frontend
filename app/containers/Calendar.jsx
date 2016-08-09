@@ -22,12 +22,18 @@ class Calendar extends Component {
         this.context.router.push(`/calendar/${event.id}`);
     }
 
+    handleNewEventSelected(event) {
+        alert("TODO: New Event Page");
+        // this.context.router.push(`/events/new`);
+    }
+
     render() {
         const result = this.props.error
              ? this.props.error.message
              : <EventList
                events={this.props.list}
                onEventSelected={e => this.handleEventSelected(e)}
+               onNewEventSelected={e => this.handleNewEventSelected(e)}
              />;
 
         return (
