@@ -12,11 +12,11 @@ class NewEventForm extends Component {
     submitButton() {
         const buttonAttributes = {};
 
-        const validationMsg =
+        const somethingIsInvalid =
             this.props.nameValidationMessage ||
             this.props.dateValidationMessage;
 
-        if (validationMsg) {
+        if (somethingIsInvalid) {
             buttonAttributes.disabled = 'disabled';
         }
 

@@ -57,14 +57,14 @@ class NewSessionForm extends Component {
     submitButton() {
         const buttonAttributes = {};
 
-        const validationMsg =
+        const anythingIsInvalid =
             this.props.titleValidationMessage ||
             this.props.descriptionValidationMessage ||
             this.props.dateValidationMessage ||
             this.props.adminIdValidationMessage ||
             this.props.speakerIdValidationMessage;
 
-        if (validationMsg) {
+        if (anythingIsInvalid) {
             buttonAttributes.disabled = 'disabled';
         }
 
