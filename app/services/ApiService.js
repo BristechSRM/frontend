@@ -68,6 +68,13 @@ class Api {
         const requestData = { method: 'PATCH', headers, body: JSON.stringify(op) };
         return this.performRequest(uri, requestData);
     }
+
+    post(uri, obj) {
+        const headers = this.getAuthorizationAndJsonHeaders();
+        const body = JSON.stringify(obj);
+        const requestData = { method: 'POST', headers, body };
+        return this.performRequest(uri, requestData);
+    }
 }
 
 export default new Api();

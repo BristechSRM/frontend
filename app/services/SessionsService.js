@@ -3,6 +3,8 @@ import api from './ApiService.js';
 import _ from 'lodash';
 
 const sessionsUri = DiscoveryService.getUri('api-gateway', '/sessions');
+const speakersUri = DiscoveryService.getUri('api-gateway', '/speakers');
+const adminsUri = DiscoveryService.getUri('api-gateway', '/admins');
 
 const sortProperties = {
     name: {
@@ -77,6 +79,19 @@ class SessionsService {
         const op = { path, value };
         return api.patch(`${sessionsUri}/${sessionId}`, op);
     }
+
+    postSession(session) {
+        return api.post(sessionsUri, session);
+    }
+
+    getAllSpeakers() {
+        return api.get(speakersUri);
+    }
+
+    getAllAdmins() {
+        return api.get(adminsUri);
+    }
+
 }
 
 export default new SessionsService();

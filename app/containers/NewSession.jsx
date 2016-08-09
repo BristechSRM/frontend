@@ -1,6 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import NewSessionForm from '../components/Session/NewSessionForm.jsx';
+import {
+    newSessionTitleEntered,
+    newSessionDescriptionEntered,
+    newSessionDateEntered,
+    newSessionSpeakerSelected,
+    newSessionAdminSelected,
+    getAllSpeakers,
+    getAllAdmins,
+    submitNewSession,
+} from '../actions';
+
 
 // React container component for creating a new session.
 // Acts as a container for the display-only NewSessionForm component.
@@ -17,32 +28,33 @@ class NewSession extends Component {
     }
 
     componentDidMount() {
-        alert('TODO: get all speakers & admins for droplist');
+        this.props.dispatch(getAllSpeakers());
+        this.props.dispatch(getAllAdmins());
     }
 
 
     titleEntered(title) {
-        alert('TODO: dispatch action to set value in redux store');
+        this.props.dispatch(newSessionTitleEntered(title));
     }
 
     descriptionEntered(description) {
-        alert('TODO: dispatch action to set value in redux store');
+        this.props.dispatch(newSessionDescriptionEntered(description));
     }
 
     dateEntered(date) {
-        alert('TODO: dispatch action to set value in redux store');
+        this.props.dispatch(newSessionDateEntered(date));
     }
 
     speakerSelected(speakerId) {
-        alert('TODO: dispatch action to set value in redux store');
+        this.props.dispatch(newSessionSpeakerSelected(speakerId));
     }
 
     adminSelected(adminId) {
-        alert('TODO: dispatch action to set value in redux store');
+        this.props.dispatch(newSessionAdminSelected(adminId));
     }
 
     submit() {
-        alert('TODO: dispatch action to make REST call to save session');
+        this.props.dispatch(submitNewSession(this.context.router));
     }
 
     render() {
@@ -59,11 +71,8 @@ class NewSession extends Component {
             adminId={this.props.adminId}
             adminIdValidation={this.props.adminIdValidation}
             error={this.props.error}
-
-            // TODO: replace dummy data with actual retrieved data
-            admins={[{ forename: 'Joe', surname: 'Bloggs', id: '1111.2222' }]}
-            speakers={[{ forename: 'Blodwyn', surname: 'Jones', id: '3333.4444' }]}
-
+            admins={this.props.admins}
+            speakers={this.props.speakers}
             isFetchingAdmins={this.props.isFetchingAdmins}
             isFetchingSpeakers={this.props.isFetchingSpeakers}
             submitMessage={this.props.submitMessage}
@@ -81,7 +90,22 @@ class NewSession extends Component {
 
 function mapStateToProps(state) {
     return {
-        // TODO: map redux state to properties for sub-components
+        admins: state.newsession.admins,
+        speakers: state.newsession.speakers,
+        isFetchingAdmins: state.newsession.isFetchingAdmins,
+        isFetchingSpeakers: state.newsession.isFetchingSpeakers,
+        submitMessage: state.newsession.submitMessage,
+        title: state.newsession.title,
+        titleValidation: state.newsession.titleValidation,
+        description: state.newsession.description,
+        descriptionValidation: state.newsession.descriptionValidation,
+        date: state.newsession.date,
+        dateValidation: state.newsession.dateValidation,
+        speakerId: state.newsession.speakerId,
+        speakerIdValidation: state.newsession.speakerIdValidation,
+        adminId: state.newsession.adminId,
+        adminIdValidation: state.newsession.adminIdValidation,
+        error: state.newsession.error,
     };
 }
 
