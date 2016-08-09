@@ -23,8 +23,7 @@ class Calendar extends Component {
     }
 
     handleNewEventSelected(event) {
-        alert("TODO: New Event Page");
-        // this.context.router.push(`/events/new`);
+        this.context.router.push('/events/new');
     }
 
     render() {

@@ -31,19 +31,19 @@ const initialState = new immutable.Record({
     submitMessage: null,
 
     title: '',
-    titleValidation: validateMandatory(''),
+    titleValidationMessage: validateMandatory(''),
 
     description: '',
-    descriptionValidation: validateMandatory(''),
+    descriptionValidationMessage: validateMandatory(''),
 
     date: '',
-    dateValidation: validateMandatory(''),
+    dateValidationMessage: validateMandatory(''),
 
     speakerId: null,
-    speakerIdValidation: validateMandatory(null),
+    speakerIdValidationMessage: validateMandatory(null),
 
     adminId: null,
-    adminIdValidation: validateMandatory(null),
+    adminIdValidationMessage: validateMandatory(null),
     error: null,
 })();
 
@@ -53,27 +53,27 @@ const newsession = handleActions({
     [actionTypes.NEW_SESSION_ADD_TITLE]: (state, action) =>
         state
             .set('title', action.payload)
-            .set('titleValidation', validateMandatory(action.payload)),
+            .set('titleValidationMessage', validateMandatory(action.payload)),
 
     [actionTypes.NEW_SESSION_ADD_DESCRIPTION]: (state, action) =>
         state
             .set('description', action.payload)
-            .set('descriptionValidation', validateMandatory(action.payload)),
+            .set('descriptionValidationMessage', validateMandatory(action.payload)),
 
     [actionTypes.NEW_SESSION_ADD_DATE]: (state, action) =>
         state
             .set('date', action.payload)
-            .set('dateValidation', validateMandatoryDate(action.payload)),
+            .set('dateValidationMessage', validateMandatoryDate(action.payload)),
 
     [actionTypes.NEW_SESSION_ADD_SPEAKER_ID]: (state, action) =>
         state
             .set('speakerId', action.payload)
-            .set('speakerIdValidation', validateMandatory(action.payload)),
+            .set('speakerIdValidationMessage', validateMandatory(action.payload)),
 
     [actionTypes.NEW_SESSION_ADD_ADMIN_ID]: (state, action) =>
         state
             .set('adminId', action.payload)
-            .set('adminIdValidation', validateMandatory(action.payload)),
+            .set('adminIdValidationMessage', validateMandatory(action.payload)),
 
     [actionTypes.NEW_SESSION_GET_SPEAKERS_START]:
         (state) => state.set('isFetchingSpeakers', true),

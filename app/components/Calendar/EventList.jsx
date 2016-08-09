@@ -33,7 +33,7 @@ class EventList extends Component {
         );
     }
 
-    renderNewEventLink(event) {
+    renderNewEventLink() {
         this.key++;
         return (
            <NewEventCard

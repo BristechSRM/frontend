@@ -61,15 +61,15 @@ class NewSession extends Component {
         return (
           <NewSessionForm
             title={this.props.title}
-            titleValidation={this.props.titleValidation}
+            titleValidationMessage={this.props.titleValidationMessage}
             description={this.props.description}
-            descriptionValidation={this.props.descriptionValidation}
+            descriptionValidationMessage={this.props.descriptionValidationMessage}
             date={this.props.date}
-            dateValidation={this.props.dateValidation}
+            dateValidationMessage={this.props.dateValidationMessage}
             speakerId={this.props.speakerId}
-            speakerIdValidation={this.props.speakerIdValidation}
+            speakerIdValidationMessage={this.props.speakerIdValidationMessage}
             adminId={this.props.adminId}
-            adminIdValidation={this.props.adminIdValidation}
+            adminIdValidationMessage={this.props.adminIdValidationMessage}
             error={this.props.error}
             admins={this.props.admins}
             speakers={this.props.speakers}
@@ -96,15 +96,15 @@ function mapStateToProps(state) {
         isFetchingSpeakers: state.newsession.isFetchingSpeakers,
         submitMessage: state.newsession.submitMessage,
         title: state.newsession.title,
-        titleValidation: state.newsession.titleValidation,
+        titleValidationMessage: state.newsession.titleValidationMessage,
         description: state.newsession.description,
-        descriptionValidation: state.newsession.descriptionValidation,
+        descriptionValidationMessage: state.newsession.descriptionValidationMessage,
         date: state.newsession.date,
-        dateValidation: state.newsession.dateValidation,
+        dateValidationMessage: state.newsession.dateValidationMessage,
         speakerId: state.newsession.speakerId,
-        speakerIdValidation: state.newsession.speakerIdValidation,
+        speakerIdValidationMessage: state.newsession.speakerIdValidationMessage,
         adminId: state.newsession.adminId,
-        adminIdValidation: state.newsession.adminIdValidation,
+        adminIdValidationMessage: state.newsession.adminIdValidationMessage,
         error: state.newsession.error,
     };
 }
@@ -116,15 +116,15 @@ NewSession.contextTypes = {
 
 NewSession.propTypes = {
     title: PropTypes.string,
-    titleValidation: PropTypes.string,
+    titleValidationMessage: PropTypes.string,
     description: PropTypes.string,
-    descriptionValidation: PropTypes.string,
+    descriptionValidationMessage: PropTypes.string,
     date: PropTypes.string,
-    dateValidation: PropTypes.string,
+    dateValidationMessage: PropTypes.string,
     speakerId: PropTypes.string,
-    speakerIdValidation: PropTypes.string,
+    speakerIdValidationMessage: PropTypes.string,
     adminId: PropTypes.string,
-    adminIdValidation: PropTypes.string,
+    adminIdValidationMessage: PropTypes.string,
     error: PropTypes.string,
     isFetchingAdmins: PropTypes.bool,
     isFetchingSpeakers: PropTypes.bool,

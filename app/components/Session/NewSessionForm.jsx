@@ -57,14 +57,14 @@ class NewSessionForm extends Component {
     submitButton() {
         const buttonAttributes = {};
 
-        const validationMsg =
-            this.props.titleValidation ||
-            this.props.descriptionValidation ||
-            this.props.dateValidation ||
-            this.props.adminIdValidation ||
-            this.props.speakerIdValidation;
+        const anythingIsInvalid =
+            this.props.titleValidationMessage ||
+            this.props.descriptionValidationMessage ||
+            this.props.dateValidationMessage ||
+            this.props.adminIdValidationMessage ||
+            this.props.speakerIdValidationMessage;
 
-        if (validationMsg) {
+        if (anythingIsInvalid) {
             buttonAttributes.disabled = 'disabled';
         }
 
@@ -96,7 +96,7 @@ class NewSessionForm extends Component {
                               onChange={this.sendValue(this.props.titleEntered)}
                             />
                           </td>
-                          <td>{this.props.titleValidation}</td>
+                          <td>{this.props.titleValidationMessage}</td>
                         </tr>
                         <tr>
                           <td><label htmlFor="description">Description <span className="error">*</span></label></td>
@@ -110,7 +110,7 @@ class NewSessionForm extends Component {
                               onChange={this.sendValue(this.props.descriptionEntered)}
                             />
                           </td>
-                          <td>{this.props.descriptionValidation}</td>
+                          <td>{this.props.descriptionValidationMessage}</td>
                         </tr>
                         <tr>
                           <td><label htmlFor="date">Session date <span className="error">*</span></label></td>
@@ -118,24 +118,24 @@ class NewSessionForm extends Component {
                             <input
                               type="text"
                               id="date"
-                              name="dob"
+                              name="date"
                               size="10"
                               value={this.props.date}
                               onChange={this.sendValue(this.props.dateEntered)}
                             />
                             <span className="note">DD/MM/YYYY</span>
                           </td>
-                          <td>{this.props.dateValidation}</td>
+                          <td>{this.props.dateValidationMessage}</td>
                         </tr>
                         <tr>
                           <td><label htmlFor="speaker">Speaker <span className="error">*</span></label></td>
                           <td>{this.speakersDroplist()}</td>
-                          <td>{this.props.speakerIdValidation}</td>
+                          <td>{this.props.speakerIdValidationMessage}</td>
                         </tr>
                         <tr>
                           <td><label htmlFor="admin">Admin <span className="error">*</span></label></td>
                           <td>{this.adminsDroplist()}</td>
-                          <td>{this.props.adminIdValidation}</td>
+                          <td>{this.props.adminIdValidationMessage}</td>
                         </tr>
                         <tr>
                         <td></td>
@@ -157,19 +157,19 @@ class NewSessionForm extends Component {
 NewSessionForm.propTypes = {
     // Data captured by the form
     title: PropTypes.string,
-    titleValidation: PropTypes.string,
+    titleValidationMessage: PropTypes.string,
 
     description: PropTypes.string,
-    descriptionValidation: PropTypes.string,
+    descriptionValidationMessage: PropTypes.string,
 
     date: PropTypes.string,
-    dateValidation: PropTypes.string,
+    dateValidationMessage: PropTypes.string,
 
     speakerId: PropTypes.string,
-    speakerIdValidation: PropTypes.string,
+    speakerIdValidationMessage: PropTypes.string,
 
     adminId: PropTypes.string,
-    adminIdValidation: PropTypes.string,
+    adminIdValidationMessage: PropTypes.string,
 
     error: PropTypes.string,
 
