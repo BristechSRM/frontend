@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-import moment from 'moment';
-
 
 // A dummy 'EventCard' that serves as a clickable 'add new event' link
 const styles = {
