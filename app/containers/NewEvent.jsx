@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import NewEventForm from '../components/Events/NewEventForm.jsx';
-
+import {
+    newEventNameEntered,
+    newEventDateEntered,
+    submitNewEvent,
+} from '../actions';
 
 // React container component for creating a new event.
 // Acts as a container for the display-only NewEventForm component.
@@ -19,15 +23,15 @@ class NewEvent extends Component {
 
 
     nameEntered(name) {
-        alert('Action on name entered TBD');
+        this.props.dispatch(newEventNameEntered(name));
     }
 
     dateEntered(date) {
-        alert('Action on date entered TBD');
+        this.props.dispatch(newEventDateEntered(date));
     }
 
     submit() {
-        alert('Action on form submit TBD');
+        this.props.dispatch(submitNewEvent(this.context.router));
     }
 
     render() {
@@ -50,12 +54,12 @@ class NewEvent extends Component {
 
 function mapStateToProps(state) {
     return {
-        submitMessage: 'TBD',
-        name: 'TBD',
-        nameValidationMessage: 'TBD',
-        date: 'TBD',
-        dateValidationMessage: 'TBD',
-        error: 'TBD',
+        submitMessage: state.newevent.submitMessage,
+        name: state.newevent.name,
+        nameValidationMessage: state.newevent.nameValidationMessage,
+        date: state.newevent.date,
+        dateValidationMessage: state.newevent.dateValidationMessage,
+        error: state.newevent.error,
     };
 }
 

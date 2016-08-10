@@ -141,7 +141,7 @@ export const newSessionAdminSelected = (newAdminId) =>
 export const submitNewSession = (history) =>
     (dispatch, getState) => {
         dispatch(createAction(actionTypes.NEW_SESSION_SUBMIT_START)());
-        const sessionInRedux = window.debug_session = getState().newsession;
+        const sessionInRedux = getState().newsession;
 
         const newSessionPostData = {
             title: sessionInRedux.title,
@@ -182,3 +182,35 @@ export const getAllAdmins = (sessionId) =>
             .catch(error => dispatch(createAction(actionTypes.NEW_SESSION_GET_ADMINS_ERROR)(error)));
     };
 
+export const newEventNameEntered = (newName) =>
+    createAction(actionTypes.NEW_EVENT_ADD_NAME)(newName);
+
+export const newEventDateEntered = (newDate) =>
+    createAction(actionTypes.NEW_EVENT_ADD_DATE)(newDate);
+
+// This action requires the react-route history object (from this.props.history) to be passed in,
+// because the action re-routes the user to the 'event details' page.
+// Simply dispatching push(url) doesn't work - it updates history only.
+export const submitNewEvent = (history) =>
+    (dispatch, getState) => {
+        dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_START)());
+        const eventInRedux = getState().newevent;
+
+        const newEventPostData = {
+            name: eventInRedux.title,
+            date: moment(eventInRedux.date, 'D/M/YYYY').format(),
+        };
+
+        return EventsService.postEvent(newEventPostData)
+            .then(
+                (newEventId) => {
+                    setTimeout(() => {
+                        dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_COMPLETE)());
+                        alert('TBD: Redirect to the event page');
+                        // TODO: Event details page in a future release
+                        // TODO something like this: history.push(`/events/${newEventId}`);
+                    }, 5000);
+                }
+            )
+            .catch(error => dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_ERROR)(error)));
+    };

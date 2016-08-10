@@ -11,6 +11,11 @@ class EventsService {
     getEvent(eventId) {
         return api.get(`${eventsUri}/${eventId}`);
     }
+
+    postEvent(event) {
+        return api.post(eventsUri, event);
+    }
+
 }
 
 export default new EventsService();
