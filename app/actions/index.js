@@ -207,9 +207,13 @@ export const submitNewEvent = (history) =>
                 (newEventId) => {
                     setTimeout(() => {
                         dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_COMPLETE)());
-                        alert('TBD: Redirect to the event page');
-                        // TODO: Event details page in a future release
-                        // TODO something like this: history.push(`/events/${newEventId}`);
+                        // TBD: Redirect to an event page (when such a thing exists)
+                        // for now, redirect to the main calendar page, where at least
+                        // the event can be seen.
+
+                        // Eventually: history.push(`/events/${newEventId}`);
+                        // For now:
+                        history.push('/calendar');
                     }, 5000);
                 }
             )
