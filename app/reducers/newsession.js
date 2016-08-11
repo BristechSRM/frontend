@@ -17,7 +17,9 @@ const validateMandatoryDate = (value) => {
     const parsedDate = moment(value, expectedDateFormat, strict);
 
     if (!parsedDate.isValid()) {
-        return `Format required: ${expectedDateFormat}`;
+        // Note although we accept D/M/YYYY (as per 'moment.js'), the
+        // user will better understand "DD/MM/YYYY"
+        return 'Format required: DD/MM/YYYY';
     }
 
     return null;

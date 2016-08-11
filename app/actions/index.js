@@ -197,7 +197,8 @@ export const submitNewEvent = (history) =>
         const eventInRedux = getState().newevent;
 
         const newEventPostData = {
-            name: eventInRedux.title,
+            id: '00000000-0000-0000-0000-000000000000',
+            name: eventInRedux.name,
             date: moment(eventInRedux.date, 'D/M/YYYY').format(),
         };
 
