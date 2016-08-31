@@ -5,7 +5,7 @@ git clone https://github.com/BristechSRM/frontend.git
 cd frontend
 ```
 
-Add app/config/config.dev.json
+Create `app/config/config.dev.json` based on `app/config/template.config.dev.json`.  We don't commit `config.dev.json` to source control, which allows each developer to have a different local config without committing those changes.
 
 ```
 npm install
