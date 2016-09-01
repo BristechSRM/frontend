@@ -45,7 +45,7 @@ class EventSessions extends Component {
 EventSessions.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.object,
-    sessions: PropTypes.array,
+    sessions: PropTypes.object,
     dispatch: PropTypes.func,
     params: PropTypes.object,
 };

@@ -182,14 +182,14 @@ SessionCard.propTypes = {
     onSelect: PropTypes.func,
     title: PropTypes.string,
     status: PropTypes.string,
-    date: PropTypes.object,
+    date: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     speakerRating: PropTypes.number,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,
-    lastContactDate: PropTypes.object,
+    lastContactDate: PropTypes.string,
     lastContactDirection: PropTypes.string,
 };
 

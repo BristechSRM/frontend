@@ -54,7 +54,7 @@ class EventList extends Component {
 }
 
 EventList.propTypes = {
-    events: PropTypes.array,
+    events: PropTypes.object,
     onEventSelected: PropTypes.func,
     onNewEventSelected: PropTypes.func,
 };

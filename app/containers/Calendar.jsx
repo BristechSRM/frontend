@@ -49,7 +49,7 @@ class Calendar extends Component {
 Calendar.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.object,
-    list: PropTypes.array,
+    list: PropTypes.object,
     children: PropTypes.object,
     dispatch: PropTypes.func,
 };
