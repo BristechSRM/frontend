@@ -38,7 +38,7 @@ class EventList extends Component {
         return (
            <NewEventCard
              key="AddNewEvent"
-             onSelected={e => this.props.onNewEventSelected(e)}
+             onSelected={() => this.props.onNewEventSelected()}
            />
         );
     }
