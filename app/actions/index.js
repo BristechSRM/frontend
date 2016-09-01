@@ -203,19 +203,17 @@ export const submitNewEvent = (history) =>
         };
 
         return EventsService.postEvent(newEventPostData)
-            .then(
-                (newEventId) => {
-                    setTimeout(() => {
-                        dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_COMPLETE)());
-                        // TBD: Redirect to an event page (when such a thing exists)
-                        // for now, redirect to the main calendar page, where at least
-                        // the event can be seen.
+            .then(() => {
+                setTimeout(() => {
+                    dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_COMPLETE)());
+                    // TBD: Redirect to an event page (when such a thing exists)
+                    // for now, redirect to the main calendar page, where at least
+                    // the event can be seen.
 
-                        // Eventually: history.push(`/events/${newEventId}`);
-                        // For now:
-                        history.push('/calendar');
-                    }, 5000);
-                }
-            )
+                    // Eventually: history.push(`/events/${newEventId}`);
+                    // For now:
+                    history.push('/calendar');
+                }, 5000);
+            })
             .catch(error => dispatch(createAction(actionTypes.NEW_EVENT_SUBMIT_ERROR)(error)));
     };
