@@ -3,11 +3,6 @@
 ```
 git clone https://github.com/BristechSRM/frontend.git
 cd frontend
-```
-
-Add app/config/config.dev.json
-
-```
 npm install
 npm run start:dev
 ```
