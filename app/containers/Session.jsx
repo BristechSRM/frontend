@@ -81,6 +81,7 @@ class Session extends Component {
                       speakerHandles={this.props.speaker ? this.props.speaker.handles : null}
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
+                      event={this.props.session.event}
                       lastContact={this.props.session.lastContact}
                       editStash={this.props.editStash}
                       changeEditMode={this.changeEditMode}
