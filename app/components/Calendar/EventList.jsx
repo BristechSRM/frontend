@@ -27,7 +27,7 @@ class EventList extends Component {
              key={this.key}
              id={event.id}
              date={event.date}
-             sessions={event.sessions}
+             sessionIds={event.sessionIds}
              onSelected={e => this.props.onEventSelected(e)}
            />
         );

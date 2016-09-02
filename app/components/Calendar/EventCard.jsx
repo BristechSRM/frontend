@@ -32,7 +32,7 @@ const styles = {
 class EventCard extends Component {
 
     render() {
-        const sufficientSessions = this.props.sessions.length >= 2;
+        const sufficientSessions = this.props.sessionIds.length >= 2;
         const cardBorderStyles = {
             borderLeft: `8px ${sufficientSessions ? '#84a935' : '#f49939'} solid`,
         };
@@ -42,7 +42,7 @@ class EventCard extends Component {
         const month = date.format('MMMM');
         const year = date.year();
 
-        const sessionLabel = this.props.sessions.length === 1 ? 'session' : 'sessions';
+        const sessionLabel = this.props.sessionIds.length === 1 ? 'session' : 'sessions';
 
         return (
             <div
@@ -54,7 +54,7 @@ class EventCard extends Component {
                  <span>{month}</span>&nbsp;
                  <span style={styles.base.date.year}>{year}</span>
                </p>
-               <p style={styles.base.sessions}>{`${this.props.sessions.length} ${sessionLabel}`}</p>
+               <p style={styles.base.sessions}>{`${this.props.sessionIds.length} ${sessionLabel}`}</p>
             </div>
         );
     }
@@ -63,7 +63,7 @@ class EventCard extends Component {
 EventCard.propTypes = {
     id: PropTypes.string,
     date: PropTypes.string,
-    sessions: PropTypes.array,
+    sessionIds: PropTypes.array,
     onSelected: PropTypes.func,
 };
 
