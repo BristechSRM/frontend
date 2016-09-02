@@ -12,6 +12,10 @@ const styles = {
                 cursor: 'pointer',
             },
         },
+        description: {
+            margin: '0',
+            fontSize: '1.3rem',
+        },
         date: {
             margin: '0',
             fontSize: '1.3rem',
@@ -49,6 +53,7 @@ class EventCard extends Component {
               style={[styles.base.card, cardBorderStyles]}
               onClick={() => this.props.onSelected({ id: this.props.id })}
             >
+               <p style={styles.base.description}>{this.props.description}</p>
                <p style={styles.base.date}>
                  <span style={styles.base.date.day}>{day}</span>&nbsp;
                  <span>{month}</span>&nbsp;
@@ -62,6 +67,7 @@ class EventCard extends Component {
 
 EventCard.propTypes = {
     id: PropTypes.string,
+    description: PropTypes.string,
     date: PropTypes.string,
     sessionIds: PropTypes.array,
     onSelected: PropTypes.func,

@@ -26,6 +26,7 @@ class EventList extends Component {
            <EventCard
              key={this.key}
              id={event.id}
+             description={event.description}
              date={event.date}
              sessionIds={event.sessionIds}
              onSelected={e => this.props.onEventSelected(e)}
