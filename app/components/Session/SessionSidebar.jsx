@@ -15,6 +15,12 @@ class SessionSidebar extends Component {
         return firstHandle ? firstHandle.identifier : '';
     }
 
+    getEventString(event, namePath) {
+        const eventDate = this.formatDate(event.date, 'Unset Date');
+        const eventName = event[namePath] ? event[namePath] : 'Unnamed Event';
+        return `${eventName} on ${eventDate}`;
+    }
+
     formatDate(date, missingDateMessage) {
         if (!date) {
             return missingDateMessage;
@@ -26,14 +32,48 @@ class SessionSidebar extends Component {
             : date;
     }
 
+    handleSessionEventClicked(event) {
+        this.context.router.push(`/calendar/${event.id}`);
+    }
+
     joinName(forename, surname) {
         const fn = forename ? `${forename} ` : '';
         const ln = surname || '';
         return `${fn} ${ln}`;
     }
 
-    handleSessionEventClicked(event) {
-        this.context.router.push(`/calendar/${event.id}`);
+    eventsSelection() {
+        if (this.props.isFetchingEvents) {
+            return <select><option>Loading events...</option></select>;
+        }
+        return (
+                <select
+                  id="event"
+                  name="event"
+                  defaultValue={this.props.event ? this.props.event.id : null}
+                  onChange={(event) => this.props.changeEditStash('session', 'eventId', event.target.value)}
+                >
+                    <option value=""></option>
+                    {
+                        this.props.allEvents.map(event =>
+                            <option key={`event-${event.id}`} value={event.id}>
+                                {this.getEventString(event, 'description')}
+                            </option>
+                        )
+                    }
+                </select>
+        );
+    }
+
+    eventDisplay() {
+        return (
+            this.props.event ?
+                <a onClick={() => this.handleSessionEventClicked(this.props.event)} href="">
+                    {this.getEventString(this.props.event, 'description')}
+                </a>
+            :
+                null
+        );
     }
 
     render() {
@@ -44,9 +84,6 @@ class SessionSidebar extends Component {
         const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
         const assignedDate = this.formatDate(this.props.date, 'Not assigned');
         const dateAdded = this.formatDate(this.props.dateAdded, '');
-        const eventDate = this.formatDate(this.props.event ? this.props.event.date : null, 'Unset Date');
-        const eventName = this.props.event ? this.props.event.name : '';
-        const eventString = this.props.event ? `${eventName} on ${eventDate}` : null;
 
         return (
             <div className={styles.sessionSidebar}>
@@ -171,14 +208,19 @@ class SessionSidebar extends Component {
                             <tr>
                                 <td>Assigned Event</td>
                                 <td>
-                                    {
-                                        this.props.event ?
-                                            <a onClick={() => this.handleSessionEventClicked(this.props.event)} href="">
-                                                {eventString}
-                                            </a>
-                                        :
-                                            null
-                                    }
+                                    <EditSaveControl
+                                      changeEditMode={(inEditMode) =>
+                                          this.props.changeEditMode('session', 'eventId', inEditMode)}
+                                      onSaveClick={this.props.saveSessionEventId}
+                                      inEditMode={this.props.editStash.session.eventId.inEditMode}
+                                    >
+                                        {
+                                            this.props.editStash.session.eventId.inEditMode ?
+                                                this.eventsSelection()
+                                            :
+                                                this.eventDisplay()
+                                        }
+                                    </EditSaveControl>
                                 </td>
                             </tr>
                             <tr>
@@ -263,6 +305,8 @@ SessionSidebar.propTypes = {
     adminSurname: PropTypes.string,
     event: PropTypes.object,
     lastContact: PropTypes.object,
+    allEvents: PropTypes.object,
+    isFetchingEvents: PropTypes.bool,
     editStash: PropTypes.object,
     changeEditMode: PropTypes.func,
     changeEditStash: PropTypes.func,
@@ -270,6 +314,7 @@ SessionSidebar.propTypes = {
     saveSpeakerBio: PropTypes.func,
     saveSessionDescription: PropTypes.func,
     saveSessionTitle: PropTypes.func,
+    saveSessionEventId: PropTypes.func,
     saveSpeakerNames: PropTypes.func,
 };
 

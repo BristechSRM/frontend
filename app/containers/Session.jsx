@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence,
+import { getSession, getCorrespondence, getAllEvents,
     updateSpeakerRating, updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
-    updateSessionDescription, updateSessionTitle,
+    updateSessionDescription, updateSessionTitle, updateSessionEventId,
     changeSessionViewEditMode,
     changeSessionViewEditStash } from '../actions';
 import styles from './session.scss';
@@ -20,6 +20,7 @@ class Session extends Component {
         this.saveSpeakerBio = () => this.saveStashedChanges('speaker', 'bio', updateSpeakerBio);
         this.saveSessionDescription = () => this.saveStashedChanges('session', 'description', updateSessionDescription);
         this.saveSessionTitle = () => this.saveStashedChanges('session', 'title', updateSessionTitle);
+        this.saveSessionEventId = () => this.saveStashedChanges('session', 'eventId', updateSessionEventId);
         this.saveSpeakerNames = () => {
             this.saveStashedChanges('speaker', 'forename', updateSpeakerForename);
             this.saveStashedChanges('speaker', 'surname', updateSpeakerSurname);
@@ -29,6 +30,7 @@ class Session extends Component {
     componentDidMount() {
         const sessionId = this.props.params.sessionId;
         this.props.dispatch(getSession(sessionId));
+        this.props.dispatch(getAllEvents()); // TODO change to a function to be called when edit mode is entered.
     }
 
     componentWillReceiveProps(nextProps) {
@@ -81,8 +83,10 @@ class Session extends Component {
                       speakerHandles={this.props.speaker ? this.props.speaker.handles : null}
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
-                      event={this.props.session.event}
+                      event={this.props.event}
                       lastContact={this.props.session.lastContact}
+                      allEvents={this.props.events}
+                      isFetchingEvents={this.props.isFetchingEvents}
                       editStash={this.props.editStash}
                       changeEditMode={this.changeEditMode}
                       changeEditStash={this.changeEditStash}
@@ -90,6 +94,7 @@ class Session extends Component {
                       saveSpeakerBio={this.saveSpeakerBio}
                       saveSessionDescription={this.saveSessionDescription}
                       saveSessionTitle={this.saveSessionTitle}
+                      saveSessionEventId={this.saveSessionEventId}
                       saveSpeakerNames={this.saveSpeakerNames}
                     />
                 </div>
@@ -106,7 +111,10 @@ Session.propTypes = {
     session: PropTypes.object,
     speaker: PropTypes.object,
     admin: PropTypes.object,
+    event: PropTypes.object,
     correspondence: PropTypes.object,
+    events: PropTypes.object,
+    isFetchingEvents: PropTypes.bool,
     isFetching: PropTypes.bool,
     editStash: PropTypes.object,
     error: PropTypes.shape({ message: PropTypes.string }),
@@ -121,6 +129,9 @@ function mapStateToProps(state) {
         session: state.session.session,
         speaker: state.session.session.speaker,
         admin: state.session.session.admin,
+        event: state.session.session.event,
+        events: state.session.events,
+        isFetchingEvents: state.session.isFetchingEvents,
         error: state.session.error,
     };
 }

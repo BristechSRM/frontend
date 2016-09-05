@@ -14,6 +14,7 @@ const initialEditStash = new immutable.Record({
     session: new immutable.Record({
         title: initialEditRecord,
         description: initialEditRecord,
+        eventId: initialEditRecord,
     })(),
 })();
 
@@ -22,6 +23,8 @@ const initialState = new immutable.Record({
     editStash: initialEditStash,
     session: new immutable.Record({})(),
     correspondence: immutable.List(),
+    isFetchingEvents: false,
+    events: immutable.List(),
     error: null,
 })();
 
@@ -78,6 +81,18 @@ const session = handleActions({
         state.withMutations(map => {
             map.set('isFetching', false)
                .set('error', action.payload);
+        }),
+
+    [actionTypes.GET_EVENTS_START]: (state) => state.set('isFetchingEvents', true),
+
+    [actionTypes.GET_EVENTS_ERROR]: (state, action) =>
+        state.withMutations(map => {
+            map.set('isFetchingEvents', false).set('error', action.payload);
+        }),
+
+    [actionTypes.GET_EVENTS_COMPLETE]: (state, action) =>
+        state.withMutations(map => {
+            map.set('isFetchingEvents', false).set('events', action.payload);
         }),
 
     [actionTypes.SESSION_VIEW_EDITMODE_CHANGED]: (state, action) =>
