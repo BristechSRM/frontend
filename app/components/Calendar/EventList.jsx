@@ -38,7 +38,7 @@ class EventList extends Component {
         return (
            <NewEventCard
              key="AddNewEvent"
-             onSelected={e => this.props.onNewEventSelected(e)}
+             onSelected={() => this.props.onNewEventSelected()}
            />
         );
     }
@@ -54,7 +54,7 @@ class EventList extends Component {
 }
 
 EventList.propTypes = {
-    events: PropTypes.array,
+    events: PropTypes.object,
     onEventSelected: PropTypes.func,
     onNewEventSelected: PropTypes.func,
 };

@@ -22,7 +22,7 @@ class Calendar extends Component {
         this.context.router.push(`/calendar/${event.id}`);
     }
 
-    handleNewEventSelected(event) {
+    handleNewEventSelected() {
         this.context.router.push('/events/new');
     }
 
@@ -32,7 +32,7 @@ class Calendar extends Component {
              : <EventList
                events={this.props.list}
                onEventSelected={e => this.handleEventSelected(e)}
-               onNewEventSelected={e => this.handleNewEventSelected(e)}
+               onNewEventSelected={() => this.handleNewEventSelected()}
              />;
 
         return (
@@ -49,7 +49,7 @@ class Calendar extends Component {
 Calendar.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.object,
-    list: PropTypes.array,
+    list: PropTypes.object,
     children: PropTypes.object,
     dispatch: PropTypes.func,
 };
