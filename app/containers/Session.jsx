@@ -30,7 +30,7 @@ class Session extends Component {
     componentDidMount() {
         const sessionId = this.props.params.sessionId;
         this.props.dispatch(getSession(sessionId));
-        this.props.dispatch(getAllEvents()); // TODO change to a function to be called when edit mode is entered.
+        this.props.dispatch(getAllEvents());
     }
 
     componentWillReceiveProps(nextProps) {
