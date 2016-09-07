@@ -15,10 +15,10 @@ class SessionSidebar extends Component {
         return firstHandle ? firstHandle.identifier : '';
     }
 
-    getEventString(event, namePath) {
-        const eventDate = this.formatDate(event.date, 'Unset Date');
-        const eventName = event[namePath] ? event[namePath] : 'Unnamed Event';
-        return `${eventName} on ${eventDate}`;
+    getEventDisplayString(event) {
+        const date = this.formatDate(event.date, 'Unset Date');
+        const eventName = event.description ? event.description : 'Unnamed Event';
+        return `${eventName} on ${date}`;
     }
 
     formatDate(date, missingDateMessage) {
@@ -57,7 +57,7 @@ class SessionSidebar extends Component {
                     {
                         this.props.allEvents.map(event =>
                             <option key={`event-${event.id}`} value={event.id}>
-                                {this.getEventString(event, 'description')}
+                                {this.getEventDisplayString(event)}
                             </option>
                         )
                     }
@@ -69,7 +69,7 @@ class SessionSidebar extends Component {
         return (
             this.props.event ?
                 <a onClick={() => this.handleSessionEventClicked(this.props.event)} href="">
-                    {this.getEventString(this.props.event, 'description')}
+                    {this.getEventDisplayString(this.props.event)}
                 </a>
             :
                 null
