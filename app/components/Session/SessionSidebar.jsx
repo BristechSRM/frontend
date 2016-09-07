@@ -16,7 +16,7 @@ class SessionSidebar extends Component {
     }
 
     getEventDisplayString(event) {
-        const date = this.formatDate(event.date, 'Unset Date');
+        const date = this.formatDate(event.date, 'Unspecified Date');
         const eventName = event.description ? event.description : 'Unnamed Event';
         return `${eventName} on ${date}`;
     }
