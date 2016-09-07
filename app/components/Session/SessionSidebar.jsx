@@ -32,6 +32,10 @@ class SessionSidebar extends Component {
         return `${fn} ${ln}`;
     }
 
+    handleSessionEventClicked(event) {
+        this.context.router.push(`/calendar/${event.id}`);
+    }
+
     render() {
         const h1Style = {
             color: SessionStatusService.getStatusColor(this.props.status),
@@ -40,6 +44,9 @@ class SessionSidebar extends Component {
         const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
         const assignedDate = this.formatDate(this.props.date, 'Not assigned');
         const dateAdded = this.formatDate(this.props.dateAdded, '');
+        const eventDate = this.formatDate(this.props.event ? this.props.event.date : null, 'Unset Date');
+        const eventName = this.props.event ? this.props.event.name : '';
+        const eventString = this.props.event ? `${eventName} on ${eventDate}` : null;
 
         return (
             <div className={styles.sessionSidebar}>
@@ -162,7 +169,20 @@ class SessionSidebar extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Assigned Event Date</td>
+                                <td>Assigned Event</td>
+                                <td>
+                                    {
+                                        this.props.event ?
+                                            <a onClick={() => this.handleSessionEventClicked(this.props.event)} href="">
+                                                {eventString}
+                                            </a>
+                                        :
+                                            null
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Assigned Date and Time</td>
                                 <td>{assignedDate}</td>
                             </tr>
                             <tr>
@@ -241,6 +261,7 @@ SessionSidebar.propTypes = {
     speakerBio: PropTypes.string,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
+    event: PropTypes.object,
     lastContact: PropTypes.object,
     editStash: PropTypes.object,
     changeEditMode: PropTypes.func,
@@ -250,6 +271,10 @@ SessionSidebar.propTypes = {
     saveSessionDescription: PropTypes.func,
     saveSessionTitle: PropTypes.func,
     saveSpeakerNames: PropTypes.func,
+};
+
+SessionSidebar.contextTypes = {
+    router: PropTypes.object,
 };
 
 export default SessionSidebar;
