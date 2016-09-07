@@ -72,7 +72,7 @@ class SessionSidebar extends Component {
                     {this.getEventDisplayString(this.props.event)}
                 </a>
             :
-                null
+                <div></div>
         );
     }
 
