@@ -120,6 +120,18 @@ export const updateSessionTitle = (sessionId, newTitle) =>
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_TITLE_ERROR)(error)));
     };
 
+export const updateSessionEventId = (sessionId, newEventId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SESSION_EVENTID_START)());
+        // Note: could reduce payload by only requesting event summary when updating, instead of full session.
+        // Would require update to gateway for an event summary endpoint, and frontend propogation to session reducer
+        return SessionsService.patchSession(sessionId, 'eventId', newEventId)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_EVENTID_COMPLETE)(newEventId)))
+            .then(() => dispatch(getSession(sessionId)))
+            .then(() => dispatch(changeSessionViewEditMode('session', 'eventId', false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_EVENTID_ERROR)(error)));
+    };
+
 export const newSessionTitleEntered = (newTitle) =>
     createAction(actionTypes.NEW_SESSION_ADD_TITLE)(newTitle);
 
