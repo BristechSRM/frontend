@@ -30,6 +30,7 @@ class EventList extends Component {
              date={event.date}
              sessionIds={event.sessionIds}
              onSelected={e => this.props.onEventSelected(e)}
+             onPublish={eventId => this.props.onEventPublishClick(eventId)}
            />
         );
     }
@@ -56,6 +57,7 @@ class EventList extends Component {
 
 EventList.propTypes = {
     events: PropTypes.object,
+    onEventPublishClick: PropTypes.func,
     onEventSelected: PropTypes.func,
     onNewEventSelected: PropTypes.func,
 };

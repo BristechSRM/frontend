@@ -53,13 +53,16 @@ class EventCard extends Component {
               style={[styles.base.card, cardBorderStyles]}
               onClick={() => this.props.onSelected({ id: this.props.id })}
             >
-               <p style={styles.base.description}>{this.props.description}</p>
-               <p style={styles.base.date}>
-                 <span style={styles.base.date.day}>{day}</span>&nbsp;
-                 <span>{month}</span>&nbsp;
-                 <span style={styles.base.date.year}>{year}</span>
-               </p>
-               <p style={styles.base.sessions}>{`${this.props.sessionIds.length} ${sessionLabel}`}</p>
+                <p style={styles.base.description}>{this.props.description}</p>
+                <button onClick={() => this.props.onPublish(this.props.id)}>
+                    Publish
+                </button>
+                <p style={styles.base.date}>
+                    <span style={styles.base.date.day}>{day}</span>&nbsp;
+                    <span>{month}</span>&nbsp;
+                    <span style={styles.base.date.year}>{year}</span>
+                </p>
+                <p style={styles.base.sessions}>{`${this.props.sessionIds.length} ${sessionLabel}`}</p>
             </div>
         );
     }
@@ -71,6 +74,7 @@ EventCard.propTypes = {
     date: PropTypes.string,
     sessionIds: PropTypes.array,
     onSelected: PropTypes.func,
+    onPublish: PropTypes.func,
 };
 
 export default Radium(EventCard);

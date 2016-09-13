@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import EventList from '../components/Calendar/EventList.jsx';
 import { connect } from 'react-redux';
-import { getAllEvents } from '../actions';
+import { getAllEvents, publishEvent } from '../actions';
 import styles from './calendar.scss';
 
 class Calendar extends Component {
@@ -26,11 +26,16 @@ class Calendar extends Component {
         this.context.router.push('/events/new');
     }
 
+    handlePublishEvent(eventId) {
+        this.props.dispatch(publishEvent(eventId));
+    }
+
     render() {
         const result = this.props.error
              ? this.props.error.message
              : <EventList
                events={this.props.list}
+               onEventPublishClick={eventId => this.handlePublishEvent(eventId)}
                onEventSelected={e => this.handleEventSelected(e)}
                onNewEventSelected={() => this.handleNewEventSelected()}
              />;
