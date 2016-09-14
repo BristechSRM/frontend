@@ -60,6 +60,15 @@ export const getEvent = (eventId) =>
             .catch(error => dispatch(createAction(actionTypes.GET_EVENT_ERROR)(error)));
     };
 
+export const publishEvent = (eventId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.PUBLISH_EVENT_START)());
+        return EventsService.publishEvent(eventId)
+            .then(() => dispatch(createAction(actionTypes.PUBLISH_EVENT_COMPLETE)(eventId)))
+            .then(() => dispatch(getEvent(eventId)))
+            .catch(error => dispatch(createAction(actionTypes.PUBLISH_EVENT_ERROR)(error)));
+    };
+
 export const changeSessionViewEditMode = (record, field, inEditMode) =>
     createAction(actionTypes.SESSION_VIEW_EDITMODE_CHANGED)({ record, field, inEditMode });
 
