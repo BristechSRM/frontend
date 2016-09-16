@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import EventList from '../components/Calendar/EventList.jsx';
 import { connect } from 'react-redux';
-import { getAllEvents, publishEvent } from '../actions';
+import { getAllEvents, postMeetupEvent } from '../actions';
 import styles from './calendar.scss';
 
 class Calendar extends Component {
@@ -27,7 +27,14 @@ class Calendar extends Component {
     }
 
     handlePublishEvent(eventId) {
-        this.props.dispatch(publishEvent(eventId));
+        const meetup = {
+            id: '00000000-0000-0000-0000-000000000000',
+            eventId,
+            meetupId: '',
+            publishedDate: '',
+            meetupUrl: '',
+        };
+        this.props.dispatch(postMeetupEvent(meetup));
     }
 
     render() {

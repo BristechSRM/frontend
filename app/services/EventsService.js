@@ -15,11 +15,6 @@ class EventsService {
     postEvent(event) {
         return api.post(eventsUri, event);
     }
-
-    publishEvent(eventId) {
-        return api.post(`${eventsUri}/publish/?eventId=${eventId}`);
-    }
-
 }
 
 export default new EventsService();
