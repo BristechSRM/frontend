@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 import SessionsService from '../services/SessionsService';
 import SpeakersService from '../services/SpeakersService';
 import EventsService from '../services/EventsService';
+import MeetupEventsService from '../services/MeetupEventsService';
 import CorrespondenceService from '../services/CorrespondenceService';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
@@ -60,13 +61,12 @@ export const getEvent = (eventId) =>
             .catch(error => dispatch(createAction(actionTypes.GET_EVENT_ERROR)(error)));
     };
 
-export const publishEvent = (eventId) =>
+export const postMeetupEvent = (meetup) =>
     (dispatch) => {
-        dispatch(createAction(actionTypes.PUBLISH_EVENT_START)());
-        return EventsService.publishEvent(eventId)
-            .then(() => dispatch(createAction(actionTypes.PUBLISH_EVENT_COMPLETE)(eventId)))
-            .then(() => dispatch(getEvent(eventId)))
-            .catch(error => dispatch(createAction(actionTypes.PUBLISH_EVENT_ERROR)(error)));
+        dispatch(createAction(actionTypes.PUBLISH_MEETUPEVENT_START)());
+        return MeetupEventsService.post(meetup)
+            .then(() => dispatch(createAction(actionTypes.PUBLISH_MEETUPEVENT_COMPLETE)(meetup)))
+            .catch(error => dispatch(createAction(actionTypes.PUBLISH_MEETUPEVENT_ERROR)(error)));
     };
 
 export const changeSessionViewEditMode = (record, field, inEditMode) =>
