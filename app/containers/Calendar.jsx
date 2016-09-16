@@ -28,11 +28,7 @@ class Calendar extends Component {
 
     handlePublishEvent(eventId) {
         const meetup = {
-            id: '00000000-0000-0000-0000-000000000000',
             eventId,
-            meetupId: '',
-            publishedDate: '',
-            meetupUrl: '',
         };
         this.props.dispatch(postMeetupEvent(meetup));
     }
