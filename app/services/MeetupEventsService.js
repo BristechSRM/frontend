@@ -9,8 +9,8 @@ class MeetupEventsService {
         return api.get(`${meetupEventsUri}/${id}`);
     }
 
-    post(eventId) {
-        return api.post(meetupEventsUri, eventId);
+    post(meetup) {
+        return api.post(meetupEventsUri, meetup);
     }
 }
 
