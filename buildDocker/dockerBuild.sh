@@ -9,7 +9,7 @@ mkdir -p $DIR/code
 mkdir -p $DIR/packed
 mkdir $DIR/context
 
-git clone --depth 1 -b addDockerBuildScripts https://github.com/BristechSRM/frontend.git $DIR/code
+git clone --depth 1 https://github.com/BristechSRM/frontend.git $DIR/code
 
 docker run -v $DIR/code:/code \
     -v $DIR/packed:/packed \
