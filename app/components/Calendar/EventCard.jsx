@@ -34,6 +34,45 @@ const styles = {
 };
 
 class EventCard extends Component {
+    renderPublishedDate(date) {
+        if (!date) {
+            return (
+                <div>
+                    <div>Published on:</div>
+                </div>
+            );
+        }
+        const pDate = moment(date);
+        const dayMonthYear = pDate.format('D MMMM YYYY');
+        const time = pDate.format('h:mma');
+        return (
+            <div>
+                <div>Published on:</div>
+                <div>{dayMonthYear}</div>
+                <div>{`At ${time}`}</div>
+            </div>
+        );
+    }
+
+    renderMeetupEvent(meetupEvent) {
+        if (!meetupEvent) {
+            return (
+                <div>
+                    <button onClick={() => this.props.onPublish(this.props.id)}>
+                        Publish
+                    </button>
+                </div>
+            );
+        }
+        return (
+            <div>
+                {this.renderPublishedDate(meetupEvent.publishedDate)}
+                <a href={meetupEvent.meetupUrl}>
+                    Link to Meetup Event
+                </a>
+            </div>
+        );
+    }
 
     render() {
         const sufficientSessions = this.props.sessionIds.length >= 2;
@@ -54,9 +93,7 @@ class EventCard extends Component {
               onClick={() => this.props.onSelected({ id: this.props.id })}
             >
                 <p style={styles.base.description}>{this.props.description}</p>
-                <button onClick={() => this.props.onPublish(this.props.id)}>
-                    Publish
-                </button>
+                {this.renderMeetupEvent(this.props.meetupEvent)}
                 <p style={styles.base.date}>
                     <span style={styles.base.date.day}>{day}</span>&nbsp;
                     <span>{month}</span>&nbsp;
@@ -72,6 +109,7 @@ EventCard.propTypes = {
     id: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,
+    meetupEvent: PropTypes.object,
     sessionIds: PropTypes.array,
     onSelected: PropTypes.func,
     onPublish: PropTypes.func,
