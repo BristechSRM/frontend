@@ -75,6 +75,12 @@ class Api {
         const requestData = { method: 'POST', headers, body };
         return this.performRequest(uri, requestData);
     }
+
+    delete(uri) {
+        const headers = this.getAuthorizationHeaders();
+        const requestData = { method: 'DELETE', headers };
+        return this.performRequest(uri, requestData);
+    }
 }
 
 export default new Api();
