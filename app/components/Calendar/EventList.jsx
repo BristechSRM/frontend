@@ -28,6 +28,7 @@ class EventList extends Component {
              id={event.id}
              description={event.description}
              date={event.date}
+             meetupEvent={event.meetupEvent}
              sessionIds={event.sessionIds}
              onSelected={e => this.props.onEventSelected(e)}
              onPublish={eventId => this.props.onEventPublishClick(eventId)}

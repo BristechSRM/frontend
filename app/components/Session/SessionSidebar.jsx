@@ -82,7 +82,6 @@ class SessionSidebar extends Component {
         };
 
         const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
-        const assignedDate = this.formatDate(this.props.date, 'Not assigned');
         const dateAdded = this.formatDate(this.props.dateAdded, '');
 
         return (
@@ -222,10 +221,6 @@ class SessionSidebar extends Component {
                                         }
                                     </EditSaveControl>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>Assigned Date and Time</td>
-                                <td>{assignedDate}</td>
                             </tr>
                             <tr>
                                 <td>Credibility</td>

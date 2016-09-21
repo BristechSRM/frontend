@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-import moment from 'moment';
 
 const styles = {
     base: {
@@ -58,8 +57,6 @@ class EventSession extends Component {
     }
 
     render() {
-        const startDate = moment(this.props.startDate);
-        const endDate = moment(this.props.endDate);
         const bio = this.convertToHtml(this.props.speakerBio);
         const description = this.convertToHtml(this.props.description);
 
@@ -74,10 +71,6 @@ class EventSession extends Component {
                 <div style={styles.base.sessionSummary}>
                   <div style={styles.base.name}>
                      <p>{`${this.props.speakerForename} ${this.props.speakerSurname}`}</p>
-                  </div>
-                  <div style={styles.base.moment}>
-                     <p style={styles.base.date}>{startDate.format('dddd, DD MMMM')}</p>
-                     <p style={styles.base.time}>{startDate.format('HH:mm')} - {endDate.format('HH:mm')}</p>
                   </div>
                 </div>
                 <h2 style={styles.base.title}>{this.props.title}</h2>
