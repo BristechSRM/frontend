@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 import EventCard from './EventCard.jsx';
 import NewEventCard from './NewEventCard.jsx';
+import MeetupPublishErrorCard from './MeetupPublishErrorCard.jsx';
 
 const styles = {
     base: {
@@ -48,10 +49,18 @@ class EventList extends Component {
         );
     }
 
+    renderMeetupPublishError() {
+        if (!this.props.meetupPublishError) {
+            return (<div></div>);
+        }
+        return (<MeetupPublishErrorCard error={this.props.meetupPublishError} />);
+    }
+
     render() {
         return (
             <div styles={styles.base}>
                 { this.renderNewEventLink() }
+                { this.renderMeetupPublishError() }
                 { this.props.events.map(e => this.renderEvent(e)) }
             </div>
         );
@@ -65,6 +74,7 @@ EventList.propTypes = {
     onMeetupUpdateClick: PropTypes.func,
     onEventSelected: PropTypes.func,
     onNewEventSelected: PropTypes.func,
+    meetupPublishError: PropTypes.object,
 };
 
 export default Radium(EventList);
