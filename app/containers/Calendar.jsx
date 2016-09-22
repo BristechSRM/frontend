@@ -51,6 +51,7 @@ class Calendar extends Component {
                onMeetupUpdateClick={meetupEventId => this.handleMeetupUpdate(meetupEventId)}
                onEventSelected={e => this.handleEventSelected(e)}
                onNewEventSelected={() => this.handleNewEventSelected()}
+               meetupPublishError={this.props.meetupPublishError}
              />;
 
         return (
@@ -67,6 +68,7 @@ class Calendar extends Component {
 Calendar.propTypes = {
     isFetching: PropTypes.bool,
     error: PropTypes.object,
+    meetupPublishError: PropTypes.object,
     list: PropTypes.object,
     children: PropTypes.object,
     dispatch: PropTypes.func,
@@ -80,6 +82,7 @@ function mapStateToProps(state) {
     return {
         isFetching: state.events.isFetching,
         error: state.events.error,
+        meetupPublishError: state.events.meetupPublishError,
         list: state.events.events,
     };
 }
