@@ -66,6 +66,9 @@ class EventCard extends Component {
         }
         return (
             <div>
+                <button onClick={() => this.props.onMeetupDelete(meetupEvent.id)}>
+                    Delete from Meetup
+                </button>
                 {this.renderPublishedDate(meetupEvent.publishedDate)}
                 <a href={meetupEvent.meetupUrl}>
                     Link to Meetup Event
@@ -113,6 +116,7 @@ EventCard.propTypes = {
     sessionIds: PropTypes.array,
     onSelected: PropTypes.func,
     onPublish: PropTypes.func,
+    onMeetupDelete: PropTypes.func,
 };
 
 export default Radium(EventCard);

@@ -12,6 +12,10 @@ class MeetupEventsService {
     post(meetup) {
         return api.post(meetupEventsUri, meetup);
     }
+
+    delete(id) {
+        return api.delete(`${meetupEventsUri}/${id}`);
+    }
 }
 
 export default new MeetupEventsService();
