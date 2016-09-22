@@ -20,8 +20,7 @@ class EventSessions extends Component {
         return (
           <div key={session.id}>
             <EventSession
-              startDate={session.startDate}
-              endDate={session.endDate}
+              id={session.id}
               title={session.title}
               description={session.description}
               speakerForename={session.speakerForename}

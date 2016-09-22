@@ -33,6 +33,7 @@ class EventList extends Component {
              onSelected={e => this.props.onEventSelected(e)}
              onPublish={eventId => this.props.onEventPublishClick(eventId)}
              onMeetupDelete={meetupEventId => this.props.onMeetupDeleteClick(meetupEventId)}
+             onMeetupUpdate={meetupEventId => this.props.onMeetupUpdateClick(meetupEventId)}
            />
         );
     }
@@ -61,6 +62,7 @@ EventList.propTypes = {
     events: PropTypes.object,
     onEventPublishClick: PropTypes.func,
     onMeetupDeleteClick: PropTypes.func,
+    onMeetupUpdateClick: PropTypes.func,
     onEventSelected: PropTypes.func,
     onNewEventSelected: PropTypes.func,
 };

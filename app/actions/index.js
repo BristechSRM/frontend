@@ -79,6 +79,15 @@ export const deleteMeetupEvent = (meetupEventId) =>
             .catch(error => dispatch(createAction(actionTypes.DELETE_MEETUPEVENT_ERROR)(error)));
     };
 
+export const updateMeetupEvent = (meetupEventId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_MEETUPEVENT_START)());
+        return MeetupEventsService.update(meetupEventId)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_MEETUPEVENT_COMPLETE)(meetupEventId)))
+            .then(() => dispatch(getAllEvents())) // Note: For more performance, could update events in events reducer to update target meetupEvent.
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_MEETUPEVENT_ERROR)(error)));
+    };
+
 export const changeSessionViewEditMode = (record, field, inEditMode) =>
     createAction(actionTypes.SESSION_VIEW_EDITMODE_CHANGED)({ record, field, inEditMode });
 

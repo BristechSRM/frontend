@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import EventList from '../components/Calendar/EventList.jsx';
 import { connect } from 'react-redux';
-import { getAllEvents, postMeetupEvent, deleteMeetupEvent } from '../actions';
+import { getAllEvents, postMeetupEvent, deleteMeetupEvent, updateMeetupEvent } from '../actions';
 import styles from './calendar.scss';
 
 class Calendar extends Component {
@@ -37,6 +37,10 @@ class Calendar extends Component {
         this.props.dispatch(deleteMeetupEvent(meetupEventId));
     }
 
+    handleMeetupUpdate(meetupEventId) {
+        this.props.dispatch(updateMeetupEvent(meetupEventId));
+    }
+
     render() {
         const result = this.props.error
              ? this.props.error.message
@@ -44,6 +48,7 @@ class Calendar extends Component {
                events={this.props.list}
                onEventPublishClick={eventId => this.handlePublishEvent(eventId)}
                onMeetupDeleteClick={meetupEventId => this.handleMeetupDelete(meetupEventId)}
+               onMeetupUpdateClick={meetupEventId => this.handleMeetupUpdate(meetupEventId)}
                onEventSelected={e => this.handleEventSelected(e)}
                onNewEventSelected={() => this.handleNewEventSelected()}
              />;
