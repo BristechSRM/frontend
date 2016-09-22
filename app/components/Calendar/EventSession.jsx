@@ -47,6 +47,9 @@ const styles = {
             fontSize: '1.2rem',
             color: '#f49939',
         },
+        titlelink: {
+            color: '#f49939',
+        },
     },
 };
 
@@ -54,6 +57,10 @@ class EventSession extends Component {
 
     convertToHtml(plaintext) {
         return !plaintext ? '' : plaintext.split('\n').map(para => `<p>${para}</p>`).join('');
+    }
+
+    handleSessionClicked(sessionId) {
+        this.context.router.push(`/sessions/${sessionId}`);
     }
 
     render() {
@@ -73,7 +80,11 @@ class EventSession extends Component {
                      <p>{`${this.props.speakerForename} ${this.props.speakerSurname}`}</p>
                   </div>
                 </div>
-                <h2 style={styles.base.title}>{this.props.title}</h2>
+                <h2 style={styles.base.title}>
+                  <a style={styles.base.titlelink} onClick={() => this.handleSessionClicked(this.props.id)} href="">
+                    {this.props.title}
+                  </a>
+                </h2>
                 <div dangerouslySetInnerHTML={{ __html: description }}>
                 </div>
               </div>
@@ -83,14 +94,17 @@ class EventSession extends Component {
 }
 
 EventSession.propTypes = {
-    startDate: PropTypes.string,
-    endDate: PropTypes.string,
+    id: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
     speakerImageUri: PropTypes.string,
     speakerBio: PropTypes.string,
+};
+
+EventSession.contextTypes = {
+    router: PropTypes.object,
 };
 
 export default Radium(EventSession);
