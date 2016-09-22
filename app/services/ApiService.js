@@ -81,6 +81,13 @@ class Api {
         const requestData = { method: 'DELETE', headers };
         return this.performRequest(uri, requestData);
     }
+
+    put(uri, obj) {
+        const headers = this.getAuthorizationAndJsonHeaders();
+        const body = obj ? JSON.stringify(obj) : '';
+        const requestData = { method: 'PUT', headers, body };
+        return this.performRequest(uri, requestData);
+    }
 }
 
 export default new Api();

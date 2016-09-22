@@ -16,6 +16,10 @@ class MeetupEventsService {
     delete(id) {
         return api.delete(`${meetupEventsUri}/${id}`);
     }
+
+    update(id) {
+        return api.put(`${meetupEventsUri}/${id}`);
+    }
 }
 
 export default new MeetupEventsService();

@@ -59,7 +59,7 @@ class EventCard extends Component {
             return (
                 <div>
                     <button onClick={() => this.props.onPublish(this.props.id)}>
-                        Publish
+                        Publish to Meetup
                     </button>
                 </div>
             );
@@ -68,6 +68,9 @@ class EventCard extends Component {
             <div>
                 <button onClick={() => this.props.onMeetupDelete(meetupEvent.id)}>
                     Delete from Meetup
+                </button>
+                <button onClick={() => this.props.onMeetupUpdate(meetupEvent.id)}>
+                    Update on Meetup
                 </button>
                 {this.renderPublishedDate(meetupEvent.publishedDate)}
                 <a href={meetupEvent.meetupUrl}>
@@ -117,6 +120,7 @@ EventCard.propTypes = {
     onSelected: PropTypes.func,
     onPublish: PropTypes.func,
     onMeetupDelete: PropTypes.func,
+    onMeetupUpdate: PropTypes.func,
 };
 
 export default Radium(EventCard);
