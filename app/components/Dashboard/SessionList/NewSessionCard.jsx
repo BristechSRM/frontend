@@ -127,7 +127,7 @@ class NewSessionCard extends Component {
         return (
             <div
               style={[styles.base.card, { height: this.props.height, width: this.props.width }]}
-              onClick={() => this.props.onSelect({ id: this.props.id })}
+              onClick={() => this.props.onSelect()}
             >
                 <div style={[styles.base.speaker, addNewBannerBackgroundStyle, addNewBannerTextStyle]}>
                     <div style={styles.base.speaker.name}>

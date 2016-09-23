@@ -75,80 +75,77 @@ class NewSessionForm extends Component {
 
     render() {
         return (
-            <div>
-              <h1>Create New Session</h1>
-              <form
-                onSubmit={(event) => { event.preventDefault(); this.props.submit(); return false; } }
-              >
-                  <fieldset>
-                  <legend>New session details</legend>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td><label htmlFor="title">Title <span className="error">*</span></label></td>
-                          <td>
-                            <input
-                              type="text"
-                              id="title"
-                              name="title"
-                              size="40"
-                              value={this.props.title}
-                              onChange={this.sendValue(this.props.titleEntered)}
-                            />
-                          </td>
-                          <td>{this.props.titleValidationMessage}</td>
-                        </tr>
-                        <tr>
-                          <td><label htmlFor="description">Description <span className="error">*</span></label></td>
-                          <td>
-                            <input
-                              type="text"
-                              id="description"
-                              name="description"
-                              size="40"
-                              value={this.props.description}
-                              onChange={this.sendValue(this.props.descriptionEntered)}
-                            />
-                          </td>
-                          <td>{this.props.descriptionValidationMessage}</td>
-                        </tr>
-                        <tr>
-                          <td><label htmlFor="date">Session date <span className="error">*</span></label></td>
-                          <td>
-                            <input
-                              type="text"
-                              id="date"
-                              name="date"
-                              size="10"
-                              value={this.props.date}
-                              onChange={this.sendValue(this.props.dateEntered)}
-                            />
-                            <span className="note">DD/MM/YYYY</span>
-                          </td>
-                          <td>{this.props.dateValidationMessage}</td>
-                        </tr>
-                        <tr>
-                          <td><label htmlFor="speaker">Speaker <span className="error">*</span></label></td>
-                          <td>{this.speakersDroplist()}</td>
-                          <td>{this.props.speakerIdValidationMessage}</td>
-                        </tr>
-                        <tr>
-                          <td><label htmlFor="admin">Admin <span className="error">*</span></label></td>
-                          <td>{this.adminsDroplist()}</td>
-                          <td>{this.props.adminIdValidationMessage}</td>
-                        </tr>
-                        <tr>
-                        <td></td>
-                        <td>
-                          {this.submitButton()}
-                          {this.props.submitMessage}
-                        </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </fieldset>
-              </form>
-            </div>
+          <form
+            onSubmit={(event) => { event.preventDefault(); this.props.submit(); return false; } }
+          >
+              <fieldset>
+              <legend>New session details</legend>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><label htmlFor="title">Title <span className="error">*</span></label></td>
+                      <td>
+                        <input
+                          type="text"
+                          id="title"
+                          name="title"
+                          size="40"
+                          value={this.props.title}
+                          onChange={this.sendValue(this.props.titleEntered)}
+                        />
+                      </td>
+                      <td>{this.props.titleValidationMessage}</td>
+                    </tr>
+                    <tr>
+                      <td><label htmlFor="description">Description <span className="error">*</span></label></td>
+                      <td>
+                        <input
+                          type="text"
+                          id="description"
+                          name="description"
+                          size="40"
+                          value={this.props.description}
+                          onChange={this.sendValue(this.props.descriptionEntered)}
+                        />
+                      </td>
+                      <td>{this.props.descriptionValidationMessage}</td>
+                    </tr>
+                    <tr>
+                      <td><label htmlFor="date">Session date <span className="error">*</span></label></td>
+                      <td>
+                        <input
+                          type="text"
+                          id="date"
+                          name="date"
+                          size="10"
+                          value={this.props.date}
+                          onChange={this.sendValue(this.props.dateEntered)}
+                        />
+                        <span className="note">DD/MM/YYYY</span>
+                      </td>
+                      <td>{this.props.dateValidationMessage}</td>
+                    </tr>
+                    <tr>
+                      <td><label htmlFor="speaker">Speaker <span className="error">*</span></label></td>
+                      <td>{this.speakersDroplist()}</td>
+                      <td>{this.props.speakerIdValidationMessage}</td>
+                    </tr>
+                    <tr>
+                      <td><label htmlFor="admin">Admin <span className="error">*</span></label></td>
+                      <td>{this.adminsDroplist()}</td>
+                      <td>{this.props.adminIdValidationMessage}</td>
+                    </tr>
+                    <tr>
+                    <td></td>
+                    <td>
+                      {this.submitButton()}
+                      {this.props.submitMessage}
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </fieldset>
+          </form>
         );
     }
 }

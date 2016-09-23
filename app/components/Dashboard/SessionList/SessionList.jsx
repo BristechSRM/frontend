@@ -46,7 +46,7 @@ class SessionList extends Component {
            <NewSessionCard
              id={"NewSession"}
              height="280px"
-             onSelect={s => this.props.onNewSessionSelected(s)}
+             onSelect={() => this.props.onNewSessionSelected()}
              title={"New Session"}
              status={"0"}  /* 0 will render similar to an 'unassigned' session. */
              date={ null }

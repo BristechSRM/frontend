@@ -59,31 +59,33 @@ class NewSession extends Component {
 
     render() {
         return (
-          <NewSessionForm
-            title={this.props.title}
-            titleValidationMessage={this.props.titleValidationMessage}
-            description={this.props.description}
-            descriptionValidationMessage={this.props.descriptionValidationMessage}
-            date={this.props.date}
-            dateValidationMessage={this.props.dateValidationMessage}
-            speakerId={this.props.speakerId}
-            speakerIdValidationMessage={this.props.speakerIdValidationMessage}
-            adminId={this.props.adminId}
-            adminIdValidationMessage={this.props.adminIdValidationMessage}
-            error={this.props.error}
-            admins={this.props.admins}
-            speakers={this.props.speakers}
-            isFetchingAdmins={this.props.isFetchingAdmins}
-            isFetchingSpeakers={this.props.isFetchingSpeakers}
-            submitMessage={this.props.submitMessage}
-
-            submit={this.submit}
-            titleEntered={this.titleEntered}
-            descriptionEntered={this.descriptionEntered}
-            dateEntered={this.dateEntered}
-            speakerSelected={this.speakerSelected}
-            adminSelected={this.adminSelected}
-          />
+            <div>
+                <h1>Create New Session</h1>
+                <NewSessionForm
+                  title={this.props.title}
+                  titleValidationMessage={this.props.titleValidationMessage}
+                  description={this.props.description}
+                  descriptionValidationMessage={this.props.descriptionValidationMessage}
+                  date={this.props.date}
+                  dateValidationMessage={this.props.dateValidationMessage}
+                  speakerId={this.props.speakerId}
+                  speakerIdValidationMessage={this.props.speakerIdValidationMessage}
+                  adminId={this.props.adminId}
+                  adminIdValidationMessage={this.props.adminIdValidationMessage}
+                  error={this.props.error}
+                  admins={this.props.admins}
+                  speakers={this.props.speakers}
+                  isFetchingAdmins={this.props.isFetchingAdmins}
+                  isFetchingSpeakers={this.props.isFetchingSpeakers}
+                  submitMessage={this.props.submitMessage}
+                  submit={this.submit}
+                  titleEntered={this.titleEntered}
+                  descriptionEntered={this.descriptionEntered}
+                  dateEntered={this.dateEntered}
+                  speakerSelected={this.speakerSelected}
+                  adminSelected={this.adminSelected}
+                />
+            </div>
         );
     }
 }
