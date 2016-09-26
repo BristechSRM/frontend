@@ -160,6 +160,56 @@ export const updateSessionEventId = (sessionId, newEventId) =>
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_EVENTID_ERROR)(error)));
     };
 
+export const newSpeakerForenameChanged = (newForename) =>
+    createAction(actionTypes.NEW_SPEAKER_ADD_FORENAME)(newForename);
+
+export const newSpeakerSurnameChanged = (newSurname) =>
+    createAction(actionTypes.NEW_SPEAKER_ADD_SURNAME)(newSurname);
+
+export const newSpeakerImageUriChanged = (newImageUri) =>
+    createAction(actionTypes.NEW_SPEAKER_ADD_IMAGEURI)(newImageUri);
+
+export const newSpeakerBioChanged = (newBio) =>
+    createAction(actionTypes.NEW_SPEAKER_ADD_BIO)(newBio);
+
+export const newSpeakerSetNewSessionNext = (value) =>
+    createAction(actionTypes.NEW_SPEAKER_SET_CREATE_SESSION_NEXT)(value);
+
+// This action requires the react-route history object (from this.props.history) to be passed in,
+// because the action re-routes the user to the 'edit session' page.
+// Simply dispatching push(url) doesn't work - it updates history only.
+export const submitNewSpeaker = (history) =>
+    (dispatch, getState) => {
+        dispatch(createAction(actionTypes.NEW_SPEAKER_SUBMIT_START)());
+        const speakerInRedux = getState().newspeaker;
+
+        const newSpeakerPostData = {
+            forename: speakerInRedux.forename,
+            surname: speakerInRedux.surname,
+            imageUri: speakerInRedux.imageUri,
+            bio: speakerInRedux.bio,
+            rating: 1, // TODO remove rating
+        };
+
+        return SpeakersService.postSpeaker(newSpeakerPostData)
+            .then(
+                () => { // newSpeakerId
+                    if (speakerInRedux.createSessionNext) {
+                        setTimeout(() => {
+                            dispatch(createAction(actionTypes.NEW_SPEAKER_SUBMIT_COMPLETE)());
+                            history.push('/sessions/new');
+                        }, 5000);
+                    } else {
+                        setTimeout(() => {
+                            dispatch(createAction(actionTypes.NEW_SPEAKER_SUBMIT_COMPLETE)());
+                            history.push('/dashboard');
+                        }, 5000);
+                    }
+                }
+            )
+            .catch(error => dispatch(createAction(actionTypes.NEW_SPEAKER_SUBMIT_ERROR)(error)));
+    };
+
 export const newSessionTitleEntered = (newTitle) =>
     createAction(actionTypes.NEW_SESSION_ADD_TITLE)(newTitle);
 
@@ -186,7 +236,6 @@ export const submitNewSession = (history) =>
         const newSessionPostData = {
             title: sessionInRedux.title,
             description: sessionInRedux.description,
-            date: moment(sessionInRedux.date, 'D/M/YYYY').format(),
             speaker: { id: sessionInRedux.speakerId },
         };
 

@@ -112,7 +112,7 @@ function mapStateToProps(state) {
 }
 
 NewSession.contextTypes = {
-    router: PropTypes.func.isRequired,
+    router: PropTypes.object.isRequired,
 };
 
 
