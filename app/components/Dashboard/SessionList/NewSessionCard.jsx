@@ -102,9 +102,6 @@ class NewSessionCard extends Component {
         // Style for 'add new' panel.
         // Overrides the style of a standard card so that it renders in a pale grey
         // 'placeholder' style
-        const addNewTextStyle = {
-            color: '#DDDDDD',
-        };
 
         const addNewBannerBackgroundStyle = {
             backgroundColor: '#DDDDDD',
@@ -127,23 +124,25 @@ class NewSessionCard extends Component {
         return (
             <div
               style={[styles.base.card, { height: this.props.height, width: this.props.width }]}
-              onClick={() => this.props.onSelect({ id: this.props.id })}
             >
-                <div style={[styles.base.speaker, addNewBannerBackgroundStyle, addNewBannerTextStyle]}>
+                <div
+                  style={[styles.base.speaker, addNewBannerBackgroundStyle, addNewBannerTextStyle]}
+                  onClick={() => this.props.onNewSpeakerSelected()}
+                >
                     <div style={styles.base.speaker.name}>
-                        { /* speakerName */ "Create New Session"}
+                        Create New Speaker
                     </div>
                     <div style={styles.base.speaker.rating}>
                         {'☆☆☆☆☆'}
                     </div>
                 </div>
-                <div style={styles.base.session}>
+                <div
+                  style={styles.base.session}
+                  onClick={() => this.props.onNewSessionSelected()}
+                >
                     <div style={styles.base.session.details}>
-                        <div style={[styles.base.session.details.title, addNewTextStyle]}>
-                            {"Title"}
-                        </div>
-                        <div style={[styles.base.session.details.date, addNewTextStyle]}>
-                            {"DD Mmmmmm YYYY"}
+                        <div style={[styles.base.session.details.title]}>
+                            Create New Session
                         </div>
                     </div>
                     <div style={styles.base.footer}>
@@ -170,7 +169,8 @@ NewSessionCard.propTypes = {
     id: PropTypes.string,
     height: PropTypes.string,
     width: PropTypes.string,
-    onSelect: PropTypes.func,
+    onNewSpeakerSelected: PropTypes.func,
+    onNewSessionSelected: PropTypes.func,
     title: PropTypes.string,
     status: PropTypes.string,
     date: PropTypes.object,

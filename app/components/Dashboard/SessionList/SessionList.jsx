@@ -46,7 +46,8 @@ class SessionList extends Component {
            <NewSessionCard
              id={"NewSession"}
              height="280px"
-             onSelect={s => this.props.onNewSessionSelected(s)}
+             onNewSpeakerSelected={() => this.props.onNewSpeakerSelected()}
+             onNewSessionSelected={() => this.props.onNewSessionSelected()}
              title={"New Session"}
              status={"0"}  /* 0 will render similar to an 'unassigned' session. */
              date={ null }
@@ -75,6 +76,7 @@ class SessionList extends Component {
 SessionList.propTypes = {
     sessions: PropTypes.array,
     onSessionSelected: PropTypes.func,
+    onNewSpeakerSelected: PropTypes.func,
     onNewSessionSelected: PropTypes.func,
 };
 

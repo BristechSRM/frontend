@@ -22,6 +22,9 @@ class Dashboard extends Component {
         this.context.router.push(`/sessions/${session.id}`);
     }
 
+    handleNewSpeakerSelected() {
+        this.context.router.push('/speakers/new');
+    }
     handleNewSessionSelected() {
         this.context.router.push('/sessions/new');
     }
@@ -31,6 +34,7 @@ class Dashboard extends Component {
             ? <p>There was an error retrieving sessions - '{this.props.error.message}'</p>
           : <SessionList sessions={this.props.sessions}
             onSessionSelected={s => this.handleSessionSelected(s)}
+            onNewSpeakerSelected={() => this.handleNewSpeakerSelected()}
             onNewSessionSelected={() => this.handleNewSessionSelected()}
           />;
 

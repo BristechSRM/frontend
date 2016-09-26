@@ -92,7 +92,7 @@ const newsession = handleActions({
     [actionTypes.NEW_SESSION_SUBMIT_START]:
         (state) => state.set('submitMessage', 'Saving new session...'),
     [actionTypes.NEW_SESSION_SUBMIT_COMPLETE]:
-        (state) => state.set('submitMessage', 'Saved.'),
+        () => initialState,
     [actionTypes.NEW_SESSION_SUBMIT_ERROR]:
         (state) => state.set('submitMessage', 'Error saving session.'),
 

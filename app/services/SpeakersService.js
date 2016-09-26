@@ -9,6 +9,10 @@ class SpeakersService {
         return api.get(`${speakersUri}/${speakerId}`);
     }
 
+    postSpeaker(speaker) {
+        return api.post(speakersUri, speaker);
+    }
+
     patchSpeaker(speakerId, path, value) {
         const op = { path, value };
         return api.patch(`${speakersUri}/${speakerId}`, op);
