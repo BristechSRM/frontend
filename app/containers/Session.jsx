@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
-import SessionCorrespondence from '../components/Session/SessionCorrespondence.jsx';
-import { getSession, getCorrespondence, getAllEvents,
+import SessionNotes from '../components/Session/SessionNotes.jsx';
+import { getSession, getNotesBySessionId, getAllEvents,
     updateSpeakerRating, updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
     updateSessionDescription, updateSessionTitle, updateSessionEventId,
     changeSessionViewEditMode,
@@ -35,7 +35,7 @@ class Session extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.session.id !== nextProps.session.id) {
-            this.props.dispatch(getCorrespondence(nextProps.session));
+            this.props.dispatch(getNotesBySessionId(nextProps.session.id));
         }
     }
 
@@ -98,8 +98,8 @@ class Session extends Component {
                       saveSpeakerNames={this.saveSpeakerNames}
                     />
                 </div>
-                <div className={styles.correspondence}>
-                    <SessionCorrespondence correspondence={this.props.correspondence} />
+                <div className={styles.notes}>
+                    <SessionNotes notes={this.props.notes} />
                 </div>
             </div>
         );
@@ -112,7 +112,7 @@ Session.propTypes = {
     speaker: PropTypes.object,
     admin: PropTypes.object,
     event: PropTypes.object,
-    correspondence: PropTypes.object,
+    notes: PropTypes.object,
     events: PropTypes.object,
     isFetchingEvents: PropTypes.bool,
     isFetching: PropTypes.bool,
@@ -125,7 +125,7 @@ function mapStateToProps(state) {
     return {
         isFetching: state.session.isFetching,
         editStash: state.session.editStash,
-        correspondence: state.session.correspondence,
+        notes: state.session.notes,
         session: state.session.session,
         speaker: state.session.session.speaker,
         admin: state.session.session.admin,

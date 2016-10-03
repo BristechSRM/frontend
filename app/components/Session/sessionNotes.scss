@@ -1,0 +1,12 @@
+.notes {
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    // padding-left: 65px;
+    padding-bottom: 65px;
+    display: flex;
+    flex-direction: column;
+}
+
+.note:nth-child(even) {
+    background-color: #f6f6f6;
+}
