@@ -23,6 +23,8 @@ const initialState = new immutable.Record({
     editStash: initialEditStash,
     session: new immutable.Record({})(),
     notes: immutable.List(),
+    newNote: '',
+    editingNewNote: false,
     isFetchingEvents: false,
     events: immutable.List(),
     error: null,
@@ -74,13 +76,19 @@ const session = handleActions({
     [actionTypes.GET_NOTES_BY_SESSION_COMPLETE]: (state, action) =>
         state.withMutations(map =>
             map.set('isFetching', false)
-               .set('notes', immutable.List(action.payload))
+               .set('notes', immutable.List(action.payload).sortBy(note => note.dateModified))
         ),
 
     [actionTypes.GET_NOTES_BY_SESSION_ERROR]: (state, action) =>
         state.withMutations(map => {
             map.set('isFetching', false)
                .set('error', action.payload);
+        }),
+
+    [actionTypes.CHANGE_NEW_SESSION_NOTE]: (state, action) =>
+        state.withMutations(map => {
+            map.set('editingNewNote', action.payload !== '')
+               .set('newNote', action.payload);
         }),
 
     [actionTypes.GET_EVENTS_START]: (state) => state.set('isFetchingEvents', true),
