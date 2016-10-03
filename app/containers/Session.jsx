@@ -5,6 +5,7 @@ import SessionNotes from '../components/Session/SessionNotes.jsx';
 import { getSession, getNotesBySessionId, getAllEvents,
     updateSpeakerRating, updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
     updateSessionDescription, updateSessionTitle, updateSessionEventId,
+    editNewNote, clearNewNote, saveNewNote,
     changeSessionViewEditMode,
     changeSessionViewEditStash } from '../actions';
 import styles from './session.scss';
@@ -25,6 +26,9 @@ class Session extends Component {
             this.saveStashedChanges('speaker', 'forename', updateSpeakerForename);
             this.saveStashedChanges('speaker', 'surname', updateSpeakerSurname);
         };
+        this.editNewNote = this.editNewNote.bind(this);
+        this.clearNewNote = this.clearNewNote.bind(this);
+        this.saveNewNote = this.saveNewNote.bind(this);
     }
 
     componentDidMount() {
@@ -59,13 +63,24 @@ class Session extends Component {
         }
     }
 
+    editNewNote(note) {
+        this.props.dispatch(editNewNote(note));
+    }
+
+    clearNewNote() {
+        this.props.dispatch(clearNewNote());
+    }
+
+    saveNewNote() {
+        this.props.dispatch(saveNewNote(this.props.session.id, this.props.newNote));
+    }
+
     render() {
         if (this.props.isFetching) {
             return (
                 <p>Loading...</p>
             );
         }
-
         return (
             <div className={styles.session}>
                 <div className={styles.sidebar}>
@@ -99,7 +114,14 @@ class Session extends Component {
                     />
                 </div>
                 <div className={styles.notes}>
-                    <SessionNotes notes={this.props.notes} />
+                    <SessionNotes
+                      notes={this.props.notes}
+                      newNote={this.props.newNote}
+                      editNewNote={this.editNewNote}
+                      editingNewNote={this.props.editingNewNote}
+                      saveNewNote={this.saveNewNote}
+                      clearNewNote={this.clearNewNote}
+                    />
                 </div>
             </div>
         );
@@ -113,6 +135,8 @@ Session.propTypes = {
     admin: PropTypes.object,
     event: PropTypes.object,
     notes: PropTypes.object,
+    newNote: PropTypes.string,
+    editingNewNote: PropTypes.bool,
     events: PropTypes.object,
     isFetchingEvents: PropTypes.bool,
     isFetching: PropTypes.bool,
@@ -126,6 +150,8 @@ function mapStateToProps(state) {
         isFetching: state.session.isFetching,
         editStash: state.session.editStash,
         notes: state.session.notes,
+        newNote: state.session.newNote,
+        editingNewNote: state.session.editingNewNote,
         session: state.session.session,
         speaker: state.session.session.speaker,
         admin: state.session.session.admin,

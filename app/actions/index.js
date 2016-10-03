@@ -169,6 +169,23 @@ export const updateSessionEventId = (sessionId, newEventId) =>
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_EVENTID_ERROR)(error)));
     };
 
+export const editNewNote = (newNote) =>
+    createAction(actionTypes.CHANGE_NEW_SESSION_NOTE)(newNote);
+
+export const clearNewNote = () =>
+    createAction(actionTypes.CHANGE_NEW_SESSION_NOTE)('');
+
+export const saveNewNote = (sessionId, newNote) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.SAVE_NEW_SESSON_NOTE_START)());
+
+        return NotesService.postNote(sessionId, newNote)
+            .then(() => dispatch(createAction(actionTypes.SAVE_NEW_SESSON_NOTE_COMPLETE)()))
+            .then(() => dispatch(getNotesBySessionId(sessionId)))
+            .then(() => dispatch(clearNewNote()))
+            .catch(error => dispatch(createAction(actionTypes.SAVE_NEW_SESSON_NOTE_ERROR)(error)));
+    };
+
 export const newSpeakerForenameChanged = (newForename) =>
     createAction(actionTypes.NEW_SPEAKER_ADD_FORENAME)(newForename);
 
