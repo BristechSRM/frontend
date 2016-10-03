@@ -22,7 +22,7 @@ const initialState = new immutable.Record({
     isFetching: false,
     editStash: initialEditStash,
     session: new immutable.Record({})(),
-    correspondence: immutable.List(),
+    notes: immutable.List(),
     isFetchingEvents: false,
     events: immutable.List(),
     error: null,
@@ -69,15 +69,15 @@ const session = handleActions({
         return state.setIn(['session', 'speaker'], newSpeaker);
     },
 
-    [actionTypes.GET_CORRESPONDENCE_START]: (state) => state.set('isFetching', true),
+    [actionTypes.GET_NOTES_BY_SESSION_START]: (state) => state.set('isFetching', true),
 
-    [actionTypes.GET_CORRESPONDENCE_COMPLETE]: (state, action) =>
+    [actionTypes.GET_NOTES_BY_SESSION_COMPLETE]: (state, action) =>
         state.withMutations(map =>
             map.set('isFetching', false)
-               .set('correspondence', immutable.List(action.payload))
+               .set('notes', immutable.List(action.payload))
         ),
 
-    [actionTypes.GET_CORRESPONDENCE_ERROR]: (state, action) =>
+    [actionTypes.GET_NOTES_BY_SESSION_ERROR]: (state, action) =>
         state.withMutations(map => {
             map.set('isFetching', false)
                .set('error', action.payload);

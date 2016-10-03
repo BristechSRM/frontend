@@ -4,6 +4,7 @@ import SpeakersService from '../services/SpeakersService';
 import EventsService from '../services/EventsService';
 import MeetupEventsService from '../services/MeetupEventsService';
 import CorrespondenceService from '../services/CorrespondenceService';
+import NotesService from '../services/NotesService';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
 import moment from 'moment';
@@ -26,6 +27,14 @@ export const getSession = (sessionId) =>
 
 export const changeViewSettings = createAction(actionTypes.VIEW_SETTINGS_CHANGED,
      settings => new immutable.Record(settings)());
+
+export const getNotesBySessionId = (sessionId) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.GET_NOTES_BY_SESSION_START)());
+        return NotesService.getNotesBySessionId(sessionId)
+            .then(notes => dispatch(createAction(actionTypes.GET_NOTES_BY_SESSION_COMPLETE)(notes)))
+            .catch(error => dispatch(createAction(actionTypes.GET_NOTES_BY_SESSION_ERROR)(error)));
+    };
 
 export const getCorrespondence = (session) =>
     (dispatch) => {
