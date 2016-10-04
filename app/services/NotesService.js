@@ -16,6 +16,11 @@ class NotesService {
         };
         return api.post(notesUri, newNoteData);
     }
+
+    patchNote(noteId, path, value) {
+        const op = { path, value };
+        return api.patch(`${notesUri}/${noteId}`, op);
+    }
 }
 
 export default new NotesService();

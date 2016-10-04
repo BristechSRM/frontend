@@ -5,7 +5,8 @@ import SessionNotes from '../components/Session/SessionNotes.jsx';
 import { getSession, getNotesBySessionId, getAllEvents,
     updateSpeakerRating, updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
     updateSessionDescription, updateSessionTitle, updateSessionEventId,
-    editNewNote, clearNewNote, saveNewNote,
+    changeNoteEditMode, changeNoteStash, updateNote,
+    changeNewNote, clearNewNote, saveNewNote,
     changeSessionViewEditMode,
     changeSessionViewEditStash } from '../actions';
 import styles from './session.scss';
@@ -26,7 +27,12 @@ class Session extends Component {
             this.saveStashedChanges('speaker', 'forename', updateSpeakerForename);
             this.saveStashedChanges('speaker', 'surname', updateSpeakerSurname);
         };
-        this.editNewNote = this.editNewNote.bind(this);
+
+        this.handleNoteEditSave = this.handleNoteEditSave.bind(this);
+        this.handleNoteEdit = this.handleNoteEdit.bind(this);
+        this.changeNoteEditMode = this.changeNoteEditMode.bind(this);
+
+        this.changeNewNote = this.changeNewNote.bind(this);
         this.clearNewNote = this.clearNewNote.bind(this);
         this.saveNewNote = this.saveNewNote.bind(this);
     }
@@ -63,8 +69,23 @@ class Session extends Component {
         }
     }
 
-    editNewNote(note) {
-        this.props.dispatch(editNewNote(note));
+    changeNoteEditMode(noteId, inEditMode, currentNote) {
+        this.props.dispatch(changeNoteEditMode(noteId, inEditMode, currentNote));
+    }
+
+    handleNoteEdit(editedNote) {
+        this.props.dispatch(changeNoteStash(editedNote));
+    }
+
+    handleNoteEditSave() {
+        this.props.dispatch(updateNote(
+            this.props.session.id,
+            this.props.noteEditStash.noteId,
+            this.props.noteEditStash.value));
+    }
+
+    changeNewNote(note) {
+        this.props.dispatch(changeNewNote(note));
     }
 
     clearNewNote() {
@@ -116,9 +137,15 @@ class Session extends Component {
                 <div className={styles.notes}>
                     <SessionNotes
                       notes={this.props.notes}
+
+                      handleNoteEdit={this.handleNoteEdit}
+                      handleNoteEditSave={this.handleNoteEditSave}
+                      changeNoteEditMode={this.changeNoteEditMode}
+                      noteEditStash={this.props.noteEditStash}
+
                       newNote={this.props.newNote}
-                      editNewNote={this.editNewNote}
-                      editingNewNote={this.props.editingNewNote}
+                      changeNewNote={this.changeNewNote}
+                      isEditingNewNote={this.props.isEditingNewNote}
                       saveNewNote={this.saveNewNote}
                       clearNewNote={this.clearNewNote}
                     />
@@ -135,8 +162,9 @@ Session.propTypes = {
     admin: PropTypes.object,
     event: PropTypes.object,
     notes: PropTypes.object,
+    noteEditStash: PropTypes.object,
     newNote: PropTypes.string,
-    editingNewNote: PropTypes.bool,
+    isEditingNewNote: PropTypes.bool,
     events: PropTypes.object,
     isFetchingEvents: PropTypes.bool,
     isFetching: PropTypes.bool,
@@ -150,8 +178,9 @@ function mapStateToProps(state) {
         isFetching: state.session.isFetching,
         editStash: state.session.editStash,
         notes: state.session.notes,
+        noteEditStash: state.session.noteEditStash,
         newNote: state.session.newNote,
-        editingNewNote: state.session.editingNewNote,
+        isEditingNewNote: state.session.isEditingNewNote,
         session: state.session.session,
         speaker: state.session.session.speaker,
         admin: state.session.session.admin,

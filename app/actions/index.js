@@ -169,7 +169,24 @@ export const updateSessionEventId = (sessionId, newEventId) =>
             .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_EVENTID_ERROR)(error)));
     };
 
-export const editNewNote = (newNote) =>
+export const changeNoteStash = (editedNote) =>
+    createAction(actionTypes.NOTE_EDITSTASH_CHANGED)(editedNote);
+
+export const changeNoteEditMode = (noteId, inEditMode, currentNote) =>
+    createAction(actionTypes.NOTE_EDITMODE_CHANGED)({ noteId, inEditMode, currentNote });
+
+export const updateNote = (sessionId, noteId, editedNote) =>
+    (dispatch) => {
+        dispatch(createAction(actionTypes.UPDATE_SESSION_NOTE_START)());
+
+        return NotesService.patchNote(noteId, 'note', editedNote)
+            .then(() => dispatch(createAction(actionTypes.UPDATE_SESSION_NOTE_COMPLETE)()))
+            .then(() => dispatch(getNotesBySessionId(sessionId)))
+            .then(() => dispatch(changeNoteEditMode(noteId, false)))
+            .catch(error => dispatch(createAction(actionTypes.UPDATE_SESSION_NOTE_ERROR)(error)));
+    };
+
+export const changeNewNote = (newNote) =>
     createAction(actionTypes.CHANGE_NEW_SESSION_NOTE)(newNote);
 
 export const clearNewNote = () =>
