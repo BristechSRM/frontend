@@ -70,12 +70,6 @@ const styles = {
                 name: {
                     margin: 0,
                 },
-                lastContact: {
-                    fontSize: '0.8rem',
-                    fontWeight: '300',
-                    color: '#555',
-                    margin: 0,
-                },
             },
         },
     },
@@ -119,19 +113,6 @@ class SessionCard extends Component {
             ? <img src={this.props.adminImageUri} width="50px" height="50px" />
             : null;
 
-        const lastContactDate = this.props.lastContactDate ? this.props.lastContactDate : 'Never';
-        const lastContact = this.isValidDate(lastContactDate)
-            ? moment(lastContactDate).fromNow()
-            : lastContactDate;
-
-        const lastContactIcon = this.props.lastContactDirection === 'in'
-            ? 'arrow_downward'
-            : 'arrow_upward';
-
-        const directionIcon = this.props.lastContactDate
-            ? <FontIcon className="material-icons" color={Colors.grey400}>{lastContactIcon}</FontIcon>
-            : null;
-
         return (
             <div
               style={[styles.base.card, { height: this.props.height, width: this.props.width }]}
@@ -160,13 +141,7 @@ class SessionCard extends Component {
                             {adminImage}
                         </div>
                         <div style={styles.base.footer.admin.details}>
-                            <div>
                               <p style={styles.base.footer.admin.name}>{adminName}</p>
-                              <p style={styles.base.footer.admin.lastContact}>Last contact - {lastContact}</p>
-                            </div>
-                        </div>
-                        <div style={styles.base.footer.lastContact}>
-                            {directionIcon}
                         </div>
                     </div>
                 </div>
@@ -189,8 +164,6 @@ SessionCard.propTypes = {
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,
-    lastContactDate: PropTypes.string,
-    lastContactDirection: PropTypes.string,
 };
 
 export default Radium(SessionCard);

@@ -34,8 +34,6 @@ class SessionList extends Component {
              adminForename={session.admin ? session.admin.forename : null}
              adminSurname={session.admin ? session.admin.surname : null}
              adminImageUri={session.admin ? session.admin.imageUri : null}
-             lastContactDate={session.lastContact ? session.lastContact.date : null}
-             lastContactDirection="in"
            />
          </div>);
     }
@@ -57,8 +55,6 @@ class SessionList extends Component {
              adminForename={"New"}
              adminSurname={"Admin"}
              adminImageUri={null}
-             lastContactDate={null}
-             lastContactDirection="in"
            />
          </div>);
     }

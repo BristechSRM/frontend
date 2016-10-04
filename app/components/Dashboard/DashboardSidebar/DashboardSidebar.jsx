@@ -49,7 +49,6 @@ class DashboardSidebar extends Component {
                       value={this.props.sortProperty}
                       onChange={(e, i, v) => this.handleSortPropertyChange(e, i, v)}
                     >
-                       <MenuItem value={"last-contact"} primaryText="Last Contact" />
                        <MenuItem value={"name"} primaryText="Name" />
                        <MenuItem value={"rating"} primaryText="Rating" />
                        <MenuItem value={"event-date"} primaryText="Event Date" />

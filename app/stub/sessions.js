@@ -29,9 +29,6 @@ const sessionSchema = {
         admin: {
             $ref: '#/definitions/admin',
         },
-        lastContact: {
-            $ref: '#/definitions/lastContact',
-        },
     },
     required: ['id', 'title', 'status', 'date', 'speaker', 'admin', 'lastContact'],
     definitions: {
@@ -74,23 +71,6 @@ const sessionSchema = {
             type: 'integer',
             minimum: 1,
             maximum: 5,
-        },
-        lastContact: {
-            type: 'object',
-            properties: {
-                date: {
-                    type: 'string',
-                    faker: 'date.past',
-                },
-                speakerId: {
-                    type: 'string',
-                    faker: 'random.uuid',
-                },
-                adminId: {
-                    type: 'string',
-                    faker: 'random.uuid',
-                },
-            },
         },
     },
 };

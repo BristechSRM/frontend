@@ -81,7 +81,6 @@ class SessionSidebar extends Component {
             color: SessionStatusService.getStatusColor(this.props.status),
         };
 
-        const lastContactDate = this.formatDate(this.props.lastContact ? this.props.lastContact.date : null, 'Never');
         const dateAdded = this.formatDate(this.props.dateAdded, '');
 
         return (
@@ -248,10 +247,6 @@ class SessionSidebar extends Component {
                                 <td>Date Added</td>
                                 <td>{dateAdded}</td>
                             </tr>
-                            <tr>
-                                <td>Last Contact</td>
-                                <td>{lastContactDate}</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -299,7 +294,6 @@ SessionSidebar.propTypes = {
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     event: PropTypes.object,
-    lastContact: PropTypes.object,
     allEvents: PropTypes.object,
     isFetchingEvents: PropTypes.bool,
     editStash: PropTypes.object,
