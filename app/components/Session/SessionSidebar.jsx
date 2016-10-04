@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
 import EditSaveControl from './EditSaveControl.jsx';
-import RatingControl from './RatingControl.jsx';
 import moment from 'moment';
 
 import styles from './sessionSidebar.scss';
@@ -222,24 +221,6 @@ class SessionSidebar extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Credibility</td>
-                                <td>
-                                    <EditSaveControl
-                                      changeEditMode={(inEditMode) =>
-                                          this.props.changeEditMode('speaker', 'rating', inEditMode)}
-                                      onSaveClick={this.props.saveSpeakerRating}
-                                      inEditMode={this.props.editStash.speaker.rating.inEditMode}
-                                    >
-                                        <RatingControl
-                                          rating={this.props.speakerRating}
-                                          onRatingClick={(rating) =>
-                                              this.props.changeEditStash('speaker', 'rating', rating)}
-                                          inEditMode
-                                        />
-                                    </EditSaveControl>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>Signup Method</td>
                                 <td></td>
                             </tr>
@@ -288,7 +269,6 @@ SessionSidebar.propTypes = {
     speakerId: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
-    speakerRating: PropTypes.number,
     speakerHandles: PropTypes.array,
     speakerBio: PropTypes.string,
     adminForename: PropTypes.string,
@@ -299,7 +279,6 @@ SessionSidebar.propTypes = {
     editStash: PropTypes.object,
     changeEditMode: PropTypes.func,
     changeEditStash: PropTypes.func,
-    saveSpeakerRating: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
     saveSessionDescription: PropTypes.func,
     saveSessionTitle: PropTypes.func,

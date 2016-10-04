@@ -12,11 +12,6 @@ const sortProperties = {
         sortSelector: 'speakerSurname',
         nullIsLow: true,
     },
-    rating: {
-        nullSelector: 'speakerRating',
-        sortSelector: 'speakerRating',
-        nullIsLow: true,
-    },
     'event-date': {
         nullSelector: 'date',
         sortSelector: 'date',

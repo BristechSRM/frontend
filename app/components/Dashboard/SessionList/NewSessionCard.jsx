@@ -28,11 +28,6 @@ const styles = {
                 fontSize: '1.6rem',
                 textAlign: 'center',
             },
-            rating: {
-                flex: '0 1 auto',
-                color: '#fff',
-                fontSize: '1.2rem',
-            },
         },
         session: {
             flex: '1 1 auto',
@@ -126,9 +121,6 @@ class NewSessionCard extends Component {
                     <div style={styles.base.speaker.name}>
                         Create New Speaker
                     </div>
-                    <div style={styles.base.speaker.rating}>
-                        {'☆☆☆☆☆'}
-                    </div>
                 </div>
                 <div
                   style={styles.base.session}
@@ -166,7 +158,6 @@ NewSessionCard.propTypes = {
     date: PropTypes.object,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
-    speakerRating: PropTypes.number,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,

@@ -30,7 +30,6 @@ class SessionList extends Component {
              date={session.date}
              speakerForename={session.speaker.forename}
              speakerSurname={session.speaker.surname}
-             speakerRating={session.speaker.rating}
              adminForename={session.admin ? session.admin.forename : null}
              adminSurname={session.admin ? session.admin.surname : null}
              adminImageUri={session.admin ? session.admin.imageUri : null}
@@ -51,7 +50,6 @@ class SessionList extends Component {
              date={ null }
              speakerForename={"Add New"}
              speakerSurname={"Session"}
-             speakerRating={0}
              adminForename={"New"}
              adminSurname={"Admin"}
              adminImageUri={null}

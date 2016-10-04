@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SessionSidebar from '../components/Session/SessionSidebar.jsx';
 import SessionNotes from '../components/Session/SessionNotes.jsx';
 import { getSession, getNotesBySessionId, getAllEvents,
-    updateSpeakerRating, updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
+    updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
     updateSessionDescription, updateSessionTitle, updateSessionEventId,
     changeNoteEditMode, changeNoteStash, updateNote,
     changeNewNote, clearNewNote, saveNewNote,
@@ -18,7 +18,6 @@ class Session extends Component {
         this.changeEditMode = this.changeEditMode.bind(this);
         this.changeEditStash = this.changeEditStash.bind(this);
         this.saveStashedChanges = this.saveStashedChanges.bind(this);
-        this.saveSpeakerRating = () => this.saveStashedChanges('speaker', 'rating', updateSpeakerRating);
         this.saveSpeakerBio = () => this.saveStashedChanges('speaker', 'bio', updateSpeakerBio);
         this.saveSessionDescription = () => this.saveStashedChanges('session', 'description', updateSessionDescription);
         this.saveSessionTitle = () => this.saveStashedChanges('session', 'title', updateSessionTitle);
@@ -114,7 +113,6 @@ class Session extends Component {
                       speakerId={this.props.speaker ? this.props.speaker.id : null}
                       speakerForename={this.props.speaker ? this.props.speaker.forename : null}
                       speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
-                      speakerRating={this.props.speaker ? this.props.speaker.rating : null}
                       speakerBio={this.props.speaker ? this.props.speaker.bio : null}
                       speakerHandles={this.props.speaker ? this.props.speaker.handles : null}
                       adminForename={this.props.admin ? this.props.admin.forename : null}
@@ -125,7 +123,6 @@ class Session extends Component {
                       editStash={this.props.editStash}
                       changeEditMode={this.changeEditMode}
                       changeEditStash={this.changeEditStash}
-                      saveSpeakerRating={this.saveSpeakerRating}
                       saveSpeakerBio={this.saveSpeakerBio}
                       saveSessionDescription={this.saveSessionDescription}
                       saveSessionTitle={this.saveSessionTitle}

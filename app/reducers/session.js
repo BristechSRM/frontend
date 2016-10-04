@@ -8,7 +8,6 @@ const initialEditStash = new immutable.Record({
     speaker: new immutable.Record({
         forename: initialEditRecord,
         surname: initialEditRecord,
-        rating: initialEditRecord,
         bio: initialEditRecord,
     })(),
     session: new immutable.Record({
@@ -59,11 +58,6 @@ const session = handleActions({
 
     [actionTypes.UPDATE_SESSION_TITLE_COMPLETE]: (state, action) =>
         state.setIn(['session', 'title'], action.payload),
-
-    [actionTypes.UPDATE_SPEAKER_RATING_COMPLETE]: (state, action) => {
-        const newSpeaker = Object.assign({}, state.session.speaker, { rating: action.payload });
-        return state.setIn(['session', 'speaker'], newSpeaker);
-    },
 
     [actionTypes.UPDATE_SPEAKER_BIO_COMPLETE]: (state, action) => {
         const newSpeaker = Object.assign({}, state.session.speaker, { bio: action.payload });
