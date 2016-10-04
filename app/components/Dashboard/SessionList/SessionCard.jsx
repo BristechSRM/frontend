@@ -27,11 +27,6 @@ const styles = {
                 fontSize: '1.6rem',
                 textAlign: 'center',
             },
-            rating: {
-                flex: '0 1 auto',
-                color: '#fff',
-                fontSize: '1.2rem',
-            },
         },
         session: {
             flex: '1 1 auto',
@@ -122,10 +117,6 @@ class SessionCard extends Component {
                     <div style={styles.base.speaker.name}>
                         {speakerName}
                     </div>
-                    <div style={styles.base.speaker.rating}>
-                        {'★'.repeat(this.props.speakerRating)}
-                        {'☆'.repeat(5 - this.props.speakerRating)}
-                    </div>
                 </div>
                 <div style={styles.base.session}>
                     <div style={styles.base.session.details}>
@@ -160,7 +151,6 @@ SessionCard.propTypes = {
     date: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,
-    speakerRating: PropTypes.number,
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,

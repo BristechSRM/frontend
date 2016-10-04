@@ -84,15 +84,6 @@ export const changeSessionViewEditMode = (record, field, inEditMode) =>
 export const changeSessionViewEditStash = (record, field, value) =>
     createAction(actionTypes.SESSION_VIEW_EDITSTASH_CHANGED)({ record, field, value });
 
-export const updateSpeakerRating = (speakerId, newRating) =>
-    (dispatch) => {
-        dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_START)());
-        return SpeakersService.patchSpeaker(speakerId, 'rating', newRating)
-            .then(() => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_COMPLETE)(newRating)))
-            .then(() => dispatch(changeSessionViewEditMode('speaker', 'rating', false)))
-            .catch(error => dispatch(createAction(actionTypes.UPDATE_SPEAKER_RATING_ERROR)(error)));
-    };
-
 export const updateSpeakerBio = (speakerId, newBio) =>
     (dispatch) => {
         dispatch(createAction(actionTypes.UPDATE_SPEAKER_BIO_START)());
@@ -212,7 +203,6 @@ export const submitNewSpeaker = (history) =>
             surname: speakerInRedux.surname,
             imageUri: speakerInRedux.imageUri,
             bio: speakerInRedux.bio,
-            rating: 1, // TODO remove rating
         };
 
         return SpeakersService.postSpeaker(newSpeakerPostData)

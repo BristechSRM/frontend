@@ -50,7 +50,6 @@ class DashboardSidebar extends Component {
                       onChange={(e, i, v) => this.handleSortPropertyChange(e, i, v)}
                     >
                        <MenuItem value={"name"} primaryText="Name" />
-                       <MenuItem value={"rating"} primaryText="Rating" />
                        <MenuItem value={"event-date"} primaryText="Event Date" />
                     </DropDownMenu>
 
