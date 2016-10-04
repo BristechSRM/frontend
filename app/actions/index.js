@@ -3,7 +3,6 @@ import SessionsService from '../services/SessionsService';
 import SpeakersService from '../services/SpeakersService';
 import EventsService from '../services/EventsService';
 import MeetupEventsService from '../services/MeetupEventsService';
-import CorrespondenceService from '../services/CorrespondenceService';
 import NotesService from '../services/NotesService';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
@@ -34,24 +33,6 @@ export const getNotesBySessionId = (sessionId) =>
         return NotesService.getNotesBySessionId(sessionId)
             .then(notes => dispatch(createAction(actionTypes.GET_NOTES_BY_SESSION_COMPLETE)(notes)))
             .catch(error => dispatch(createAction(actionTypes.GET_NOTES_BY_SESSION_ERROR)(error)));
-    };
-
-export const getCorrespondence = (session) =>
-    (dispatch) => {
-        // CorrespondenceService will error if there's no admin id available
-        // (eg on a new session that has no admin assigned yet)
-        if (session.admin) {
-            dispatch(createAction(actionTypes.GET_CORRESPONDENCE_START)());
-            return CorrespondenceService.getCorrespondence(session.admin.id, session.speaker.id)
-                .then(correspondence => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_COMPLETE)(correspondence)))
-                .catch(error => dispatch(createAction(actionTypes.GET_CORRESPONDENCE_ERROR)(error)));
-        }
-
-        // Nothing to do if there's no admin (there can be no correspondence).
-        // Returning an empty promise to maintain the interface, as all actions seem to return a Promise.
-        return new Promise((resolve /* ,reject */) => {
-            resolve(null);
-        });
     };
 
 export const getAllEvents = () =>

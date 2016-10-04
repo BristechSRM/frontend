@@ -71,12 +71,6 @@ const styles = {
                 name: {
                     margin: 0,
                 },
-                lastContact: {
-                    fontSize: '0.8rem',
-                    fontWeight: '300',
-                    color: '#555',
-                    margin: 0,
-                },
             },
         },
     },
@@ -152,11 +146,7 @@ class NewSessionCard extends Component {
                         <div style={styles.base.footer.admin.details}>
                             <div>
                               <p style={styles.base.footer.admin.name}>{""}</p>
-                              <p style={styles.base.footer.admin.lastContact}>{""}</p>
                             </div>
-                        </div>
-                        <div style={styles.base.footer.lastContact}>
-                            {""}
                         </div>
                     </div>
                 </div>
@@ -180,8 +170,6 @@ NewSessionCard.propTypes = {
     adminForename: PropTypes.string,
     adminSurname: PropTypes.string,
     adminImageUri: PropTypes.string,
-    lastContactDate: PropTypes.object,
-    lastContactDirection: PropTypes.string,
 };
 
 export default Radium(NewSessionCard);

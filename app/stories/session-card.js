@@ -20,8 +20,6 @@ storiesOf('SessionCard', module)
         adminForename="Chris"
         adminSurname="Smith"
         adminImageUri="https://placebear.com/g/50/50"
-        lastContactDate={moment().subtract(3, 'd')}
-        lastContactDirection="in"
       />
   ))
   .add('contacted (out)', () => (
@@ -39,8 +37,6 @@ storiesOf('SessionCard', module)
         adminForename="Chris"
         adminSurname="Smith"
         adminImageUri="https://placebear.com/g/50/50"
-        lastContactDate={moment().subtract(4, 'w')}
-        lastContactDirection="out"
       />
   ))
   .add('not contacted', () => (

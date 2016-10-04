@@ -16,7 +16,7 @@ const initialState = new immutable.Record({
             ['topic-approved']: false,
             ['date-assigned']: false,
         })(),
-        sortProperty: 'last-contact',
+        sortProperty: 'name',
         isSortOrderAscending: false,
     })(),
     error: null,

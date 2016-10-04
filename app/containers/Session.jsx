@@ -120,7 +120,6 @@ class Session extends Component {
                       adminForename={this.props.admin ? this.props.admin.forename : null}
                       adminSurname={this.props.admin ? this.props.admin.surname : null}
                       event={this.props.event}
-                      lastContact={this.props.session.lastContact}
                       allEvents={this.props.events}
                       isFetchingEvents={this.props.isFetchingEvents}
                       editStash={this.props.editStash}
