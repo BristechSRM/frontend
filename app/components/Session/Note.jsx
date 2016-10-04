@@ -5,6 +5,7 @@ import styles from './note.scss';
 class Note extends Component {
 
     render() {
+        const dateAdded = moment(this.props.dateAdded);
         const dateModified = moment(this.props.dateModified);
 
         return (
@@ -15,7 +16,9 @@ class Note extends Component {
                     )}
                 </div>
                 <div className={styles.details}>
-                    <div>Date Modified:</div>
+                    <div>Added:</div>
+                    <div>{dateAdded.format('DD MMMM YYYY [at] h:mma')}</div>
+                    <div>Modified:</div>
                     <div>{dateModified.format('DD MMMM YYYY [at] h:mma')}</div>
                 </div>
             </div>
@@ -24,6 +27,7 @@ class Note extends Component {
 }
 
 Note.propTypes = {
+    dateAdded: PropTypes.string,
     dateModified: PropTypes.string,
     note: PropTypes.string,
 };

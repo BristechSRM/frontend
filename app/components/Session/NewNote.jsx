@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import styles from './newNote.scss';
 
 class NewNote extends Component {
@@ -14,16 +13,16 @@ class NewNote extends Component {
                             <td>
                                 <textarea
                                   onChange={(event) =>
-                                  this.props.editNewNote(event.target.value)}
+                                  this.props.changeNewNote(event.target.value)}
                                   value={this.props.newNote}
                                   placeholder="Click to enter new note"
-                                  className={!this.props.editingNewNote ? styles.cleanedTextArea : null}
+                                  className={!this.props.isEditingNewNote ? styles.cleanedTextArea : null}
                                   rows={6}
                                   cols={60}
                                 />
                             </td>
                             <td>
-                                { this.props.editingNewNote ?
+                                { this.props.isEditingNewNote ?
                                     <button
                                       className="btn btn-default"
                                       type="button"
@@ -35,7 +34,7 @@ class NewNote extends Component {
                                 }
                             </td>
                             <td>
-                                { this.props.editingNewNote ?
+                                { this.props.isEditingNewNote ?
                                     <button
                                       className="btn btn-default"
                                       type="button"
@@ -57,8 +56,8 @@ class NewNote extends Component {
 
 NewNote.propTypes = {
     newNote: PropTypes.string,
-    editNewNote: PropTypes.func.isRequired,
-    editingNewNote: PropTypes.bool.isRequired,
+    changeNewNote: PropTypes.func.isRequired,
+    isEditingNewNote: PropTypes.bool.isRequired,
     saveNewNote: PropTypes.func.isRequired,
     clearNewNote: PropTypes.func.isRequired,
 };

@@ -18,13 +18,22 @@ const initialEditStash = new immutable.Record({
     })(),
 })();
 
+const initialNoteEditRecord =
+    new immutable.Record({
+        noteId: null,
+        inEditMode: false,
+        valueChanged: false,
+        value: null,
+    })();
+
 const initialState = new immutable.Record({
     isFetching: false,
     editStash: initialEditStash,
     session: new immutable.Record({})(),
     notes: immutable.List(),
+    noteEditStash: initialNoteEditRecord,
     newNote: '',
-    editingNewNote: false,
+    isEditingNewNote: false,
     isFetchingEvents: false,
     events: immutable.List(),
     error: null,
@@ -76,7 +85,7 @@ const session = handleActions({
     [actionTypes.GET_NOTES_BY_SESSION_COMPLETE]: (state, action) =>
         state.withMutations(map =>
             map.set('isFetching', false)
-               .set('notes', immutable.List(action.payload).sortBy(note => note.dateModified))
+               .set('notes', immutable.List(action.payload).sort((a, b) => -a.dateAdded.localeCompare(b.dateAdded))) // Note minus for most recent first
         ),
 
     [actionTypes.GET_NOTES_BY_SESSION_ERROR]: (state, action) =>
@@ -85,9 +94,26 @@ const session = handleActions({
                .set('error', action.payload);
         }),
 
+    [actionTypes.NOTE_EDITSTASH_CHANGED]: (state, action) =>
+        state.setIn(['noteEditStash', 'value'], action.payload),
+
+    [actionTypes.NOTE_EDITMODE_CHANGED]: (state, action) =>
+        state.withMutations(map => {
+            const newMap =
+                map.setIn(['noteEditStash', 'noteId'], action.payload.noteId)
+                   .setIn(['noteEditStash', 'inEditMode'], action.payload.inEditMode)
+                   .setIn(['noteEditStash', 'value'], action.payload.currentNote);
+            if (!action.payload.inEditMode) {
+                return newMap.setIn(['noteEditStash', 'noteId'], null)
+                    .setIn(['noteEditStash', 'value'], null)
+                    .setIn(['noteEditStash', 'valueChanged'], false);
+            }
+            return newMap;
+        }),
+
     [actionTypes.CHANGE_NEW_SESSION_NOTE]: (state, action) =>
         state.withMutations(map => {
-            map.set('editingNewNote', action.payload !== '')
+            map.set('isEditingNewNote', action.payload !== '')
                .set('newNote', action.payload);
         }),
 
