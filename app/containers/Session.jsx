@@ -7,8 +7,7 @@ import { getSession, getNotesBySessionId, getAllEvents,
     updateSessionDescription, updateSessionTitle, updateSessionEventId,
     changeNoteEditMode, changeNoteStash, updateNote,
     changeNewNote, clearNewNote, saveNewNote,
-    changeSessionViewEditMode,
-    changeSessionViewEditStash } from '../actions';
+    changeSessionViewEditMode, changeSessionViewEditStash } from '../actions';
 import styles from './session.scss';
 
 class Session extends Component {
