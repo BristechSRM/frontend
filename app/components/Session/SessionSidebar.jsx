@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
 import EditSaveControl from './EditSaveControl.jsx';
+import ContactDetails from './ContactDetails.jsx';
 import moment from 'moment';
 
 import styles from './sessionSidebar.scss';
@@ -233,27 +234,9 @@ class SessionSidebar extends Component {
                 </div>
 
                 <div className={styles.section}>
-                    <h1>Contact Details</h1>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Email</td>
-                                <td>{this.getHandle('email')}</td>
-                            </tr>
-                            <tr>
-                                <td>Phone Number</td>
-                                <td>{this.getHandle('phone')}</td>
-                            </tr>
-                            <tr>
-                                <td>Twitter</td>
-                                <td>@{this.getHandle('twitter')}</td>
-                            </tr>
-                            <tr>
-                                <td>Github</td>
-                                <td>{this.getHandle('github')}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ContactDetails
+                      handles={this.props.speakerHandles}
+                    />
                 </div>
             </div>
         );

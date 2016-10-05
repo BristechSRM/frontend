@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-import * as Colors from 'material-ui/lib/styles/colors';
-import FontIcon from 'material-ui/lib/font-icon';
 import SessionStatusService from '../../../services/SessionStatusService';
 import moment from 'moment';
 
