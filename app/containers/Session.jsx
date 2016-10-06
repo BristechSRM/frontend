@@ -5,6 +5,7 @@ import SessionNotes from '../components/Session/SessionNotes.jsx';
 import { getSession, getNotesBySessionId, getAllEvents,
     updateSpeakerBio, updateSpeakerForename, updateSpeakerSurname,
     updateSessionDescription, updateSessionTitle, updateSessionEventId,
+    updateSpeakerHandles,
     changeNoteEditMode, changeNoteStash, updateNote,
     changeNewNote, clearNewNote, saveNewNote,
     changeSessionViewEditMode, changeSessionViewEditStash } from '../actions';
@@ -18,6 +19,8 @@ class Session extends Component {
         this.changeEditStash = this.changeEditStash.bind(this);
         this.saveStashedChanges = this.saveStashedChanges.bind(this);
         this.saveSpeakerBio = () => this.saveStashedChanges('speaker', 'bio', updateSpeakerBio);
+        this.saveSpeakerHandles = () => this.saveStashedChanges('speaker', 'handles',
+            (speakerId, newHandles) => updateSpeakerHandles(this.props.session.id, speakerId, newHandles));
         this.saveSessionDescription = () => this.saveStashedChanges('session', 'description', updateSessionDescription);
         this.saveSessionTitle = () => this.saveStashedChanges('session', 'title', updateSessionTitle);
         this.saveSessionEventId = () => this.saveStashedChanges('session', 'eventId', updateSessionEventId);
@@ -51,12 +54,12 @@ class Session extends Component {
         this.props.dispatch(changeSessionViewEditMode(record, field, inEditMode));
     }
 
-    changeEditStash(record, field, value) {
+    changeEditStash(record, field, value, isInit) {
         if (!this.props.editStash[record][field].inEditMode) {
             // TODO: decide if this should be set here, or in reducer as a part of changing stash
             this.changeEditMode(record, field, true);
         }
-        this.props.dispatch(changeSessionViewEditStash(record, field, value));
+        this.props.dispatch(changeSessionViewEditStash(record, field, value, isInit));
     }
 
     saveStashedChanges(record, field, updateFunc) {
@@ -123,6 +126,7 @@ class Session extends Component {
                       changeEditMode={this.changeEditMode}
                       changeEditStash={this.changeEditStash}
                       saveSpeakerBio={this.saveSpeakerBio}
+                      saveSpeakerHandles={this.saveSpeakerHandles}
                       saveSessionDescription={this.saveSessionDescription}
                       saveSessionTitle={this.saveSessionTitle}
                       saveSessionEventId={this.saveSessionEventId}

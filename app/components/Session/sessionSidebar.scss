@@ -3,6 +3,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.editable {
+    cursor: pointer; cursor: hand;
+}
+
+.editable:hover {
+    background-color: white; 
+}
+
 .header {
     font-weight: 300;
     font-size: 22px;
