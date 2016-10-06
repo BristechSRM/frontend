@@ -150,118 +150,107 @@ class SessionSidebar extends Component {
                 <div className={styles.section}>
                     <div className={styles.section}>
                         <h1>Abstract</h1>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        {
-                                            !this.props.editStash.session.description.inEditMode ?
-                                                <div
-                                                  className={styles.editable}
-                                                  onClick={() => this.props.changeEditMode(
-                                                      'session', 'description', true)}
-                                                >
-                                                    {this.props.description}
-                                                </div>
-                                            :
-                                        <EditSaveControl
-                                          changeEditMode={(inEditMode) =>
-                                              this.props.changeEditMode('session', 'description', inEditMode)}
-                                          onSaveClick={this.props.saveSessionDescription}
-                                          inEditMode={this.props.editStash.session.description.inEditMode}
-                                        >
-                                                    <textarea
-                                                      onChange={(event) =>
-                                                          this.props.changeEditStash(
-                                                              'session', 'description', event.target.value)}
-                                                      defaultValue={this.props.description}
-                                                    />
-                                        </EditSaveControl>
-                                        }
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {
+                            !this.props.editStash.session.description.inEditMode ?
+                                <div
+                                  className={styles.editable}
+                                  onClick={() => this.props.changeEditMode(
+                                        'session', 'description', true)}
+                                >
+                                    {this.props.description}
+                                </div>
+                            :
+                                <EditSaveControl
+                                  changeEditMode={(inEditMode) =>
+                                        this.props.changeEditMode('session', 'description', inEditMode)}
+                                  onSaveClick={this.props.saveSessionDescription}
+                                  inEditMode={this.props.editStash.session.description.inEditMode}
+                                >
+                                            <textarea
+                                              onChange={(event) =>
+                                                    this.props.changeEditStash(
+                                                        'session', 'description', event.target.value)}
+                                              defaultValue={this.props.description}
+                                              rows={8}
+                                              cols={35}
+                                            />
+                                </EditSaveControl>
+                        }
                     </div>
 
                     <div className={styles.section}>
                         <h1>Biography</h1>
+                        {
+                            !this.props.editStash.speaker.bio.inEditMode ?
+                                <div
+                                  className={styles.editable}
+                                  onClick={() => this.props.changeEditMode('speaker', 'bio', true)}
+                                >
+                                    {this.props.speakerBio}
+                                </div>
+                            :
+                                <EditSaveControl
+                                  changeEditMode={(inEditMode) =>
+                                    this.props.changeEditMode('speaker', 'bio', inEditMode)}
+                                  onSaveClick={this.props.saveSpeakerBio}
+                                  inEditMode={this.props.editStash.speaker.bio.inEditMode}
+                                >
+                                    <textarea
+                                      onChange={(event) =>
+                                        this.props.changeEditStash(
+                                            'speaker', 'bio', event.target.value)}
+                                      defaultValue={this.props.speakerBio}
+                                      rows={8}
+                                      cols={35}
+                                    />
+                                </EditSaveControl>
+                        }
+                    </div>
+
+                    <div className={styles.section}>
+                        <h1>Status</h1>
                         <table>
                             <tbody>
                                 <tr>
+                                    <td>Assigned Admin</td>
+                                    <td>
+                                        {this.joinName(this.props.adminForename, this.props.adminSurname)}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Assigned Event</td>
                                     <td>
                                         {
-                                            !this.props.editStash.speaker.bio.inEditMode ?
+                                            !this.props.editStash.session.eventId.inEditMode ?
                                                 <div
                                                   className={styles.editable}
-                                                  onClick={() => this.props.changeEditMode('speaker', 'bio', true)}
+                                                  onClick={() => this.props.changeEditMode('session', 'eventId', true)}
                                                 >
-                                                    {this.props.speakerBio}
+                                                    {this.eventDisplay()}
                                                 </div>
                                             :
                                                 <EditSaveControl
                                                   changeEditMode={(inEditMode) =>
-                                                    this.props.changeEditMode('speaker', 'bio', inEditMode)}
-                                                  onSaveClick={this.props.saveSpeakerBio}
-                                                  inEditMode={this.props.editStash.speaker.bio.inEditMode}
+                                                    this.props.changeEditMode('session', 'eventId', inEditMode)}
+                                                  onSaveClick={this.props.saveSessionEventId}
+                                                  inEditMode={this.props.editStash.session.eventId.inEditMode}
                                                 >
-                                                    <textarea
-                                                      onChange={(event) =>
-                                                        this.props.changeEditStash(
-                                                            'speaker', 'bio', event.target.value)}
-                                                      defaultValue={this.props.speakerBio}
-                                                    />
+                                                    {this.eventsSelection()}
                                                 </EditSaveControl>
                                         }
-
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>Signup Method</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Date Added</td>
+                                    <td>{dateAdded}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <h1>Status</h1>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Assigned Admin</td>
-                                <td>
-                                    {this.joinName(this.props.adminForename, this.props.adminSurname)}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Assigned Event</td>
-                                <td>
-                                    {
-                                        !this.props.editStash.session.eventId.inEditMode ?
-                                            <div
-                                              className={styles.editable}
-                                              onClick={() => this.props.changeEditMode('session', 'eventId', true)}
-                                            >
-                                                {this.eventDisplay()}
-                                            </div>
-                                        :
-                                            <EditSaveControl
-                                              changeEditMode={(inEditMode) =>
-                                                this.props.changeEditMode('session', 'eventId', inEditMode)}
-                                              onSaveClick={this.props.saveSessionEventId}
-                                              inEditMode={this.props.editStash.session.eventId.inEditMode}
-                                            >
-                                                {this.eventsSelection()}
-                                            </EditSaveControl>
-                                    }
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Signup Method</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Date Added</td>
-                                <td>{dateAdded}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
 
                 <div className={styles.section}>
