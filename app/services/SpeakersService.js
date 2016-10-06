@@ -14,7 +14,9 @@ class SpeakersService {
     }
 
     patchSpeaker(speakerId, path, value) {
-        const op = { path, value };
+        const stringValue = typeof value === 'string' ? value : JSON.stringify(value);
+
+        const op = { path, value: stringValue };
         return api.patch(`${speakersUri}/${speakerId}`, op);
     }
 }

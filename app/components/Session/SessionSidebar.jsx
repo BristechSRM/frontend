@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import SessionStatusService from '../../services/SessionStatusService';
 import EditSaveControl from './EditSaveControl.jsx';
-import LinkEditSaveControl from './LinkEditSaveControl.jsx';
 import ContactDetails from './ContactDetails.jsx';
+import EditContactDetails from './EditContactDetails.jsx';
 import moment from 'moment';
 
 import styles from './sessionSidebar.scss';
@@ -99,7 +99,8 @@ class SessionSidebar extends Component {
                                 </div>
                             :
                                 <EditSaveControl
-                                  changeEditMode={(inEditMode) => this.props.changeEditMode('speaker', 'forename', inEditMode)}
+                                  changeEditMode={(inEditMode) => this.props.changeEditMode(
+                                      'speaker', 'forename', inEditMode)}
                                   onSaveClick={this.props.saveSpeakerNames}
                                   inEditMode={this.props.editStash.speaker.forename.inEditMode}
                                 >
@@ -157,7 +158,8 @@ class SessionSidebar extends Component {
                                             !this.props.editStash.session.description.inEditMode ?
                                                 <div
                                                   className={styles.editable}
-                                                  onClick={() => this.props.changeEditMode('session', 'description', true)}
+                                                  onClick={() => this.props.changeEditMode(
+                                                      'session', 'description', true)}
                                                 >
                                                     {this.props.description}
                                                 </div>
@@ -239,14 +241,14 @@ class SessionSidebar extends Component {
                                                 {this.eventDisplay()}
                                             </div>
                                         :
-                                            <LinkEditSaveControl
+                                            <EditSaveControl
                                               changeEditMode={(inEditMode) =>
                                                 this.props.changeEditMode('session', 'eventId', inEditMode)}
                                               onSaveClick={this.props.saveSessionEventId}
                                               inEditMode={this.props.editStash.session.eventId.inEditMode}
                                             >
                                                 {this.eventsSelection()}
-                                            </LinkEditSaveControl>
+                                            </EditSaveControl>
                                     }
                                 </td>
                             </tr>
@@ -263,9 +265,31 @@ class SessionSidebar extends Component {
                 </div>
 
                 <div className={styles.section}>
-                    <ContactDetails
-                      handles={this.props.speakerHandles}
-                    />
+                    {
+                        !this.props.editStash.speaker.handles.inEditMode ?
+                            <div
+                              className={styles.editable}
+                              onClick={() => this.props.changeEditStash(
+                                      'speaker', 'handles', this.props.speakerHandles, true)}
+                            >
+                                <ContactDetails
+                                  handles={this.props.speakerHandles}
+                                />
+                            </div>
+                        :
+                            <EditSaveControl
+                              changeEditMode={(inEditMode) =>
+                                this.props.changeEditMode('speaker', 'handles', inEditMode)}
+                              onSaveClick={this.props.saveSpeakerHandles}
+                              inEditMode={this.props.editStash.speaker.handles.inEditMode}
+                            >
+                                <EditContactDetails
+                                  stashedHandles={this.props.editStash.speaker.handles.value}
+                                  onHandlesChange={(newHandles) => this.props.changeEditStash(
+                                      'speaker', 'handles', newHandles)}
+                                />
+                            </EditSaveControl>
+                    }
                 </div>
             </div>
         );
@@ -292,6 +316,7 @@ SessionSidebar.propTypes = {
     changeEditMode: PropTypes.func,
     changeEditStash: PropTypes.func,
     saveSpeakerBio: PropTypes.func,
+    saveSpeakerHandles: PropTypes.func,
     saveSessionDescription: PropTypes.func,
     saveSessionTitle: PropTypes.func,
     saveSessionEventId: PropTypes.func,

@@ -10,7 +10,7 @@ class ContactDetails extends Component {
         return (
             <tr key={handle.id} >
                 <td>{this.capitalizeFirstLetter(handle.type)}</td>
-                <td>{handle.identifier}</td>
+                <td>{handle.type === 'twitter' ? '@' : null}{handle.identifier}</td>
             </tr>
         );
     }

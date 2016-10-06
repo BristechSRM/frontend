@@ -9,6 +9,7 @@ const initialEditStash = new immutable.Record({
         forename: initialEditRecord,
         surname: initialEditRecord,
         bio: initialEditRecord,
+        handles: initialEditRecord,
     })(),
     session: new immutable.Record({
         title: initialEditRecord,
@@ -139,9 +140,10 @@ const session = handleActions({
         state.withMutations(map => {
             const record = action.payload.record;
             const field = action.payload.field;
+            const valueChanged = action.payload.isInit === undefined ? true : !action.payload.isInit;
             const newMap = map.setIn(['editStash', record, field, 'value'], action.payload.value);
             if (!map.getIn(['editStash', record, field, 'valueChanged'])) {
-                return newMap.setIn(['editStash', record, field, 'valueChanged'], true);
+                return newMap.setIn(['editStash', record, field, 'valueChanged'], valueChanged);
             }
             return newMap;
         }),
