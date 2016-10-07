@@ -84,6 +84,7 @@ class EditContactDetails extends Component {
         const handles = this.useHandlesOrDefault(this.props.stashedHandles);
         return (
             <div>
+                <h1>Contact Details</h1>
                 <table>
                     <tbody>
                         {handles.map(handle => this.renderHandleEditRow(handle))}
