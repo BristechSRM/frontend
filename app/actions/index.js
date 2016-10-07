@@ -240,9 +240,6 @@ export const newSessionTitleEntered = (newTitle) =>
 export const newSessionDescriptionEntered = (newDescription) =>
     createAction(actionTypes.NEW_SESSION_ADD_DESCRIPTION)(newDescription);
 
-export const newSessionDateEntered = (newDate) =>
-    createAction(actionTypes.NEW_SESSION_ADD_DATE)(newDate);
-
 export const newSessionSpeakerSelected = (newSpeakerId) =>
     createAction(actionTypes.NEW_SESSION_ADD_SPEAKER_ID)(newSpeakerId);
 

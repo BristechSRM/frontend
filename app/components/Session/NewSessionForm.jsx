@@ -60,7 +60,6 @@ class NewSessionForm extends Component {
         const anythingIsInvalid =
             this.props.titleValidationMessage ||
             this.props.descriptionValidationMessage ||
-            this.props.dateValidationMessage ||
             this.props.adminIdValidationMessage ||
             this.props.speakerIdValidationMessage;
 
@@ -111,21 +110,6 @@ class NewSessionForm extends Component {
                       <td>{this.props.descriptionValidationMessage}</td>
                     </tr>
                     <tr>
-                      <td><label htmlFor="date">Session date <span className="error">*</span></label></td>
-                      <td>
-                        <input
-                          type="text"
-                          id="date"
-                          name="date"
-                          size="10"
-                          value={this.props.date}
-                          onChange={this.sendValue(this.props.dateEntered)}
-                        />
-                        <span className="note">DD/MM/YYYY</span>
-                      </td>
-                      <td>{this.props.dateValidationMessage}</td>
-                    </tr>
-                    <tr>
                       <td><label htmlFor="speaker">Speaker <span className="error">*</span></label></td>
                       <td>{this.speakersDroplist()}</td>
                       <td>{this.props.speakerIdValidationMessage}</td>
@@ -159,9 +143,6 @@ NewSessionForm.propTypes = {
     description: PropTypes.string,
     descriptionValidationMessage: PropTypes.string,
 
-    date: PropTypes.string,
-    dateValidationMessage: PropTypes.string,
-
     speakerId: PropTypes.string,
     speakerIdValidationMessage: PropTypes.string,
 
@@ -183,7 +164,6 @@ NewSessionForm.propTypes = {
     submit: PropTypes.func,
     titleEntered: PropTypes.func,
     descriptionEntered: PropTypes.func,
-    dateEntered: PropTypes.func,
     speakerSelected: PropTypes.func,
     adminSelected: PropTypes.func,
 };
