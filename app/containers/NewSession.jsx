@@ -4,7 +4,6 @@ import NewSessionForm from '../components/Session/NewSessionForm.jsx';
 import {
     newSessionTitleEntered,
     newSessionDescriptionEntered,
-    newSessionDateEntered,
     newSessionSpeakerSelected,
     newSessionAdminSelected,
     getAllSpeakers,
@@ -21,7 +20,6 @@ class NewSession extends Component {
         super(props);
         this.titleEntered = this.titleEntered.bind(this);
         this.descriptionEntered = this.descriptionEntered.bind(this);
-        this.dateEntered = this.dateEntered.bind(this);
         this.speakerSelected = this.speakerSelected.bind(this);
         this.adminSelected = this.adminSelected.bind(this);
         this.submit = this.submit.bind(this);
@@ -39,10 +37,6 @@ class NewSession extends Component {
 
     descriptionEntered(description) {
         this.props.dispatch(newSessionDescriptionEntered(description));
-    }
-
-    dateEntered(date) {
-        this.props.dispatch(newSessionDateEntered(date));
     }
 
     speakerSelected(speakerId) {
@@ -66,8 +60,6 @@ class NewSession extends Component {
                   titleValidationMessage={this.props.titleValidationMessage}
                   description={this.props.description}
                   descriptionValidationMessage={this.props.descriptionValidationMessage}
-                  date={this.props.date}
-                  dateValidationMessage={this.props.dateValidationMessage}
                   speakerId={this.props.speakerId}
                   speakerIdValidationMessage={this.props.speakerIdValidationMessage}
                   adminId={this.props.adminId}
@@ -81,7 +73,6 @@ class NewSession extends Component {
                   submit={this.submit}
                   titleEntered={this.titleEntered}
                   descriptionEntered={this.descriptionEntered}
-                  dateEntered={this.dateEntered}
                   speakerSelected={this.speakerSelected}
                   adminSelected={this.adminSelected}
                 />
@@ -101,8 +92,6 @@ function mapStateToProps(state) {
         titleValidationMessage: state.newsession.titleValidationMessage,
         description: state.newsession.description,
         descriptionValidationMessage: state.newsession.descriptionValidationMessage,
-        date: state.newsession.date,
-        dateValidationMessage: state.newsession.dateValidationMessage,
         speakerId: state.newsession.speakerId,
         speakerIdValidationMessage: state.newsession.speakerIdValidationMessage,
         adminId: state.newsession.adminId,
@@ -121,8 +110,6 @@ NewSession.propTypes = {
     titleValidationMessage: PropTypes.string,
     description: PropTypes.string,
     descriptionValidationMessage: PropTypes.string,
-    date: PropTypes.string,
-    dateValidationMessage: PropTypes.string,
     speakerId: PropTypes.string,
     speakerIdValidationMessage: PropTypes.string,
     adminId: PropTypes.string,
@@ -131,12 +118,6 @@ NewSession.propTypes = {
     isFetchingAdmins: PropTypes.bool,
     isFetchingSpeakers: PropTypes.bool,
     submitMessage: PropTypes.string,
-    submit: PropTypes.func,
-    titleEntered: PropTypes.func,
-    descriptionEntered: PropTypes.func,
-    dateEntered: PropTypes.func,
-    speakerSelected: PropTypes.func,
-    adminSelected: PropTypes.func,
     dispatch: PropTypes.func,
     admins: PropTypes.array,
     speakers: PropTypes.array,

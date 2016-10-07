@@ -2,28 +2,8 @@
 import { handleActions } from 'redux-actions';
 import immutable from 'immutable';
 import * as actionTypes from '../constants/actionTypes';
-import moment from 'moment';
 
 const validateMandatory = (value) => (value ? null : 'Value required');
-
-const validateMandatoryDate = (value) => {
-    const msg = validateMandatory(value);
-    if (msg) {
-        return msg;
-    }
-
-    const expectedDateFormat = 'D/M/YYYY';
-    const strict = true;
-    const parsedDate = moment(value, expectedDateFormat, strict);
-
-    if (!parsedDate.isValid()) {
-        // Note although we accept D/M/YYYY (as per 'moment.js'), the
-        // user will better understand "DD/MM/YYYY"
-        return 'Format required: DD/MM/YYYY';
-    }
-
-    return null;
-};
 
 const initialState = new immutable.Record({
     admins: [],
@@ -37,9 +17,6 @@ const initialState = new immutable.Record({
 
     description: '',
     descriptionValidationMessage: validateMandatory(''),
-
-    date: '',
-    dateValidationMessage: validateMandatory(''),
 
     speakerId: null,
     speakerIdValidationMessage: validateMandatory(null),
@@ -61,11 +38,6 @@ const newsession = handleActions({
         state
             .set('description', action.payload)
             .set('descriptionValidationMessage', validateMandatory(action.payload)),
-
-    [actionTypes.NEW_SESSION_ADD_DATE]: (state, action) =>
-        state
-            .set('date', action.payload)
-            .set('dateValidationMessage', validateMandatoryDate(action.payload)),
 
     [actionTypes.NEW_SESSION_ADD_SPEAKER_ID]: (state, action) =>
         state

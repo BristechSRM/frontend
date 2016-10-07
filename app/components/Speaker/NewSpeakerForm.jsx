@@ -68,7 +68,7 @@ class NewSpeakerForm extends Component {
                           type="text"
                           id="imageUri"
                           name="imageUri"
-                          size="10"
+                          size="40"
                           value={this.props.imageUri}
                           onChange={this.sendValue(this.props.imageUriChanged)}
                         />
@@ -91,6 +91,8 @@ class NewSpeakerForm extends Component {
                           name="bio"
                           value={this.props.bio}
                           onChange={this.sendValue(this.props.bioChanged)}
+                          cols={40}
+                          rows={6}
                         />
                       </td>
                     </tr>

@@ -14,13 +14,24 @@ class ContactDetails extends Component {
             </tr>
         );
     }
+
+    renderAddHandleMessage() {
+        return (
+            <tr>
+                <td>Click to add contact details</td>
+            </tr>
+        );
+    }
+
     render() {
         return (
             <div>
                 <h1>Contact Details</h1>
                 <table>
                     <tbody>
-                        {this.props.handles ? this.props.handles.map(handle => this.renderHandleRow(handle)) : null}
+                        {this.props.handles && this.props.handles.length > 0
+                            ? this.props.handles.map(handle => this.renderHandleRow(handle))
+                            : this.renderAddHandleMessage()}
                     </tbody>
                 </table>
             </div>
