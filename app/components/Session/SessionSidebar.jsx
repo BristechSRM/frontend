@@ -82,8 +82,6 @@ class SessionSidebar extends Component {
             color: SessionStatusService.getStatusColor(this.props.status),
         };
 
-        const dateAdded = this.formatDate(this.props.dateAdded, '');
-
         return (
             <div className={styles.sessionSidebar}>
                 <div className={styles.header}>
@@ -240,14 +238,6 @@ class SessionSidebar extends Component {
                                         }
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Signup Method</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Date Added</td>
-                                    <td>{dateAdded}</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -290,7 +280,6 @@ SessionSidebar.propTypes = {
     status: PropTypes.string,
     description: PropTypes.string,
     date: PropTypes.string,
-    dateAdded: PropTypes.string,
     speakerId: PropTypes.string,
     speakerForename: PropTypes.string,
     speakerSurname: PropTypes.string,

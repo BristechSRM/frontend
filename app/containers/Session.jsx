@@ -111,7 +111,6 @@ class Session extends Component {
                       status={this.props.session.status}
                       description={this.props.session.description}
                       date={this.props.session.date}
-                      dateAdded={this.props.session.dateAdded}
                       speakerId={this.props.speaker ? this.props.speaker.id : null}
                       speakerForename={this.props.speaker ? this.props.speaker.forename : null}
                       speakerSurname={this.props.speaker ? this.props.speaker.surname : null}
