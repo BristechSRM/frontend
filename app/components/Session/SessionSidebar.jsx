@@ -73,7 +73,7 @@ class SessionSidebar extends Component {
                     {this.getEventDisplayString(this.props.event)}
                 </a>
             :
-                <div></div>
+                <div>Click to select an event</div>
         );
     }
 
@@ -81,6 +81,12 @@ class SessionSidebar extends Component {
         const h1Style = {
             color: SessionStatusService.getStatusColor(this.props.status),
         };
+
+        const speakerFullName =
+            (this.props.speakerForename && this.props.speakerForename.trim())
+                || (this.props.speakerSurname && this.props.speakerSurname.trim())
+                ? this.joinName(this.props.speakerForename, this.props.speakerSurname).trim()
+                : 'Click to add Speaker Name';
 
         return (
             <div className={styles.sessionSidebar}>
@@ -93,7 +99,7 @@ class SessionSidebar extends Component {
                                   className={styles.editable}
                                   onClick={() => this.props.changeEditMode('speaker', 'forename', true)}
                                 >
-                                    {this.joinName(this.props.speakerForename, this.props.speakerSurname)}
+                                    {speakerFullName}
                                 </div>
                             :
                                 <EditSaveControl
@@ -127,7 +133,9 @@ class SessionSidebar extends Component {
                               className={styles.editable}
                               onClick={() => this.props.changeEditMode('session', 'title', true)}
                             >
-                                {this.props.title}
+                                {(this.props.title && this.props.title.trim())
+                                    ? this.props.title.trim()
+                                    : 'Click to add Session Title'}
                             </div>
                         :
                             <EditSaveControl
@@ -155,7 +163,9 @@ class SessionSidebar extends Component {
                                   onClick={() => this.props.changeEditMode(
                                         'session', 'description', true)}
                                 >
-                                    {this.props.description}
+                                    {(this.props.description && this.props.description.trim())
+                                        ? this.props.description.trim()
+                                        : 'Click to add session abstract'}
                                 </div>
                             :
                                 <EditSaveControl
@@ -184,7 +194,9 @@ class SessionSidebar extends Component {
                                   className={styles.editable}
                                   onClick={() => this.props.changeEditMode('speaker', 'bio', true)}
                                 >
-                                    {this.props.speakerBio}
+                                    {(this.props.speakerBio && this.props.speakerBio.trim())
+                                        ? this.props.speakerBio.trim()
+                                        : 'Click to add speaker biography'}
                                 </div>
                             :
                                 <EditSaveControl
