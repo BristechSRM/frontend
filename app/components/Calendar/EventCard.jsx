@@ -73,7 +73,7 @@ class EventCard extends Component {
                     Update on Meetup
                 </button>
                 {this.renderPublishedDate(meetupEvent.publishedDate)}
-                <a href={meetupEvent.meetupUrl}>
+                <a href={meetupEvent.meetupUrl} target="_blank">
                     Link to Meetup Event
                 </a>
             </div>
