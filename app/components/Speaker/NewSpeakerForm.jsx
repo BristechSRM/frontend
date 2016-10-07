@@ -62,7 +62,7 @@ class NewSpeakerForm extends Component {
                       <td>{this.props.surnameValidationMessage}</td>
                     </tr>
                     <tr>
-                      <td><label htmlFor="imageUri">Profile Image</label></td>
+                      <td><label htmlFor="imageUri">Profile Image Uri</label></td>
                       <td>
                         <input
                           type="text"
